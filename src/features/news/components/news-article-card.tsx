@@ -1,7 +1,7 @@
 import { ArrowRight, CalendarDays } from 'lucide-react';
 import { getNewsCategoryLabel } from '@/features/news/lib/news';
 import { type NewsArticleItem } from '@/entities/site';
-import { Badge } from '@/shared/ui';
+import { Badge, InternalLink } from '@/shared/ui';
 
 type NewsArticleCardProps = {
   article: NewsArticleItem;
@@ -20,7 +20,7 @@ export function NewsArticleCard({
 
   if (variant === 'compact') {
     return (
-      <a
+      <InternalLink
         href={article.href}
         className="flex min-h-44 flex-col rounded-lg border border-slate-200 bg-white p-5 shadow-[0_12px_30px_rgba(15,23,42,0.06)] transition-colors hover:border-blue-200"
       >
@@ -34,13 +34,13 @@ export function NewsArticleCard({
           <h3 className="text-lg font-black leading-snug tracking-[-0.04em] text-slate-950">{article.title}</h3>
           <p className="mt-3 text-sm leading-7 text-slate-600">{article.excerpt}</p>
         </div>
-      </a>
+      </InternalLink>
     );
   }
 
   if (variant === 'row') {
     return (
-      <a
+      <InternalLink
         href={article.href}
         className="grid gap-4 rounded-lg border border-slate-200 bg-white p-4 transition-colors hover:bg-slate-50 sm:grid-cols-[11rem_1fr]"
       >
@@ -60,12 +60,12 @@ export function NewsArticleCard({
           <h3 className="mt-3 text-xl font-black leading-snug tracking-[-0.04em] text-slate-950">{article.title}</h3>
           <p className="mt-3 text-sm leading-7 text-slate-600">{article.excerpt}</p>
         </div>
-      </a>
+      </InternalLink>
     );
   }
 
   return (
-    <a
+    <InternalLink
       href={article.href}
       className="flex h-full flex-col overflow-hidden rounded-lg border border-white bg-white/96 shadow-[0_16px_42px_rgba(15,23,42,0.07)]"
     >
@@ -84,6 +84,6 @@ export function NewsArticleCard({
           <ArrowRight className="h-4 w-4" />
         </span>
       </div>
-    </a>
+    </InternalLink>
   );
 }

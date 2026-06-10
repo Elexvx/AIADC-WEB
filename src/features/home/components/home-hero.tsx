@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import { ArrowRight, ChevronLeft, ChevronRight, Megaphone } from 'lucide-react';
-import { Button } from '@/shared/ui';
+import { ROUTES } from '@/shared/config/routes';
+import { Button, InternalLink } from '@/shared/ui';
 import { homeHeroSlides } from '@/features/home/config/home-content';
 
 function highlightAccent(text: string, accent: string) {
@@ -69,16 +70,16 @@ export function HomeHero() {
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
             <Button asChild size="lg" className="rounded-md bg-blue-600 px-8 text-base text-white shadow-[0_18px_40px_rgba(37,99,235,0.36)] hover:bg-blue-500 sm:px-9">
-              <a href="#signup" className="inline-flex items-center gap-3">
+              <InternalLink href={ROUTES.login} className="inline-flex items-center gap-3">
                 立即报名
                 <ArrowRight className="h-5 w-5" />
-              </a>
+              </InternalLink>
             </Button>
             <Button asChild size="lg" variant="outline" className="rounded-md border-white/30 bg-white/4 px-8 text-base text-white hover:bg-white/12 sm:px-9">
-              <a href="/tracks" className="inline-flex items-center gap-3">
-                查看赛道
+              <InternalLink href={ROUTES.intro} className="inline-flex items-center gap-3">
+                了解赛事
                 <ArrowRight className="h-5 w-5" />
-              </a>
+              </InternalLink>
             </Button>
           </div>
 

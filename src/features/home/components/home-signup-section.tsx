@@ -1,32 +1,37 @@
-import { ArrowRight, Download } from 'lucide-react';
-import { siteContent } from '@/entities/site';
-import { Button } from '@/shared/ui';
+'use client';
+
+import { ArrowRight } from 'lucide-react';
+import { ROUTES } from '@/shared/config/routes';
+import { useLocale } from '@/shared/i18n/locale-provider';
+import { Button, InternalLink } from '@/shared/ui';
 
 export function HomeSignupSection() {
+  const { messages } = useLocale();
+  const signup = messages.home.signup;
+
   return (
     <section id="signup" className="bg-white py-10 sm:py-12">
-      <div className="section-shell grid gap-8 rounded-lg border border-white bg-white/96 p-6 shadow-[0_16px_42px_rgba(15,23,42,0.07)] sm:p-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-        <div>
-          <div className="section-kicker text-blue-600">报名参赛</div>
-          <h2 className="mt-4 max-w-2xl text-balance text-4xl font-black tracking-[-0.06em] text-slate-950 sm:text-5xl">{siteContent.cta.title}</h2>
-          <p className="mt-5 max-w-2xl text-lg leading-9 text-slate-600">{siteContent.cta.description}</p>
-        </div>
-        <div className="space-y-4">
-          <div className="grid gap-4 sm:grid-cols-2">
-            <Button asChild size="lg" className="rounded-md bg-blue-600 text-white hover:bg-blue-500">
-              <a href="#top" className="inline-flex items-center gap-2">
-                {siteContent.cta.action}
-                <ArrowRight className="h-4 w-4" />
-              </a>
-            </Button>
-            <Button asChild size="lg" variant="outline" className="rounded-md border-blue-200 bg-white text-blue-700 hover:bg-blue-50">
-              <a href="/materials" className="inline-flex items-center gap-2">
-                <Download className="h-4 w-4" />
-                下载执行方案
-              </a>
+      <div className="section-shell rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_16px_42px_rgba(15,23,42,0.07)] sm:p-8 lg:p-10">
+        <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
+          <div className="section-kicker text-blue-600">{signup.kicker}</div>
+          <h2 className="mt-4 max-w-3xl text-balance text-3xl font-black tracking-[-0.06em] text-slate-950 sm:text-4xl lg:text-5xl">
+            {signup.title}
+          </h2>
+          <p className="mt-5 max-w-3xl text-base leading-8 text-slate-600 sm:text-lg sm:leading-9">
+            {signup.description}
+          </p>
+          <div className="mt-8">
+            <Button
+              asChild
+              size="lg"
+              className="h-12 rounded-xl bg-[#155dfc] px-8 font-semibold !text-white shadow-[0_14px_30px_rgba(21,93,252,0.22)] hover:bg-[#1447e6]"
+            >
+              <InternalLink href={ROUTES.login} className="inline-flex items-center justify-center gap-2 !text-white">
+                {signup.action}
+                <ArrowRight className="h-4 w-4 shrink-0 !text-white" />
+              </InternalLink>
             </Button>
           </div>
-          <p className="text-sm leading-7 text-slate-600">报名材料、赛道说明、作品模板与评审规则将在报名系统中同步开放。</p>
         </div>
       </div>
     </section>

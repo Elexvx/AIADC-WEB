@@ -1,3 +1,5 @@
+import { ROUTES } from '@/shared/config/routes';
+
 export type NavItem = {
   label: string;
   target: string;
@@ -67,7 +69,10 @@ export type NewsArticleItem = {
 
 export type FooterColumnItem = {
   title: string;
-  links: string[];
+  links: {
+    label: string;
+    href: string;
+  }[];
 };
 
 export const siteContent = {
@@ -107,7 +112,7 @@ export const siteContent = {
       imageUrl:
         'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=2400&q=85',
       tone: 'blueprint',
-      buttons: [{ label: '立即报名', href: '#signup', variant: 'primary' }],
+      buttons: [{ label: '立即报名', href: ROUTES.login, variant: 'primary' }],
     },
     {
       kicker: '三大赛道同步开放',
@@ -119,8 +124,8 @@ export const siteContent = {
         'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=2400&q=85',
       tone: 'aurora',
       buttons: [
-        { label: '立即报名', href: '#signup', variant: 'primary' },
-        { label: '查看赛道', href: '/tracks', variant: 'secondary' },
+        { label: '立即报名', href: ROUTES.login, variant: 'primary' },
+        { label: '了解赛事', href: ROUTES.intro, variant: 'secondary' },
       ],
     },
     {
@@ -133,9 +138,9 @@ export const siteContent = {
         'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=2400&q=85',
       tone: 'summit',
       buttons: [
-        { label: '立即报名', href: '#signup', variant: 'primary' },
-        { label: '查看赛道', href: '/tracks', variant: 'secondary' },
-        { label: '下载执行方案', href: '/materials', variant: 'ghost' },
+        { label: '立即报名', href: ROUTES.login, variant: 'primary' },
+        { label: '了解赛事', href: ROUTES.intro, variant: 'secondary' },
+        { label: '下载执行方案', href: ROUTES.materials, variant: 'ghost' },
       ],
     },
   ] satisfies HeroSlideItem[],
@@ -321,25 +326,37 @@ export const siteContent = {
     action: '进入报名系统',
   },
   footer: {
+    description: '面向高校与青年创新团队的智能应用竞赛门户，集中提供赛道信息、报名入口、材料下载与赛事资讯。',
     columns: [
       {
-        title: '关于',
-        links: ['关于我们', '全球布局', '新闻动态', '联系我们'],
+        title: '赛事导航',
+        links: [
+          { label: '首页', href: ROUTES.home },
+          { label: '大赛简介', href: ROUTES.intro },
+        ],
       },
       {
-        title: '服务',
-        links: ['基础服务', '政策与融资', '市场推广', '全球化服务'],
+        title: '参赛支持',
+        links: [
+          { label: '创业基地', href: ROUTES.startupBase },
+          { label: '材料下载', href: ROUTES.materials },
+          { label: '登录入口', href: ROUTES.login },
+        ],
       },
       {
-        title: '资源',
-        links: ['企业展示', '成功案例', '政策资讯'],
-      },
-      {
-        title: '申请',
-        links: ['申请服务', '登录'],
+        title: '资讯与内容',
+        links: [
+          { label: '新闻中心', href: ROUTES.news },
+          { label: '赛事动态', href: ROUTES.news },
+          { label: '政策支持', href: ROUTES.policies },
+          { label: '关于我们', href: ROUTES.about },
+        ],
       },
     ] satisfies FooterColumnItem[],
-    copyright: '© 2024 AI National Competition. All Rights Reserved.',
-    legalLinks: ['隐私政策', '服务条款'],
+    copyright: '© 2024 全国大学生智能应用开发大赛. 保留所有权利。',
+    legalLinks: [
+      { label: '隐私政策', href: ROUTES.privacy },
+      { label: '服务条款', href: ROUTES.terms },
+    ],
   },
 } as const;

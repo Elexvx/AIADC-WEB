@@ -1,7 +1,7 @@
 import { ArrowLeft, CalendarDays } from 'lucide-react';
 import { notFound } from 'next/navigation';
 import { siteContent } from '@/entities/site';
-import { Badge } from '@/shared/ui';
+import { Badge, InternalLink } from '@/shared/ui';
 import { SiteFooter, SiteHeader } from '@/widgets/site-shell';
 
 type NewsDetailPageProps = {
@@ -48,10 +48,10 @@ export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
 
       <article className="bg-white py-12 sm:py-16">
         <div className="section-shell">
-          <a href="/news" className="inline-flex items-center gap-2 rounded-md bg-white px-4 py-2 text-sm font-bold text-blue-700 shadow-[0_10px_24px_rgba(15,23,42,0.06)] transition-colors hover:bg-blue-50">
+          <InternalLink href="/news" className="inline-flex items-center gap-2 rounded-md bg-white px-4 py-2 text-sm font-bold text-blue-700 shadow-[0_10px_24px_rgba(15,23,42,0.06)] transition-colors hover:bg-blue-50">
             <ArrowLeft className="h-4 w-4" />
             返回新闻中心
-          </a>
+          </InternalLink>
 
           <div className="mt-8 overflow-hidden rounded-lg border border-white bg-white shadow-[0_18px_54px_rgba(15,23,42,0.08)]">
             <div className="relative aspect-[16/7] min-h-72 overflow-hidden bg-slate-900">

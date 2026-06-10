@@ -117,6 +117,24 @@ img {
   flex-direction: column;
 }
 
+.page-transition {
+  min-height: 100vh;
+  opacity: 0;
+  transform: translateY(14px) scale(0.992);
+  filter: blur(10px);
+  transition:
+    opacity 320ms ease,
+    transform 420ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter 420ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform, filter;
+}
+
+.page-transition-entered {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+
 .section-shell {
   width: min(100% - 2rem, 1380px);
   margin-inline: auto;
@@ -167,5 +185,19 @@ img {
   .section-kicker::before,
   .section-kicker::after {
     margin-inline: 0.45rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .page-transition,
+  .page-transition-entered {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
   }
 }

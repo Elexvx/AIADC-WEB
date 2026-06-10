@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { ArrowRight, CalendarDays } from 'lucide-react';
-import { Badge, Card } from '@/shared/ui';
+import { Badge, InternalLink } from '@/shared/ui';
 import { getNewsCategoryGroups, getNewsCategoryLabel, type NewsCategoryKey } from '@/features/news/lib/news';
 
 const newsGroups = getNewsCategoryGroups();
@@ -12,7 +12,7 @@ export function NewsTabs() {
   const activeGroup = newsGroups.find((group) => group.key === activeTab) ?? newsGroups[0];
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       <div className="flex flex-wrap gap-3">
         {newsGroups.map((group) => (
           <button
@@ -28,22 +28,10 @@ export function NewsTabs() {
         ))}
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
-        <Card className="overflow-hidden rounded-lg border-white bg-white/96 shadow-[0_18px_54px_rgba(15,23,42,0.07)]">
-          <div className="relative aspect-[16/10] overflow-hidden bg-slate-900">
-            <img src={activeGroup.articles[0]?.imageUrl} alt={activeGroup.articles[0]?.title ?? activeGroup.label} className="h-full w-full object-cover" />
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(15,23,42,0.08)_0%,rgba(15,23,42,0.82)_100%)]" />
-            <div className="absolute inset-x-0 bottom-0 p-6 text-white sm:p-8">
-              <Badge className="border border-blue-100 bg-blue-50 text-blue-700">{activeGroup.label}</Badge>
-              <h2 className="mt-4 text-balance text-2xl font-black tracking-[-0.05em] sm:text-4xl">{activeGroup.articles[0]?.title}</h2>
-              <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-200 sm:text-base">{activeGroup.description}</p>
-            </div>
-          </div>
-        </Card>
-
-        <div className="space-y-4">
-          {activeGroup.articles.map((article) => (
-            <a
+      <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+        {activeGroup.articles.length > 0 ? (
+          activeGroup.articles.map((article) => (
+            <InternalLink
               key={article.slug}
               href={article.href}
               className="block rounded-lg border border-slate-200 bg-white p-5 shadow-[0_14px_36px_rgba(15,23,42,0.06)] transition-colors hover:bg-slate-50"
@@ -61,9 +49,13 @@ export function NewsTabs() {
                 查看全文
                 <ArrowRight className="h-4 w-4" />
               </span>
-            </a>
-          ))}
-        </div>
+            </InternalLink>
+          ))
+        ) : (
+          <div className="rounded-lg border border-dashed border-slate-200 bg-slate-50 p-8 text-center text-sm text-slate-500 md:col-span-2 xl:col-span-3">
+            当前分类暂无文章。
+          </div>
+        )}
       </div>
     </div>
   );

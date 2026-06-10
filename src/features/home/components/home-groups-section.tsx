@@ -1,7 +1,8 @@
 import { ChevronRight, Users } from 'lucide-react';
 import { siteContent } from '@/entities/site';
 import { homeGroupIcons } from '@/features/home/config/home-content';
-import { Card, CardContent, SectionHeading } from '@/shared/ui';
+import { ROUTES } from '@/shared/config/routes';
+import { Card, CardContent, InternalLink, SectionHeading } from '@/shared/ui';
 
 export function HomeGroupsSection() {
   return (
@@ -25,10 +26,10 @@ export function HomeGroupsSection() {
                     <h3 className="text-lg font-bold tracking-[-0.04em] text-slate-950">{group.title}</h3>
                     <p className="mt-2 text-sm leading-7 text-slate-600">{group.description}</p>
                   </div>
-                  <a href="#signup" className="mt-auto inline-flex h-9 w-fit shrink-0 items-center gap-2 rounded-md bg-blue-50 px-3 text-sm font-semibold text-blue-700 transition-colors hover:bg-blue-100">
+                  <InternalLink href={ROUTES.login} className="mt-auto inline-flex h-9 w-fit shrink-0 items-center gap-2 rounded-md bg-blue-50 px-3 text-sm font-semibold text-blue-700 transition-colors hover:bg-blue-100">
                     {group.cta}
                     <ChevronRight className="h-4 w-4" />
-                  </a>
+                  </InternalLink>
                 </CardContent>
               </Card>
             );

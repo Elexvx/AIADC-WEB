@@ -1,41 +1,60 @@
-import { siteContent } from '@/entities/site';
+'use client';
+
+import { useLocale } from '@/shared/i18n/locale-provider';
+import { InternalLink } from '@/shared/ui';
 
 export function SiteFooter() {
+  const { messages } = useLocale();
+  const { footer, brand } = messages;
+
   return (
     <footer className="mt-auto border-t border-slate-200 bg-white">
-      <div className="border-t border-white/10 bg-[radial-gradient(circle_at_top,rgba(59,130,246,0.18),transparent_30%),linear-gradient(180deg,#0c1830_0%,#09111f_100%)] text-white">
-        <div className="section-shell grid gap-10 py-14 sm:gap-12 sm:py-16 lg:grid-cols-4 lg:gap-20">
-          {siteContent.footer.columns.map((column) => (
-            <div key={column.title} className="space-y-6">
-              <div className="space-y-4">
-                <h2 className="text-2xl font-semibold tracking-[-0.03em] text-white/92 sm:text-[1.9rem]">{column.title}</h2>
-                <div className="h-px w-16 bg-blue-200/38" />
-              </div>
-
-              <nav aria-label={`${column.title}栏目`} className="space-y-3 text-base leading-8 text-slate-300 sm:text-lg">
-                {column.links.map((link) => (
-                  <a
-                    key={link}
-                    href="/#signup"
-                    className="block transition-colors duration-200 hover:text-white"
-                  >
-                    {link}
-                  </a>
-                ))}
-              </nav>
+      <div className="bg-white text-slate-950">
+        <div className="section-shell py-8 sm:py-10 lg:py-12">
+          <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.35fr)] lg:items-start lg:gap-12">
+            <div className="max-w-md">
+              <h2 className="text-xl font-black tracking-[-0.04em] text-slate-950 sm:text-2xl">
+                {brand.primary} {brand.secondary}
+              </h2>
+              <p className="mt-3 max-w-[34rem] text-sm leading-7 text-slate-600 sm:text-base sm:leading-8">
+                {footer.description}
+              </p>
             </div>
-          ))}
+
+            <div className="grid grid-cols-2 gap-x-6 gap-y-8 border-t border-blue-100 pt-6 sm:grid-cols-3 sm:gap-x-8 sm:pt-7 lg:ml-auto lg:w-fit lg:border-t-0 lg:pt-0">
+              {footer.columns.map((column) => (
+                <div key={column.title} className="space-y-3">
+                  <div className="space-y-2">
+                    <h3 className="text-sm font-black tracking-[-0.03em] text-slate-950 sm:text-base">{column.title}</h3>
+                    <div className="h-px w-10 bg-blue-200" />
+                  </div>
+
+                  <nav aria-label={`${column.title}栏目`} className="space-y-2 text-sm leading-6 text-slate-600 sm:text-[15px]">
+                    {column.links.map((link) => (
+                      <InternalLink
+                        key={link.label}
+                        href={link.href}
+                        className="block transition-colors duration-200 hover:text-blue-700"
+                      >
+                        {link.label}
+                      </InternalLink>
+                    ))}
+                  </nav>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 
       <div className="border-t border-slate-200 bg-white">
-        <div className="section-shell flex flex-col gap-4 py-5 text-sm text-slate-500 sm:py-6 md:flex-row md:items-center md:justify-between">
-          <span className="leading-6">{siteContent.footer.copyright}</span>
+        <div className="section-shell flex flex-col gap-3 py-4 text-sm text-slate-500 sm:py-5 md:flex-row md:items-center md:justify-between">
+          <span className="leading-6">{footer.copyright}</span>
           <div className="flex flex-wrap gap-x-6 gap-y-2 text-slate-600">
-            {siteContent.footer.legalLinks.map((link) => (
-              <a key={link} href="/#signup" className="transition-colors hover:text-slate-900">
-                {link}
-              </a>
+            {footer.legalLinks.map((link) => (
+              <InternalLink key={link.label} href={link.href} className="transition-colors hover:text-slate-900">
+                {link.label}
+              </InternalLink>
             ))}
           </div>
         </div>

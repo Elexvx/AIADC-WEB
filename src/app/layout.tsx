@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import { siteContent } from '@/entities/site';
+import { LocaleProvider } from '@/shared/i18n/locale-provider';
+import { PageTransition } from '@/shared/ui';
 import { FloatingActions } from '@/widgets/site-shell';
 import './globals.css';
 
@@ -36,8 +38,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="zh-CN">
       <body className="bg-background text-foreground antialiased">
-        {children}
-        <FloatingActions />
+        <LocaleProvider>
+          <PageTransition>{children}</PageTransition>
+          <FloatingActions />
+        </LocaleProvider>
       </body>
     </html>
   );

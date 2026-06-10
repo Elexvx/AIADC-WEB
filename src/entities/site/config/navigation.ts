@@ -1,3 +1,5 @@
+import { ROUTES } from '@/shared/config/routes';
+
 export type NavLinkItem = {
   label: string;
   href: string;
@@ -11,40 +13,37 @@ export type NavPanelItem = NavLinkItem & {
   description: string;
 };
 
-export const eventPageItems: NavPanelItem[] = [
-  { label: '大赛简介', description: '赛事定位与生态介绍', href: '/intro' },
-  { label: '赛事安排', description: '报名、评审与决赛节点', href: '/schedule' },
-  { label: '奖项设置', description: '奖金、证书与生态支持', href: '/awards' },
-  { label: '赛区设置', description: '参赛组别与赛道方向', href: '/tracks' },
-];
+export const eventPageItems: NavPanelItem[] = [];
 
 export const mainNavItems: MainNavItem[] = [
-  { label: '首页', href: '/' },
-  { label: '新闻中心', href: '/news' },
-  { label: '赛事', href: '/intro', dropdown: true },
-  { label: '活动', href: '/schedule' },
-  { label: '优秀项目', href: '/news/tabs' },
-  { label: '创业基地', href: '/#signup' },
-  { label: '服务介绍', href: '/materials' },
-  { label: '政府政策', href: '/intro' },
-  { label: '关于我们', href: '/intro' },
+  { label: '首页', href: ROUTES.home },
+  { label: '新闻中心', href: ROUTES.news },
+  { label: '赛事', href: ROUTES.intro },
+  { label: '活动', href: ROUTES.events },
+  { label: '优秀项目', href: ROUTES.projects },
+  { label: '创业基地', href: ROUTES.startupBase },
+  { label: '材料下载', href: ROUTES.materials },
+  { label: '政策支持', href: ROUTES.policies },
+  { label: '关于我们', href: ROUTES.about },
 ] as const;
 
 export const pageSwitchItems: NavPanelItem[] = [
-  { label: '大赛首页', description: '赛事概览与关键数据', href: '/' },
-  ...eventPageItems,
-  { label: '参赛报名', description: '报名入口与材料说明', href: '/#signup' },
-  { label: '材料下载', description: '执行方案与参赛模板', href: '/materials' },
-  { label: '新闻动态', description: '赛事进展与评审消息', href: '/news' },
+  { label: '首页', description: '赛事概览与关键信息', href: ROUTES.home },
+  { label: '新闻中心', description: '资讯分类与文章浏览', href: ROUTES.news },
+  { label: '赛事', description: '赛事定位与整体介绍', href: ROUTES.intro },
+  { label: '活动', description: '活动预告与交流安排', href: ROUTES.events },
+  { label: '优秀项目', description: '查看重点展示作品', href: ROUTES.projects },
+  { label: '创业基地', description: '项目成长与孵化支持', href: ROUTES.startupBase },
+  { label: '材料下载', description: '执行方案与参赛模板', href: ROUTES.materials },
+  { label: '政策支持', description: '政策信息与规范说明', href: ROUTES.policies },
+  { label: '关于我们', description: '赛事定位与组织方式', href: ROUTES.about },
 ];
 
 export const footerSwitchLinks: NavLinkItem[] = [
-  { label: '首页', href: '/' },
-  { label: '大赛简介', href: '/intro' },
-  { label: '赛事安排', href: '/schedule' },
-  { label: '奖项设置', href: '/awards' },
-  { label: '赛区设置', href: '/tracks' },
-  { label: '材料下载', href: '/materials' },
-  { label: '新闻中心', href: '/news' },
-  { label: '报名入口', href: '/#signup' },
+  { label: '首页', href: ROUTES.home },
+  { label: '大赛简介', href: ROUTES.intro },
+  { label: '优秀项目', href: ROUTES.projects },
+  { label: '材料下载', href: ROUTES.materials },
+  { label: '新闻中心', href: ROUTES.news },
+  { label: '登录入口', href: ROUTES.login },
 ];

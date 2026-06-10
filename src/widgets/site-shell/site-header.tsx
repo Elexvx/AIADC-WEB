@@ -3,10 +3,12 @@
 import { useState } from 'react';
 import { ChevronDown, Languages, Menu } from 'lucide-react';
 import { usePathname } from 'next/navigation';
-import { mainNavItems, pageSwitchItems, eventPageItems, siteContent } from '@/entities/site';
-import { Button } from '@/shared/ui';
+import { siteContent } from '@/entities/site';
+import { ROUTES } from '@/shared/config/routes';
+import { useLocale } from '@/shared/i18n/locale-provider';
+import { Button, InternalLink } from '@/shared/ui';
 
-function BrandMark() {
+function BrandMark({ primary, secondary }: { primary: string; secondary: string }) {
   return (
     <span className="flex items-center gap-3">
       <span className="relative grid h-11 w-11 place-items-center overflow-hidden rounded-lg bg-gradient-to-br from-cyan-300 via-blue-500 to-blue-700 text-lg font-black text-white shadow-[0_16px_36px_rgba(37,99,235,0.35)]">
@@ -14,8 +16,8 @@ function BrandMark() {
         <span className="absolute bottom-1 right-1 h-2 w-2 rounded-full bg-emerald-300" />
       </span>
       <span className="leading-tight">
-        <strong className="block text-base font-bold tracking-[-0.04em] text-white">全国大学生</strong>
-        <small className="block text-sm font-semibold text-white/84">智能应用开发大赛</small>
+        <strong className="block text-base font-bold tracking-[-0.04em] text-slate-950">{primary}</strong>
+        <small className="block text-sm font-semibold text-slate-600">{secondary}</small>
       </span>
     </span>
   );
@@ -23,36 +25,42 @@ function BrandMark() {
 
 function isActive(href: string, pathname: string) {
   if (href === '/') return pathname === '/';
+  if (href.startsWith('/#')) return pathname === ROUTES.home;
+  if (href.includes('#')) return pathname === href.split('#')[0];
   return pathname === href;
 }
 
 export function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [localeMenuOpen, setLocaleMenuOpen] = useState(false);
   const pathname = usePathname();
+  const { locale, setLocale, labels, messages } = useLocale();
+  const { brand, header } = messages;
+  const currentLocaleLabel = locale === 'zh' ? '中' : 'EN';
 
   return (
-    <header className="sticky top-0 z-50 bg-[#070707] text-white shadow-[0_10px_34px_rgba(0,0,0,0.22)]">
+    <header className="sticky top-0 z-50 bg-[rgba(255,255,255,0.88)] text-slate-950 shadow-[0_10px_34px_rgba(15,23,42,0.12)] backdrop-blur">
       <div className="section-shell flex h-14 items-center gap-5 sm:h-16">
-        <a href="/" aria-label={`${siteContent.brand.cnName} 首页`} className="shrink-0">
-          <BrandMark />
-        </a>
+        <InternalLink href="/" aria-label={`${siteContent.brand.cnName} ${brand.homeAria}`} className="shrink-0">
+          <BrandMark primary={brand.primary} secondary={brand.secondary} />
+        </InternalLink>
 
         <nav className="hidden flex-1 items-center justify-center gap-8 xl:flex" aria-label="主导航">
-          {mainNavItems.map((item, index) =>
+          {header.mainNavItems.map((item, index) =>
             item.dropdown ? (
               <div key={item.label} className="group relative">
-                <a
+                <InternalLink
                   href={item.href}
-                  className={`relative inline-flex items-center whitespace-nowrap text-sm font-semibold transition-colors hover:text-orange-200 ${
-                    eventPageItems.some((eventItem) => eventItem.href === pathname) ? 'text-white' : 'text-white/86'
+                  className={`relative inline-flex items-center whitespace-nowrap text-sm font-semibold transition-colors hover:text-blue-500 ${
+                    header.eventPageItems.some((eventItem) => isActive(eventItem.href, pathname)) ? 'text-slate-950' : 'text-slate-700'
                   }`}
                 >
                   {item.label}
                   <ChevronDown className="ml-1 h-3.5 w-3.5" />
-                </a>
+                </InternalLink>
                 <div className="invisible absolute left-1/2 top-[calc(100%+1.1rem)] z-50 w-64 -translate-x-1/2 rounded-lg border border-slate-200 bg-white p-2 text-slate-950 opacity-0 shadow-[0_24px_70px_rgba(15,23,42,0.16)] transition-all group-hover:visible group-hover:opacity-100">
-                  {eventPageItems.map((eventItem) => (
-                    <a
+                  {header.eventPageItems.map((eventItem) => (
+                    <InternalLink
                       key={eventItem.href}
                       href={eventItem.href}
                       className={`block rounded-md p-3 transition-colors hover:bg-blue-50 ${
@@ -61,35 +69,60 @@ export function SiteHeader() {
                     >
                       <span className="block text-sm font-bold text-slate-950">{eventItem.label}</span>
                       <span className="mt-1 block text-xs leading-5 text-slate-500">{eventItem.description}</span>
-                    </a>
+                    </InternalLink>
                   ))}
                 </div>
               </div>
             ) : (
-              <a
+              <InternalLink
                 key={`${item.label}-${item.href}`}
                 href={item.href}
-                className={`relative whitespace-nowrap text-sm font-semibold transition-colors hover:text-orange-200 ${
-                  isActive(item.href, pathname) || (index === 0 && pathname === '/') ? 'text-white' : 'text-white/86'
+                className={`relative whitespace-nowrap text-sm font-semibold transition-colors hover:text-blue-500 ${
+                  isActive(item.href, pathname) || (index === 0 && pathname === '/') ? 'text-slate-950' : 'text-slate-700'
                 }`}
               >
                 {item.label}
-                {item.label === '关于我们' ? <ChevronDown className="ml-1 inline h-3.5 w-3.5" /> : null}
-              </a>
+              </InternalLink>
             ),
           )}
         </nav>
 
         <div className="ml-auto flex items-center gap-3">
-          <button
-            type="button"
-            className="hidden h-10 w-10 place-items-center rounded-full border border-white/20 text-white transition-colors hover:bg-white/10 sm:grid"
-            aria-label="切换语言"
-          >
-            <Languages className="h-4 w-4" />
-          </button>
-          <Button asChild variant="outline" className="hidden h-10 rounded-full border-white/25 bg-transparent px-5 text-white hover:bg-white/10 sm:inline-flex">
-            <a href="/#signup">登录</a>
+          <div className="relative hidden sm:block">
+            <button
+              type="button"
+              aria-label={header.languageAria}
+              aria-expanded={localeMenuOpen}
+              aria-haspopup="menu"
+              onClick={() => setLocaleMenuOpen((open) => !open)}
+              className="inline-flex h-10 items-center gap-2 rounded-full border border-slate-200 bg-white px-3 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50"
+            >
+              <Languages className="h-4 w-4" />
+              <span>{currentLocaleLabel}</span>
+            </button>
+            {localeMenuOpen ? (
+              <div className="absolute right-0 top-[calc(100%+0.75rem)] z-50 min-w-40 rounded-xl border border-slate-200 bg-white p-1.5 shadow-[0_24px_70px_rgba(15,23,42,0.16)]">
+                {Object.entries(labels).map(([value, label]) => (
+                  <button
+                    key={value}
+                    type="button"
+                    onClick={() => {
+                      setLocale(value as 'zh' | 'en');
+                      setLocaleMenuOpen(false);
+                    }}
+                    className={`flex w-full items-center justify-between rounded-lg px-3 py-2 text-left text-sm transition-colors ${
+                      locale === value ? 'bg-blue-50 font-semibold text-blue-700' : 'text-slate-700 hover:bg-slate-50'
+                    }`}
+                  >
+                    <span>{label}</span>
+                    <span className="text-xs uppercase text-slate-400">{value}</span>
+                  </button>
+                ))}
+              </div>
+            ) : null}
+          </div>
+          <Button asChild variant="outline" className="hidden h-10 rounded-full border-slate-200 bg-white px-5 text-slate-900 hover:bg-slate-50 sm:inline-flex">
+            <InternalLink href="/login">{header.login}</InternalLink>
           </Button>
           <div className="relative">
             <button
@@ -97,15 +130,32 @@ export function SiteHeader() {
               aria-expanded={menuOpen}
               aria-haspopup="menu"
               onClick={() => setMenuOpen((open) => !open)}
-              className="flex h-10 w-10 items-center justify-center rounded-md text-white transition-colors hover:bg-white/10 xl:hidden"
+              className="flex h-10 w-10 items-center justify-center rounded-md text-slate-900 transition-colors hover:bg-slate-100 xl:hidden"
             >
               <Menu className="h-5 w-5" />
             </button>
             {menuOpen ? (
               <div className="fixed left-4 right-4 top-16 rounded-lg border border-slate-200 bg-white p-2 text-slate-950 shadow-[0_24px_70px_rgba(15,23,42,0.16)] sm:absolute sm:left-auto sm:right-0 sm:top-[calc(100%+0.75rem)] sm:w-[min(23rem,calc(100vw-2rem))]">
+                <div className="mb-2 flex items-center justify-between rounded-md border border-slate-200 bg-slate-50 px-3 py-2 sm:hidden">
+                  <span className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">{header.languageAria}</span>
+                  <div className="flex gap-2">
+                    {Object.entries(labels).map(([value, label]) => (
+                      <button
+                        key={value}
+                        type="button"
+                        onClick={() => setLocale(value as 'zh' | 'en')}
+                        className={`rounded-full px-3 py-1 text-xs font-semibold ${
+                          locale === value ? 'bg-blue-600 text-white' : 'bg-white text-slate-700 ring-1 ring-slate-200'
+                        }`}
+                      >
+                        {label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
                 <div className="grid gap-1 sm:grid-cols-2">
-                  {pageSwitchItems.map((item) => (
-                    <a
+                  {header.pageSwitchItems.map((item) => (
+                    <InternalLink
                       key={item.label}
                       href={item.href}
                       onClick={() => setMenuOpen(false)}
@@ -113,7 +163,7 @@ export function SiteHeader() {
                     >
                       <span className="block text-sm font-bold text-slate-950">{item.label}</span>
                       <span className="mt-1 block text-xs leading-5 text-slate-500">{item.description}</span>
-                    </a>
+                    </InternalLink>
                   ))}
                 </div>
               </div>

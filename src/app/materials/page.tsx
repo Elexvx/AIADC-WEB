@@ -1,5 +1,5 @@
-import { ArrowRight, Download, FileText } from 'lucide-react';
-import { Button, Card } from '@/shared/ui';
+import { ArrowRight, Download } from 'lucide-react';
+import { Button, Card, InternalLink, PageHero } from '@/shared/ui';
 import { SiteFooter, SiteHeader } from '@/widgets/site-shell';
 
 const materialItems = [
@@ -8,21 +8,21 @@ const materialItems = [
     description: '赛事章程、组织架构、赛程节点与联系方式。',
     format: 'PDF',
     audience: '院校组织者 / 指导老师',
-    action: '下载文件',
+    action: '下载',
   },
   {
     title: '报名信息模板',
     description: '团队成员、指导老师、单位信息与承诺书模板。',
     format: 'DOCX',
     audience: '参赛团队',
-    action: '下载文件',
+    action: '下载',
   },
   {
     title: '作品说明书模板',
     description: '项目背景、技术方案、演示说明与创新价值。',
     format: 'DOCX',
     audience: '参赛团队',
-    action: '下载文件',
+    action: '下载',
   },
   {
     title: '评审标准说明',
@@ -42,21 +42,11 @@ export default function MaterialsPage() {
   return (
     <main className="page-shell bg-white">
       <SiteHeader />
-
-      <section className="relative overflow-hidden bg-[#07172d] text-white">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(56,189,248,0.14),transparent_32%),linear-gradient(180deg,rgba(8,23,45,0.92)_0%,rgba(7,23,45,1)_100%)]" />
-        <div className="section-shell relative py-12 sm:py-16">
-          <div className="max-w-4xl">
-            <div className="section-kicker text-cyan-200">材料下载</div>
-            <h1 className="mt-4 text-balance text-4xl font-black tracking-[-0.06em] text-white sm:text-6xl">
-              参赛文件集中获取
-            </h1>
-            <p className="mt-6 text-base leading-8 text-slate-300 sm:text-lg sm:leading-9">
-              大赛执行方案、报名信息模板、作品说明书模板与评审标准统一整理，方便院校、指导老师与参赛团队快速查找。
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="材料下载"
+        title="参赛文件集中获取"
+        description="大赛执行方案、报名信息模板、作品说明书模板与评审标准统一整理，方便院校、指导老师与参赛团队快速查找。"
+      />
 
       <section className="relative z-10 -mt-10 pb-14 sm:-mt-12 sm:pb-16">
         <div className="section-shell">
@@ -79,7 +69,6 @@ export default function MaterialsPage() {
                   <tr className="text-left text-sm font-bold text-slate-500">
                     <th className="px-8 py-4">文件名称</th>
                     <th className="px-6 py-4">内容说明</th>
-                    <th className="px-6 py-4">适用对象</th>
                     <th className="px-6 py-4">格式</th>
                     <th className="px-8 py-4 text-right">操作</th>
                   </tr>
@@ -88,17 +77,11 @@ export default function MaterialsPage() {
                   {materialItems.map((item, index) => (
                     <tr key={item.title} className={index < materialItems.length - 1 ? 'border-b border-slate-200' : ''}>
                       <td className="px-8 py-6 align-top">
-                        <div className="flex items-start gap-4">
-                          <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-cyan-50 text-cyan-700 ring-1 ring-cyan-100">
-                            <FileText className="h-5 w-5" />
-                          </span>
-                          <div>
-                            <div className="text-lg font-black tracking-[-0.04em] text-slate-950">{item.title}</div>
-                          </div>
+                        <div>
+                          <div className="text-lg font-black tracking-[-0.04em] text-slate-950">{item.title}</div>
                         </div>
                       </td>
                       <td className="px-6 py-6 align-top text-sm leading-7 text-slate-600 sm:text-base">{item.description}</td>
-                      <td className="px-6 py-6 align-top text-sm leading-7 text-slate-600 sm:text-base">{item.audience}</td>
                       <td className="px-6 py-6 align-top">
                         <span className="inline-flex rounded-full border border-blue-100 bg-blue-50 px-3 py-1 text-xs font-bold tracking-[0.12em] text-blue-700">
                           {item.format}
@@ -106,10 +89,10 @@ export default function MaterialsPage() {
                       </td>
                       <td className="px-8 py-6 align-top text-right">
                         <Button asChild variant="outline" className="rounded-md border-blue-200 text-blue-700 hover:bg-blue-50">
-                          <a href="/" className="inline-flex items-center gap-2">
+                          <InternalLink href="/" className="inline-flex items-center gap-2">
                             <Download className="h-4 w-4" />
                             {item.action}
-                          </a>
+                          </InternalLink>
                         </Button>
                       </td>
                     </tr>
@@ -121,26 +104,20 @@ export default function MaterialsPage() {
             <div className="md:hidden">
               {materialItems.map((item, index) => (
                 <div key={item.title} className={`px-6 py-6 ${index < materialItems.length - 1 ? 'border-b border-slate-200' : ''}`}>
-                  <div className="flex items-start gap-4">
-                    <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-cyan-50 text-cyan-700 ring-1 ring-cyan-100">
-                      <FileText className="h-5 w-5" />
-                    </span>
-                    <div className="min-w-0 flex-1">
-                      <div className="flex flex-wrap items-center gap-3">
-                        <h3 className="text-lg font-black tracking-[-0.04em] text-slate-950">{item.title}</h3>
-                        <span className="inline-flex rounded-full border border-blue-100 bg-blue-50 px-3 py-1 text-xs font-bold tracking-[0.12em] text-blue-700">
-                          {item.format}
-                        </span>
-                      </div>
-                      <p className="mt-3 text-sm leading-7 text-slate-600">{item.description}</p>
-                      <div className="mt-2 text-sm font-semibold text-slate-500">{item.audience}</div>
-                      <Button asChild variant="outline" className="mt-5 rounded-md border-blue-200 text-blue-700 hover:bg-blue-50">
-                        <a href="/" className="inline-flex items-center gap-2">
+                  <div className="min-w-0 flex-1">
+                    <div className="flex flex-wrap items-center gap-3">
+                      <h3 className="text-lg font-black tracking-[-0.04em] text-slate-950">{item.title}</h3>
+                      <span className="inline-flex rounded-full border border-blue-100 bg-blue-50 px-3 py-1 text-xs font-bold tracking-[0.12em] text-blue-700">
+                        {item.format}
+                      </span>
+                    </div>
+                    <p className="mt-3 text-sm leading-7 text-slate-600">{item.description}</p>
+                    <Button asChild variant="outline" className="mt-5 rounded-md border-blue-200 text-blue-700 hover:bg-blue-50">
+                        <InternalLink href="/" className="inline-flex items-center gap-2">
                           <Download className="h-4 w-4" />
                           {item.action}
-                        </a>
-                      </Button>
-                    </div>
+                        </InternalLink>
+                    </Button>
                   </div>
                 </div>
               ))}
@@ -152,10 +129,10 @@ export default function MaterialsPage() {
               <div className="text-base font-black tracking-[-0.03em] text-slate-950">需要更多报名支持？</div>
               <p className="mt-1 text-sm leading-7 text-slate-600 sm:text-base">如需院校组织说明、赛事咨询或材料补充，请联系组委会服务入口。</p>
             </div>
-            <a href="/intro" className="inline-flex shrink-0 items-center gap-2 text-sm font-bold text-blue-700">
+            <InternalLink href="/intro" className="inline-flex shrink-0 items-center gap-2 text-sm font-bold text-blue-700">
               查看赛事介绍
               <ArrowRight className="h-4 w-4" />
-            </a>
+            </InternalLink>
           </div>
         </div>
       </section>
