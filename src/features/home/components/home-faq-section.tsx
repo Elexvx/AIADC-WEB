@@ -7,7 +7,7 @@ export function HomeFaqSection() {
     <section id="faq" className="bg-white py-10 sm:py-12">
       <div className="section-shell">
         <SectionHeading centered eyebrow="常见问题" title="报名与作品提交问题速查" description="把高频问题前置到官网，提升移动端与桌面端的信息查找效率。" />
-        <div className="mx-auto mt-9 grid max-w-5xl gap-4 md:grid-cols-2">
+        <div className="mt-9 grid gap-4 md:grid-cols-2">
           {homeFaqItems.map((item) => (
             <Card key={item.question} className="rounded-lg border-slate-200 bg-white shadow-[0_14px_36px_rgba(15,23,42,0.06)]">
               <CardContent className="flex min-h-36 items-start gap-4 !p-6">
