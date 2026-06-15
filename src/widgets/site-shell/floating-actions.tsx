@@ -13,7 +13,7 @@ export function FloatingActions() {
         title="在线客服"
         className="grid h-11 w-11 place-items-center rounded-full border border-white/80 bg-emerald-500 text-white shadow-[0_12px_28px_rgba(16,185,129,0.28)] outline-none transition-colors hover:bg-emerald-400 focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 sm:h-12 sm:w-12"
       >
-        <MessageCircle className="h-[18px] w-[18px] sm:h-5 sm:w-5" />
+        <MessageCircle className="h-[18px] w-[18px] sm:h-5 sm:w-5 text-white" />
       </a>
       <button
         type="button"

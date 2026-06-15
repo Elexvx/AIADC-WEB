@@ -19,7 +19,7 @@ export default function TermsPage() {
       />
 
       <section className="bg-white pb-12 sm:pb-14">
-        <div className="section-shell rounded-lg border border-white bg-white/96 p-6 shadow-[0_16px_42px_rgba(15,23,42,0.07)] sm:p-8">
+        <div className="section-shell rounded-lg border border-slate-200 bg-white p-6 sm:p-8">
           {page.richTextBlocks?.map((block) => (
             <p key={block.id} className="text-sm leading-8 text-slate-600 sm:text-base">
               {block.content}

@@ -13,8 +13,8 @@ export function SiteFooter() {
         <div className="section-shell py-8 sm:py-10 lg:py-12">
           <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.35fr)] lg:items-start lg:gap-12">
             <div className="max-w-md">
-              <h2 className="text-xl font-black tracking-[-0.04em] text-slate-950 sm:text-2xl">
-                {brand.primary} {brand.secondary}
+              <h2 className="heading-2 text-slate-950">
+                {brand.primary}{brand.secondary}
               </h2>
               <p className="mt-3 max-w-[34rem] text-sm leading-7 text-slate-600 sm:text-base sm:leading-8">
                 {footer.description}
@@ -25,7 +25,7 @@ export function SiteFooter() {
               {footer.columns.map((column) => (
                 <div key={column.title} className="space-y-3">
                   <div className="flex flex-col items-end gap-2">
-                    <h3 className="text-sm font-black tracking-[-0.03em] text-slate-950 sm:text-base">{column.title}</h3>
+                    <h3 className="heading-3 text-slate-950">{column.title}</h3>
                     <div className="h-px w-10 bg-blue-200" />
                   </div>
 

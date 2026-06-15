@@ -22,7 +22,7 @@ export function NewsArticleCard({
     return (
       <InternalLink
         href={article.href}
-        className="flex min-h-44 flex-col rounded-lg border border-slate-200 bg-white p-5 shadow-[0_12px_30px_rgba(15,23,42,0.06)] transition-colors hover:border-blue-200"
+        className="flex min-h-44 flex-col rounded-lg border border-slate-200 bg-white p-5 transition-colors hover:border-blue-200"
       >
         <div className="flex items-center justify-between gap-4">
           {showCategory ? (
@@ -31,7 +31,7 @@ export function NewsArticleCard({
           <span className="shrink-0 text-sm font-semibold text-slate-400">{article.date}</span>
         </div>
         <div className="mt-5">
-          <h3 className="text-lg font-black leading-snug tracking-[-0.04em] text-slate-950">{article.title}</h3>
+          <h3 className="heading-3 text-slate-950">{article.title}</h3>
           <p className="mt-3 text-sm leading-7 text-slate-600">{article.excerpt}</p>
         </div>
       </InternalLink>
@@ -57,7 +57,7 @@ export function NewsArticleCard({
               {article.date}
             </span>
           </div>
-          <h3 className="mt-3 text-xl font-black leading-snug tracking-[-0.04em] text-slate-950">{article.title}</h3>
+          <h3 className="mt-3 heading-3 text-slate-950">{article.title}</h3>
           <p className="mt-3 text-sm leading-7 text-slate-600">{article.excerpt}</p>
         </div>
       </InternalLink>
@@ -67,7 +67,7 @@ export function NewsArticleCard({
   return (
     <InternalLink
       href={article.href}
-      className="flex h-full flex-col overflow-hidden rounded-lg border border-white bg-white/96 shadow-[0_16px_42px_rgba(15,23,42,0.07)]"
+      className="flex h-full flex-col overflow-hidden rounded-lg border border-slate-200 bg-white"
     >
       <div className="relative aspect-[16/10] overflow-hidden">
         <img src={article.image.url} alt={article.image.alt} className="h-full w-full object-cover" loading="lazy" />
@@ -77,7 +77,7 @@ export function NewsArticleCard({
       </div>
       <div className="flex min-h-56 flex-1 flex-col p-6">
         <span className="text-xs font-semibold tracking-[0.12em] text-slate-400">{article.date}</span>
-        <h3 className="mt-4 text-lg font-black leading-snug tracking-[-0.04em] text-slate-950">{article.title}</h3>
+        <h3 className="mt-4 heading-3 text-slate-950">{article.title}</h3>
         <p className="mt-3 text-sm leading-7 text-slate-600">{article.excerpt}</p>
         <span className="mt-auto inline-flex items-center gap-2 pt-5 text-sm font-bold text-blue-700">
           查看全文

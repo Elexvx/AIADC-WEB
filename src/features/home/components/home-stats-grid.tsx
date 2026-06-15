@@ -1,6 +1,58 @@
+'use client';
+
+import { useEffect, useRef, useState } from 'react';
 import { Card } from '@/shared/ui';
-import { getSectionItems, resolveIcon } from '@/shared/content';
+import { getSectionItems } from '@/shared/content';
 import { usePageContent } from '@/shared/i18n/locale-provider';
+
+function parseValue(value: string): { num: number; suffix: string } {
+  const match = value.match(/^(\d+)(.*)$/);
+  if (!match) return { num: 0, suffix: value };
+  return { num: parseInt(match[1], 10), suffix: match[2] };
+}
+
+function AnimatedNumber({ value }: { value: string }) {
+  const [display, setDisplay] = useState('0');
+  const ref = useRef<HTMLDivElement>(null);
+  const hasAnimated = useRef(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const { num, suffix } = parseValue(value);
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasAnimated.current) {
+          hasAnimated.current = true;
+          const duration = 1500;
+          const startTime = performance.now();
+
+          function tick(now: number) {
+            const elapsed = now - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            // easeOutExpo
+            const eased = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+            setDisplay(Math.round(eased * num).toString() + suffix);
+            if (progress < 1) requestAnimationFrame(tick);
+          }
+          requestAnimationFrame(tick);
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [value]);
+
+  return (
+    <div ref={ref} className="text-3xl font-bold text-slate-950">
+      {display}
+    </div>
+  );
+}
 
 export function HomeStatsGrid() {
   const page = usePageContent('home');
@@ -12,7 +64,6 @@ export function HomeStatsGrid() {
         <Card className="overflow-hidden rounded-lg border-white/80 bg-white/96 shadow-none backdrop-blur">
           <div className="grid grid-cols-2 gap-0 md:grid-cols-4">
             {stats.map((stat, index) => {
-              const Icon = resolveIcon(stat.iconKey);
               const isLeftColumnOnMobile = index % 2 === 0;
               const isTopRowOnMobile = index < 2;
               const isLastDesktopColumn = index === stats.length - 1;
@@ -26,12 +77,9 @@ export function HomeStatsGrid() {
                     isLastDesktopColumn ? 'md:border-r-0' : 'md:border-r'
                   } md:border-b-0`}
                 >
-                  <span className="grid h-9 w-9 place-items-center rounded-lg bg-blue-50 text-blue-600 ring-1 ring-blue-100">
-                    <Icon className="h-5 w-5" />
-                  </span>
                   <div>
-                    <div className="text-xl font-black leading-none tracking-[-0.05em] text-slate-950 sm:text-2xl md:text-3xl">{stat.value}</div>
-                    <div className="mt-1.5 text-sm font-semibold text-slate-500">{stat.label}</div>
+                    <AnimatedNumber value={stat.value} />
+                    <div className="mt-1.5 text-xs font-medium text-slate-500">{stat.label}</div>
                   </div>
                 </div>
               );

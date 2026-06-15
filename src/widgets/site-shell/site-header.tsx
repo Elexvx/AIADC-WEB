@@ -15,7 +15,7 @@ function BrandMark({ primary, secondary }: { primary: string; secondary: string 
         <span className="absolute bottom-1 right-1 h-2 w-2 rounded-full bg-emerald-300" />
       </span>
       <span className="leading-tight">
-        <strong className="block text-base font-bold tracking-[-0.04em] text-slate-950">{primary}</strong>
+        <strong className="block text-base font-bold tracking-wide text-slate-950">{primary}</strong>
         <small className="block text-sm font-semibold text-slate-600">{secondary}</small>
       </span>
     </span>

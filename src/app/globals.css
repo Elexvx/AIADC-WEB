@@ -3,6 +3,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  --font-sans: var(--font-alibaba-puhuiti), -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', ui-sans-serif, system-ui, sans-serif;
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
   --color-card: hsl(var(--card));
@@ -69,8 +70,10 @@ body {
   overflow-x: hidden;
   overflow-y: visible;
   background: #ffffff;
-  font-family: 'Inter', 'PingFang SC', 'Microsoft YaHei', ui-sans-serif, system-ui, sans-serif;
+  font-weight: 400;
   text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 ::-webkit-scrollbar {
@@ -202,6 +205,70 @@ img {
   margin-inline: auto;
 }
 
+/* ── Typography Scale（全局排版规范） ──
+ *
+ * 级别        用途                      字号(移动/平板/桌面)         字重      行高
+ * ─────────────────────────────────────────────────────────────────────────────
+ * display    首页 Hero 大标题          4xl / 6xl / 7xl            900       [1.08]
+ * h1         页面主标题 (PageHero)     3xl / 4xl / 5xl            900       tight
+ * h2         区块/章节标题             2xl / 3xl / 4xl            700       tight
+ * h3         卡片/子区块标题           lg  / xl  / 2xl            600       tight
+ * h4         小标题/列表组标题         base / lg   / –            600       normal
+ * body       正文                     base / –   / –             400       relaxed
+ * body-lg    描述文字/大段正文         base / lg   / –             400       loose(8)
+ * caption    辅助说明/元信息           sm   / –   / –              400      normal
+ * eyebrow    眉标(kicker)             xs   / –   / –              800      0.18em upper
+ */
+
+@layer base {
+  /* ── Display：首页 Hero 超大标题 ── */
+  .heading-display {
+    font-size: clamp(2.25rem, 1.5rem + 2.7vw, 4.5rem);
+    font-weight: 900;
+    line-height: 1.08;
+    letter-spacing: 0.02em;
+  }
+
+  /* ── H1：页面主标题 ── */
+  .heading-1 {
+    font-size: clamp(1.875rem, 1.25rem + 2.3vw, 3rem);
+    font-weight: 900;
+    line-height: 1.15;
+    letter-spacing: 0.02em;
+  }
+
+  /* ── H2：区块/章节标题 ── */
+  .heading-2 {
+    font-size: clamp(1.5rem, 1rem + 1.8vw, 2.25rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0.015em;
+  }
+
+  /* ── H3：卡片/子区块标题 ── */
+  .heading-3 {
+    font-size: clamp(1.125rem, 0.8rem + 1.2vw, 1.5rem);
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: 0.01em;
+  }
+
+  /* ── H4：小标题/列表组标题 ── */
+  .heading-4 {
+    font-size: clamp(1rem, 0.7rem + 0.9vw, 1.125rem);
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  /* ── Body-lg：描述文字/段落 ── */
+  .body-lg {
+    font-size: clamp(1rem, 0.9rem + 0.3vw, 1.125rem);
+    font-weight: 400;
+    line-height: 2;
+    letter-spacing: 0.01em;
+  }
+}
+
 .eyebrow,
 .section-kicker {
   width: fit-content;
@@ -263,4 +330,124 @@ img {
     transform: none;
     transition: none;
   }
+}
+
+/* ── Article Detail Page: Editorial Styles ── */
+
+/* Reading Progress Bar */
+.article-progress {
+  transition: transform 0.05s linear;
+}
+
+.article-page.is-reading .article-progress {
+  transform: scaleX(var(--reading-progress, 0));
+}
+
+/* Hero Image - subtle parallax zoom on scroll */
+.article-hero-image {
+  transform-origin: center center;
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.article-page.is-scrolled .article-hero-image {
+  transform: scale(1.04);
+}
+
+/* Meta & Title entrance animations */
+.article-meta {
+  animation: articleFadeSlideUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 0.15s;
+}
+
+.article-title {
+  animation: articleFadeSlideUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 0.3s;
+}
+
+.article-title-line {
+  animation: articleExpandWidth 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 0.55s;
+  transform-origin: left center;
+}
+
+@keyframes articleFadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes articleExpandWidth {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Body content scroll reveals */
+.article-back-btn {
+  animation: articleFadeIn 0.5s ease both;
+  animation-delay: 0.1s;
+}
+
+.article-excerpt {
+  animation: articleRevealUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 0.25s;
+}
+
+.article-content {
+  animation: articleRevealUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 0.4s;
+}
+
+@keyframes articleFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes articleRevealUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Drop Cap - Editorial first paragraph styling */
+.article-drop-cap::first-letter {
+  float: left;
+  font-size: 3.75em;
+  font-weight: 900;
+  line-height: 0.78;
+  margin-right: 0.12em;
+  margin-top: 0.06em;
+  color: #1a365d;
+  font-family: var(--font-sans);
+}
+
+@media (min-width: 640px) {
+  .article-drop-cap::first-letter {
+    font-size: 4.2em;
+  }
+}
+
+/* Paragraph - clean reading experience */
+.article-paragraph {
+  position: relative;
+}
+
+/* Article footer divider animation */
+.article-footer-divider {
+  animation: articleFadeIn 0.5s ease both;
+  animation-delay: 0.55s;
 }

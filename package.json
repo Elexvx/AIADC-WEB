@@ -26,6 +26,10 @@
     "@types/node": "^25.6.2",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
-    "typescript": "^6.0.3"
+    "alibabapuhuiti-3-55-regular": "^1.0.0",
+    "alibabapuhuiti-3-65-medium": "^1.0.0",
+    "alibabapuhuiti-3-85-bold": "^1.0.0",
+    "typescript": "^6.0.3",
+    "vite-plugin-font": "^5.1.2"
   }
 }

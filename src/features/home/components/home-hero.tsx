@@ -71,15 +71,15 @@ export function HomeHero() {
             ))}
           </div>
 
-          <h1 className="text-balance text-4xl font-black leading-[1.08] tracking-[-0.05em] text-white sm:text-6xl sm:tracking-[-0.07em] lg:text-7xl">
+          <h1 className="text-balance heading-display text-white">
             {currentHero.title}
             <span className="block">{highlightAccent(currentHero.subtitle ?? '', String(currentHero.extra?.accent ?? ''))}</span>
           </h1>
 
-          <p className="mt-7 max-w-2xl text-base leading-8 text-slate-200 sm:text-lg sm:leading-9">{currentHero.description}</p>
+          <p className="mt-7 max-w-2xl body-lg text-slate-200">{currentHero.description}</p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
-            <Button asChild size="lg" className="rounded-md bg-blue-600 px-8 text-base text-white shadow-[0_18px_40px_rgba(37,99,235,0.36)] hover:bg-blue-500 sm:px-9">
+            <Button asChild size="lg" className="rounded-md bg-blue-600 px-8 text-base text-white hover:bg-blue-500 sm:px-9">
               <InternalLink href={currentHero.cta?.href ?? ROUTES.login} className="inline-flex items-center gap-3">
                 {currentHero.cta?.label ?? '立即报名'}
                 <ArrowRight className="h-5 w-5" />

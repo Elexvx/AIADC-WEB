@@ -1,9 +1,32 @@
 import type { Metadata } from 'next';
+import localFont from 'next/font/local';
 import { getPageContent, getSiteMeta, getSiteShellContent } from '@/shared/content';
 import { LocaleProvider } from '@/shared/i18n/locale-provider';
 import { PageTransition } from '@/shared/ui';
 import { FloatingActions } from '@/widgets/site-shell';
 import './globals.css';
+
+const alibabaPuHuiTi = localFont({
+  src: [
+    {
+      path: '../../public/fonts/alibaba-puhuiti/AlibabaPuHuiTi-Regular.woff2',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/alibaba-puhuiti/AlibabaPuHuiTi-Medium.woff2',
+      weight: '500',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/alibaba-puhuiti/AlibabaPuHuiTi-Bold.woff2',
+      weight: '700',
+      style: 'normal',
+    },
+  ],
+  display: 'swap',
+  variable: '--font-alibaba-puhuiti',
+});
 
 const siteUrl = process.env.VITE_PUBLIC_SITE_URL ?? 'https://your-domain.vercel.app';
 const siteShell = getSiteShellContent('zh');
@@ -40,7 +63,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="zh-CN">
-      <body className="bg-background text-foreground antialiased">
+      <body className={`${alibabaPuHuiTi.className} bg-background text-foreground antialiased`}>
         <LocaleProvider>
           <PageTransition>{children}</PageTransition>
           <FloatingActions />
