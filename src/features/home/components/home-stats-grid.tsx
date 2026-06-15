@@ -1,21 +1,30 @@
 import { Card } from '@/shared/ui';
-import { homeStatItems } from '@/features/home/config/home-content';
+import { getSectionItems, resolveIcon } from '@/shared/content';
+import { usePageContent } from '@/shared/i18n/locale-provider';
 
 export function HomeStatsGrid() {
+  const page = usePageContent('home');
+  const stats = getSectionItems(page, 'stats');
+
   return (
     <section className="relative z-10 -mt-14">
       <div className="section-shell">
-        <Card className="overflow-hidden rounded-lg border-white/80 bg-white/96 shadow-[0_22px_70px_rgba(15,23,42,0.16)] backdrop-blur">
-          <div className="grid grid-cols-2 gap-0 md:grid-cols-5">
-            {homeStatItems.map((stat, index) => {
-              const Icon = stat.icon;
+        <Card className="overflow-hidden rounded-lg border-white/80 bg-white/96 shadow-none backdrop-blur">
+          <div className="grid grid-cols-2 gap-0 md:grid-cols-4">
+            {stats.map((stat, index) => {
+              const Icon = resolveIcon(stat.iconKey);
+              const isLeftColumnOnMobile = index % 2 === 0;
+              const isTopRowOnMobile = index < 2;
+              const isLastDesktopColumn = index === stats.length - 1;
 
               return (
                 <div
                   key={stat.label}
-                  className={`flex min-h-24 flex-col items-center justify-center gap-2 border-slate-200 px-3 py-4 text-center md:min-h-24 md:border-r md:px-3 ${
-                    index < 4 ? 'border-b md:border-b-0' : ''
-                  } ${index % 2 === 0 ? 'border-r md:border-r' : 'md:border-r'} last:border-r-0`}
+                  className={`flex min-h-24 flex-col items-center justify-center gap-2 border-slate-200 px-3 py-4 text-center md:min-h-24 md:px-3 ${
+                    isTopRowOnMobile ? 'border-b' : ''
+                  } ${isLeftColumnOnMobile ? 'border-r' : ''} ${
+                    isLastDesktopColumn ? 'md:border-r-0' : 'md:border-r'
+                  } md:border-b-0`}
                 >
                   <span className="grid h-9 w-9 place-items-center rounded-lg bg-blue-50 text-blue-600 ring-1 ring-blue-100">
                     <Icon className="h-5 w-5" />

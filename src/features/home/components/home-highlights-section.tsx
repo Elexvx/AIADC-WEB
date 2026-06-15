@@ -1,7 +1,12 @@
-import { homeHighlightItems } from '@/features/home/config/home-content';
+import { getSection, resolveIcon } from '@/shared/content';
+import { usePageContent } from '@/shared/i18n/locale-provider';
 import { Card, CardContent, SectionHeading } from '@/shared/ui';
 
 export function HomeHighlightsSection() {
+  const page = usePageContent('home');
+  const section = getSection(page, 'highlights');
+  const items = section?.items ?? [];
+
   return (
     <section className="bg-white pb-10 sm:pb-12">
       <div className="section-shell">
@@ -9,14 +14,14 @@ export function HomeHighlightsSection() {
           <SectionHeading
             centered
             eyebrow="赛事亮点"
-            title="让智能应用，从想法走向验证"
-            description="赛事围绕组别、赛道、时间线与作品评审构建一体化体验，让每个团队都能快速找到适合自己的成长路径。"
+            title={section?.title ?? '让智能应用，从想法走向验证'}
+            description={section?.description ?? '赛事围绕组别、赛道、时间线与作品评审构建一体化体验，让每个团队都能快速找到适合自己的成长路径。'}
           />
         </div>
 
         <div className="mt-9 grid gap-5 md:grid-cols-4">
-          {homeHighlightItems.map((item) => {
-            const Icon = item.icon;
+          {items.map((item) => {
+            const Icon = resolveIcon(item.iconKey);
 
             return (
               <Card key={item.title} className="rounded-lg border-white bg-white/96 shadow-[0_16px_42px_rgba(15,23,42,0.07)]">

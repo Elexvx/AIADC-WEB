@@ -1,10 +1,11 @@
-import { siteContent } from '@/entities/site';
 import { NewsArticleCard } from '@/features/news';
+import { useLocale } from '@/shared/i18n/locale-provider';
 import { SectionHeading } from '@/shared/ui';
 
 export function HomeNewsSection() {
-  const newsArticles = siteContent.newsArticles.filter((article) => article.category === 'news');
-  const notices = siteContent.newsArticles.filter((article) => article.category !== 'news');
+  const { news } = useLocale();
+  const newsArticles = news.articles.filter((article) => article.category === 'news');
+  const notices = news.articles.filter((article) => article.category !== 'news');
 
   return (
     <section id="news" className="bg-white pb-10 sm:pb-12">

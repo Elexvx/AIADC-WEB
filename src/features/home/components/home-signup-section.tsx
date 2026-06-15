@@ -1,13 +1,16 @@
 'use client';
 
 import { ArrowRight } from 'lucide-react';
-import { ROUTES } from '@/shared/config/routes';
-import { useLocale } from '@/shared/i18n/locale-provider';
+import { usePageContent } from '@/shared/i18n/locale-provider';
 import { Button, InternalLink } from '@/shared/ui';
 
 export function HomeSignupSection() {
-  const { messages } = useLocale();
-  const signup = messages.home.signup;
+  const page = usePageContent('home');
+  const signup = page.ctaBanner;
+
+  if (!signup?.action) {
+    return null;
+  }
 
   return (
     <section id="signup" className="bg-white py-10 sm:py-12">
@@ -26,8 +29,8 @@ export function HomeSignupSection() {
               size="lg"
               className="h-12 rounded-xl bg-[#155dfc] px-8 font-semibold !text-white shadow-[0_14px_30px_rgba(21,93,252,0.22)] hover:bg-[#1447e6]"
             >
-              <InternalLink href={ROUTES.login} className="inline-flex items-center justify-center gap-2 !text-white">
-                {signup.action}
+              <InternalLink href={signup.action.href} className="inline-flex items-center justify-center gap-2 !text-white">
+                {signup.action.label}
                 <ArrowRight className="h-4 w-4 shrink-0 !text-white" />
               </InternalLink>
             </Button>

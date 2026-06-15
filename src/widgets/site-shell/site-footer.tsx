@@ -4,8 +4,8 @@ import { useLocale } from '@/shared/i18n/locale-provider';
 import { InternalLink } from '@/shared/ui';
 
 export function SiteFooter() {
-  const { messages } = useLocale();
-  const { footer, brand } = messages;
+  const { siteShell } = useLocale();
+  const { footer, brand } = siteShell;
 
   return (
     <footer className="mt-auto border-t border-slate-200 bg-white">
@@ -21,10 +21,10 @@ export function SiteFooter() {
               </p>
             </div>
 
-            <div className="grid grid-cols-2 gap-x-6 gap-y-8 border-t border-blue-100 pt-6 sm:grid-cols-3 sm:gap-x-8 sm:pt-7 lg:ml-auto lg:w-fit lg:border-t-0 lg:pt-0">
+            <div className="grid grid-cols-2 gap-x-6 gap-y-8 border-t border-blue-100 pt-6 text-right sm:grid-cols-3 sm:gap-x-8 sm:pt-7 lg:ml-auto lg:w-fit lg:border-t-0 lg:pt-0">
               {footer.columns.map((column) => (
                 <div key={column.title} className="space-y-3">
-                  <div className="space-y-2">
+                  <div className="flex flex-col items-end gap-2">
                     <h3 className="text-sm font-black tracking-[-0.03em] text-slate-950 sm:text-base">{column.title}</h3>
                     <div className="h-px w-10 bg-blue-200" />
                   </div>
@@ -49,7 +49,20 @@ export function SiteFooter() {
 
       <div className="border-t border-slate-200 bg-white">
         <div className="section-shell flex flex-col gap-3 py-4 text-sm text-slate-500 sm:py-5 md:flex-row md:items-center md:justify-between">
-          <span className="leading-6">{footer.copyright}</span>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 leading-6">
+            <span>{footer.copyright}</span>
+            {footer.filings.map((filing) => (
+              <a
+                key={filing.label}
+                href={filing.href}
+                target="_blank"
+                rel="noreferrer"
+                className="transition-colors hover:text-slate-900"
+              >
+                {filing.label}
+              </a>
+            ))}
+          </div>
           <div className="flex flex-wrap gap-x-6 gap-y-2 text-slate-600">
             {footer.legalLinks.map((link) => (
               <InternalLink key={link.label} href={link.href} className="transition-colors hover:text-slate-900">

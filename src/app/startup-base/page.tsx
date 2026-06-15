@@ -1,42 +1,52 @@
-import { Building2, Compass, Rocket } from 'lucide-react';
-import { PageHero } from '@/shared/ui';
+import { MapPin, Sparkles } from 'lucide-react';
+import { getPageContent, getSectionItems, getSiteMeta, resolveIcon } from '@/shared/content';
+import { ContentCard, PageHero, ScrollReveal } from '@/shared/ui';
 import { SiteFooter, SiteHeader } from '@/widgets/site-shell';
 
-const baseItems = [
-  { icon: Rocket, title: '项目孵化支持', description: '围绕参赛项目的产品打磨、路演准备与后续验证，提供更连续的成长支持。' },
-  { icon: Building2, title: '资源对接场景', description: '连接院校、导师、企业伙伴与展示机会，让优秀作品在赛后继续沉淀与转化。' },
-  { icon: Compass, title: '发展路径建议', description: '帮助团队从竞赛作品走向应用试点、成果展示与后续申报，形成更清晰的发展路径。' },
-];
-
 export const metadata = {
-  title: '创业基地',
-  description: '查看赛事关联的创业基地支持与项目孵化方向。',
+  ...getSiteMeta('startup-base', 'zh'),
 };
 
 export default function StartupBasePage() {
+  const page = getPageContent('startup-base', 'zh');
+  const baseItems = getSectionItems(page, 'baseItems');
+
   return (
     <main className="page-shell bg-white">
       <SiteHeader />
       <PageHero
-        eyebrow="创业基地"
-        title="竞赛之外的项目成长支持"
-        description="为具备延展潜力的团队和作品提供展示、孵化与资源衔接场景，让优秀项目在比赛之后继续前进。"
+        eyebrow={page.hero?.eyebrow ?? '创业基地'}
+        title={page.hero?.title ?? ''}
+        description={page.hero?.description ?? ''}
+        backgroundImage={page.hero?.backgroundImage}
+        dark={page.hero?.dark}
+        fullBleedBackground
       />
 
-      <section className="bg-white pb-12 sm:pb-14">
-        <div className="section-shell grid gap-5 md:grid-cols-3">
+      <ScrollReveal as="section" className="bg-white pt-8 pb-12 sm:pt-10 sm:pb-14" delay={40}>
+        <ScrollReveal className="section-shell grid gap-5 md:grid-cols-3" staggerChildren>
           {baseItems.map((item) => {
-            const Icon = item.icon;
+            const Icon = resolveIcon(item.iconKey, Sparkles);
             return (
-              <div key={item.title} className="rounded-lg border border-white bg-white/96 p-6 shadow-[0_16px_42px_rgba(15,23,42,0.07)]">
-                <Icon className="h-6 w-6 text-blue-600" />
-                <h2 className="mt-4 text-xl font-black tracking-[-0.04em] text-slate-950">{item.title}</h2>
-                <p className="mt-3 text-sm leading-7 text-slate-600 sm:text-base">{item.description}</p>
-              </div>
+              <ContentCard
+                key={item.id}
+                title={item.title}
+                description={item.description}
+                imageUrl={item.imageUrl}
+                imageAlt={item.title}
+                icon={Icon}
+                meta={
+                  <span className="inline-flex items-center gap-2">
+                    <MapPin className="h-4 w-4 text-blue-600" />
+                    {String(item.extra?.location ?? '')}
+                  </span>
+                }
+                actionLabel="查看空间详情"
+              />
             );
           })}
-        </div>
-      </section>
+        </ScrollReveal>
+      </ScrollReveal>
 
       <SiteFooter />
     </main>

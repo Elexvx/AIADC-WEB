@@ -1,10 +1,10 @@
 import { ArrowRight, CalendarDays } from 'lucide-react';
 import { getNewsCategoryLabel } from '@/features/news/lib/news';
-import { type NewsArticleItem } from '@/entities/site';
+import { type ArticleItem } from '@/shared/content';
 import { Badge, InternalLink } from '@/shared/ui';
 
 type NewsArticleCardProps = {
-  article: NewsArticleItem;
+  article: ArticleItem;
   variant?: 'image' | 'compact' | 'row';
   showCategory?: boolean;
   categoryLabel?: string;
@@ -45,7 +45,7 @@ export function NewsArticleCard({
         className="grid gap-4 rounded-lg border border-slate-200 bg-white p-4 transition-colors hover:bg-slate-50 sm:grid-cols-[11rem_1fr]"
       >
         <div className="aspect-[4/3] overflow-hidden rounded-md bg-slate-100">
-          <img src={article.imageUrl} alt={article.title} className="h-full w-full object-cover" />
+          <img src={article.image.url} alt={article.image.alt} className="h-full w-full object-cover" />
         </div>
         <div className="min-w-0">
           <div className="flex flex-wrap items-center gap-3">
@@ -70,7 +70,7 @@ export function NewsArticleCard({
       className="flex h-full flex-col overflow-hidden rounded-lg border border-white bg-white/96 shadow-[0_16px_42px_rgba(15,23,42,0.07)]"
     >
       <div className="relative aspect-[16/10] overflow-hidden">
-        <img src={article.imageUrl} alt={article.title} className="h-full w-full object-cover" loading="lazy" />
+        <img src={article.image.url} alt={article.image.alt} className="h-full w-full object-cover" loading="lazy" />
         {showCategory ? (
           <Badge className="absolute left-4 top-4 border border-blue-100 bg-blue-50 text-blue-700">{resolvedLabel}</Badge>
         ) : null}

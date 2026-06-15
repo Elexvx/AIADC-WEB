@@ -1,6 +1,6 @@
 import { ArrowLeft, CalendarDays } from 'lucide-react';
 import { notFound } from 'next/navigation';
-import { siteContent } from '@/entities/site';
+import { getNewsArticleBySlug, getNewsArticles, getNewsCategories } from '@/shared/content';
 import { Badge, InternalLink } from '@/shared/ui';
 import { SiteFooter, SiteHeader } from '@/widgets/site-shell';
 
@@ -11,14 +11,14 @@ type NewsDetailPageProps = {
 };
 
 export function generateStaticParams() {
-  return siteContent.newsArticles.map((article) => ({
+  return getNewsArticles('zh').map((article) => ({
     slug: article.slug,
   }));
 }
 
 export async function generateMetadata({ params }: NewsDetailPageProps) {
   const { slug } = await params;
-  const article = siteContent.newsArticles.find((item) => item.slug === slug);
+  const article = getNewsArticleBySlug(slug, 'zh');
 
   if (!article) {
     return {
@@ -34,13 +34,13 @@ export async function generateMetadata({ params }: NewsDetailPageProps) {
 
 export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
   const { slug } = await params;
-  const article = siteContent.newsArticles.find((item) => item.slug === slug);
+  const article = getNewsArticleBySlug(slug, 'zh');
 
   if (!article) {
     notFound();
   }
 
-  const categoryLabel = siteContent.newsCategories.find((category) => category.value === article.category)?.label ?? '新闻动态';
+  const categoryLabel = getNewsCategories('zh').find((category) => category.value === article.category)?.label ?? '新闻动态';
 
   return (
     <main className="page-shell bg-white">
@@ -55,7 +55,7 @@ export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
 
           <div className="mt-8 overflow-hidden rounded-lg border border-white bg-white shadow-[0_18px_54px_rgba(15,23,42,0.08)]">
             <div className="relative aspect-[16/7] min-h-72 overflow-hidden bg-slate-900">
-              <img src={article.imageUrl} alt={article.title} className="h-full w-full object-cover opacity-82" />
+              <img src={article.image.url} alt={article.image.alt} className="h-full w-full object-cover opacity-82" />
               <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(3,7,18,0.12)_0%,rgba(3,7,18,0.78)_100%)]" />
               <div className="absolute inset-x-0 bottom-0 p-6 sm:p-10">
                 <div className="flex flex-wrap items-center gap-3">

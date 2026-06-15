@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { ChevronDown, Languages, Menu } from 'lucide-react';
 import { usePathname } from 'next/navigation';
-import { siteContent } from '@/entities/site';
 import { ROUTES } from '@/shared/config/routes';
 import { useLocale } from '@/shared/i18n/locale-provider';
 import { Button, InternalLink } from '@/shared/ui';
@@ -34,14 +33,14 @@ export function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [localeMenuOpen, setLocaleMenuOpen] = useState(false);
   const pathname = usePathname();
-  const { locale, setLocale, labels, messages } = useLocale();
-  const { brand, header } = messages;
+  const { locale, setLocale, labels, siteShell } = useLocale();
+  const { brand, header } = siteShell;
   const currentLocaleLabel = locale === 'zh' ? '中' : 'EN';
 
   return (
     <header className="sticky top-0 z-50 bg-[rgba(255,255,255,0.88)] text-slate-950 shadow-[0_10px_34px_rgba(15,23,42,0.12)] backdrop-blur">
       <div className="section-shell flex h-14 items-center gap-5 sm:h-16">
-        <InternalLink href="/" aria-label={`${siteContent.brand.cnName} ${brand.homeAria}`} className="shrink-0">
+        <InternalLink href="/" aria-label={`${brand.applicationName} ${brand.homeAria}`} className="shrink-0">
           <BrandMark primary={brand.primary} secondary={brand.secondary} />
         </InternalLink>
 
@@ -122,7 +121,7 @@ export function SiteHeader() {
             ) : null}
           </div>
           <Button asChild variant="outline" className="hidden h-10 rounded-full border-slate-200 bg-white px-5 text-slate-900 hover:bg-slate-50 sm:inline-flex">
-            <InternalLink href="/login">{header.login}</InternalLink>
+            <InternalLink href="/login">{header.loginLabel}</InternalLink>
           </Button>
           <div className="relative">
             <button

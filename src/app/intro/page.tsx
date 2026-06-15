@@ -1,14 +1,8 @@
 import { Building2, CalendarDays, Code2, Mail, MapPin, Rocket, Sparkles } from 'lucide-react';
-import { siteContent } from '@/entities/site';
-import { Badge, Button, Card, CardContent, CardDescription, CardHeader, CardTitle, InternalLink, PageHero, SectionHeading } from '@/shared/ui';
+import { getPageContent, getSectionItems, getSiteMeta, resolveIcon } from '@/shared/content';
+import { Badge, Button, Card, CardContent, CardDescription, CardHeader, CardTitle, InternalLink, PageHero, ScrollReveal, SectionHeading } from '@/shared/ui';
 import { ROUTES } from '@/shared/config/routes';
 import { SiteFooter, SiteHeader } from '@/widgets/site-shell';
-
-const contactItems = [
-  { icon: Mail, title: '咨询邮箱', text: 'contact@ai-competition.org' },
-  { icon: Building2, title: '组织单位', text: '全国大学生智能应用开发大赛组委会' },
-  { icon: MapPin, title: '服务范围', text: '线上报名、作品评审、总决赛组织' },
-];
 
 const awardToneClasses: Record<string, string> = {
   gold: 'border-amber-200 bg-amber-50 text-amber-700',
@@ -17,42 +11,49 @@ const awardToneClasses: Record<string, string> = {
   slate: 'border-blue-200 bg-blue-50 text-blue-700',
 };
 
-const trackIcons = [Sparkles, Code2, Rocket];
-
 export const metadata = {
-  title: '大赛简介',
-  description: '全国大学生智能应用开发大赛简介。',
+  ...getSiteMeta('intro', 'zh'),
 };
 
 export default function IntroPage() {
+  const page = getPageContent('intro', 'zh');
+  const valueCards = getSectionItems(page, 'valueCards');
+  const schedule = getSectionItems(page, 'schedule');
+  const awards = getSectionItems(page, 'awards');
+  const tracks = getSectionItems(page, 'tracks');
+  const contacts = getSectionItems(page, 'contacts');
+
   return (
     <main className="page-shell bg-white text-slate-950">
       <SiteHeader />
       <PageHero
-        eyebrow="大赛简介"
-        title="构建高水平智能应用创新竞赛生态"
-        description="全国大学生智能应用开发大赛致力于吸引更多高校学生与青年团队参与人工智能应用开发、产业命题验证与项目路演，推动区域经济与数字产业高质量协同发展。"
+        eyebrow={page.hero?.eyebrow ?? '大赛简介'}
+        title={page.hero?.title ?? ''}
+        description={page.hero?.description ?? ''}
+        backgroundImage={page.hero?.backgroundImage}
+        dark={page.hero?.dark}
+        fullBleedBackground
       />
 
-      <section className="bg-white pb-8 sm:pb-10">
+      <ScrollReveal as="section" className="bg-white pt-8 pb-8 sm:pt-10 sm:pb-10" delay={40}>
         <div className="section-shell">
           <div className="grid gap-5 md:grid-cols-3">
-            {['创新竞赛生态', '产业命题验证', '项目路演成长'].map((item) => (
+            {valueCards.map((item) => (
               <div
-                key={item}
+                key={item.id}
                 className="rounded-lg border border-white bg-white/96 p-6 shadow-[0_16px_42px_rgba(15,23,42,0.07)]"
               >
-                <div className="text-sm font-black tracking-[-0.03em] text-blue-600">{item}</div>
+                <div className="text-sm font-black tracking-[-0.03em] text-blue-600">{item.title}</div>
                 <p className="mt-3 text-sm leading-7 text-slate-600 sm:text-base">
-                  围绕智能应用开发全流程，连接高校、产业与青年创新团队，帮助项目从创意萌芽走向真实场景验证。
+                  {item.description}
                 </p>
               </div>
             ))}
           </div>
         </div>
-      </section>
+      </ScrollReveal>
 
-      <section id="schedule" className="py-8 sm:py-10">
+      <ScrollReveal as="section" id="schedule" className="py-8 sm:py-10" delay={60}>
         <div className="section-shell">
           <SectionHeading
             centered
@@ -66,7 +67,7 @@ export default function IntroPage() {
             <div className="absolute bottom-0 left-[1.15rem] top-0 hidden w-px bg-gradient-to-b from-blue-200 via-blue-100 to-transparent sm:block" />
 
             <div className="space-y-4 sm:space-y-5">
-            {siteContent.schedule.map((item, index) => (
+            {schedule.map((item, index) => (
               <div key={item.title} className="relative sm:pl-14">
                 <div className="absolute left-0 top-7 hidden h-9 w-9 items-center justify-center rounded-full border border-blue-200 bg-white shadow-[0_10px_24px_rgba(37,99,235,0.12)] sm:flex">
                   <div className="h-3 w-3 rounded-full bg-blue-600" />
@@ -96,9 +97,9 @@ export default function IntroPage() {
             </div>
           </div>
         </div>
-      </section>
+      </ScrollReveal>
 
-      <section id="awards" className="py-8 sm:py-10">
+      <ScrollReveal as="section" id="awards" className="py-8 sm:py-10" delay={80}>
         <div className="section-shell">
           <SectionHeading
             centered
@@ -108,12 +109,12 @@ export default function IntroPage() {
             className="mx-auto max-w-4xl"
           />
 
-          <div className="mt-8 flex gap-5 overflow-x-auto pb-2 hide-scrollbar">
-            {siteContent.awards.map((award) => (
-              <Card key={award.title} className="min-w-[17rem] flex-1 rounded-lg border-white bg-white/96 shadow-[0_16px_42px_rgba(15,23,42,0.07)]">
+          <ScrollReveal className="mt-8 flex gap-5 overflow-x-auto pb-2 hide-scrollbar" staggerChildren>
+            {awards.map((award) => (
+              <Card key={award.title} className="min-w-[17rem] flex-1 rounded-lg border-white bg-white/96">
                 <CardHeader className="space-y-4 p-6">
-                  <div className={`grid h-12 w-12 place-items-center rounded-xl border text-xl ${awardToneClasses[award.tone] ?? awardToneClasses.slate}`}>
-                    <span>{award.icon}</span>
+                  <div className={`grid h-12 w-12 place-items-center rounded-xl border text-xl ${awardToneClasses[String(award.extra?.tone ?? 'slate')] ?? awardToneClasses.slate}`}>
+                    <span>{String(award.extra?.glyph ?? '★')}</span>
                   </div>
                   <div>
                     <CardTitle className="text-xl font-black tracking-[-0.05em] text-slate-950">{award.title}</CardTitle>
@@ -121,16 +122,16 @@ export default function IntroPage() {
                   </div>
                 </CardHeader>
                 <CardContent className="px-6 pb-6 pt-0">
-                  <div className="text-3xl font-black tracking-[-0.06em] text-blue-700">{award.prize}</div>
+                  <div className="text-3xl font-black tracking-[-0.06em] text-blue-700">{String(award.extra?.prize ?? '')}</div>
                   <p className="mt-3 whitespace-pre-line text-sm leading-7 text-slate-600">{award.detail}</p>
                 </CardContent>
               </Card>
             ))}
-          </div>
+          </ScrollReveal>
         </div>
-      </section>
+      </ScrollReveal>
 
-      <section id="tracks" className="py-8 sm:py-10">
+      <ScrollReveal as="section" id="tracks" className="py-8 sm:py-10" delay={100}>
         <div className="section-shell">
           <SectionHeading
             centered
@@ -140,9 +141,9 @@ export default function IntroPage() {
             className="mx-auto max-w-4xl"
           />
 
-          <div className="mt-8 grid gap-5 md:grid-cols-3">
-            {siteContent.tracks.map((track, index) => {
-              const Icon = trackIcons[index] ?? Sparkles;
+          <ScrollReveal className="mt-8 grid gap-5 md:grid-cols-3" staggerChildren>
+            {tracks.map((track) => {
+              const Icon = resolveIcon(track.iconKey, Sparkles);
 
               return (
                 <Card key={track.title} className="flex h-full flex-col rounded-lg border-white bg-white/96 shadow-[0_16px_42px_rgba(15,23,42,0.07)]">
@@ -151,7 +152,7 @@ export default function IntroPage() {
                       <div className="grid h-12 w-12 place-items-center rounded-xl bg-gradient-to-br from-blue-50 to-cyan-50 text-blue-600 ring-1 ring-blue-100">
                         <Icon className="h-6 w-6" />
                       </div>
-                      <Badge className="border border-blue-100 bg-blue-50 text-blue-700">{track.code}</Badge>
+                      <Badge className="border border-blue-100 bg-blue-50 text-blue-700">{track.subtitle ?? String(track.extra?.badge ?? '')}</Badge>
                     </div>
                     <div>
                       <CardTitle className="text-xl font-black tracking-[-0.05em] text-slate-950">{track.title}</CardTitle>
@@ -160,17 +161,17 @@ export default function IntroPage() {
                   </CardHeader>
                   <CardContent className="mt-auto px-6 pb-6 pt-0">
                     <Button asChild variant="outline" className="w-full rounded-md border-blue-200 text-blue-700 hover:bg-blue-50">
-                      <InternalLink href={ROUTES.login}>{track.cta}</InternalLink>
+                      <InternalLink href={track.cta?.href ?? ROUTES.login}>{track.cta?.label ?? '查看评审标准'}</InternalLink>
                     </Button>
                   </CardContent>
                 </Card>
               );
             })}
-          </div>
+          </ScrollReveal>
         </div>
-      </section>
+      </ScrollReveal>
 
-      <section id="contact" className="py-8 pb-14 sm:py-10 sm:pb-16">
+      <ScrollReveal as="section" id="contact" className="py-8 pb-14 sm:py-10 sm:pb-16" delay={120}>
         <div className="section-shell">
           <SectionHeading
             centered
@@ -180,21 +181,21 @@ export default function IntroPage() {
             className="mx-auto max-w-4xl"
           />
 
-          <div className="mt-8 grid gap-4 sm:grid-cols-3">
-            {contactItems.map((item) => {
-              const Icon = item.icon;
+          <ScrollReveal className="mt-8 grid gap-4 sm:grid-cols-3" staggerChildren>
+            {contacts.map((item) => {
+              const Icon = resolveIcon(item.iconKey, Mail);
 
               return (
                 <div key={item.title} className="rounded-lg border border-white bg-white/96 p-6 shadow-[0_16px_42px_rgba(15,23,42,0.07)]">
                   <Icon className="h-6 w-6 text-blue-600" />
                   <h3 className="mt-4 text-base font-black tracking-[-0.03em] text-slate-950">{item.title}</h3>
-                  <p className="mt-2 break-words text-sm leading-7 text-slate-600">{item.text}</p>
+                  <p className="mt-2 break-words text-sm leading-7 text-slate-600">{item.description}</p>
                 </div>
               );
             })}
-          </div>
+          </ScrollReveal>
         </div>
-      </section>
+      </ScrollReveal>
 
       <SiteFooter />
     </main>

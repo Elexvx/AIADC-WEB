@@ -1,28 +1,23 @@
-import { siteContent, type NewsArticleItem } from '@/entities/site';
+import { getNewsArticles, getNewsCategories, type ArticleItem } from '@/shared/content';
 
-export const newsCategorySummaries = {
-  news: {
-    label: '新闻动态',
-    description: '关注赛事进展、赛道发布与评审节奏，快速掌握关键动态。',
-  },
-  notice: {
-    label: '通知公告',
-    description: '集中查看报名要求、材料规范、时间节点与规则更新。',
-  },
-  media: {
-    label: '媒体报道',
-    description: '汇总产业伙伴、媒体观察与赛事生态合作相关内容。',
-  },
-} as const;
+export const newsCategorySummaries = Object.fromEntries(
+  getNewsCategories('zh').map((item) => [
+    item.value,
+    {
+      label: item.label,
+      description: item.description,
+    },
+  ]),
+) as Record<ArticleItem['category'], { label: string; description: string }>;
 
 export type NewsCategoryKey = keyof typeof newsCategorySummaries;
 
-export function getNewsCategoryLabel(category: NewsArticleItem['category']) {
+export function getNewsCategoryLabel(category: ArticleItem['category']) {
   return newsCategorySummaries[category]?.label ?? '新闻动态';
 }
 
-export function getArticlesByCategory(category: NewsArticleItem['category']) {
-  return siteContent.newsArticles.filter((article) => article.category === category);
+export function getArticlesByCategory(category: ArticleItem['category']) {
+  return getNewsArticles('zh', category);
 }
 
 export function getNewsCategoryGroups() {

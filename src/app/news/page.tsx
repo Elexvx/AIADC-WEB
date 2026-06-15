@@ -1,27 +1,32 @@
+import { getPageContent, getSiteMeta } from '@/shared/content';
 import { NewsTabs } from '@/features/news';
-import { PageHero } from '@/shared/ui';
+import { PageHero, ScrollReveal } from '@/shared/ui';
 import { SiteFooter, SiteHeader } from '@/widgets/site-shell';
 
 export const metadata = {
-  title: '新闻中心',
-  description: '通过顶部分类切换查看全国大学生智能应用开发大赛新闻动态、通知公告与媒体报道。',
+  ...getSiteMeta('news', 'zh'),
 };
 
 export default function NewsPage() {
+  const page = getPageContent('news', 'zh');
+
   return (
     <main className="page-shell bg-white">
       <SiteHeader />
       <PageHero
-        eyebrow="新闻中心"
-        title="赛事资讯集中浏览"
-        description="通过顶部分类直接切换新闻动态、通知公告与媒体报道，平铺查看文章并跳转详情。"
+        eyebrow={page.hero?.eyebrow ?? '新闻中心'}
+        title={page.hero?.title ?? ''}
+        description={page.hero?.description ?? ''}
+        backgroundImage={page.hero?.backgroundImage}
+        dark={page.hero?.dark}
+        fullBleedBackground
       />
 
-      <section className="bg-white pb-12 sm:pb-14">
-        <div className="section-shell rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_16px_42px_rgba(15,23,42,0.07)] sm:p-8">
+      <ScrollReveal as="section" className="bg-white pt-8 pb-12 sm:pt-10 sm:pb-14" delay={40}>
+        <div className="section-shell">
           <NewsTabs />
         </div>
-      </section>
+      </ScrollReveal>
 
       <SiteFooter />
     </main>
