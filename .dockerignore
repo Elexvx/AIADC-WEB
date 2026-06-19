@@ -1,0 +1,16 @@
+**/node_modules
+**/.next
+**/dist
+**/.turbopack
+**/.umi
+**/.umi-production
+**/target
+**/playwright-report
+**/test-results
+**/coverage
+.git
+.codex
+*.log
+*.tmp
+*.pid
+*.cache

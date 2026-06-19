@@ -1,0 +1,78 @@
+.saas-global-float-actions {
+  z-index: 980;
+}
+
+.saas-global-float-actions__qr-popover .ant-popover-inner {
+  border-radius: var(--ant-border-radius-lg);
+  padding: var(--saas-spacing-10) var(--saas-spacing-sm) var(--saas-spacing-sm);
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.14);
+}
+
+.saas-global-float-actions__qr-popover .ant-popover-arrow {
+  display: none;
+}
+
+.saas-global-float-actions__qr-card {
+  width: min(var(--saas-spacing-156), calc(100vw - var(--saas-spacing-80)));
+  text-align: center;
+}
+
+.saas-global-float-actions__qr-title {
+  display: block;
+  margin-bottom: var(--saas-spacing-xs);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.saas-global-float-actions__qr-image-wrap {
+  min-height: var(--saas-qrcode-size);
+  display: grid;
+  place-items: center;
+}
+
+.saas-global-float-actions__qr-image {
+  width: var(--saas-qrcode-size);
+  height: var(--saas-qrcode-size);
+  object-fit: contain;
+  display: block;
+}
+
+.saas-global-float-actions__qr-placeholder {
+  width: var(--saas-qrcode-size);
+  min-height: var(--saas-qrcode-size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--saas-spacing-sm);
+  border: 1px dashed var(--ant-color-border);
+  border-radius: var(--saas-card-radius);
+  background: var(--ant-color-fill-tertiary);
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+@media (max-width: 767px) {
+  .saas-global-float-actions .ant-float-btn {
+    width: var(--saas-spacing-40);
+    height: var(--saas-spacing-40);
+  }
+
+  .saas-global-float-actions__qr-card {
+    width: min(var(--saas-spacing-148), calc(100vw - var(--saas-spacing-64)));
+  }
+
+  .saas-global-float-actions__qr-image-wrap {
+    min-height: var(--saas-qrcode-size-mobile);
+  }
+
+  .saas-global-float-actions__qr-image {
+    width: var(--saas-qrcode-size-mobile);
+    height: var(--saas-qrcode-size-mobile);
+  }
+
+  .saas-global-float-actions__qr-placeholder {
+    width: var(--saas-qrcode-size-mobile);
+    min-height: var(--saas-qrcode-size-mobile);
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "name": "@aiadc/official-site",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build && node scripts/sync-vercel-manifests.mjs",
+    "preview": "next start",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@radix-ui/react-slot": "^1.2.5",
+    "@tailwindcss/postcss": "^4.3.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^1.17.0",
+    "next": "^16.2.7",
+    "postcss": "^8.5.15",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "tailwind-merge": "^3.6.0",
+    "tailwindcss": "^4.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.2",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "alibabapuhuiti-3-55-regular": "^1.0.0",
+    "alibabapuhuiti-3-65-medium": "^1.0.0",
+    "alibabapuhuiti-3-85-bold": "^1.0.0",
+    "typescript": "^6.0.3",
+    "vite-plugin-font": "^5.1.2"
+  }
+}

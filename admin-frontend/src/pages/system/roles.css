@@ -1,0 +1,184 @@
+.role-editor-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--saas-spacing-sm);
+}
+
+.role-editor-form .ant-form-item {
+  margin-bottom: var(--saas-spacing-sm);
+}
+
+.role-editor-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--saas-spacing-sm);
+  align-items: stretch;
+}
+
+.role-editor-section {
+  border: 1px solid var(--ant-color-border-secondary);
+  border-radius: var(--saas-card-radius);
+  background: var(--ant-color-bg-container);
+  padding: var(--saas-spacing-sm);
+  min-height: 0;
+}
+
+.role-editor-section__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--saas-spacing-sm);
+  margin-bottom: var(--saas-spacing-xs);
+}
+
+.role-editor-section__title {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.role-editor-section__meta {
+  margin-top: var(--saas-spacing-2xs);
+  color: var(--ant-color-text-secondary);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.role-permission-tree {
+  max-height: var(--saas-spacing-400);
+  overflow: auto;
+}
+
+.role-permission-tree .ant-tree {
+  background: transparent;
+}
+
+.role-permission-tree .ant-tree-title {
+  display: block;
+  min-width: 0;
+  width: 100%;
+}
+
+.role-permission-tree .ant-tree-node-content-wrapper:hover {
+  background: var(--ant-color-primary-bg);
+}
+
+.role-permission-tree .ant-tree-node-content-wrapper.ant-tree-node-selected,
+.role-permission-tree .ant-tree-node-content-wrapper.ant-tree-node-selected:hover {
+  background: var(--ant-color-primary-bg-hover);
+}
+
+.role-page-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: calc(var(--saas-spacing-xs) + var(--saas-spacing-xxs));
+  min-width: 0;
+  padding-block: var(--saas-spacing-2xs);
+}
+
+.role-page-row--mismatch .role-page-row__name,
+.role-page-row--mismatch .role-page-row__route,
+.role-page-row--mismatch .role-page-row__hint--mismatch {
+  color: var(--ant-color-error);
+}
+
+.role-page-row__name {
+  flex: 0 1 auto;
+  min-width: 0;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.role-page-row__meta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--saas-spacing-xs);
+  min-width: 0;
+  flex: 0 1 auto;
+}
+
+.role-page-row__kind {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 var(--saas-spacing-xs);
+  border-radius: 50%;
+  background: var(--ant-color-primary-bg);
+  color: var(--ant-color-primary);
+  font-size: 12px;
+  line-height: var(--saas-spacing-20);
+  white-space: nowrap;
+}
+
+.role-page-row__route {
+  color: var(--ant-color-text-secondary);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.role-page-row__route--mismatch {
+  color: var(--ant-color-error);
+  font-weight: 500;
+}
+
+.role-page-row__hint {
+  white-space: nowrap;
+  font-size: 12px;
+}
+
+.role-page-row__hint--catalog {
+  color: var(--ant-color-text-secondary);
+}
+
+.role-page-row__hint--mismatch {
+  color: var(--ant-color-error);
+}
+
+.role-action-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--saas-spacing-xs);
+}
+
+.role-action-panel__page-name {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.role-action-panel__empty {
+  min-height: var(--saas-spacing-176);
+  display: grid;
+  place-items: center;
+}
+
+.role-permission-detail__tags {
+  min-width: 0;
+}
+
+.role-permission-detail__page-tree-row {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--saas-spacing-xs);
+}
+
+.role-permission-detail__page-tree-row .role-page-row__meta {
+  flex-wrap: wrap;
+}
+
+.role-action-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--saas-spacing-xs) var(--saas-spacing-sm);
+}
+
+.role-action-grid .ant-checkbox-wrapper {
+  margin-inline-start: 0;
+}
+
+.role-action-grid .ant-checkbox + span {
+  padding-inline-start: var(--saas-spacing-xs);
+}
