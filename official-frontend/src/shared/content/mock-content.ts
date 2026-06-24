@@ -199,7 +199,7 @@ const siteShell: SiteShellContent = {
       { label: '服务条款', href: '/terms' },
     ],
     filings: [
-      { label: 'ICP备案号办理中', href: 'https://beian.miit.gov.cn/' },
+      { label: '苏ICP备2025160017号-2', href: 'https://beian.miit.gov.cn/' },
       { label: '公安备案号办理中', href: 'https://www.beian.gov.cn/portal/registerSystemInfo' },
     ],
     copyright: 'Copyright 2026 AIADC 组委会. All Rights Reserved.',
