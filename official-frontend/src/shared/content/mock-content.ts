@@ -528,7 +528,7 @@ const projectsPage = page(
   {
     eyebrow: '优秀项目',
     title: '从真实问题出发的 AI 应用实践',
-    description: '以下为 mock 展示项目，用于官网内容模拟和备案预览。',
+    description: '聚焦校园服务、城市治理与企业效率等场景，呈现 AI 应用落地实践案例。',
     backgroundImage: codeImage,
   },
   [
