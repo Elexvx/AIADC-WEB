@@ -64,14 +64,7 @@ export const resolvePreferredLocale = (value?: string | null): AppLocale => {
 };
 
 export const resolveRuntimeLocale = (): AppLocale => {
-  let umiLocale: string | undefined;
-  try {
-    umiLocale = getLocale();
-  } catch (_error) {
-    umiLocale = undefined;
-  }
-
-  const runtimeLocale = normalizeLocale(umiLocale);
+  const runtimeLocale = normalizeLocale(getLocale());
   if (runtimeLocale) {
     return runtimeLocale;
   }

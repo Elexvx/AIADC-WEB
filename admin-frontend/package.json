@@ -1,5 +1,5 @@
 {
-  "name": "saas-frontend",
+  "name": "saas-lumira-ui",
   "private": true,
   "version": "0.1.0",
   "packageManager": "pnpm@10.33.0",
@@ -30,8 +30,8 @@
     "test:antd-static-theme": "tsx scripts/antd-static-theme-smoke.ts",
     "test:e2e": "playwright test",
     "test:e2e:smoke": "playwright test --grep @smoke",
-    "test:e2e:reset": "node ../admin-backend/scripts/reset-e2e-platform.mjs && playwright test",
-    "test:e2e:reset:smoke": "node ../admin-backend/scripts/reset-e2e-platform.mjs && playwright test --grep @smoke",
+    "test:e2e:reset": "node ../bin/reset-e2e-platform.mjs && playwright test",
+    "test:e2e:reset:smoke": "node ../bin/reset-e2e-platform.mjs && playwright test --grep @smoke",
     "test:e2e:ui": "playwright test --ui"
   },
   "dependencies": {
@@ -45,14 +45,14 @@
     "antd-img-crop": "^4.30.0",
     "dayjs": "^1.11.20",
     "rc-slider-captcha": "^1.9.0",
-    "react": "18.3.1",
-    "react-dom": "18.3.1"
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6"
   },
   "devDependencies": {
     "@playwright/test": "^1.60.0",
     "@types/node": "^25.6.2",
-    "@types/react": "^18.3.27",
-    "@types/react-dom": "^18.3.7",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
     "@vitest/coverage-v8": "^4.1.6",
     "less-loader": "^12.3.2",
     "postcss": "8.5.14",

@@ -72,19 +72,17 @@ const patchUmiRuntime = () => {
 
   const originalPathResolver = 'function q(e,t="/"){return`${C(t)}${e.split("/").map(e=>encodeURIComponent(e)).join("/")}`}';
   const cdnPathResolver = 'function q(e,t="/"){if("/"===t&&"string"==typeof e){let t=e.split("/").pop();if(/\\.css(?:[?#]|$)/.test(e))return"/cdn-assets/css/"+t.replaceAll(".","__dot__");if(/\\.js(?:[?#]|$)/.test(e))return"/cdn-assets/js/"+t.replaceAll(".","__dot__")}return`${C(t)}${e.split("/").map(e=>encodeURIComponent(e)).join("/")}`}';
-  if (runtime.includes(originalPathResolver)) {
-    runtime = runtime.replace(originalPathResolver, cdnPathResolver);
-  } else {
-    console.warn('Skipping Umi runtime path resolver patch: expected minified snippet was not found.');
+  if (!runtime.includes(originalPathResolver)) {
+    throw new Error('Cannot patch Umi runtime path resolver.');
   }
+  runtime = runtime.replace(originalPathResolver, cdnPathResolver);
 
   const originalScriptSource = 'if(e)return{src:e.getAttribute("src")};';
   const cdnScriptSource = 'if(e){let t=e.getAttribute("src")||"";return t=t.replace(/^.*\\/cdn-assets\\/js\\//,"").replaceAll("__dot__","."),{src:t}};';
-  if (runtime.includes(originalScriptSource)) {
-    runtime = runtime.replace(originalScriptSource, cdnScriptSource);
-  } else {
-    console.warn('Skipping Umi runtime chunk source resolver patch: expected minified snippet was not found.');
+  if (!runtime.includes(originalScriptSource)) {
+    throw new Error('Cannot patch Umi runtime chunk source resolver.');
   }
+  runtime = runtime.replace(originalScriptSource, cdnScriptSource);
 
   runtime = runtime.replace('function N(e){return L(e,".css")}', 'function N(e){return L(e,".css")||e.includes("/cdn-assets/css/")}');
   runtime = runtime.replaceAll('else if(L(t,".js"))', 'else if(L(t,".js")||t.includes("/cdn-assets/js/"))');

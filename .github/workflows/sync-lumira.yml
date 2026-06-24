@@ -1,0 +1,107 @@
+name: Sync Lumira Scaffold
+
+on:
+  schedule:
+    - cron: '0 18 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: sync-lumira-scaffold
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    name: Create Lumira sync PR
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout AIADC-WEB
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          path: aiadc-web
+
+      - name: Checkout Lumira upstream
+        uses: actions/checkout@v4
+        with:
+          repository: Elexvx/Lumira
+          ref: main
+          fetch-depth: 1
+          path: lumira
+
+      - name: Sync scaffold directories
+        run: |
+          set -euo pipefail
+          cd aiadc-web
+
+          rsync -a --delete \
+            --exclude='.git/' \
+            --exclude='.idea/' \
+            --exclude='.vscode/' \
+            --exclude='target/' \
+            --exclude='storage/' \
+            --exclude='logs/' \
+            --exclude='*.log' \
+            --exclude='services/lumira-system/src/main/java/com/lumira/saas/modules/aiadc/' \
+            --exclude='services/lumira-system/src/test/java/com/lumira/saas/modules/aiadc/' \
+            --exclude='services/lumira-system/src/main/resources/db/migration/V55__aiadc_cms_content.sql' \
+            ../lumira/lumira-backend/ admin-backend/
+
+          rsync -a --delete \
+            --exclude='.git/' \
+            --exclude='.idea/' \
+            --exclude='.vscode/' \
+            --exclude='node_modules/' \
+            --exclude='dist/' \
+            --exclude='.umi/' \
+            --exclude='.umi-production/' \
+            --exclude='.cache/' \
+            --exclude='*.log' \
+            --exclude='src/pages/business/' \
+            ../lumira/lumira-ui/ admin-frontend/
+
+      - name: Detect changes
+        id: diff
+        run: |
+          cd aiadc-web
+          if git diff --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create pull request
+        if: steps.diff.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          path: aiadc-web
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: chore/sync-lumira-scaffold
+          delete-branch: true
+          commit-message: chore: sync Lumira scaffold
+          title: chore: sync Lumira scaffold
+          body: |
+            This PR syncs the middle-office scaffold from `Elexvx/Lumira@main`.
+
+            Protected AIADC business-owned paths were intentionally excluded from the mechanical sync:
+            - `admin-backend/services/lumira-system/src/main/java/com/lumira/saas/modules/aiadc/`
+            - `admin-backend/services/lumira-system/src/test/java/com/lumira/saas/modules/aiadc/`
+            - `admin-backend/services/lumira-system/src/main/resources/db/migration/V55__aiadc_cms_content.sql`
+            - `admin-frontend/src/pages/business/`
+
+            Before merging, please review scaffold integration files such as:
+            - `admin-frontend/src/access.ts`
+            - `admin-frontend/src/routes/meta.ts`
+            - `admin-frontend/src/locales/zh-CN/nav.ts`
+            - `admin-frontend/src/locales/en-US/nav.ts`
+            - `admin-backend/services/lumira-admin/src/main/resources/application.yml`
+            - `admin-backend/sql/saas.sql`
+
+            Required local verification:
+            - `cd admin-backend && ./mvnw -pl services/lumira-admin -am package -DskipTests`
+            - `cd admin-frontend && corepack pnpm run build`
+            - `cd official-frontend && corepack pnpm run build`

@@ -717,7 +717,7 @@ const useMenuTreeManagement = ({
 
       confirmAction({
         title: t('停用菜单', 'Disable menu'),
-        content: t('确认停用菜单「{name}」吗？停用后该菜单将不再在前台展示。', 'Disable menu "{name}"? After disabling, it will no longer be shown in the frontend.').replace('{name}', record.menuName),
+        content: t('确认停用菜单「{name}」吗？停用后该菜单将不再在前台展示。', 'Disable menu "{name}"? After disabling, it will no longer be shown in the lumira-ui.').replace('{name}', record.menuName),
         okText: t('确认停用', 'Disable'),
         okButtonProps: { danger: true },
         onOk: async () => {

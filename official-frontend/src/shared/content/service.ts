@@ -1,9 +1,9 @@
 export {
-  getResolvedContentBundle as getContentBundle,
-  getResolvedNewsArticleBySlug as getNewsArticleBySlug,
-  getResolvedNewsArticles as getNewsArticles,
-  getResolvedNewsCategories as getNewsCategories,
-  getResolvedPageContent as getPageContent,
-  getResolvedSiteMeta as getSiteMeta,
-  getResolvedSiteShellContent as getSiteShellContent,
-} from './lumira-service';
+  getMockContentBundle as getContentBundle,
+  getMockNewsArticleBySlug as getNewsArticleBySlug,
+  getMockNewsArticles as getNewsArticles,
+  getMockNewsCategories as getNewsCategories,
+  getMockPageContent as getPageContent,
+  getMockSiteMeta as getSiteMeta,
+  getMockSiteShellContent as getSiteShellContent,
+} from './mock-content';

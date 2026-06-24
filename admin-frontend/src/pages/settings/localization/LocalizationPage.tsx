@@ -87,15 +87,15 @@ const NAMESPACE_LABELS: Record<string, string> = {
 };
 
 const SOURCE_REF_BY_NAMESPACE: Record<string, string> = {
-  nav: 'frontend/src/routes/meta.ts',
-  common: 'frontend/src/locales/zh-CN.ts',
-  page: 'frontend/src/locales/zh-CN.ts',
-  message: 'frontend/src/locales/zh-CN.ts',
-  theme: 'frontend/src/locales/zh-CN.ts',
-  tenant: 'frontend/src/locales/zh-CN.ts',
-  auth: 'frontend/src/locales/zh-CN.ts',
-  system: 'frontend/src/locales/zh-CN.ts',
-  app: 'frontend/src/locales/zh-CN.ts',
+  nav: 'lumira-ui/src/routes/meta.ts',
+  common: 'lumira-ui/src/locales/zh-CN.ts',
+  page: 'lumira-ui/src/locales/zh-CN.ts',
+  message: 'lumira-ui/src/locales/zh-CN.ts',
+  theme: 'lumira-ui/src/locales/zh-CN.ts',
+  tenant: 'lumira-ui/src/locales/zh-CN.ts',
+  auth: 'lumira-ui/src/locales/zh-CN.ts',
+  system: 'lumira-ui/src/locales/zh-CN.ts',
+  app: 'lumira-ui/src/locales/zh-CN.ts',
 };
 
 const routeKeySet = new Set(backendRouteMeta.map((item) => item.name).filter(Boolean));
@@ -108,10 +108,10 @@ const resolveSourceType = (key: string) => (key.startsWith('nav.') ? 'ROUTE' : '
 
 const resolveSourceRef = (key: string, namespaceCode: string) => {
   if (routeKeySet.has(key) || namespaceCode === 'nav') {
-    return 'frontend/src/routes/meta.ts';
+    return 'lumira-ui/src/routes/meta.ts';
   }
 
-  return SOURCE_REF_BY_NAMESPACE[namespaceCode] || 'frontend/src/locales/zh-CN.ts';
+  return SOURCE_REF_BY_NAMESPACE[namespaceCode] || 'lumira-ui/src/locales/zh-CN.ts';
 };
 
 

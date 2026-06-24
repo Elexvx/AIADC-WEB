@@ -77,8 +77,8 @@ interface RuntimeAppearanceSettingsResponse {
 const buildInitialBootstrapSnapshot = (): BootstrapSnapshot => ({
   phase: 'idle',
   progress: 0,
-  title: '正在启动系统',
-  description: '正在检查后端服务',
+  title: t('app.bootstrap.starting', '正在启动系统'),
+  description: t('app.bootstrap.checkingBackend', '正在检查后端服务'),
   retryCount: 0,
   ready: false,
   updatedAt: Date.now(),

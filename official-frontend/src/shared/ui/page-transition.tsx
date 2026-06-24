@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 
 export function PageTransition({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
     if ('scrollRestoration' in window.history) {
@@ -26,8 +26,6 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
     };
 
     resetScroll();
-
-    setIsVisible(false);
 
     const frame = window.requestAnimationFrame(() => {
       resetScroll();
