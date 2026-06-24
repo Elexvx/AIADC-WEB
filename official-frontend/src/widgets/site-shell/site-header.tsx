@@ -9,14 +9,12 @@ import { Button, InternalLink } from '@/shared/ui';
 
 function BrandMark({ primary, secondary }: { primary: string; secondary: string }) {
   return (
-    <span className="flex items-center gap-3">
-      <span className="relative grid h-11 w-11 place-items-center overflow-hidden rounded-lg bg-gradient-to-br from-cyan-300 via-blue-500 to-blue-700 text-lg font-black text-white shadow-[0_16px_36px_rgba(37,99,235,0.35)]">
-        A
-        <span className="absolute bottom-1 right-1 h-2 w-2 rounded-full bg-emerald-300" />
+    <span className="flex items-center gap-2.5">
+      <span className="grid h-9 w-9 place-items-center overflow-hidden bg-white p-0.5">
+        <img src="/assets/aiadc-logo.png" alt="" className="h-full w-full object-contain" />
       </span>
-      <span className="leading-tight">
-        <strong className="block text-base font-bold tracking-wide text-slate-950">{primary}</strong>
-        <small className="block text-sm font-semibold text-slate-600">{secondary}</small>
+      <span className="leading-none">
+        <strong className="block whitespace-nowrap text-lg font-bold tracking-wide text-[#082656]">{primary}{secondary}</strong>
       </span>
     </span>
   );
@@ -24,7 +22,7 @@ function BrandMark({ primary, secondary }: { primary: string; secondary: string 
 
 function isActive(href: string, pathname: string) {
   if (href === '/') return pathname === '/';
-  if (href.startsWith('/#')) return pathname === ROUTES.home;
+  if (href.startsWith('/#')) return false;
   if (href.includes('#')) return pathname === href.split('#')[0];
   return pathname === href;
 }
@@ -38,13 +36,13 @@ export function SiteHeader() {
   const currentLocaleLabel = locale === 'zh' ? '中' : 'EN';
 
   return (
-    <header className="sticky top-0 z-50 bg-[rgba(255,255,255,0.88)] text-slate-950 shadow-[0_10px_34px_rgba(15,23,42,0.12)] backdrop-blur">
-      <div className="section-shell flex h-14 items-center gap-5 sm:h-16">
+    <header className="sticky top-0 z-50 border-b border-slate-100 bg-[rgba(255,255,255,0.92)] text-slate-950 backdrop-blur">
+      <div className="section-shell flex h-16 items-center gap-5">
         <InternalLink href="/" aria-label={`${brand.applicationName} ${brand.homeAria}`} className="shrink-0">
           <BrandMark primary={brand.primary} secondary={brand.secondary} />
         </InternalLink>
 
-        <nav className="hidden flex-1 items-center justify-center gap-8 xl:flex" aria-label="主导航">
+        <nav className="hidden flex-1 items-center justify-center gap-7 xl:flex" aria-label="主导航">
           {header.mainNavItems.map((item, index) =>
             item.dropdown ? (
               <div key={item.label} className="group relative">
@@ -76,9 +74,9 @@ export function SiteHeader() {
               <InternalLink
                 key={`${item.label}-${item.href}`}
                 href={item.href}
-                className={`relative whitespace-nowrap text-sm font-semibold transition-colors hover:text-blue-500 ${
+                className={`relative flex h-16 items-center whitespace-nowrap text-sm font-semibold transition-colors after:absolute after:bottom-0 after:left-1/2 after:h-0.5 after:w-0 after:-translate-x-1/2 after:bg-[#0b55b7] after:transition-all hover:text-[#082f6f] ${
                   isActive(item.href, pathname) || (index === 0 && pathname === '/') ? 'text-slate-950' : 'text-slate-700'
-                }`}
+                } ${isActive(item.href, pathname) || (index === 0 && pathname === '/') ? 'after:w-10' : 'hover:after:w-6'}`}
               >
                 {item.label}
               </InternalLink>
@@ -87,7 +85,7 @@ export function SiteHeader() {
         </nav>
 
         <div className="ml-auto flex items-center gap-3">
-          <div className="relative hidden sm:block">
+          <div className="relative hidden">
             <button
               type="button"
               aria-label={header.languageAria}
@@ -120,8 +118,8 @@ export function SiteHeader() {
               </div>
             ) : null}
           </div>
-          <Button asChild variant="outline" className="hidden h-10 rounded-full border-slate-200 bg-white px-5 text-slate-900 hover:bg-slate-50 sm:inline-flex">
-            <InternalLink href="/login">{header.loginLabel}</InternalLink>
+          <Button asChild className="hidden h-10 rounded-md bg-[#082f6f] px-5 text-sm font-bold !text-white shadow-[0_10px_20px_rgba(8,47,111,0.18)] hover:bg-[#06275d] sm:inline-flex">
+            <InternalLink href="/login" className="!text-white">{header.loginLabel}</InternalLink>
           </Button>
           <div className="relative">
             <button

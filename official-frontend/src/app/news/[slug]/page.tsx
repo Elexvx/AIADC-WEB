@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: NewsDetailPageProps) {
 
   if (!article) {
     return {
-      title: '璧勮璇︽儏',
+      title: '资讯详情',
     };
   }
 
@@ -58,7 +58,7 @@ export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
 
       <SiteHeader />
 
-      {/* 鈹€鈹€ Hero Section: Full-bleed Editorial Image 鈹€鈹€ */}
+      {/* Hero Section: Full-bleed Editorial Image */}
       <section className="article-hero relative overflow-hidden">
         {/* Decorative top accent line */}
         <div className="absolute left-0 right-0 top-0 z-10 h-[4px] bg-gradient-to-r from-transparent via-[#1a365d] to-transparent" />
@@ -106,7 +106,7 @@ export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
         </svg>
       </section>
 
-      {/* 鈹€鈹€ Article Body: Editorial Reading Experience 鈹€鈹€ */}
+      {/* Article Body: Editorial Reading Experience */}
       <article className="article-body relative">
         {/* Match hero content alignment: same padding + same max-width */}
         <div className="px-6 py-14 sm:px-12 sm:py-20 lg:px-20">
@@ -117,7 +117,7 @@ export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
             className="group inline-flex items-center gap-1.5 text-sm text-slate-400 transition-colors duration-200 hover:text-slate-600"
           >
             <ArrowLeft className="h-3.5 w-3.5 transition-transform duration-200 group-hover:-translate-x-0.5" />
-            杩斿洖鏂伴椈涓績
+            返回新闻中心
           </InternalLink>
 
           {/* Lead / Excerpt - styled as pull quote area */}
@@ -141,7 +141,7 @@ export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
             ))}
           </div>
 
-          {/* 涓婁竴绡?/ 涓嬩竴绡?瀵艰埅 */}
+          {/* Previous / next article navigation */}
           <nav className="mt-12 flex items-center justify-between gap-4 border-t border-slate-200 pt-8">
             {prevArticle ? (
               <InternalLink
@@ -149,7 +149,7 @@ export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
                 className="group inline-flex max-w-[45%] items-center gap-2 text-sm text-slate-500 transition-colors hover:text-blue-600"
               >
                 <ChevronLeft className="h-4 w-4 shrink-0 transition-transform group-hover:-translate-x-0.5" />
-                <span className="truncate">涓婁竴绡囷細{prevArticle.title}</span>
+                <span className="truncate">上一篇：{prevArticle.title}</span>
               </InternalLink>
             ) : <span />}
             {nextArticle ? (
@@ -157,7 +157,7 @@ export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
                 href={`/news/${nextArticle.slug}`}
                 className="group inline-flex max-w-[45%] items-center justify-end gap-2 text-sm text-slate-500 transition-colors hover:text-blue-600"
               >
-                <span className="truncate">涓嬩竴绡囷細{nextArticle.title}</span>
+                <span className="truncate">下一篇：{nextArticle.title}</span>
                 <ChevronRight className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-0.5" />
               </InternalLink>
             ) : <span />}

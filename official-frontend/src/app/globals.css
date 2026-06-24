@@ -70,6 +70,7 @@ body {
   overflow-x: hidden;
   overflow-y: visible;
   background: #ffffff;
+  font-family: var(--font-sans);
   font-weight: 400;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -209,22 +210,22 @@ img {
  *
  * 级别        用途                      字号(移动/平板/桌面)         字重      行高
  * ─────────────────────────────────────────────────────────────────────────────
- * display    首页 Hero 大标题          4xl / 6xl / 7xl            900       [1.08]
- * h1         页面主标题 (PageHero)     3xl / 4xl / 5xl            900       tight
+ * display    首页 Hero 大标题          4xl / 6xl / 7xl            700       [1.08]
+ * h1         页面主标题 (PageHero)     3xl / 4xl / 5xl            700       tight
  * h2         区块/章节标题             2xl / 3xl / 4xl            700       tight
  * h3         卡片/子区块标题           lg  / xl  / 2xl            600       tight
  * h4         小标题/列表组标题         base / lg   / –            600       normal
  * body       正文                     base / –   / –             400       relaxed
  * body-lg    描述文字/大段正文         base / lg   / –             400       loose(8)
  * caption    辅助说明/元信息           sm   / –   / –              400      normal
- * eyebrow    眉标(kicker)             xs   / –   / –              800      0.18em upper
+ * eyebrow    眉标(kicker)             xs   / –   / –              700      0.18em upper
  */
 
 @layer base {
   /* ── Display：首页 Hero 超大标题 ── */
   .heading-display {
     font-size: clamp(2.25rem, 1.5rem + 2.7vw, 4.5rem);
-    font-weight: 900;
+    font-weight: 700;
     line-height: 1.08;
     letter-spacing: 0.02em;
   }
@@ -232,7 +233,7 @@ img {
   /* ── H1：页面主标题 ── */
   .heading-1 {
     font-size: clamp(1.875rem, 1.25rem + 2.3vw, 3rem);
-    font-weight: 900;
+    font-weight: 700;
     line-height: 1.15;
     letter-spacing: 0.02em;
   }
@@ -273,7 +274,7 @@ img {
 .section-kicker {
   width: fit-content;
   font-size: 0.72rem;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
 }
@@ -427,7 +428,7 @@ img {
 .article-drop-cap::first-letter {
   float: left;
   font-size: 3.75em;
-  font-weight: 900;
+  font-weight: 700;
   line-height: 0.78;
   margin-right: 0.12em;
   margin-top: 0.06em;

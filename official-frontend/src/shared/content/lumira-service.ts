@@ -1,6 +1,7 @@
 import type { ArticleItem, CmsContentBundle, CmsPageContent, NewsCategorySummary, PageKey, SeoContent, SiteShellContent } from '@/shared/content/types';
 import { createLumiraUrl, lumiraServiceConfig } from '@/shared/config/lumira';
 import { defaultLocale, type Locale } from '@/shared/i18n/config';
+import { getDefaultContentBundle } from './default-content';
 
 type LumiraFieldRecord = {
   sectionKey?: string;
@@ -174,7 +175,7 @@ async function fetchLumiraBundle(locale?: string): Promise<CmsContentBundle | nu
     }
     const payload = (await response.json()) as LumiraApiResponse<LumiraPublicContent>;
     const fields = payload.data?.fields || [];
-    const bundle = cloneBundle(emptyBundle(locale));
+    const bundle = cloneBundle(getDefaultContentBundle(locale));
     fields.forEach((field) => applyField(bundle, field));
     return bundle;
   } catch {
@@ -183,7 +184,7 @@ async function fetchLumiraBundle(locale?: string): Promise<CmsContentBundle | nu
 }
 
 export async function getResolvedContentBundle(locale?: string): Promise<CmsContentBundle> {
-  return (await fetchLumiraBundle(locale)) || emptyBundle(locale);
+  return (await fetchLumiraBundle(locale)) || getDefaultContentBundle(locale);
 }
 
 export async function getResolvedSiteShellContent(locale?: string): Promise<SiteShellContent> {

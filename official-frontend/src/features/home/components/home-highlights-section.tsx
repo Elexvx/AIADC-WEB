@@ -1,6 +1,7 @@
 import { getSection, resolveIcon } from '@/shared/content';
 import { usePageContent } from '@/shared/i18n/locale-provider';
-import { Card, CardContent, SectionHeading } from '@/shared/ui';
+import { Card, CardContent } from '@/shared/ui';
+import { HomeSectionTitle } from './home-section-title';
 
 export function HomeHighlightsSection() {
   const page = usePageContent('home');
@@ -8,29 +9,22 @@ export function HomeHighlightsSection() {
   const items = section?.items ?? [];
 
   return (
-    <section className="bg-white pb-10 sm:pb-12">
+    <section id="tracks" className="bg-white py-9 sm:py-11">
       <div className="section-shell">
-        <div className="mx-auto max-w-4xl text-center">
-          <SectionHeading
-            centered
-            eyebrow="赛事亮点"
-            title={section?.title ?? '让智能应用，从想法走向验证'}
-            description={section?.description ?? '赛事围绕组别、赛道、时间线与作品评审构建一体化体验，让每个团队都能快速找到适合自己的成长路径。'}
-          />
-        </div>
+        <HomeSectionTitle title={section?.title ?? '赛道设置'} />
 
-        <div className="mt-9 grid gap-5 md:grid-cols-4">
+        <div className="grid gap-7 md:grid-cols-3">
           {items.map((item) => {
             const Icon = resolveIcon(item.iconKey);
 
             return (
-              <Card key={item.title} className="rounded-lg border-slate-200 bg-white">
-                <CardContent className="flex min-h-56 flex-col p-5 sm:p-6">
-                  <div className="grid h-12 w-12 place-items-center rounded-lg bg-gradient-to-br from-blue-50 to-cyan-50 text-blue-600 ring-1 ring-blue-100">
-                    <Icon className="h-6 w-6" />
+              <Card key={item.title} className="rounded-md border-slate-200 bg-white shadow-none transition-colors hover:border-blue-200">
+                <CardContent className="flex h-[172px] flex-col items-center justify-center px-6 py-5 text-center sm:h-[182px]">
+                  <div>
+                    <Icon className="mx-auto h-9 w-9 stroke-[1.7] text-[#0b55b7]" />
+                    <h3 className="mt-3 text-xl font-semibold tracking-wide text-[#082656]">{item.title}</h3>
+                    <p className="mx-auto mt-3 max-w-[18rem] overflow-hidden text-sm leading-6 text-slate-600 [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3]">{item.description}</p>
                   </div>
-                  <h3 className="mt-5 heading-3 text-slate-950">{item.title}</h3>
-                  <p className="mt-2 text-sm leading-7 text-slate-600">{item.description}</p>
                 </CardContent>
               </Card>
             );

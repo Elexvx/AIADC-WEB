@@ -71,7 +71,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
 
   return (
     <html lang="zh-CN">
-      <body className={`${alibabaPuHuiTi.className} bg-background text-foreground antialiased`}>
+      <body className={`${alibabaPuHuiTi.variable} ${alibabaPuHuiTi.className} bg-background text-foreground antialiased`}>
         <LocaleProvider initialContent={initialContent}>
           <PageTransition>{children}</PageTransition>
           <FloatingActions />

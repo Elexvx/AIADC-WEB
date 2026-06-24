@@ -26,7 +26,7 @@ export function ScrollReveal<T extends ElementType = 'div'>({
 }: ScrollRevealProps<T>) {
   const Component = (as ?? 'div') as ElementType;
   const ref = useRef<HTMLElement | null>(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
     const node = ref.current;

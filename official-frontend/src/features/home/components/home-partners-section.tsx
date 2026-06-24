@@ -1,24 +1,40 @@
 import { getSectionItems } from '@/shared/content';
 import { usePageContent } from '@/shared/i18n/locale-provider';
-import { Card, CardContent, SectionHeading } from '@/shared/ui';
+import { HomeSectionTitle } from './home-section-title';
+
+function initials(title: string) {
+  return title
+    .replace(/[（(].*?[）)]/g, '')
+    .split('')
+    .filter((char) => /[\u4e00-\u9fa5A-Za-z0-9]/.test(char))
+    .slice(0, 4)
+    .join('');
+}
 
 export function HomePartnersSection() {
   const page = usePageContent('home');
   const partners = getSectionItems(page, 'partners');
 
   return (
-    <section id="partners" className="bg-white pb-10 sm:pb-12">
+    <section id="partners" className="bg-white py-10 sm:py-12">
       <div className="section-shell">
-        <div className="mx-auto max-w-4xl text-center">
-          <SectionHeading centered eyebrow="合作伙伴" title="共建智能应用创新生态" description="联合高校、产业机构与技术平台，为参赛团队提供命题、评审、资源与生态支持。" />
-        </div>
-        <div className="mt-9 grid grid-cols-2 overflow-hidden rounded-lg border-slate-200 bg-white sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
+        <HomeSectionTitle title="合作支持" description="展示协同高校、产业机构与技术平台标识。" />
+
+        <div className="mt-9 grid grid-cols-2 overflow-hidden rounded-lg border border-slate-200 bg-white sm:grid-cols-3 lg:grid-cols-6">
           {partners.map((partner) => (
-            <Card key={partner.id} className="rounded-none border-0 border-r border-b border-slate-200 bg-white shadow-none">
-              <CardContent className="grid min-h-24 place-items-center !p-5 text-center">
-                <span className="text-balance text-sm font-black tracking-wide text-slate-500 sm:text-base">{partner.title}</span>
-              </CardContent>
-            </Card>
+            <div key={partner.id} className="min-h-24 border-b border-r border-slate-200 p-4 last:border-r-0">
+              <div className="flex h-full items-center justify-center text-center">
+                <div className="grid h-16 w-full max-w-32 place-items-center overflow-hidden rounded-md bg-white p-2">
+                  {partner.imageUrl ? (
+                    <img src={partner.imageUrl} alt={`${partner.title} logo`} className="h-full w-full object-contain" loading="lazy" />
+                  ) : (
+                    <span aria-label={`${partner.title} logo`} className="text-base font-semibold tracking-wide text-blue-700">
+                      {String(partner.extra?.initials ?? initials(partner.title))}
+                    </span>
+                  )}
+                </div>
+              </div>
+            </div>
           ))}
         </div>
       </div>

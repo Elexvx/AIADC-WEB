@@ -32,12 +32,12 @@ export function IntroAwardsSection({ items }: IntroAwardsSectionProps) {
                   <span>{String(award.extra?.glyph ?? '★')}</span>
                 </div>
                 <div>
-                  <CardTitle className="text-xl font-black tracking-wide text-slate-950">{award.title}</CardTitle>
+                  <CardTitle className="text-xl font-semibold tracking-wide text-slate-950">{award.title}</CardTitle>
                   <CardDescription className="mt-1 text-slate-500">{award.subtitle}</CardDescription>
                 </div>
               </CardHeader>
               <CardContent className="px-6 pb-6 pt-0">
-                <div className="text-3xl font-black tracking-wide text-blue-700">{String(award.extra?.prize ?? '')}</div>
+                <div className="text-3xl font-semibold tracking-wide text-blue-700">{String(award.extra?.prize ?? '')}</div>
                 <p className="mt-3 whitespace-pre-line text-sm leading-7 text-slate-600">{award.description}</p>
               </CardContent>
             </Card>

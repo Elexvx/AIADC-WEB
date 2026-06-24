@@ -1,7 +1,8 @@
 import { HelpCircle } from 'lucide-react';
 import { getSectionItems } from '@/shared/content';
 import { usePageContent } from '@/shared/i18n/locale-provider';
-import { Card, CardContent, SectionHeading } from '@/shared/ui';
+import { Card, CardContent } from '@/shared/ui';
+import { HomeSectionTitle } from './home-section-title';
 
 export function HomeFaqSection() {
   const page = usePageContent('home');
@@ -10,7 +11,7 @@ export function HomeFaqSection() {
   return (
     <section id="faq" className="bg-white py-10 sm:py-12">
       <div className="section-shell">
-        <SectionHeading centered eyebrow="常见问题" title="报名与作品提交问题速查" description="把高频问题前置到官网，提升移动端与桌面端的信息查找效率。" />
+        <HomeSectionTitle title="常见问题" description="把高频问题前置到官网，提升移动端与桌面端的信息查找效率。" />
         <div className="mt-9 grid gap-4 md:grid-cols-2">
           {faqItems.map((item) => (
             <Card key={item.id} className="rounded-lg border-slate-200 bg-white">

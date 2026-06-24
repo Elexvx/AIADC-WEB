@@ -32,8 +32,8 @@ export function IntroScheduleTimeline({ items }: IntroScheduleTimelineProps) {
                   <CardContent className="p-6 sm:p-7">
                     <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
                       <div className="min-w-0">
-                        <div className="text-xs font-black tracking-[0.18em] text-blue-400">STEP {String(index + 1).padStart(2, '0')}</div>
-                        <h3 className="mt-3 text-2xl font-black tracking-wide text-slate-950">{item.title}</h3>
+                        <div className="text-xs font-semibold tracking-[0.18em] text-blue-400">STEP {String(index + 1).padStart(2, '0')}</div>
+                        <h3 className="mt-3 text-2xl font-semibold tracking-wide text-slate-950">{item.title}</h3>
                         <div className="mt-5 inline-flex items-center gap-2 rounded-full bg-blue-50 px-3 py-1.5 text-sm font-bold text-blue-700">
                           <CalendarDays className="h-4 w-4" />
                           {item.date}

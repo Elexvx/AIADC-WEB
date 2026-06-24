@@ -1,8 +1,7 @@
-import { ChevronRight } from 'lucide-react';
-import { ROUTES } from '@/shared/config/routes';
 import { getSection, resolveIcon } from '@/shared/content';
 import { usePageContent } from '@/shared/i18n/locale-provider';
-import { Card, CardContent, InternalLink, SectionHeading } from '@/shared/ui';
+import { Card, CardContent } from '@/shared/ui';
+import { HomeSectionTitle } from './home-section-title';
 
 export function HomeGroupsSection() {
   const page = usePageContent('home');
@@ -10,30 +9,22 @@ export function HomeGroupsSection() {
   const groups = section?.items ?? [];
 
   return (
-    <section id="groups" className="bg-white py-10 sm:py-12">
+    <section id="groups" className="bg-white py-9 sm:py-11">
       <div className="section-shell">
-        <div className="mx-auto max-w-4xl text-center">
-          <SectionHeading centered eyebrow="参赛对象" title={section?.title ?? '覆盖多元青年创新团队'} description={section?.description ?? '以团队形式参赛，每队 1-5 人，可跨校组队，按照组别选择对应赛道。'} />
-        </div>
+        <HomeSectionTitle title={section?.title ?? '参赛组别'} />
 
-        <div className="mt-9 grid gap-5 md:grid-cols-3">
+        <div className="grid gap-7 md:grid-cols-3">
           {groups.map((group) => {
             const Icon = resolveIcon(group.iconKey);
 
             return (
-              <Card key={group.title} className="rounded-lg border-slate-200 bg-white">
-                <CardContent className="flex h-full min-h-72 flex-col p-5 sm:p-6">
-                  <div className="grid h-12 w-12 place-items-center rounded-lg bg-gradient-to-br from-blue-50 to-cyan-50 text-blue-600 ring-1 ring-blue-100">
-                    <Icon className="h-6 w-6" />
+              <Card key={group.title} className="rounded-md border-slate-200 bg-white shadow-none transition-colors hover:border-blue-200">
+                <CardContent className="flex h-[172px] flex-col items-center justify-center px-6 py-5 text-center sm:h-[182px]">
+                  <div>
+                    <Icon className="mx-auto h-9 w-9 stroke-[1.7] text-[#0b55b7]" />
+                    <h3 className="mt-3 text-xl font-semibold tracking-wide text-[#082656]">{group.title}</h3>
+                    <p className="mx-auto mt-3 max-w-[18rem] overflow-hidden text-sm leading-6 text-slate-600 [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3]">{group.description}</p>
                   </div>
-                  <div className="mt-5 min-w-0">
-                    <h3 className="heading-3 text-slate-950">{group.title}</h3>
-                    <p className="mt-2 text-sm leading-7 text-slate-600">{group.description}</p>
-                  </div>
-                  <InternalLink href={group.cta?.href ?? ROUTES.login} className="mt-auto inline-flex h-9 w-fit shrink-0 items-center gap-2 rounded-md bg-blue-50 px-3 text-sm font-semibold text-blue-700 transition-colors hover:bg-blue-100">
-                    {group.cta?.label ?? '了解报名条件'}
-                    <ChevronRight className="h-4 w-4" />
-                  </InternalLink>
                 </CardContent>
               </Card>
             );
