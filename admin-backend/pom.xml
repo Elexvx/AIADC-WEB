@@ -9,22 +9,22 @@
     <name>lumira-parent</name>
 
     <modules>
-        <module>services/system-service</module>
-        <module>services/lumira-server</module>
-        <module>libs/common-core</module>
-        <module>libs/common-domain</module>
-        <module>libs/common-web</module>
-        <module>libs/common-security</module>
-        <module>libs/lumira-api</module>
-        <module>libs/plugin-api</module>
-        <module>services/auth-service</module>
-        <module>services/file-service</module>
-        <module>services/message-service</module>
-        <module>services/plugin-service</module>
-        <module>services/localization-service</module>
-        <module>services/payment-service</module>
-        <module>services/ai-service</module>
-        <module>services/job-executor</module>
+        <module>services/lumira-system</module>
+        <module>services/lumira-admin</module>
+        <module>libs/lumira-common-core</module>
+        <module>libs/lumira-common-domain</module>
+        <module>libs/lumira-common-web</module>
+        <module>libs/lumira-common-security</module>
+        <module>libs/lumira-common-api</module>
+        <module>libs/lumira-plugin-api</module>
+        <module>services/lumira-auth</module>
+        <module>services/lumira-file</module>
+        <module>services/lumira-message</module>
+        <module>services/lumira-plugin</module>
+        <module>services/lumira-localization</module>
+        <module>services/lumira-payment</module>
+        <module>services/lumira-ai</module>
+        <module>services/lumira-quartz</module>
     </modules>
 
     <properties>

@@ -4,6 +4,8 @@ export default {
   'nav.ai.root': 'AI',
   'nav.ai.assistant': 'AI 助手',
   'nav.ai.knowledge': '知识库',
+  'nav.business.root': '业务中台',
+  'nav.business.aiadcCms': 'AIADC 内容中台',
   'nav.user.center': '用户中心',
   'nav.user.users': '用户管理',
   'nav.user.departments': '组织部门',

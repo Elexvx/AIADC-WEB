@@ -63,6 +63,24 @@ const aiRoutes: BackendRouteRecord[] = [
   { path: '/settings/ai-knowledge', redirect: '/ai/knowledge' },
 ];
 
+const businessRouteMeta: BackendRouteMeta[] = [
+  { path: '/business', name: 'nav.business.root', icon: 'AppstoreOutlined', access: 'canVisitAiadcCms' },
+  { path: '/business/aiadc-cms', name: 'nav.business.aiadcCms', icon: 'FormOutlined', access: 'canVisitAiadcCms' },
+];
+
+const businessRoutes: BackendRouteRecord[] = [
+  {
+    path: '/business',
+    name: 'nav.business.root',
+    icon: 'AppstoreOutlined',
+    access: 'canVisitAiadcCms',
+    routes: [
+      { path: '/business', redirect: '/business/aiadc-cms', hideInMenu: true },
+      { path: '/business/aiadc-cms', component: '@/pages/business/aiadc-cms', name: 'nav.business.aiadcCms', icon: 'FormOutlined', access: 'canVisitAiadcCms' },
+    ],
+  },
+];
+
 export const systemRouteMeta: BackendRouteMeta[] = [
   { path: '/settings', name: 'nav.settings.root', icon: 'SettingOutlined', hideInMenu: true },
   { path: '/settings/monitoring', name: 'nav.system.monitoring.root', icon: 'FundOutlined', access: 'canVisitSystemMonitoring' },
@@ -200,25 +218,6 @@ const dashboardRoutes: BackendRouteRecord[] = [
     routes: [
       { path: '/dashboard', redirect: '/dashboard/home', hideInMenu: true },
       { path: '/dashboard/home', component: '@/pages/dashboard/DashboardHomePage', name: 'nav.dashboard.home', icon: 'DashboardOutlined', access: 'canVisitDashboard' },
-    ],
-  },
-];
-
-const businessRouteMeta: BackendRouteMeta[] = [
-  { path: '/business', name: 'nav.business.root', icon: 'AppstoreOutlined', access: 'canVisitAiadcCms' },
-  { path: '/business/aiadc-cms', name: 'nav.business.aiadcCms', icon: 'FormOutlined', access: 'canVisitAiadcCms' },
-];
-
-const businessRoutes: BackendRouteRecord[] = [
-  {
-    path: '/business',
-    component: '@/layouts/SettingsLayout/SettingsLayout',
-    name: 'nav.business.root',
-    icon: 'AppstoreOutlined',
-    access: 'canVisitAiadcCms',
-    routes: [
-      { path: '/business', redirect: '/business/aiadc-cms', hideInMenu: true },
-      { path: '/business/aiadc-cms', component: '@/pages/business/aiadc-cms', name: 'nav.business.aiadcCms', icon: 'FormOutlined', access: 'canVisitAiadcCms' },
     ],
   },
 ];

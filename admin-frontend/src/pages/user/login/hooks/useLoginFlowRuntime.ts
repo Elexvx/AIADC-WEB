@@ -8,7 +8,7 @@ import type { Dispatch, SetStateAction } from 'react';
 import { flushSync } from 'react-dom';
 import { beginLoginFlow, endLoginFlow } from '@/auth/loginFlowState';
 import { isLoggedIn, tryRefreshToken } from '@/auth/sessionLifecycle';
-import { createLoginStorageHandler, resolveAuthorizedLoginRedirectTarget } from '@/auth/loginRedirect';
+import { createLoginSessionBroadcastListener, resolveAuthorizedLoginRedirectTarget } from '@/auth/loginRedirect';
 import { resolveLoginRedirectTarget } from '@/auth/loginRedirect';
 import { isPasskeySupported, toAuthenticationPayload, toPublicKeyRequestOptions } from '@/auth/passkey';
 import { DEFAULT_SECURITY_SETTINGS } from '@/auth/securitySettingsTypes';
@@ -1294,25 +1294,48 @@ export const useLoginFlowRuntime = ({
       return;
     }
     passwordChangeRestoreHandledRef.current = true;
-    void tryRefreshToken();
-    flowState.setRestoredPasswordChangeRequired(true);
-    flowState.setPendingPasswordChangeCurrentPassword(INITIAL_PASSWORD);
-    flowState.forcedPasswordChangeForm.resetFields();
-    message.warning(formatMessage({ id: 'page.login.initialPasswordChange.required', defaultMessage: '当前账号仍在使用初始密码，请先修改密码' }));
+    let cancelled = false;
+    void (async () => {
+      const restoredSession = await restoreSession().catch(() => null);
+      if (cancelled) {
+        return;
+      }
+      if (restoredSession?.currentUser && !restoredSession.currentUser.requiresPasswordChange) {
+        setInitialState((prev: AppInitialState | undefined) =>
+          prev
+            ? {
+                ...prev,
+                currentUser: restoredSession.currentUser,
+                securitySettings: restoredSession.securitySettings,
+              }
+            : prev,
+        );
+        history.replace(resolveAuthorizedLoginRedirectTarget(locationSearch, restoredSession.currentUser, initialState?.menuTree || []));
+        return;
+      }
+      void tryRefreshToken();
+      flowState.setRestoredPasswordChangeRequired(true);
+      flowState.setPendingPasswordChangeCurrentPassword(INITIAL_PASSWORD);
+      flowState.forcedPasswordChangeForm.resetFields();
+      message.warning(formatMessage({ id: 'page.login.initialPasswordChange.required', defaultMessage: '当前账号仍在使用初始密码，请先修改密码' }));
+    })();
+    return () => {
+      cancelled = true;
+    };
   }, [
     flowState.forcedPasswordChangeForm,
     flowState.setPendingPasswordChangeCurrentPassword,
     flowState.setRestoredPasswordChangeRequired,
     flowState,
+    initialState?.menuTree,
     initialState?.currentUser?.requiresPasswordChange,
+    locationSearch,
+    setInitialState,
   ]);
   useEffect(() => {
-    const handleStorage = createLoginStorageHandler(redirectTarget, (target) => {
+    return createLoginSessionBroadcastListener(redirectTarget, (target) => {
       window.location.replace(target);
     });
-
-    window.addEventListener('storage', handleStorage);
-    return () => window.removeEventListener('storage', handleStorage);
   }, [redirectTarget]);
   useEffect(() => {
     if (wechatCallbackHandledRef.current) {

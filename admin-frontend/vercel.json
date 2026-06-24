@@ -25,8 +25,8 @@
       "destination": "https://saas.elexvx.com/ws/:path*"
     },
     {
-      "source": "/api-docs/:path*",
-      "destination": "https://saas.elexvx.com/api-docs/:path*"
+      "source": "/api-doc/:path*",
+      "destination": "https://saas.elexvx.com/api-doc/:path*"
     },
     {
       "source": "/api-docs",

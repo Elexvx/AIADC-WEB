@@ -18,7 +18,7 @@ export default {
   'app.bootstrap.enterWorkbench': 'Entering the workbench',
   'app.bootstrap.loadSecuritySettings': 'Loading security settings',
   'app.bootstrap.syncLoginPolicy': 'Syncing login policy',
-  'app.bootstrap.healthHtmlResponse': 'The backend health check returned a frontend page. Please check the API proxy configuration.',
+  'app.bootstrap.healthHtmlResponse': 'The backend health check returned a lumira-ui page. Please check the API proxy configuration.',
   'app.bootstrap.healthHttpFailed': 'Backend health check failed: HTTP {status}',
   'app.bootstrap.healthJsonResponse': 'The backend health check did not return JSON. Please check the API proxy configuration.',
   'app.bootstrap.healthStatusAbnormal': 'Backend health status is abnormal: {status}',
