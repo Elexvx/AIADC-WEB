@@ -43,11 +43,14 @@ tsconfig.exclude = [
 ];
 fs.writeFileSync(tsconfigPath, `${JSON.stringify(tsconfig, null, 2)}\n`);
 
+fs.rmSync(path.join(rootDir, 'src', 'app', 'api'), { recursive: true, force: true });
+
 fs.writeFileSync(
   path.join(rootDir, 'next.config.ts'),
   `import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
+  output: 'export',
   trailingSlash: true,
   images: {
     unoptimized: true,
