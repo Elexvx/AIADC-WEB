@@ -1,55 +1,13 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
 import { Card } from '@/shared/ui';
 import { getSectionItems } from '@/shared/content';
 import { usePageContent } from '@/shared/i18n/locale-provider';
 
-function parseValue(value: string): { num: number; suffix: string } {
-  const match = value.match(/^(\d+)(.*)$/);
-  if (!match) return { num: 0, suffix: value };
-  return { num: parseInt(match[1], 10), suffix: match[2] };
-}
-
 function AnimatedNumber({ value }: { value: string }) {
-  const [display, setDisplay] = useState('0');
-  const ref = useRef<HTMLDivElement>(null);
-  const hasAnimated = useRef(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const { num, suffix } = parseValue(value);
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !hasAnimated.current) {
-          hasAnimated.current = true;
-          const duration = 1500;
-          const startTime = performance.now();
-
-          function tick(now: number) {
-            const elapsed = now - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-            // easeOutExpo
-            const eased = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
-            setDisplay(Math.round(eased * num).toString() + suffix);
-            if (progress < 1) requestAnimationFrame(tick);
-          }
-          requestAnimationFrame(tick);
-        }
-      },
-      { threshold: 0.3 }
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [value]);
-
   return (
-    <div ref={ref} className="text-3xl font-bold text-slate-950">
-      {display}
+    <div className="text-3xl font-bold text-slate-950">
+      {value}
     </div>
   );
 }
