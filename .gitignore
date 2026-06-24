@@ -20,6 +20,14 @@ test-results
 tsconfig.tsbuildinfo
 **/tsconfig.tsbuildinfo
 
+/next-env.d.ts
+/next.config.ts
+/postcss.config.mjs
+/public
+/src
+/tailwind.config.ts
+/tsconfig.json
+
 admin-backend/**/target
 admin-backend/tmp
 admin-backend/storage
