@@ -24,8 +24,17 @@ function copyEntry(sourceRelative, targetRelative = sourceRelative) {
   fs.cpSync(source, target, { recursive: true });
 }
 
+function copyOptionalEntry(sourceRelative, targetRelative = sourceRelative) {
+  const source = path.join(officialDir, sourceRelative);
+  if (!fs.existsSync(source)) {
+    return;
+  }
+  copyEntry(sourceRelative, targetRelative);
+}
+
 copyEntry('src');
 copyEntry('public');
+copyOptionalEntry('content');
 copyEntry('postcss.config.mjs');
 copyEntry('tailwind.config.ts');
 copyEntry('tsconfig.json');

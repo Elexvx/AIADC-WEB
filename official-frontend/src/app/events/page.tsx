@@ -1,24 +1,27 @@
-import { getPageContent, getSectionItems, getSiteMeta } from '@/shared/content';
-import { PageHero, ScrollReveal } from '@/shared/ui';
-import { SiteFooter, SiteHeader } from '@/widgets/site-shell';
-import { EventFilterTabs } from '@/features/events/components/event-filter-tabs';
+import { getActivities, getPageContent, getSectionItems } from '@/lib/content';
+import { getPageMetadata } from '@/lib/metadata';
+import { PageHero, ScrollReveal } from '@/components/ui';
+import { EventFilterTabs } from '@/components/events/components/event-filter-tabs';
+import type { CmsRecordBase } from '@/lib/content/types';
 
 export async function generateMetadata() {
-  return getSiteMeta('events', 'zh');
+  return getPageMetadata('events', '/events');
 }
 
 export default async function EventsPage() {
   const page = await getPageContent('events', 'zh');
-  const eventFilters = getSectionItems(page, 'filters');
-  const eventItems = getSectionItems(page, 'events');
+  const fallbackEventItems = getSectionItems(page, 'events');
+  const activityItems = await getActivities('zh');
+  const eventItems = activityItems.length ? activityItems : fallbackEventItems;
+  const eventFilters = buildActivityFilters(eventItems);
 
   if (!eventItems.length) {
     return null;
   }
 
   return (
-    <main className="page-shell bg-white">
-      <SiteHeader />
+    <main className="bg-white">
+
       <PageHero
         eyebrow={page.hero?.eyebrow ?? '活动中心'}
         title={page.hero?.title ?? ''}
@@ -39,7 +42,31 @@ export default async function EventsPage() {
         </div>
       </ScrollReveal>
 
-      <SiteFooter />
     </main>
   );
+}
+
+function buildActivityFilters(events: CmsRecordBase[]): CmsRecordBase[] {
+  const categories = Array.from(
+    new Set(events.map((event) => event.subtitle).filter((subtitle): subtitle is string => Boolean(subtitle))),
+  );
+
+  return [
+    {
+      id: 'activity-filter-all',
+      code: 'all',
+      locale: 'zh',
+      title: '全部',
+      sort: 0,
+      status: 'published',
+    },
+    ...categories.map((category, index) => ({
+      id: `activity-filter-${index + 1}`,
+      code: category,
+      locale: 'zh' as const,
+      title: category,
+      sort: index + 1,
+      status: 'published' as const,
+    })),
+  ];
 }

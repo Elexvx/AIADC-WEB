@@ -1,10 +1,10 @@
-import { getPageContent, getSectionItems, getSiteMeta } from '@/shared/content';
-import { PageHero, ScrollReveal } from '@/shared/ui';
-import { SiteFooter, SiteHeader } from '@/widgets/site-shell';
-import { ProjectSearchBar, ProjectFilterTabs, ProjectCardGrid } from '@/features/projects';
+import { getPageContent, getSectionItems } from '@/lib/content';
+import { getPageMetadata } from '@/lib/metadata';
+import { PageHero, ScrollReveal } from '@/components/ui';
+import { ProjectSearchBar, ProjectFilterTabs, ProjectCardGrid } from '@/components/projects';
 
 export async function generateMetadata() {
-  return getSiteMeta('projects', 'zh');
+  return getPageMetadata('projects', '/projects');
 }
 
 export default async function ProjectsPage() {
@@ -17,8 +17,8 @@ export default async function ProjectsPage() {
   }
 
   return (
-    <main className="page-shell bg-white">
-      <SiteHeader />
+    <main className="bg-white">
+
       <PageHero
         eyebrow={page.hero?.eyebrow ?? '优秀项目'}
         title={page.hero?.title ?? ''}
@@ -41,7 +41,6 @@ export default async function ProjectsPage() {
         </div>
       </ScrollReveal>
 
-      <SiteFooter />
     </main>
   );
 }

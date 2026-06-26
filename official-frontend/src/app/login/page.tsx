@@ -1,18 +1,18 @@
 import { ArrowRight } from 'lucide-react';
-import { getPageContent, getSiteMeta } from '@/shared/content';
-import { Button, PageHero } from '@/shared/ui';
-import { SiteFooter, SiteHeader } from '@/widgets/site-shell';
+import { getPageContent } from '@/lib/content';
+import { getPageMetadata } from '@/lib/metadata';
+import { Button, PageHero } from '@/components/ui';
 
 export async function generateMetadata() {
-  return getSiteMeta('login', 'zh');
+  return getPageMetadata('login', '/login');
 }
 
 export default async function LoginPage() {
   const page = await getPageContent('login', 'zh');
 
   return (
-    <main className="page-shell bg-white">
-      <SiteHeader />
+    <main className="bg-white">
+
       <PageHero
         eyebrow={page.hero?.eyebrow ?? '登录入口'}
         title={page.hero?.title ?? ''}
@@ -34,7 +34,6 @@ export default async function LoginPage() {
         </div>
       </section>
 
-      <SiteFooter />
     </main>
   );
 }

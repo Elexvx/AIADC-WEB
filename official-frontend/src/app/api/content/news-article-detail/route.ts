@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getNewsArticleBySlug } from '@/shared/content';
+import { getNewsArticleBySlug } from '@/lib/content';
 
 export const dynamic = 'force-dynamic';
 

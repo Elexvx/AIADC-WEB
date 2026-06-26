@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
-import { getSiteMeta } from '@/shared/content';
-import { isPageKey } from '@/shared/content/utils';
+import { getSiteMeta } from '@/lib/content';
+import { isPageKey } from '@/lib/content/utils';
 
 export const dynamic = 'force-dynamic';
 

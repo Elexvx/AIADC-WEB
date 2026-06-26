@@ -1,17 +1,17 @@
-import { getPageContent, getSiteMeta } from '@/shared/content';
-import { PageHero } from '@/shared/ui';
-import { SiteFooter, SiteHeader } from '@/widgets/site-shell';
+import { getPageContent } from '@/lib/content';
+import { getPageMetadata } from '@/lib/metadata';
+import { PageHero } from '@/components/ui';
 
 export async function generateMetadata() {
-  return getSiteMeta('privacy', 'zh');
+  return getPageMetadata('privacy', '/privacy');
 }
 
 export default async function PrivacyPage() {
   const page = await getPageContent('privacy', 'zh');
 
   return (
-    <main className="page-shell bg-white">
-      <SiteHeader />
+    <main className="bg-white">
+
       <PageHero
         eyebrow={page.hero?.eyebrow ?? '隐私政策'}
         title={page.hero?.title ?? ''}
@@ -28,7 +28,6 @@ export default async function PrivacyPage() {
         </div>
       </section>
 
-      <SiteFooter />
     </main>
   );
 }

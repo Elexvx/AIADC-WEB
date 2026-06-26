@@ -1,18 +1,18 @@
-import { getPageContent, getSiteMeta } from '@/shared/content';
-import { NewsTabs } from '@/features/news';
-import { PageHero, ScrollReveal } from '@/shared/ui';
-import { SiteFooter, SiteHeader } from '@/widgets/site-shell';
+import { getPageContent } from '@/lib/content';
+import { getPageMetadata } from '@/lib/metadata';
+import { NewsTabs } from '@/components/news';
+import { PageHero, ScrollReveal } from '@/components/ui';
 
 export async function generateMetadata() {
-  return getSiteMeta('news', 'zh');
+  return getPageMetadata('news', '/news');
 }
 
 export default async function NewsPage() {
   const page = await getPageContent('news', 'zh');
 
   return (
-    <main className="page-shell bg-white">
-      <SiteHeader />
+    <main className="bg-white">
+
       <PageHero
         eyebrow={page.hero?.eyebrow ?? '新闻中心'}
         title={page.hero?.title ?? ''}
@@ -28,7 +28,6 @@ export default async function NewsPage() {
         </div>
       </ScrollReveal>
 
-      <SiteFooter />
     </main>
   );
 }

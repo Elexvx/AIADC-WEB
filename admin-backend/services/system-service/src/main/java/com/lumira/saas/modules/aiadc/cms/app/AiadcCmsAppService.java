@@ -24,7 +24,7 @@ import java.util.regex.Pattern;
 public class AiadcCmsAppService {
 
     private static final int MAX_PAGE_SIZE = 200;
-    private static final int MAX_JSON_LENGTH = 20000;
+    private static final int MAX_JSON_LENGTH = 200000;
     private static final Pattern SAFE_FIELD_PATH = Pattern.compile("^[A-Za-z0-9_.\\[\\]-]+$");
     private static final TypeReference<Map<String, Object>> MAP_TYPE = new TypeReference<>() {
     };
@@ -280,22 +280,11 @@ public class AiadcCmsAppService {
         addRecord(specs, "startup-base", "Startup base", "startup-base", null, null, "baseItems", List.of(extra("extra.location", "string", "input", true)));
         addHero(specs, "news", "News", "news", "hero");
         addPlain(specs, "news", "News", null, "newsCategories", null, null, List.of(
-                extra("label", "string", "input", true),
-                extra("value", "news | notice | media", "select", true, true),
-                extra("description", "string", "textarea", true),
-                extra("sort", "number", "drag-sort-number", true),
-                extra("status", "draft | published", "publish-switch", true)
+                extra("items", "NewsCategorySummary[]", "schema-driven-extra", true)
         ));
-        addPlain(specs, "news", "News", null, "newsArticles", null, null, merge(baseFields(), List.of(
-                extra("category", "news | notice | media", "select", true),
-                extra("slug", "string", "input", true, true),
-                extra("href", "string", "route-or-url-input", true),
-                extra("excerpt", "string", "textarea", true),
-                extra("date", "string", "input", true),
-                extra("image.url", "url", "image-url-or-upload", true),
-                extra("image.alt", "string", "input", true),
-                extra("body", "string[]", "markdown-editor", true)
-        )));
+        addPlain(specs, "news", "News", null, "newsArticles", null, null, List.of(
+                extra("items", "ArticleItem[]", "markdown-editor", true)
+        ));
         addPlain(specs, "site-settings", "Site settings", null, "siteShell", null, null, List.of(
                 extra("brand.primary", "string", "input", true),
                 extra("brand.secondary", "string", "input", true),

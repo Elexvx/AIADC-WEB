@@ -1,10 +1,10 @@
-import { getPageContent, getSectionItems, getSiteMeta } from '@/shared/content';
-import { PageHero, ScrollReveal } from '@/shared/ui';
-import { SiteFooter, SiteHeader } from '@/widgets/site-shell';
-import { MaterialTable, MaterialCtaBanner } from '@/features/materials';
+import { getPageContent, getSectionItems } from '@/lib/content';
+import { getPageMetadata } from '@/lib/metadata';
+import { PageHero, ScrollReveal } from '@/components/ui';
+import { MaterialTable, MaterialCtaBanner } from '@/components/materials';
 
 export async function generateMetadata() {
-  return getSiteMeta('materials', 'zh');
+  return getPageMetadata('materials', '/materials');
 }
 
 export default async function MaterialsPage() {
@@ -12,8 +12,8 @@ export default async function MaterialsPage() {
   const materialItems = getSectionItems(page, 'materials');
 
   return (
-    <main className="page-shell bg-white">
-      <SiteHeader />
+    <main className="bg-white">
+
       <PageHero
         eyebrow={page.hero?.eyebrow ?? '材料下载'}
         title={page.hero?.title ?? ''}
@@ -26,11 +26,9 @@ export default async function MaterialsPage() {
       <ScrollReveal as="section" className="relative z-10 bg-white pt-8 pb-14 sm:pt-10 sm:pb-16" delay={40}>
         <div className="section-shell">
           <MaterialTable items={materialItems} />
-          <MaterialCtaBanner banner={page.ctaBanner ?? {}} />
         </div>
       </ScrollReveal>
 
-      <SiteFooter />
     </main>
   );
 }

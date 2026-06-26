@@ -1,17 +1,17 @@
-import { getPageContent, getSiteMeta } from '@/shared/content';
-import { PageHero } from '@/shared/ui';
-import { SiteFooter, SiteHeader } from '@/widgets/site-shell';
+import { getPageContent } from '@/lib/content';
+import { getPageMetadata } from '@/lib/metadata';
+import { PageHero } from '@/components/ui';
 
 export async function generateMetadata() {
-  return getSiteMeta('terms', 'zh');
+  return getPageMetadata('terms', '/terms');
 }
 
 export default async function TermsPage() {
   const page = await getPageContent('terms', 'zh');
 
   return (
-    <main className="page-shell bg-white">
-      <SiteHeader />
+    <main className="bg-white">
+
       <PageHero
         eyebrow={page.hero?.eyebrow ?? '服务条款'}
         title={page.hero?.title ?? ''}
@@ -28,7 +28,6 @@ export default async function TermsPage() {
         </div>
       </section>
 
-      <SiteFooter />
     </main>
   );
 }

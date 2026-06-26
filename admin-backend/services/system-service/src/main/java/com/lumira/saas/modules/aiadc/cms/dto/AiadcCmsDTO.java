@@ -23,7 +23,7 @@ public final class AiadcCmsDTO {
         @NotBlank
         @Size(max = 255)
         private String fieldPath;
-        @Size(max = 20000)
+        @Size(max = 200000)
         private String valueJson;
         @Size(max = 512)
         private String remark;

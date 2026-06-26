@@ -31,5 +31,18 @@
     "alibabapuhuiti-3-85-bold": "^1.0.0",
     "typescript": "^6.0.3",
     "vite-plugin-font": "^5.1.2"
-  }
+  },
+  "description": "",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Elexvx/AIADC-WEB.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Elexvx/AIADC-WEB/issues"
+  },
+  "homepage": "https://github.com/Elexvx/AIADC-WEB#readme"
 }

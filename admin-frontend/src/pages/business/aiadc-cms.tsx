@@ -222,8 +222,8 @@ const sections: BusinessSection[] = [
     permissionPrefix: 'aiadc:cms:news',
     records: [
       { pageKey: 'news', area: 'hero', fields: heroFields },
-      { collection: 'newsCategories', fields: [{ path: 'label', type: 'string', control: 'input', required: true, editable: true }, { path: 'value', type: 'news | notice | media', control: 'select', required: true, editable: true, guarded: true }, { path: 'description', type: 'string', control: 'textarea', required: true, editable: true }, { path: 'sort', type: 'number', control: 'drag-sort-number', required: true, editable: true }, { path: 'status', type: 'draft | published', control: 'publish-switch', required: true, editable: true }] },
-      { collection: 'newsArticles', fields: [...baseRecordFields, { path: 'category', type: 'news | notice | media', control: 'select', required: true, editable: true }, { path: 'slug', type: 'string', control: 'input', required: true, editable: true, guarded: true }, { path: 'href', type: 'string', control: 'route-or-url-input', required: true, editable: true }, { path: 'excerpt', type: 'string', control: 'textarea', required: true, editable: true }, { path: 'date', type: 'string', control: 'input', required: true, editable: true }, { path: 'image.url', type: 'url', control: 'image-url-or-upload', required: true, editable: true }, { path: 'image.alt', type: 'string', control: 'input', required: true, editable: true }, { path: 'body', type: 'string[]', control: 'markdown-editor', required: true, editable: true }] },
+      { collection: 'newsCategories', fields: [{ path: 'items', type: 'NewsCategorySummary[]', control: 'schema-driven-extra', required: true, editable: true, note: 'JSON array: [{ "label": "通知公告", "value": "notice", "description": "...", "sort": 1, "status": "published" }]' }] },
+      { collection: 'newsArticles', fields: [{ path: 'items', type: 'ArticleItem[]', control: 'markdown-editor', required: true, editable: true, note: 'JSON array. Each article supports category, tags, slug, image, bodyMarkdown, contentFormat=markdown.' }] },
     ],
   },
   {

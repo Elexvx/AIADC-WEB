@@ -1,10 +1,10 @@
-import { getPageContent, getSectionItems, getSiteMeta } from '@/shared/content';
-import { PageHero } from '@/shared/ui';
-import { SiteFooter, SiteHeader } from '@/widgets/site-shell';
-import { AboutCardsGrid } from '@/features/about';
+import { getPageContent, getSectionItems } from '@/lib/content';
+import { getPageMetadata } from '@/lib/metadata';
+import { PageHero } from '@/components/ui';
+import { AboutCardsGrid } from '@/components/about';
 
 export async function generateMetadata() {
-  return getSiteMeta('about', 'zh');
+  return getPageMetadata('about', '/about');
 }
 
 export default async function AboutPage() {
@@ -12,8 +12,8 @@ export default async function AboutPage() {
   const aboutItems = getSectionItems(page, 'aboutItems');
 
   return (
-    <main className="page-shell bg-white">
-      <SiteHeader />
+    <main className="bg-white">
+
       <PageHero
         eyebrow={page.hero?.eyebrow ?? '关于我们'}
         title={page.hero?.title ?? ''}
@@ -25,7 +25,6 @@ export default async function AboutPage() {
 
       <AboutCardsGrid items={aboutItems} />
 
-      <SiteFooter />
     </main>
   );
 }

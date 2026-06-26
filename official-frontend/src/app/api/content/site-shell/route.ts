@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getSiteShellContent } from '@/shared/content';
+import { getSiteShellContent } from '@/lib/content';
 
 export const dynamic = 'force-dynamic';
 

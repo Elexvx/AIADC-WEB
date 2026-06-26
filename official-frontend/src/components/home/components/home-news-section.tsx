@@ -1,0 +1,30 @@
+import { NewsArticleCard } from '@/components/news';
+import { useLocale } from '@/lib/i18n/locale-provider';
+import { HomeSectionTitle } from './home-section-title';
+
+export function HomeNewsSection() {
+  const { news } = useLocale();
+  const articles = news.articles.slice(0, 3);
+
+  if (news.articles.length === 0) {
+    return null;
+  }
+
+  return (
+    <section id="news" className="bg-white py-11 transition-colors duration-300 sm:py-14">
+      <div className="section-shell">
+        <HomeSectionTitle
+          title="新闻动态"
+          description="及时呈现组委会通知、评审规则、报名提醒和项目培育信息。"
+        />
+        {articles.length > 0 ? (
+          <div className="mt-9 grid gap-5 md:grid-cols-3">
+            {articles.map((article) => (
+              <NewsArticleCard key={article.slug} article={article} />
+            ))}
+          </div>
+        ) : null}
+      </div>
+    </section>
+  );
+}

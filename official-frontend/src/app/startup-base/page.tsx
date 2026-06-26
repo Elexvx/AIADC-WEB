@@ -1,10 +1,10 @@
-import { getPageContent, getSectionItems, getSiteMeta } from '@/shared/content';
-import { PageHero, ScrollReveal } from '@/shared/ui';
-import { SiteFooter, SiteHeader } from '@/widgets/site-shell';
-import { BaseCardGrid } from '@/features/startup-base';
+import { getPageContent, getSectionItems } from '@/lib/content';
+import { getPageMetadata } from '@/lib/metadata';
+import { PageHero, ScrollReveal } from '@/components/ui';
+import { BaseCardGrid } from '@/components/startup-base';
 
 export async function generateMetadata() {
-  return getSiteMeta('startup-base', 'zh');
+  return getPageMetadata('startup-base', '/startup-base');
 }
 
 export default async function StartupBasePage() {
@@ -12,8 +12,8 @@ export default async function StartupBasePage() {
   const baseItems = getSectionItems(page, 'baseItems');
 
   return (
-    <main className="page-shell bg-white">
-      <SiteHeader />
+    <main className="bg-white">
+
       <PageHero
         eyebrow={page.hero?.eyebrow ?? '创业基地'}
         title={page.hero?.title ?? ''}
@@ -27,7 +27,6 @@ export default async function StartupBasePage() {
         <BaseCardGrid items={baseItems} />
       </ScrollReveal>
 
-      <SiteFooter />
     </main>
   );
 }
