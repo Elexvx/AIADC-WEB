@@ -8,6 +8,7 @@ import { usePageContent } from '@/lib/i18n/locale-provider';
 import { Button, InternalLink } from '@/components/ui';
 
 const carouselIntervalMs = 8000;
+const carouselWarmupDelayMs = 1200;
 
 type HeroSlideExtra = {
   alt?: string;
@@ -26,7 +27,24 @@ export function HomeHero() {
   const page = usePageContent('home');
   const heroSlides = getSectionItems(page, 'heroSlides');
   const [activeIndex, setActiveIndex] = useState(0);
+  const [renderedSlideIndexes, setRenderedSlideIndexes] = useState<Set<number>>(() => new Set([0]));
   const currentHero = heroSlides[activeIndex] ?? heroSlides[0];
+
+  useEffect(() => {
+    if (heroSlides.length < 2) {
+      return;
+    }
+
+    const warmupTimer = window.setTimeout(() => {
+      setRenderedSlideIndexes((indexes) => {
+        const nextIndexes = new Set(indexes);
+        nextIndexes.add((activeIndex + 1) % heroSlides.length);
+        return nextIndexes;
+      });
+    }, carouselWarmupDelayMs);
+
+    return () => window.clearTimeout(warmupTimer);
+  }, [activeIndex, heroSlides.length]);
 
   useEffect(() => {
     if (heroSlides.length < 2) {
@@ -39,6 +57,18 @@ export function HomeHero() {
 
     return () => window.clearInterval(timer);
   }, [heroSlides.length]);
+
+  useEffect(() => {
+    setRenderedSlideIndexes((indexes) => {
+      if (indexes.has(activeIndex)) {
+        return indexes;
+      }
+
+      const nextIndexes = new Set(indexes);
+      nextIndexes.add(activeIndex);
+      return nextIndexes;
+    });
+  }, [activeIndex]);
 
   if (!currentHero) {
     return null;
@@ -65,18 +95,28 @@ export function HomeHero() {
         data-active-slide-id={currentHero.id}
       >
         {heroSlides.map((slide, index) => {
+          if (!renderedSlideIndexes.has(index)) {
+            return null;
+          }
+
           const slideExtra = getSlideExtra(slide);
           const slideIsImageOnly = slideExtra.variant === 'image-only';
+          const isActiveSlide = index === activeIndex;
 
           return (
             <img
               key={slide.id}
               src={slide.imageUrl ?? '/assets/aiadc-hero-visual.png'}
               alt={String(slideExtra.alt ?? 'AIADC carousel image')}
-              aria-hidden={index !== activeIndex}
-              className={`absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-700 ease-out ${
-                index === activeIndex ? 'opacity-100' : 'opacity-0'
-              }`}
+              aria-hidden={!isActiveSlide}
+              decoding="async"
+              fetchPriority={isActiveSlide ? 'high' : 'low'}
+              loading={isActiveSlide ? 'eager' : 'lazy'}
+              className={`absolute object-center transition-opacity duration-700 ease-out ${
+                slideIsImageOnly
+                  ? 'left-1/2 top-1/2 h-[84%] w-[92%] -translate-x-1/2 -translate-y-1/2 object-contain sm:h-[86%] sm:w-[90%] lg:h-[88%] lg:w-[88%]'
+                  : 'inset-0 h-full w-full object-cover'
+              } ${isActiveSlide ? 'opacity-100' : 'opacity-0'}`}
             />
           );
         })}
