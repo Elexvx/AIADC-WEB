@@ -8,13 +8,8 @@ type FrontMatter = Record<string, unknown>;
 const markdownExtensions = new Set(['.md', '.markdown']);
 
 function resolveContentDir() {
-  const cwd = process.cwd();
-  const candidates = [
-    path.join(cwd, 'content', 'news'),
-    path.join(cwd, 'official-frontend', 'content', 'news'),
-  ];
-
-  return candidates.find((candidate) => fs.existsSync(candidate) && fs.statSync(candidate).isDirectory());
+  const contentDir = path.join(process.cwd(), 'content', 'news');
+  return fs.existsSync(contentDir) && fs.statSync(contentDir).isDirectory() ? contentDir : undefined;
 }
 
 function parseScalar(value: string) {

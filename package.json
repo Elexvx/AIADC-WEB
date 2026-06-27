@@ -1,13 +1,13 @@
 {
-  "name": "@aiadc/vercel-root",
+  "name": "@aiadc/official-site",
   "private": true,
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "dev": "npm --prefix official-frontend run dev",
-    "build": "node scripts/prepare-official-vercel-build.mjs && next build && node scripts/sync-vercel-manifests.mjs",
-    "vercel-build": "npm run build",
-    "typecheck": "npm --prefix official-frontend run typecheck"
+    "dev": "next dev",
+    "build": "next build && node scripts/sync-vercel-manifests.mjs",
+    "preview": "next start",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.5",
@@ -31,18 +31,5 @@
     "alibabapuhuiti-3-85-bold": "^1.0.0",
     "typescript": "^6.0.3",
     "vite-plugin-font": "^5.1.2"
-  },
-  "description": "",
-  "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Elexvx/AIADC-WEB.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Elexvx/AIADC-WEB/issues"
-  },
-  "homepage": "https://github.com/Elexvx/AIADC-WEB#readme"
+  }
 }

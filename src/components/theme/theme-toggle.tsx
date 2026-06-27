@@ -16,10 +16,12 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
     <button
       type="button"
       aria-label={`切换到${nextThemeLabel}`}
+      aria-pressed={theme === 'dark'}
+      data-theme-toggle
       title={`切换到${nextThemeLabel}`}
       onClick={toggleTheme}
       className={cn(
-        'site-theme-toggle group relative grid h-11 w-11 place-items-center overflow-hidden rounded-md backdrop-blur-md outline-none transition-colors duration-200 hover:border-[#0075de] hover:text-[#0075de] focus-visible:ring-2 focus-visible:ring-[#0075de] focus-visible:ring-offset-2 dark:hover:border-[#0075de] dark:hover:text-[#0075de]',
+        'site-theme-toggle group relative z-20 grid h-11 w-11 touch-manipulation place-items-center overflow-hidden rounded-md backdrop-blur-md outline-none transition-colors duration-200 hover:border-[#0075de] hover:text-[#0075de] focus-visible:ring-2 focus-visible:ring-[#0075de] focus-visible:ring-offset-2 dark:hover:border-[#0075de] dark:hover:text-[#0075de]',
         className,
       )}
     >

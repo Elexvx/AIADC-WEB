@@ -21,8 +21,9 @@ function AnimatedNumber({ value }: { value: string }) {
     const [, prefix, rawNumber, suffix] = match;
     const target = Number(rawNumber);
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const stableOnMobile = window.matchMedia('(max-width: 640px)').matches;
 
-    if (!Number.isFinite(target) || reducedMotion || !('IntersectionObserver' in window)) {
+    if (!Number.isFinite(target) || reducedMotion || stableOnMobile || !('IntersectionObserver' in window)) {
       setDisplayValue(value);
       return;
     }
@@ -76,7 +77,8 @@ function AnimatedNumber({ value }: { value: string }) {
       ref={ref}
       data-stat-value={value}
       aria-label={value}
-      className="text-[2.15rem] font-bold leading-none tracking-[-0.02em] text-[#0075de] transition-colors duration-300 sm:text-[2.6rem] lg:text-[2.85rem]"
+      className="inline-block text-center text-[2.15rem] font-bold leading-none text-[#0075de] tabular-nums transition-colors duration-300 sm:text-[2.6rem] lg:text-[2.85rem]"
+      style={{ minWidth: `${value.length}ch`, fontVariantNumeric: 'tabular-nums' }}
     >
       {displayValue}
     </div>
