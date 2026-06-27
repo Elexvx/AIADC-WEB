@@ -114,7 +114,7 @@ export function HomeHero() {
               loading={isActiveSlide ? 'eager' : 'lazy'}
               className={`absolute object-center transition-opacity duration-700 ease-out ${
                 slideIsImageOnly
-                  ? 'left-1/2 top-1/2 h-[84%] w-[92%] -translate-x-1/2 -translate-y-1/2 object-contain sm:h-[86%] sm:w-[90%] lg:h-[88%] lg:w-[88%]'
+                  ? 'left-1/2 top-1/2 h-auto max-h-[82%] w-[92%] -translate-x-1/2 -translate-y-1/2 object-contain sm:inset-0 sm:h-full sm:max-h-none sm:w-full sm:translate-x-0 sm:translate-y-0 sm:object-fill'
                   : 'inset-0 h-full w-full object-cover'
               } ${isActiveSlide ? 'opacity-100' : 'opacity-0'}`}
             />
