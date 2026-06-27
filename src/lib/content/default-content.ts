@@ -637,6 +637,7 @@ function buildZhBundle(locale: Locale = defaultLocale): CmsContentBundle {
           { label: '大赛介绍', href: ROUTES.intro },
           { label: '赛道与组别', href: `${ROUTES.intro}#tracks` },
           { label: '赛程安排', href: `${ROUTES.intro}#schedule` },
+          { label: '活动中心', href: ROUTES.events },
           { label: '通知公告', href: ROUTES.news },
           { label: '资料中心', href: ROUTES.materials },
           { label: '常见问题', href: `${ROUTES.home}#faq` },

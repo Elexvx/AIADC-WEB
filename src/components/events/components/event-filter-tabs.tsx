@@ -1,75 +1,22 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { CalendarDays, ChevronRight, Clock3, MapPin } from 'lucide-react';
 import { Badge, Button, InternalLink } from '@/components/ui';
-import type { BadgeInfo, CmsRecordBase } from '@/lib/content/types';
+import type { CmsRecordBase } from '@/lib/content/types';
 
 export interface EventFilterTabsProps {
   filters: CmsRecordBase[];
   events: CmsRecordBase[];
 }
 
-type LumiraApiResponse<T> = {
-  data?: T;
-};
-
-type LumiraPageResponse<T> = {
-  records?: T[];
-};
-
-type LumiraActivityRecord = {
-  id?: number | string;
-  code?: string;
-  locale?: string;
-  title?: string;
-  subtitle?: string | null;
-  description?: string | null;
-  imageUrl?: string | null;
-  iconKey?: string | null;
-  sort?: number | null;
-  status?: string | null;
-  tags?: string | null;
-  ctaLabel?: string | null;
-  ctaHref?: string | null;
-  badgeText?: string | null;
-  badgeTone?: BadgeInfo['tone'] | null;
-  activityDate?: string | null;
-  activityTime?: string | null;
-  location?: string | null;
-  featured?: boolean | null;
-};
-
-const DEFAULT_LUMIRA_API_BASE = 'http://localhost:8080';
-const DEFAULT_ACTIVITIES_PATH = '/api/v2/aiadc/activities';
-
 export function EventFilterTabs({ filters, events }: EventFilterTabsProps) {
   const [activeFilter, setActiveFilter] = useState('all');
-  const [runtimeEvents, setRuntimeEvents] = useState<CmsRecordBase[]>(events);
-  const runtimeFilters = useMemo(() => buildActivityFilters(runtimeEvents, filters), [filters, runtimeEvents]);
-
-  useEffect(() => {
-    let ignore = false;
-
-    fetchRuntimeActivities()
-      .then((items) => {
-        if (!ignore && items.length) {
-          setRuntimeEvents(items);
-          setActiveFilter('all');
-        }
-      })
-      .catch(() => {
-        // The static site must remain usable when Lumira is offline or requires auth.
-      });
-
-    return () => {
-      ignore = true;
-    };
-  }, []);
+  const runtimeFilters = useMemo(() => buildActivityFilters(events, filters), [filters, events]);
 
   const filteredEvents = activeFilter === 'all'
-    ? runtimeEvents
-    : runtimeEvents.filter((event) => event.subtitle === activeFilter || event.code === activeFilter);
+    ? events
+    : events.filter((event) => event.subtitle === activeFilter || event.code === activeFilter);
 
   const featuredEvent = filteredEvents.find((item) => Boolean(item.extra?.featured)) ?? filteredEvents[0];
   const regularEvents = filteredEvents.filter((item) => item.id !== featuredEvent?.id);
@@ -226,84 +173,4 @@ function allFilter(): CmsRecordBase {
     sort: 0,
     status: 'published',
   };
-}
-
-async function fetchRuntimeActivities(): Promise<CmsRecordBase[]> {
-  const url = createActivitiesUrl();
-  const response = await fetch(url.toString(), { cache: 'no-store' });
-  if (!response.ok) {
-    return [];
-  }
-
-  const payload = (await response.json()) as LumiraApiResponse<LumiraPageResponse<LumiraActivityRecord>>;
-  return (payload.data?.records || [])
-    .map(toActivityItem)
-    .filter((activity): activity is CmsRecordBase => Boolean(activity))
-    .filter((activity) => activity.status === 'published')
-    .sort((left, right) => left.sort - right.sort);
-}
-
-function createActivitiesUrl() {
-  const apiBase = trimTrailingSlash(process.env.NEXT_PUBLIC_LUMIRA_API_BASE || process.env.NEXT_PUBLIC_API_BASE || DEFAULT_LUMIRA_API_BASE);
-  const path = process.env.NEXT_PUBLIC_LUMIRA_ACTIVITIES_PATH || DEFAULT_ACTIVITIES_PATH;
-  const url = new URL(path, `${apiBase}/`);
-  url.searchParams.set('locale', 'zh');
-  url.searchParams.set('status', 'published');
-  url.searchParams.set('pageNo', '1');
-  url.searchParams.set('pageSize', '100');
-  return url;
-}
-
-function trimTrailingSlash(value: string) {
-  return value.replace(/\/+$/, '');
-}
-
-function toActivityItem(activity: LumiraActivityRecord): CmsRecordBase | null {
-  const title = activity.title?.trim();
-  if (!title) {
-    return null;
-  }
-
-  return {
-    id: String(activity.id ?? activity.code ?? title),
-    code: activity.code || String(activity.id ?? title),
-    locale: activity.locale === 'en' ? 'en' : 'zh',
-    title,
-    subtitle: activity.subtitle || undefined,
-    description: activity.description || undefined,
-    imageUrl: activity.imageUrl || undefined,
-    iconKey: activity.iconKey || undefined,
-    sort: activity.sort ?? 0,
-    status: activity.status === 'draft' ? 'draft' : 'published',
-    tags: parseTags(activity.tags),
-    cta: activity.ctaLabel || activity.ctaHref
-      ? {
-          label: activity.ctaLabel || '查看详情',
-          href: activity.ctaHref || '/login',
-        }
-      : undefined,
-    badge: activity.badgeText
-      ? {
-          text: activity.badgeText,
-          tone: activity.badgeTone || undefined,
-        }
-      : undefined,
-    extra: {
-      date: activity.activityDate || '',
-      time: activity.activityTime || '',
-      location: activity.location || '',
-      featured: Boolean(activity.featured),
-    },
-  };
-}
-
-function parseTags(tags: string | null | undefined): string[] | undefined {
-  if (!tags) {
-    return undefined;
-  }
-  const parsedTags = tags
-    .split(/[,，、\s]+/)
-    .map((tag) => tag.trim())
-    .filter(Boolean);
-  return parsedTags.length ? parsedTags : undefined;
 }

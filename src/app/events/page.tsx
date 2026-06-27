@@ -1,4 +1,4 @@
-import { getActivities, getPageContent, getSectionItems } from '@/lib/content';
+import { getActivities, getPageContent } from '@/lib/content';
 import { getPageMetadata } from '@/lib/metadata';
 import { PageHero, ScrollReveal } from '@/components/ui';
 import { EventFilterTabs } from '@/components/events/components/event-filter-tabs';
@@ -10,14 +10,8 @@ export async function generateMetadata() {
 
 export default async function EventsPage() {
   const page = await getPageContent('events', 'zh');
-  const fallbackEventItems = getSectionItems(page, 'events');
   const activityItems = await getActivities('zh');
-  const eventItems = activityItems.length ? activityItems : fallbackEventItems;
-  const eventFilters = buildActivityFilters(eventItems);
-
-  if (!eventItems.length) {
-    return null;
-  }
+  const eventFilters = buildActivityFilters(activityItems);
 
   return (
     <main className="bg-white">
@@ -33,7 +27,7 @@ export default async function EventsPage() {
 
       <ScrollReveal as="section" className="bg-white pt-8 pb-3 sm:pt-10" delay={40}>
         <div className="section-shell">
-          <EventFilterTabs filters={eventFilters} events={eventItems} />
+          <EventFilterTabs filters={eventFilters} events={activityItems} />
         </div>
       </ScrollReveal>
 
