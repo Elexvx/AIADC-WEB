@@ -28,9 +28,4 @@ tsconfig.tsbuildinfo
 /tailwind.config.ts
 /tsconfig.json
 
-admin-backend/**/target
-admin-backend/tmp
-admin-backend/storage
-admin-backend/artifacts
-
 .codex-run

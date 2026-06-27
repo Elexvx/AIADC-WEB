@@ -46,8 +46,6 @@ tsconfig.exclude = [
   'node_modules',
   'out',
   '.next',
-  'admin-backend',
-  'admin-frontend',
   'official-frontend',
 ];
 fs.writeFileSync(tsconfigPath, `${JSON.stringify(tsconfig, null, 2)}\n`);
