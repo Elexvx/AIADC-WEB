@@ -40,7 +40,7 @@ export function IntroTracksSection({ items }: IntroTracksSectionProps) {
                 </CardHeader>
                 <CardContent className="mt-auto px-6 pb-6 pt-0">
                   <Button asChild variant="outline" className="w-full rounded-md">
-                    <InternalLink href={track.cta?.href ?? ROUTES.login}>{track.cta?.label ?? '查看评审标准'}</InternalLink>
+                    <InternalLink href={track.cta?.href ?? ROUTES.registration}>{track.cta?.label ?? '查看评审标准'}</InternalLink>
                   </Button>
                 </CardContent>
               </Card>

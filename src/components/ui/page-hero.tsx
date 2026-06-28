@@ -5,6 +5,7 @@ type PageHeroProps = {
   className?: string;
   backgroundImage?: string;
   dark?: boolean;
+  overlayClassName?: string;
   fullBleedBackground?: boolean;
   titleAs?: 'h1' | 'h2';
 };
@@ -16,6 +17,7 @@ export function PageHero({
   className = '',
   backgroundImage,
   dark = false,
+  overlayClassName,
   fullBleedBackground = false,
   titleAs = 'h1',
 }: PageHeroProps) {
@@ -31,9 +33,10 @@ export function PageHero({
         />
         <div
           className={`absolute inset-0 ${
-            dark
+            overlayClassName ??
+            (dark
               ? 'bg-[linear-gradient(120deg,rgba(33,49,131,0.92),rgba(33,49,131,0.82),rgba(33,49,131,0.86))]'
-              : 'bg-[linear-gradient(135deg,rgba(246,245,244,0.9),rgba(255,255,255,0.9),rgba(246,245,244,0.78))] dark:bg-[linear-gradient(120deg,rgba(33,49,131,0.92),rgba(33,49,131,0.82),rgba(33,49,131,0.86))]'
+              : 'bg-[linear-gradient(135deg,rgba(246,245,244,0.9),rgba(255,255,255,0.9),rgba(246,245,244,0.78))] dark:bg-[linear-gradient(120deg,rgba(33,49,131,0.92),rgba(33,49,131,0.82),rgba(33,49,131,0.86))]')
           }`}
           aria-hidden="true"
         />
@@ -60,9 +63,10 @@ export function PageHero({
           />
           <div
             className={`absolute inset-0 ${
-              dark
+              overlayClassName ??
+              (dark
                 ? 'bg-[linear-gradient(120deg,rgba(33,49,131,0.88),rgba(33,49,131,0.74),rgba(33,49,131,0.8))]'
-                : 'bg-[linear-gradient(135deg,rgba(246,245,244,0.84),rgba(255,255,255,0.9),rgba(246,245,244,0.8))] dark:bg-[linear-gradient(120deg,rgba(33,49,131,0.9),rgba(33,49,131,0.76),rgba(33,49,131,0.82))]'
+                : 'bg-[linear-gradient(135deg,rgba(246,245,244,0.84),rgba(255,255,255,0.9),rgba(246,245,244,0.8))] dark:bg-[linear-gradient(120deg,rgba(33,49,131,0.9),rgba(33,49,131,0.76),rgba(33,49,131,0.82))]')
             }`}
             aria-hidden="true"
           />

@@ -2,11 +2,11 @@
 
 import { ArrowUp, MessageCircle } from 'lucide-react';
 
-const CUSTOMER_SERVICE_URL = '/about';
+const CUSTOMER_SERVICE_URL = '/contact/';
 
 export function FloatingActions() {
   return (
-    <div className="fixed bottom-5 right-4 z-40 flex flex-col gap-3 sm:bottom-6 sm:right-6">
+    <div className="fixed bottom-24 right-4 z-40 flex flex-col gap-3 sm:bottom-28 sm:right-6">
       <a
         href={CUSTOMER_SERVICE_URL}
         aria-label="在线客服"

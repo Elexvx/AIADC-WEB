@@ -9,6 +9,7 @@ export type PageKey =
   | 'materials'
   | 'policies'
   | 'about'
+  | 'cookies'
   | 'privacy'
   | 'terms'
   | 'login'

@@ -4,26 +4,20 @@ import { useLocale } from '@/lib/i18n/locale-provider';
 import { InternalLink } from '@/components/ui';
 
 const footerHeadingClass = 'text-xl font-bold leading-7 text-slate-950';
-const placeholderQrFilledCells = new Set([0, 1, 2, 4, 5, 7, 9, 10, 12, 13, 15, 17, 18, 20, 21, 23, 24]);
-
 function PlaceholderQrCode() {
   return (
     <div
-      className="h-24 w-24 rounded-md border border-slate-200 bg-white p-2 shadow-sm"
+      className="flex h-24 w-24 items-center justify-center rounded-md border border-dashed border-slate-300 bg-slate-50 p-2 text-center text-xs font-semibold leading-5 text-slate-500 shadow-sm"
       aria-hidden="true"
     >
-      <div className="grid h-full w-full grid-cols-5 grid-rows-5 gap-1">
-        {Array.from({ length: 25 }).map((_, index) => {
-          return <span key={index} className={placeholderQrFilledCells.has(index) ? 'rounded-[1px] bg-slate-950' : 'rounded-[1px] bg-slate-100'} />;
-        })}
-      </div>
+      未上传
     </div>
   );
 }
 
 export function SiteFooter() {
   const { siteShell } = useLocale();
-  const { footer, brand } = siteShell;
+  const { footer } = siteShell;
   const showFooterColumns = false;
   const visibleFooterColumns = footer.columns.slice(0, 3);
 
@@ -33,10 +27,7 @@ export function SiteFooter() {
         <div className="section-shell py-8 sm:py-10 lg:py-12">
           <div className={showFooterColumns ? 'grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.35fr)] lg:items-start lg:gap-12' : ''}>
             <div className="max-w-md">
-              <h3 className={`${footerHeadingClass} max-w-sm text-balance`}>
-                {brand.primary}
-                {brand.secondary}
-              </h3>
+              <h3 className={`${footerHeadingClass} max-w-sm text-balance`}>全国大学生智能应用开发大赛</h3>
               <p className="mt-3 max-w-[34rem] text-sm leading-7 text-slate-600 sm:text-base sm:leading-8">
                 {footer.description}
               </p>

@@ -1,4 +1,5 @@
 import type { ArticleItem, BadgeInfo, CmsContentBundle, CmsPageContent, CmsRecordBase, NewsCategorySummary, PageKey, SeoContent, SiteShellContent } from '@/lib/content/types';
+import { ROUTES } from '@/lib/config/routes';
 import { createLumiraUrl, lumiraServiceConfig } from '@/lib/config/lumira';
 import { defaultLocale, type Locale } from '@/lib/i18n/config';
 import { getDefaultContentBundle } from './default-content';
@@ -339,7 +340,7 @@ function toActivityItem(activity: LumiraActivityRecord, locale?: string): CmsRec
     cta: activity.ctaLabel || activity.ctaHref
       ? {
           label: activity.ctaLabel || '查看详情',
-          href: activity.ctaHref || '/login',
+          href: activity.ctaHref || ROUTES.registration,
         }
       : undefined,
     badge: activity.badgeText

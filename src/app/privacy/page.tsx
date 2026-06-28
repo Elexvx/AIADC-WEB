@@ -1,5 +1,6 @@
 import { getPageContent } from '@/lib/content';
 import { getPageMetadata } from '@/lib/metadata';
+import { ArticleMarkdown } from '@/components/news/components/article-markdown';
 import { PageHero } from '@/components/ui';
 
 export async function generateMetadata() {
@@ -19,11 +20,15 @@ export default async function PrivacyPage() {
       />
 
       <section className="bg-white pb-12 sm:pb-14">
-        <div className="section-shell rounded-lg border border-slate-200 bg-white p-6 sm:p-8">
+        <div className="section-shell">
           {page.richTextBlocks?.map((block) => (
-            <p key={block.id} className="text-sm leading-8 text-slate-600 sm:text-base">
-              {block.content}
-            </p>
+            block.type === 'markdown' ? (
+              <ArticleMarkdown key={block.id} markdown={block.content} />
+            ) : (
+              <p key={block.id} className="text-sm leading-8 text-slate-600 sm:text-base">
+                {block.content}
+              </p>
+            )
           ))}
         </div>
       </section>

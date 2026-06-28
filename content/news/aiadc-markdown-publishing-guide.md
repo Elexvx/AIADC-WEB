@@ -14,7 +14,9 @@ status: published
 
 ## Markdown 文件放在哪里
 
-文章 Markdown 文件放在 `content/news` 目录下，文件扩展名可以是 `.md` 或 `.markdown`。构建时系统会自动读取这些文件，并生成对应的 `/news/{slug}` 详情页。
+新闻、通知、媒体动态等文章 Markdown 文件放在 `content/news` 目录下，文件扩展名可以是 `.md` 或 `.markdown`。构建时系统会自动读取这些文件，并生成对应的 `/news/{slug}` 详情页。
+
+隐私政策、用户协议等制度文档不要放入 `content/news`，应放在 `content/legal` 目录下，避免被新闻索引当作文章读取。
 
 ## frontmatter 字段
 

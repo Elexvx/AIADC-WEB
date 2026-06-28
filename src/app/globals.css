@@ -1048,6 +1048,42 @@ html.dark .article-cover {
   }
 }
 
+@keyframes tag-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes tag-scroll-reverse {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes tag-scroll-quarter {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-25%);
+  }
+}
+
+@keyframes tag-scroll-quarter-reverse {
+  from {
+    transform: translateX(-25%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
 @media (max-width: 640px) {
   .article-paragraph,
   .article-markdown p {

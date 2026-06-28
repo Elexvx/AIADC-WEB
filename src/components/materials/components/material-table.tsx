@@ -20,7 +20,7 @@ function DownloadButton({ item }: { item: DownloadItem }) {
     <Button asChild variant="outline" className="h-9 rounded-md px-3 text-sm font-semibold">
       <InternalLink href={item.fileUrl} className="inline-flex items-center gap-2">
         <Download className="h-4 w-4" />
-        下载
+        {item.actionLabel || '下载'}
       </InternalLink>
     </Button>
   );

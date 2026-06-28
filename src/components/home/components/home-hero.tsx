@@ -90,7 +90,7 @@ export function HomeHero() {
   return (
     <section id="top" className="relative overflow-hidden bg-[#dfeeff] text-white transition-colors duration-300">
       <div
-        className="relative min-h-[430px] overflow-hidden sm:min-h-[520px] lg:min-h-[560px] xl:min-h-[620px]"
+        className="relative h-[500px] overflow-hidden sm:h-[520px] lg:h-[580px] xl:h-[640px]"
         data-active-slide={activeIndex}
         data-active-slide-id={currentHero.id}
       >
@@ -129,7 +129,7 @@ export function HomeHero() {
         ) : null}
 
         {!isImageOnlySlide ? (
-          <div className="section-shell relative z-10 flex min-h-[430px] items-center justify-center px-6 py-14 text-center sm:min-h-[520px] lg:min-h-[580px] xl:min-h-[640px]">
+          <div className="section-shell relative z-10 flex h-full items-center justify-center px-6 py-14 text-center">
             <div className="mx-auto max-w-[820px]">
               <h1 className="text-[2.75rem] font-bold leading-none text-white transition-colors duration-300 sm:text-[4rem] lg:text-[4.75rem]">
                 {titleLines.length > 0
@@ -145,9 +145,9 @@ export function HomeHero() {
                 {currentHero.subtitle}
               </p>
 
-              <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
-                <Button asChild size="lg" className="h-12 rounded-full bg-[#0075de] px-8 text-base font-medium !text-white hover:bg-[#005bab]">
-                  <InternalLink href={currentHero.cta?.href ?? ROUTES.login} className="inline-flex items-center gap-2 !text-white">
+              <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
+                <Button asChild size="lg" className="h-12 w-full max-w-[220px] rounded-full bg-[#0075de] px-8 text-base font-medium !text-white hover:bg-[#005bab] sm:w-auto">
+                  <InternalLink href={currentHero.cta?.href ?? ROUTES.registration} className="inline-flex items-center justify-center gap-2 !text-white">
                     <UserPlus className="h-5 w-5 !text-white" />
                     {currentHero.cta?.label ?? 'Register'}
                   </InternalLink>
@@ -156,9 +156,9 @@ export function HomeHero() {
                   asChild
                   size="lg"
                   variant="outline"
-                  className="hero-secondary-action h-12 rounded-full px-8 text-base font-semibold shadow-[rgba(0,0,0,0.12)_0_8px_28px]"
+                  className="hero-secondary-action h-12 w-full max-w-[220px] rounded-full px-8 text-base font-semibold shadow-[rgba(0,0,0,0.12)_0_8px_28px] sm:w-auto"
                 >
-                  <InternalLink href={secondaryAction?.href ?? ROUTES.login} className="inline-flex items-center gap-2">
+                  <InternalLink href={secondaryAction?.href ?? ROUTES.registration} className="inline-flex items-center justify-center gap-2">
                     <Network className="h-5 w-5" />
                     {secondaryAction?.label ?? 'Competition Entry'}
                   </InternalLink>

@@ -76,6 +76,8 @@ export async function generateMetadata(): Promise<Metadata> {
     keywords: [
       '全国大学生智能应用开发大赛',
       'AIADC',
+      'National College Student AI Application Development Competition',
+      'AI Application Development Competition',
       '智能应用开发',
       '大学生竞赛',
       '人工智能竞赛',

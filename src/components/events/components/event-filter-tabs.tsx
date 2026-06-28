@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import { CalendarDays, ChevronRight, Clock3, MapPin } from 'lucide-react';
+import { ROUTES } from '@/lib/config/routes';
 import { Badge, Button, InternalLink } from '@/components/ui';
 import type { CmsRecordBase } from '@/lib/content/types';
 
@@ -83,7 +84,7 @@ export function EventFilterTabs({ filters, events }: EventFilterTabsProps) {
             </div>
 
             <Button asChild variant="outline" className="w-fit rounded-md lg:justify-self-end">
-              <InternalLink href={featuredEvent.cta?.href ?? '/login'}>
+              <InternalLink href={featuredEvent.cta?.href ?? ROUTES.registration}>
                 {featuredEvent.cta?.label ?? '查看详情'}
                 <ChevronRight className="h-4 w-4" />
               </InternalLink>
@@ -124,7 +125,7 @@ export function EventFilterTabs({ filters, events }: EventFilterTabsProps) {
             </div>
 
             <Button asChild variant="outline" className="mt-4 w-fit rounded-md">
-              <InternalLink href={event.cta?.href ?? '/login'}>
+              <InternalLink href={event.cta?.href ?? ROUTES.registration}>
                 {event.cta?.label ?? '查看详情'}
                 <ChevronRight className="h-4 w-4" />
               </InternalLink>

@@ -1,4 +1,5 @@
 import { ArrowRight, BriefcaseBusiness, CalendarDays } from 'lucide-react';
+import { ROUTES } from '@/lib/config/routes';
 import { Badge, InternalLink, ScrollReveal } from '@/components/ui';
 import type { CmsRecordBase } from '@/lib/content/types';
 
@@ -37,7 +38,7 @@ export function ProjectCardGrid({ projects }: ProjectCardGridProps) {
           </div>
 
           <InternalLink
-            href={project.cta?.href ?? '/login'}
+            href={project.cta?.href ?? ROUTES.registration}
             className="mt-4 inline-flex h-9 w-fit items-center gap-2 self-start rounded-md border border-[#e6e6e6] bg-white px-4 text-sm font-semibold text-[#0075de] transition-colors hover:bg-[#f6f5f4] hover:text-[#005bab]"
           >
             查看详情

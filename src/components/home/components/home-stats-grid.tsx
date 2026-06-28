@@ -90,7 +90,7 @@ export function HomeStatsGrid() {
   const stats = getSectionItems(page, 'stats');
 
   return (
-    <section className="relative z-10 -mt-10 pb-2 lg:-mt-14">
+    <section className="relative z-10 pt-5 pb-2 md:-mt-10 md:pt-0 lg:-mt-14">
       <div className="section-shell">
         <Card className="notion-card-elevated overflow-hidden backdrop-blur transition-colors duration-300">
           <div className="grid grid-cols-2 gap-0 md:grid-cols-4">

@@ -8,7 +8,7 @@ export const dynamic = 'force-static';
 
 const routePriorities: Partial<Record<keyof typeof ROUTES, number>> = {
   home: 1,
-  intro: 0.9,
+  about: 0.9,
   news: 0.8,
   materials: 0.8,
   login: 0.7,
@@ -17,12 +17,14 @@ const routePriorities: Partial<Record<keyof typeof ROUTES, number>> = {
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const siteUrl = getPublicSiteUrl();
   const now = new Date();
-  const routes = Object.entries(ROUTES).map(([key, route]) => ({
-    url: new URL(getCanonicalPath(route), siteUrl).toString(),
-    lastModified: now,
-    changeFrequency: route === '/' ? 'weekly' : 'monthly',
-    priority: routePriorities[key as keyof typeof ROUTES] ?? 0.6,
-  })) satisfies MetadataRoute.Sitemap;
+  const routes = Object.entries(ROUTES)
+    .filter(([key]) => key !== 'intro')
+    .map(([key, route]) => ({
+      url: new URL(getCanonicalPath(route), siteUrl).toString(),
+      lastModified: now,
+      changeFrequency: route === '/' ? 'weekly' : 'monthly',
+      priority: routePriorities[key as keyof typeof ROUTES] ?? 0.6,
+    })) satisfies MetadataRoute.Sitemap;
 
   const articles = await getNewsArticles('zh');
   const articleRoutes = articles.map((article) => ({

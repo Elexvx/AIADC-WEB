@@ -18,7 +18,7 @@ export function MaterialCtaBanner({ banner }: MaterialCtaBannerProps) {
         <div className="heading-4 notion-card-title">{banner.title}</div>
         <p className="notion-card-body mt-1 text-sm leading-7 sm:text-base">{banner.description}</p>
       </div>
-      <InternalLink href={banner.link?.href ?? '/intro'} className="inline-flex shrink-0 items-center gap-2 text-sm font-semibold text-[#0075de]">
+      <InternalLink href={banner.link?.href ?? '/about/#tracks'} className="inline-flex shrink-0 items-center gap-2 text-sm font-semibold text-[#0075de]">
         {banner.link?.label ?? '查看赛事介绍'}
         <ArrowRight className="h-4 w-4" />
       </InternalLink>

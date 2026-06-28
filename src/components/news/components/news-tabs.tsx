@@ -43,15 +43,23 @@ export function NewsTabs() {
     );
   }
 
+  const categoryButtonClass = (active: boolean) =>
+    `h-8 shrink-0 rounded-md px-3 text-xs font-semibold transition-colors duration-200 sm:h-9 sm:px-4 sm:text-sm ${
+      active ? 'bg-[#111111] text-white' : 'bg-[#f6f5f4] text-[#615d59] hover:bg-white hover:text-[#0075de]'
+    }`;
+  const tagButtonClass = (active: boolean) =>
+    `h-8 shrink-0 rounded-md px-3 text-xs font-semibold transition-colors duration-200 ${
+      active ? 'bg-[#111111] text-white' : 'bg-[#f6f5f4] text-[#615d59] hover:bg-white hover:text-[#0075de]'
+    }`;
+
   return (
-    <div className="space-y-6">
-      <div className="flex flex-wrap gap-3">
+    <div className="space-y-5">
+      <div className="flex flex-wrap items-center gap-2">
+        <span className="mr-1 text-sm font-semibold text-[#615d59]">分类</span>
         <button
           type="button"
           onClick={() => setActiveCategory('all')}
-          className={`rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-200 ${
-            activeCategory === 'all' ? 'bg-[#0075de] text-white' : 'bg-white text-[#615d59] ring-1 ring-[#e6e6e6] hover:bg-[#f6f5f4] hover:text-[#0075de]'
-          }`}
+          className={categoryButtonClass(activeCategory === 'all')}
         >
           全部
         </button>
@@ -60,9 +68,7 @@ export function NewsTabs() {
             key={category.value}
             type="button"
             onClick={() => setActiveCategory(category.value)}
-            className={`rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-200 ${
-              activeCategory === category.value ? 'bg-[#0075de] text-white' : 'bg-white text-[#615d59] ring-1 ring-[#e6e6e6] hover:bg-[#f6f5f4] hover:text-[#0075de]'
-            }`}
+            className={categoryButtonClass(activeCategory === category.value)}
           >
             {category.label}
           </button>
@@ -70,14 +76,12 @@ export function NewsTabs() {
       </div>
 
       {tags.length ? (
-        <div className="flex flex-wrap items-center gap-2 border-y border-[#e6e6e6] py-4">
-          <span className="mr-1 text-sm font-semibold text-[#31302e]">标签</span>
+        <div className="flex flex-wrap items-center gap-2 border-b border-[#e6e6e6] pb-5">
+          <span className="mr-1 text-sm font-semibold text-[#615d59]">标签</span>
           <button
             type="button"
             onClick={() => setActiveTag(null)}
-            className={`rounded-full px-3 py-1.5 text-xs font-semibold transition-colors ${
-              activeTag === null ? 'bg-[#111111] text-white' : 'bg-white text-[#615d59] ring-1 ring-[#e6e6e6] hover:text-[#0075de]'
-            }`}
+            className={tagButtonClass(activeTag === null)}
           >
             全部
           </button>
@@ -86,9 +90,7 @@ export function NewsTabs() {
               key={tag}
               type="button"
               onClick={() => setActiveTag(tag)}
-              className={`rounded-full px-3 py-1.5 text-xs font-semibold transition-colors ${
-                activeTag === tag ? 'bg-[#111111] text-white' : 'bg-white text-[#615d59] ring-1 ring-[#e6e6e6] hover:text-[#0075de]'
-              }`}
+              className={tagButtonClass(activeTag === tag)}
             >
               {tag}
             </button>

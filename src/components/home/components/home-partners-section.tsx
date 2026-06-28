@@ -20,13 +20,13 @@ export function HomePartnersSection() {
       <div className="section-shell">
         <HomeSectionTitle title="合作支持" description="展示协同高校、产业机构与技术平台标识。" />
 
-        <div className="mt-9 grid grid-cols-2 gap-x-8 gap-y-5 transition-colors duration-300 sm:grid-cols-3 lg:grid-cols-4">
+        <div className="mt-8 grid grid-cols-2 gap-x-3 gap-y-4 transition-colors duration-300 sm:mt-9 sm:grid-cols-3 sm:gap-x-4 sm:gap-y-5 lg:grid-cols-4 xl:grid-cols-5 xl:gap-x-5">
           {partners.map((partner) => (
-            <div key={partner.id} className="min-h-20 transition-colors duration-300">
+            <div key={partner.id} className="min-h-14 transition-colors duration-300 sm:min-h-20">
               <div className="flex h-full items-center justify-center text-center">
-                <div className="grid min-h-16 w-full max-w-full place-items-center">
+                <div className="grid h-14 w-32 place-items-center sm:h-20 sm:w-40">
                   {partner.imageUrl ? (
-                    <img src={partner.imageUrl} alt={`${partner.title} logo`} className="h-auto max-h-20 w-auto max-w-full object-contain" loading="lazy" decoding="async" />
+                    <img src={partner.imageUrl} alt={`${partner.title} logo`} className="h-14 w-32 object-contain sm:h-20 sm:w-40" loading="lazy" decoding="async" />
                   ) : (
                     <span aria-label={`${partner.title} logo`} className="text-base font-semibold tracking-[0] text-[#0075de] transition-colors duration-300">
                       {String(partner.extra?.initials ?? initials(partner.title))}
