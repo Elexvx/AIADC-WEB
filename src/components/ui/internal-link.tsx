@@ -34,10 +34,18 @@ export function InternalLink({ href, children, ...props }: InternalLinkProps) {
     const targetId = href.slice(2);
     const resolvedHref = pathname === '/' ? `#${targetId}` : href;
 
+    if (pathname === '/') {
+      return (
+        <a href={resolvedHref} {...props}>
+          {children}
+        </a>
+      );
+    }
+
     return (
-      <a href={resolvedHref} {...props}>
+      <Link href={resolvedHref} {...props}>
         {children}
-      </a>
+      </Link>
     );
   }
 

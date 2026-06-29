@@ -6,10 +6,15 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build && node scripts/sync-vercel-manifests.mjs",
+    "refresh:cdn": "node scripts/refresh-aliyun-cdn.mjs",
+    "deploy:refresh-cdn": "npm run build && npm run refresh:cdn",
     "preview": "next start",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@alicloud/cdn20180510": "^9.2.0",
+    "@alicloud/openapi-client": "^0.4.15",
+    "@alicloud/tea-util": "^1.4.11",
     "@radix-ui/react-slot": "^1.2.5",
     "@tailwindcss/postcss": "^4.3.0",
     "class-variance-authority": "^0.7.1",

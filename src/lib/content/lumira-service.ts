@@ -1,8 +1,11 @@
 import type { ArticleItem, BadgeInfo, CmsContentBundle, CmsPageContent, CmsRecordBase, NewsCategorySummary, PageKey, SeoContent, SiteShellContent } from '@/lib/content/types';
+import { unstable_cache } from 'next/cache';
 import { ROUTES } from '@/lib/config/routes';
 import { createLumiraUrl, lumiraServiceConfig } from '@/lib/config/lumira';
 import { defaultLocale, type Locale } from '@/lib/i18n/config';
 import { getDefaultContentBundle } from './default-content';
+
+const CONTENT_REVALIDATE_SECONDS = 300;
 
 type LumiraFieldRecord = {
   sectionKey?: string;
@@ -292,7 +295,7 @@ async function fetchLumiraBundle(locale?: string): Promise<CmsContentBundle | nu
 
   try {
     const response = await fetch(url, {
-      cache: 'no-store',
+      next: { revalidate: CONTENT_REVALIDATE_SECONDS },
       signal: AbortSignal.timeout(lumiraServiceConfig.requestTimeoutMs),
     });
     if (!response.ok) {
@@ -367,7 +370,7 @@ async function fetchLumiraActivities(locale?: string): Promise<CmsRecordBase[] |
 
   try {
     const response = await fetch(url, {
-      cache: 'no-store',
+      next: { revalidate: CONTENT_REVALIDATE_SECONDS },
       signal: AbortSignal.timeout(lumiraServiceConfig.requestTimeoutMs),
     });
     if (!response.ok) {
@@ -384,6 +387,28 @@ async function fetchLumiraActivities(locale?: string): Promise<CmsRecordBase[] |
     return null;
   }
 }
+
+const getCachedContentBundle = unstable_cache(
+  async (locale: Locale): Promise<CmsContentBundle> => {
+    return (await fetchLumiraBundle(locale)) || finalizeNewsBundle(getDefaultContentBundle(locale));
+  },
+  ['lumira-content-bundle'],
+  {
+    revalidate: CONTENT_REVALIDATE_SECONDS,
+    tags: ['lumira-content-bundle'],
+  },
+);
+
+const getCachedActivities = unstable_cache(
+  async (locale: Locale): Promise<CmsRecordBase[]> => {
+    return (await fetchLumiraActivities(locale)) || [];
+  },
+  ['lumira-activities'],
+  {
+    revalidate: CONTENT_REVALIDATE_SECONDS,
+    tags: ['lumira-activities'],
+  },
+);
 
 function finalizeNewsBundle(bundle: CmsContentBundle): CmsContentBundle {
   const categoryValues = new Set(bundle.news.categories.map((category) => category.value));
@@ -405,7 +430,7 @@ function finalizeNewsBundle(bundle: CmsContentBundle): CmsContentBundle {
 }
 
 export async function getResolvedContentBundle(locale?: string): Promise<CmsContentBundle> {
-  return (await fetchLumiraBundle(locale)) || finalizeNewsBundle(getDefaultContentBundle(locale));
+  return getCachedContentBundle(resolveLocale(locale));
 }
 
 export async function getResolvedSiteShellContent(locale?: string): Promise<SiteShellContent> {
@@ -437,5 +462,5 @@ export async function getResolvedNewsArticleBySlug(slug: string, locale?: string
 }
 
 export async function getResolvedActivities(locale?: string): Promise<CmsRecordBase[]> {
-  return (await fetchLumiraActivities(locale)) || [];
+  return getCachedActivities(resolveLocale(locale));
 }

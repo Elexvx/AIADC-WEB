@@ -44,6 +44,8 @@ export function SiteFooter() {
                         <img
                           src={qrCode.imageUrl}
                           alt={qrCode.label}
+                          loading="lazy"
+                          decoding="async"
                           className="h-24 w-24 rounded-md border border-slate-200 bg-white object-cover p-1 shadow-sm"
                         />
                       ) : (

@@ -11,6 +11,7 @@ type ScrollRevealProps<T extends ElementType = 'div'> = {
   threshold?: number;
   once?: boolean;
   staggerChildren?: boolean;
+  lazyRender?: boolean;
 } & Omit<ComponentPropsWithoutRef<T>, 'as' | 'children' | 'className'>;
 
 export function ScrollReveal<T extends ElementType = 'div'>({
@@ -22,6 +23,7 @@ export function ScrollReveal<T extends ElementType = 'div'>({
   threshold = 0.12,
   once = true,
   staggerChildren = false,
+  lazyRender = false,
   ...props
 }: ScrollRevealProps<T>) {
   const Component = (as ?? 'div') as ElementType;
@@ -64,6 +66,7 @@ export function ScrollReveal<T extends ElementType = 'div'>({
       ref={ref}
       className={[
         'scroll-reveal',
+        lazyRender ? 'lazy-render' : '',
         staggerChildren ? 'scroll-reveal-stagger' : '',
         isVisible ? 'is-visible' : '',
         className ?? '',

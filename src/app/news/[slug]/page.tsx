@@ -76,15 +76,17 @@ function getSharedTagScore(leftTags: string[] | undefined, rightTags: string[] |
 
 export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
   const { slug } = await params;
-  const article = await getNewsArticleBySlug(slug, 'zh');
+  const [allArticles, categories] = await Promise.all([
+    getNewsArticles('zh'),
+    getNewsCategories('zh'),
+  ]);
+  const article = allArticles.find((item) => item.slug === slug);
 
   if (!article) {
     notFound();
   }
 
-  const categories = await getNewsCategories('zh');
   const categoryLabel = categories.find((category) => category.value === article.category)?.label ?? article.category;
-  const allArticles = await getNewsArticles('zh');
   const currentIndex = allArticles.findIndex((item) => item.slug === slug);
   const prevArticle = currentIndex > 0 ? allArticles[currentIndex - 1] : null;
   const nextArticle = currentIndex < allArticles.length - 1 ? allArticles[currentIndex + 1] : null;
@@ -138,6 +140,9 @@ export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
             <img
               src={article.image.url}
               alt={article.image.alt}
+              loading="eager"
+              decoding="async"
+              fetchPriority="high"
               className="article-hero-image aspect-[16/9] w-full object-cover"
             />
           </figure>

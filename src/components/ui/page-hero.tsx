@@ -7,6 +7,7 @@ type PageHeroProps = {
   dark?: boolean;
   overlayClassName?: string;
   fullBleedBackground?: boolean;
+  backgroundLoading?: 'eager' | 'lazy';
   titleAs?: 'h1' | 'h2';
 };
 
@@ -20,17 +21,25 @@ export function PageHero({
   overlayClassName,
   fullBleedBackground = false,
   titleAs = 'h1',
+  backgroundLoading = titleAs === 'h1' ? 'eager' : 'lazy',
 }: PageHeroProps) {
   const TitleTag = titleAs;
+  const backgroundImageElement = backgroundImage ? (
+    <img
+      src={backgroundImage}
+      alt=""
+      aria-hidden="true"
+      loading={backgroundLoading}
+      decoding={backgroundLoading === 'eager' ? 'sync' : 'async'}
+      fetchPriority={backgroundLoading === 'eager' ? 'high' : 'auto'}
+      className="absolute inset-0 h-full w-full object-cover object-center"
+    />
+  ) : null;
 
   if (fullBleedBackground && backgroundImage) {
     return (
       <section className={`relative overflow-hidden py-16 sm:py-20 lg:py-24 ${className}`.trim()}>
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${backgroundImage})` }}
-          aria-hidden="true"
-        />
+        {backgroundImageElement}
         <div
           className={`absolute inset-0 ${
             overlayClassName ??
@@ -56,11 +65,7 @@ export function PageHero({
     <section className={`relative overflow-hidden bg-muted py-16 transition-colors duration-300 dark:bg-background sm:py-20 lg:py-24 ${className}`.trim()}>
       {backgroundImage ? (
         <>
-          <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url(${backgroundImage})` }}
-            aria-hidden="true"
-          />
+          {backgroundImageElement}
           <div
             className={`absolute inset-0 ${
               overlayClassName ??

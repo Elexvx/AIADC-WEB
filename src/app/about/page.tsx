@@ -266,7 +266,7 @@ export default function AboutPage() {
 
       <TracksSection />
 
-      <ScrollReveal as="section" className="overflow-hidden bg-white py-12 sm:py-16" delay={80}>
+      <ScrollReveal as="section" lazyRender className="overflow-hidden bg-white py-12 sm:py-16" delay={80}>
         <div className="section-shell">
           <SectionHeading
             eyebrow="项目方向"
@@ -279,7 +279,7 @@ export default function AboutPage() {
         </div>
       </ScrollReveal>
 
-      <ScrollReveal as="section" className="bg-white py-12 sm:py-16" delay={100}>
+      <ScrollReveal as="section" lazyRender className="bg-white py-12 sm:py-16" delay={100}>
         <div className="section-shell">
           <SectionHeading
             eyebrow="参赛要求"
@@ -305,7 +305,7 @@ export default function AboutPage() {
         </div>
       </ScrollReveal>
 
-      <ScrollReveal as="section" id="schedule" className="bg-white py-12 sm:py-16" delay={120}>
+      <ScrollReveal as="section" lazyRender id="schedule" className="bg-white py-12 sm:py-16" delay={120}>
         <div className="section-shell">
           <SectionHeading
             eyebrow="赛程安排"
@@ -338,7 +338,7 @@ export default function AboutPage() {
         </div>
       </ScrollReveal>
 
-      <ScrollReveal as="section" className="bg-white py-12 sm:py-16" delay={140}>
+      <ScrollReveal as="section" lazyRender className="bg-white py-12 sm:py-16" delay={140}>
         <div className="section-shell">
           <SectionHeading
             eyebrow="评审与奖项"
@@ -400,7 +400,7 @@ export default function AboutPage() {
         </div>
       </ScrollReveal>
 
-      <ScrollReveal as="section" className="bg-white py-12 pb-16 sm:py-16 sm:pb-20" delay={160}>
+      <ScrollReveal as="section" lazyRender className="bg-white py-12 pb-16 sm:py-16 sm:pb-20" delay={160}>
         <div className="section-shell">
           <SectionHeading
             eyebrow="报名费用"
@@ -437,7 +437,7 @@ export default function AboutPage() {
 
 function InfoBand() {
   return (
-    <ScrollReveal as="section" className="bg-white py-12 sm:py-16" delay={60}>
+    <ScrollReveal as="section" lazyRender className="bg-white py-12 sm:py-16" delay={60}>
       <div className="section-shell">
         <SectionHeading
           eyebrow="组织单位"
@@ -461,7 +461,7 @@ function InfoBand() {
 
 function TracksSection() {
   return (
-    <ScrollReveal as="section" id="tracks" className="bg-white py-12 sm:py-16" delay={70}>
+    <ScrollReveal as="section" lazyRender id="tracks" className="bg-white py-12 sm:py-16" delay={70}>
       <div className="section-shell">
         <SectionHeading
           eyebrow="赛区设置"
@@ -512,7 +512,7 @@ function CardSection({
   items: IconCardItem[];
 }) {
   return (
-    <ScrollReveal as="section" className="bg-white py-12 sm:py-16" delay={70}>
+    <ScrollReveal as="section" lazyRender className="bg-white py-12 sm:py-16" delay={70}>
       <div className="section-shell">
         <SectionHeading eyebrow={eyebrow} title={title} description={description} centered className="mx-auto max-w-4xl" />
         <div className="mt-8 grid gap-5 md:grid-cols-3">

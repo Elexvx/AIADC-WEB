@@ -42,7 +42,7 @@ export function ContentCard({
     <article className={cn('notion-card-elevated flex h-full flex-col overflow-hidden transition-colors duration-300', className)}>
       {imageUrl ? (
         <div className="aspect-[16/9] overflow-hidden bg-[#f6f5f4]">
-          <img src={imageUrl} alt={imageAlt ?? title} className="h-full w-full object-cover" loading="lazy" />
+          <img src={imageUrl} alt={imageAlt ?? title} className="h-full w-full object-cover" loading="lazy" decoding="async" />
         </div>
       ) : null}
 

@@ -402,19 +402,15 @@ img {
   flex-direction: column;
   min-height: 0;
   opacity: 0;
-  transform: translateY(14px) scale(0.992);
-  filter: blur(10px);
+  transform: translateY(8px);
   transition:
-    opacity 320ms ease,
-    transform 420ms cubic-bezier(0.22, 1, 0.36, 1),
-    filter 420ms cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: opacity, transform, filter;
+    opacity 180ms ease,
+    transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .page-transition-entered {
   opacity: 1;
-  transform: translateY(0) scale(1);
-  filter: blur(0);
+  transform: translateY(0);
 }
 
 .scroll-reveal {
@@ -431,6 +427,15 @@ img {
   opacity: 1;
   transform: translate3d(0, 0, 0);
   will-change: auto;
+}
+
+.lazy-render {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 640px;
+}
+
+.lazy-render.is-visible {
+  contain-intrinsic-size: auto;
 }
 
 .scroll-reveal-stagger > * {

@@ -60,8 +60,10 @@ export const viewport: Viewport = {
 };
 
 export async function generateMetadata(): Promise<Metadata> {
-  const siteShell = await getSiteShellContent('zh');
-  const homeMeta = await getSiteMeta('home', 'zh');
+  const [siteShell, homeMeta] = await Promise.all([
+    getSiteShellContent('zh'),
+    getSiteMeta('home', 'zh'),
+  ]);
   const siteName = siteShell.brand.applicationName;
   const title = homeMeta.title;
   const description = homeMeta.description;
@@ -158,9 +160,14 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const [zhContent, enContent] = await Promise.all([
+    getContentBundle('zh'),
+    getContentBundle('en'),
+  ]);
+
   const initialContent = {
-    zh: await getContentBundle('zh'),
-    en: await getContentBundle('en'),
+    zh: zhContent,
+    en: enContent,
   };
 
   return (

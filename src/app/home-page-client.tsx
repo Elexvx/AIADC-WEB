@@ -26,22 +26,22 @@ export function HomePageClient() {
       <ScrollReveal as="section" delay={40} {...reveal}>
         <HomeStatsGrid />
       </ScrollReveal>
-      <ScrollReveal as="section" delay={80} {...reveal}>
+      <ScrollReveal as="section" delay={80} lazyRender {...reveal}>
         <HomeGroupsSection />
       </ScrollReveal>
-      <ScrollReveal as="section" delay={100} {...reveal}>
+      <ScrollReveal as="section" delay={100} lazyRender {...reveal}>
         <HomeHighlightsSection />
       </ScrollReveal>
-      <ScrollReveal as="section" delay={120} {...reveal}>
+      <ScrollReveal as="section" delay={120} lazyRender {...reveal}>
         <HomePartnersSection />
       </ScrollReveal>
-      <ScrollReveal as="section" delay={140} {...reveal}>
+      <ScrollReveal as="section" delay={140} lazyRender {...reveal}>
         <HomeNewsSection />
       </ScrollReveal>
-      <ScrollReveal as="section" delay={160} {...reveal}>
+      <ScrollReveal as="section" delay={160} lazyRender {...reveal}>
         <HomeFaqSection />
       </ScrollReveal>
-      <ScrollReveal as="section" delay={180} {...reveal}>
+      <ScrollReveal as="section" delay={180} lazyRender {...reveal}>
         <HomeSignupSection />
       </ScrollReveal>
     </main>
