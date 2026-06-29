@@ -184,6 +184,37 @@ const awardCards = [
 const tierAwards = awardCards.slice(0, 4);
 const specialAwards = awardCards.slice(4);
 
+const tierAwardStyles = [
+  {
+    card: {
+      background: 'linear-gradient(135deg, rgba(255,249,226,0.98), rgba(255,255,255,0.94) 52%, rgba(255,238,167,0.72))',
+      borderColor: '#f4d884',
+    },
+    icon: 'border-[#f2cf64] bg-[#fff8dc] text-[#b77900]',
+  },
+  {
+    card: {
+      background: 'linear-gradient(135deg, rgba(248,250,252,0.98), rgba(255,255,255,0.94) 52%, rgba(223,230,240,0.78))',
+      borderColor: '#d9e0ea',
+    },
+    icon: 'border-[#c9d3e2] bg-[#f8fafc] text-[#64748b]',
+  },
+  {
+    card: {
+      background: 'linear-gradient(135deg, rgba(255,246,237,0.98), rgba(255,255,255,0.94) 52%, rgba(238,190,142,0.68))',
+      borderColor: '#e9bf92',
+    },
+    icon: 'border-[#dfaa75] bg-[#fff3e7] text-[#b75f1b]',
+  },
+  {
+    card: {
+      background: 'linear-gradient(135deg, rgba(239,253,248,0.98), rgba(255,255,255,0.94) 52%, rgba(186,235,220,0.72))',
+      borderColor: '#bfe3d8',
+    },
+    icon: 'border-[#9fd4c5] bg-[#eefcf7] text-[#0f8a6a]',
+  },
+];
+
 export default function AboutPage() {
   return (
     <main className="bg-white text-slate-950">
@@ -332,6 +363,7 @@ export default function AboutPage() {
             {tierAwards.map((item, index) => (
               <div
                 key={item.title}
+                style={tierAwardStyles[index]?.card}
                 className={`notion-card mx-auto p-5 ${
                   index === 0
                     ? 'max-w-md'
@@ -343,7 +375,7 @@ export default function AboutPage() {
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  <div className="grid h-10 w-10 place-items-center rounded-lg border border-[#dfe7fb] bg-white text-[#0075de]">
+                  <div className={`grid h-10 w-10 place-items-center rounded-lg border ${tierAwardStyles[index]?.icon ?? 'border-[#dfe7fb] bg-white text-[#0075de]'}`}>
                     <Medal className="h-5 w-5" />
                   </div>
                   <h3 className="text-base font-bold text-[#18253f]">{item.title}</h3>

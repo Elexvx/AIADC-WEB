@@ -15,19 +15,19 @@ export const metadata: Metadata = {
 
 const contactCards = [
   {
-    title: '地址',
+    title: '官网',
     value: 'aiadc.org.cn',
     description: '大赛官网地址，下载中心、通知公告与赛事服务信息以官网发布为准。',
     icon: MapPin,
   },
   {
     title: '邮箱',
-    value: 'aiadc.org.cn',
+    value: 'aiadc@aiadc.org.cn',
     description: '用于院校组织、赛事合作、媒体沟通及材料相关事项咨询。',
     icon: Mail,
   },
   {
-    title: '群',
+    title: '通知群',
     value: 'QQ群：871465293（1群）',
     description: '报名参赛的选手务必添加官方通知群，以免错过赛事重要通知信息。',
     icon: MessageCircle,

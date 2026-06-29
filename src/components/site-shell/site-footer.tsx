@@ -17,9 +17,14 @@ function PlaceholderQrCode() {
 
 export function SiteFooter() {
   const { siteShell } = useLocale();
-  const { footer } = siteShell;
-  const showFooterColumns = false;
-  const visibleFooterColumns = footer.columns.slice(0, 3);
+  const { footer, header } = siteShell;
+  const showFooterColumns = true;
+  const visibleFooterColumns = [
+    {
+      title: '导航',
+      links: header.mainNavItems,
+    },
+  ];
 
   return (
     <footer className="mt-auto border-t border-slate-200 bg-white">
@@ -52,7 +57,7 @@ export function SiteFooter() {
             </div>
 
             {showFooterColumns ? (
-              <div className="grid grid-cols-2 gap-x-6 gap-y-8 border-t border-blue-100 pt-6 text-left sm:grid-cols-3 sm:gap-x-8 sm:pt-7 lg:ml-auto lg:w-fit lg:border-t-0 lg:pt-0 lg:text-right">
+              <div className="grid grid-cols-2 gap-x-6 gap-y-8 border-t border-blue-100 pt-6 text-left sm:grid-cols-3 sm:gap-x-8 sm:pt-7 lg:ml-auto lg:w-fit lg:grid-cols-1 lg:border-t-0 lg:pt-0 lg:text-right">
                 {visibleFooterColumns.map((column) => (
                   <div key={column.title} className="space-y-3">
                     <div className="flex flex-col items-start gap-2 lg:items-end">
