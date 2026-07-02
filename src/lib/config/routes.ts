@@ -3,7 +3,7 @@ export const ROUTES = {
   events: '/events',
   materials: '/materials',
   news: '/news',
-  registration: 'https://www.saikr.com/vse/aiadc',
+  registration: 'https://bm.aiadc.org.cn',
   about: '/about',
   contact: '/contact',
 } as const;
