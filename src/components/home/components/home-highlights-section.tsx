@@ -1,20 +1,19 @@
 import { resolveIcon } from '@/lib/content/icon-map';
 import { getSection } from '@/lib/content/utils';
-import { usePageContent } from '@/lib/i18n/locale-provider';
+import type { CmsPageContent } from '@/lib/content/types';
 import { Card } from '@/components/ui';
 import { HomeSectionTitle } from './home-section-title';
 
-export function HomeHighlightsSection() {
-  const page = usePageContent('home');
+export function HomeHighlightsSection({ page }: { page: CmsPageContent }) {
   const section = getSection(page, 'highlights');
   const items = section?.items ?? [];
 
   return (
-    <section id="tracks" className="py-16 transition-colors duration-300 sm:py-20">
+    <section id="tracks" className="bg-white py-14 transition-colors duration-300 sm:py-18">
       <div className="section-shell">
         <HomeSectionTitle title={section?.title ?? '赛道设置'} description={section?.description} />
 
-        <div className="grid gap-7 md:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-3">
           {items.map((item) => {
             const Icon = resolveIcon(item.iconKey);
 

@@ -1,7 +1,7 @@
 const DEFAULT_LOCAL_LUMIRA_API_BASE = 'http://localhost:8080';
 const DEFAULT_PUBLIC_CONTENT_PATH = '/api/v1/public/aiadc/content';
 const DEFAULT_ACTIVITIES_PATH = '/api/v1/public/aiadc/activities';
-const DEFAULT_REQUEST_TIMEOUT_MS = 8000;
+const DEFAULT_REQUEST_TIMEOUT_MS = 1500;
 
 const trimTrailingSlash = (value: string) => value.replace(/\/+$/, '');
 const withProtocol = (value: string) => (value.startsWith('http://') || value.startsWith('https://') ? value : `https://${value}`);

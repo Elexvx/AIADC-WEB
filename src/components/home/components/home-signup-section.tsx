@@ -1,11 +1,10 @@
 'use client';
 
 import { ArrowRight } from 'lucide-react';
-import { usePageContent } from '@/lib/i18n/locale-provider';
+import type { CmsPageContent } from '@/lib/content/types';
 import { Button, InternalLink } from '@/components/ui';
 
-export function HomeSignupSection() {
-  const page = usePageContent('home');
+export function HomeSignupSection({ page }: { page: CmsPageContent }) {
   const signup = page.ctaBanner;
 
   if (!signup?.action) {
@@ -13,10 +12,10 @@ export function HomeSignupSection() {
   }
 
   return (
-    <section id="signup" className="py-16 transition-colors duration-300 sm:py-20">
+    <section id="signup" className="bg-white py-14 transition-colors duration-300 sm:py-18">
       <div className="section-shell">
-        <div className="relative overflow-hidden rounded-xl bg-[#213183] px-7 py-8 text-white transition-colors duration-300 sm:px-10 sm:py-11">
-          <div className="relative max-w-3xl">
+        <div className="overflow-hidden rounded-[24px] bg-[#213183] px-7 py-8 text-white transition-colors duration-300 sm:px-10 sm:py-11">
+          <div className="max-w-3xl">
             <h2 className="notion-cta-title max-w-[16ch] text-white transition-colors duration-300 sm:max-w-none">
               {signup.title}
             </h2>

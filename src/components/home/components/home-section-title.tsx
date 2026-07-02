@@ -4,12 +4,18 @@ type HomeSectionTitleProps = {
   centered?: boolean;
 };
 
-export function HomeSectionTitle({ title, description }: HomeSectionTitleProps) {
+export function HomeSectionTitle({ title, description, centered = true }: HomeSectionTitleProps) {
   return (
-    <div className="mb-8 text-center">
-      <h2 className="text-[2rem] font-bold leading-[1.1] tracking-[-0.04em] text-black transition-colors duration-300 dark:text-white sm:text-[2.75rem]">{title}</h2>
+    <div className={`mb-8 ${centered ? 'text-center' : 'text-left'}`}>
+      <h2 className="heading-2 text-black transition-colors duration-300 dark:text-white">{title}</h2>
       {description ? (
-        <p className="mx-auto mt-3 max-w-3xl text-sm leading-8 text-[#31302e] transition-colors duration-300 dark:text-white/82 sm:text-[15px]">{description}</p>
+        <p
+          className={`mt-3 max-w-3xl text-sm leading-8 text-[#615d59] transition-colors duration-300 dark:text-white/82 sm:text-[15px] ${
+            centered ? 'mx-auto' : ''
+          }`}
+        >
+          {description}
+        </p>
       ) : null}
     </div>
   );

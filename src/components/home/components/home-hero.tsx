@@ -4,7 +4,7 @@ import { ChevronLeft, ChevronRight, Network, UserPlus } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { ROUTES } from '@/lib/config/routes';
 import { getSectionItems } from '@/lib/content/utils';
-import { usePageContent } from '@/lib/i18n/locale-provider';
+import type { CmsPageContent } from '@/lib/content/types';
 import { Button, InternalLink } from '@/components/ui';
 
 const carouselIntervalMs = 8000;
@@ -23,8 +23,7 @@ function getSlideExtra(slide: { extra?: unknown }): HeroSlideExtra {
   return (slide.extra ?? {}) as HeroSlideExtra;
 }
 
-export function HomeHero() {
-  const page = usePageContent('home');
+export function HomeHero({ page }: { page: CmsPageContent }) {
   const heroSlides = getSectionItems(page, 'heroSlides');
   const [activeIndex, setActiveIndex] = useState(0);
   const [renderedSlideIndexes, setRenderedSlideIndexes] = useState<Set<number>>(() => new Set([0]));
@@ -123,15 +122,15 @@ export function HomeHero() {
 
         {!isImageOnlySlide ? (
           <>
-            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(21,54,122,0.56)_0%,rgba(25,88,169,0.36)_44%,rgba(25,88,169,0.16)_74%,rgba(25,88,169,0.08)_100%)]" />
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(21,54,122,0.12)_0%,rgba(21,54,122,0)_42%,rgba(21,54,122,0.20)_100%)]" />
+            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(21,54,122,0.56)_0%,rgba(25,88,169,0.38)_42%,rgba(25,88,169,0.16)_74%,rgba(25,88,169,0.06)_100%)]" />
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(21,54,122,0.10)_0%,rgba(21,54,122,0)_44%,rgba(21,54,122,0.18)_100%)]" />
           </>
         ) : null}
 
         {!isImageOnlySlide ? (
           <div className="section-shell relative z-10 flex h-full items-center justify-center px-6 py-14 text-center">
             <div className="mx-auto max-w-[820px]">
-              <h1 className="text-[2.75rem] font-bold leading-none text-white transition-colors duration-300 sm:text-[4rem] lg:text-[4.75rem]">
+              <h1 className="text-[2.75rem] font-bold leading-none tracking-[-0.05em] text-white transition-colors duration-300 sm:text-[4rem] lg:text-[4.75rem]">
                 {titleLines.length > 0
                   ? titleLines.map((line) => (
                       <span key={line} className="block">
@@ -146,10 +145,14 @@ export function HomeHero() {
               </p>
 
               <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
-                <Button asChild size="lg" className="h-12 w-full max-w-[220px] rounded-full bg-[#0075de] px-8 text-base font-medium !text-white hover:bg-[#005bab] sm:w-auto">
+                <Button
+                  asChild
+                  size="lg"
+                  className="h-12 w-full max-w-[220px] rounded-full bg-[#0075de] px-8 text-base font-medium !text-white shadow-[rgba(0,0,0,0.14)_0_10px_24px] hover:bg-[#005bab] sm:w-auto"
+                >
                   <InternalLink href={currentHero.cta?.href ?? ROUTES.registration} className="inline-flex items-center justify-center gap-2 !text-white">
                     <UserPlus className="h-5 w-5 !text-white" />
-                    {currentHero.cta?.label ?? 'Register'}
+                    {currentHero.cta?.label ?? 'Apply Now'}
                   </InternalLink>
                 </Button>
                 <Button
@@ -160,7 +163,7 @@ export function HomeHero() {
                 >
                   <InternalLink href={secondaryAction?.href ?? ROUTES.registration} className="inline-flex items-center justify-center gap-2">
                     <Network className="h-5 w-5" />
-                    {secondaryAction?.label ?? 'Competition Entry'}
+                    {secondaryAction?.label ?? 'Learn More'}
                   </InternalLink>
                 </Button>
               </div>
@@ -175,7 +178,7 @@ export function HomeHero() {
               aria-label="Previous slide"
               data-carousel-action="previous"
               onClick={showPreviousSlide}
-              className="absolute left-5 top-1/2 z-20 hidden h-10 w-10 -translate-y-1/2 place-items-center rounded-full bg-black/5 text-white backdrop-blur-sm transition active:scale-90 lg:grid"
+              className="absolute left-5 top-1/2 z-20 hidden h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-white/18 bg-black/10 text-white backdrop-blur-sm transition hover:bg-black/18 active:scale-90 lg:grid"
             >
               <ChevronLeft className="h-5 w-5" />
             </button>
@@ -184,11 +187,11 @@ export function HomeHero() {
               aria-label="Next slide"
               data-carousel-action="next"
               onClick={showNextSlide}
-              className="absolute right-5 top-1/2 z-20 hidden h-10 w-10 -translate-y-1/2 place-items-center rounded-full bg-black/5 text-white backdrop-blur-sm transition active:scale-90 lg:grid"
+              className="absolute right-5 top-1/2 z-20 hidden h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-white/18 bg-black/10 text-white backdrop-blur-sm transition hover:bg-black/18 active:scale-90 lg:grid"
             >
               <ChevronRight className="h-5 w-5" />
             </button>
-            <div className="absolute bottom-5 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2">
+            <div className="absolute bottom-5 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2 rounded-full border border-white/14 bg-white/10 px-3 py-2 backdrop-blur">
               {heroSlides.map((slide, index) => (
                 <button
                   key={slide.id}

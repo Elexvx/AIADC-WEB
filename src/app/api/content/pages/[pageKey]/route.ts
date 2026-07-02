@@ -13,15 +13,9 @@ type RouteContext = {
 export function generateStaticParams() {
   return [
     { pageKey: 'home' },
-    { pageKey: 'intro' },
     { pageKey: 'events' },
-    { pageKey: 'projects' },
-    { pageKey: 'startup-base' },
     { pageKey: 'materials' },
     { pageKey: 'about' },
-    { pageKey: 'privacy' },
-    { pageKey: 'terms' },
-    { pageKey: 'login' },
     { pageKey: 'news' },
   ];
 }

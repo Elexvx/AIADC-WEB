@@ -1,4 +1,4 @@
-import { getPageContent } from '@/lib/content';
+import { getContentBundle } from '@/lib/content';
 import { getPageMetadata } from '@/lib/metadata';
 import { NewsTabs } from '@/components/news';
 import { PageHero, ScrollReveal } from '@/components/ui';
@@ -8,7 +8,8 @@ export async function generateMetadata() {
 }
 
 export default async function NewsPage() {
-  const page = await getPageContent('news', 'zh');
+  const content = await getContentBundle('zh');
+  const page = content.pages.news;
 
   return (
     <main className="bg-white">
@@ -24,7 +25,7 @@ export default async function NewsPage() {
 
       <ScrollReveal as="section" className="bg-white pt-8 pb-12 sm:pt-10 sm:pb-14" delay={40}>
         <div className="section-shell">
-          <NewsTabs />
+          <NewsTabs news={content.news} />
         </div>
       </ScrollReveal>
 

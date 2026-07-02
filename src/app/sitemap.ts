@@ -6,24 +6,23 @@ import { getNewsArticles } from '@/lib/content';
 
 export const dynamic = 'force-static';
 
-const routePriorities: Partial<Record<keyof typeof ROUTES, number>> = {
-  home: 1,
-  about: 0.9,
-  news: 0.8,
-  materials: 0.8,
-  login: 0.7,
-};
+const staticRoutes = [
+  { path: ROUTES.home, priority: 1 },
+  { path: ROUTES.about, priority: 0.9 },
+  { path: ROUTES.events, priority: 0.8 },
+  { path: ROUTES.materials, priority: 0.8 },
+  { path: ROUTES.news, priority: 0.8 },
+  { path: ROUTES.contact, priority: 0.7 },
+] as const;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const siteUrl = getPublicSiteUrl();
   const now = new Date();
-  const routes = Object.entries(ROUTES)
-    .filter(([key]) => key !== 'intro')
-    .map(([key, route]) => ({
-      url: new URL(getCanonicalPath(route), siteUrl).toString(),
+  const routes = staticRoutes.map(({ path, priority }) => ({
+      url: new URL(getCanonicalPath(path), siteUrl).toString(),
       lastModified: now,
-      changeFrequency: route === '/' ? 'weekly' : 'monthly',
-      priority: routePriorities[key as keyof typeof ROUTES] ?? 0.6,
+      changeFrequency: path === '/' ? 'weekly' : 'monthly',
+      priority,
     })) satisfies MetadataRoute.Sitemap;
 
   const articles = await getNewsArticles('zh');

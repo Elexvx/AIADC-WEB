@@ -4,7 +4,6 @@ import { ArticleMarkdown } from '@/components/news/components/article-markdown';
 import { InternalLink } from '@/components/ui';
 import { getNewsArticleBySlug, getNewsArticles, getNewsCategories } from '@/lib/content';
 import { getCanonicalPath } from '@/lib/metadata';
-import { ArticlePageEffects } from './article-page-effects';
 
 type NewsDetailPageProps = {
   params: Promise<{
@@ -103,14 +102,11 @@ export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
 
   return (
     <main className="article-page min-h-screen bg-[#f7f5f0]">
-      <ArticlePageEffects />
-      <div className="article-progress fixed inset-x-0 top-0 z-50 h-[2px] origin-left scale-x-0 bg-[#111111]" />
-
       <article className="article-body relative px-5 pb-14 pt-12 sm:px-8 sm:pb-20 sm:pt-16 lg:px-12">
         <div className="mx-auto max-w-[760px]">
           <InternalLink
             href="/news"
-            className="article-back-btn group inline-flex items-center gap-1.5 text-sm font-medium text-[#5f5b54] transition-colors duration-200 hover:text-[#111111]"
+            className="article-back-btn group inline-flex items-center gap-1.5 text-sm font-medium text-[#5f5b54] hover:text-[#111111]"
           >
             <ArrowLeft className="h-3.5 w-3.5" />
             返回新闻中心
@@ -172,7 +168,7 @@ export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
             {prevArticle ? (
               <InternalLink
                 href={`/news/${prevArticle.slug}`}
-                className="group inline-flex min-w-0 max-w-[45%] items-center gap-2 text-sm text-[#5f5b54] transition-colors hover:text-[#111111]"
+                className="group inline-flex min-w-0 max-w-[45%] items-center gap-2 text-sm text-[#5f5b54] hover:text-[#111111]"
               >
                 <ChevronLeft className="h-4 w-4 shrink-0" />
                 <span className="truncate">上一篇：{prevArticle.title}</span>
@@ -181,7 +177,7 @@ export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
             {nextArticle ? (
               <InternalLink
                 href={`/news/${nextArticle.slug}`}
-                className="group inline-flex min-w-0 max-w-[45%] items-center justify-end gap-2 text-sm text-[#5f5b54] transition-colors hover:text-[#111111]"
+                className="group inline-flex min-w-0 max-w-[45%] items-center justify-end gap-2 text-sm text-[#5f5b54] hover:text-[#111111]"
               >
                 <span className="truncate">下一篇：{nextArticle.title}</span>
                 <ChevronRight className="h-4 w-4 shrink-0" />
@@ -200,11 +196,11 @@ export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
                   href={`/news/${relatedArticle.slug}`}
                   className="group block"
                 >
-                  <p className="text-sm font-semibold leading-6 text-[#111111] transition-colors group-hover:text-[#005bab]">
+                  <p className="text-sm font-semibold leading-6 text-[#111111] group-hover:text-[#005bab]">
                     {relatedArticle.title}
                   </p>
                   <p className="mt-2 line-clamp-2 text-sm leading-6 text-[#5f5b54]">{relatedArticle.excerpt}</p>
-                  <span className="mt-3 inline-flex items-center gap-1 text-sm text-[#6c675f] transition-colors group-hover:text-[#111111]">
+                  <span className="mt-3 inline-flex items-center gap-1 text-sm text-[#6c675f] group-hover:text-[#111111]">
                     阅读更多
                     <ArrowRight className="h-3.5 w-3.5" />
                   </span>

@@ -56,7 +56,7 @@ type LumiraActivityRecord = {
   featured?: boolean | null;
 };
 
-const pageKeys: PageKey[] = ['home', 'intro', 'events', 'projects', 'startup-base', 'materials', 'policies', 'about', 'privacy', 'terms', 'login', 'news'];
+const pageKeys: PageKey[] = ['home', 'events', 'materials', 'about', 'news'];
 
 function resolveLocale(locale?: string): Locale {
   return locale === 'en' ? 'en' : defaultLocale;

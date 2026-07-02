@@ -1,10 +1,8 @@
 import type { ArticleItem, CmsContentBundle, CmsPageContent, CmsRecordBase, DownloadItem, PageKey, StatItem, TimelineItem } from '@/lib/content/types';
 import { ROUTES } from '@/lib/config/routes';
 import { defaultLocale, type Locale } from '@/lib/i18n/config';
-import { getMarkdownLegalPage } from './legal-pages';
 import { getMarkdownNewsArticles } from './markdown-articles';
 
-const logoImage = '/assets/aiadc-logo.png';
 const noticeCover = '/assets/official-notice-cover.png';
 const heroVisual = '/assets/aiadc-hero-visual.png';
 const heroOfficialPoster = '/assets/hero/aiadc-hero-official-poster.png';
@@ -40,17 +38,9 @@ function seo(title: string, description: string) {
 function buildZhBundle(locale: Locale = defaultLocale): CmsContentBundle {
   const siteMeta: Record<PageKey, { title: string; description: string }> = {
     home: seo('全国大学生智能应用开发大赛', '面向青年开发实践主体的智能应用开发赛事官网。'),
-    intro: seo('大赛介绍', '了解全国大学生智能应用开发大赛的定位、组别、赛道与赛程。'),
     events: seo('活动中心', '查看报名征集、材料提交、评审组织、项目打磨与决赛展示安排。'),
-    projects: seo('项目展示', '查看智能应用开发项目方向与示例。'),
-    'startup-base': seo('项目培育', '了解赛前辅导、材料规范培训、AI应用工作坊与资源对接服务。'),
     materials: seo('材料下载', '下载赛事通知、执行方案、评审规则及报名材料。'),
-    policies: seo('赛事规则', '全国大学生智能应用开发大赛规则与纪律要求。'),
     about: seo('关于大赛', '了解全国大学生智能应用开发大赛组织机制与办赛原则。'),
-    cookies: seo('Cookies政策', '赛事官网 Cookies 与本地存储使用说明。'),
-    privacy: seo('隐私政策', '赛事平台个人信息保护与数据使用说明。'),
-    terms: seo('服务条款', '赛事平台服务条款与使用规范。'),
-    login: seo('报名入口', '进入全国大学生智能应用开发大赛报名与材料提交系统。'),
     news: seo('新闻动态', '查看赛事通知、组委会公告与媒体动态。'),
   };
 
@@ -111,7 +101,7 @@ function buildZhBundle(locale: Locale = defaultLocale): CmsContentBundle {
             imageUrl: heroIncubation,
             sort: 3,
             tags: ['项目培育', '资源对接', '成果孵化'],
-            cta: { label: '了解培育服务', href: ROUTES.startupBase },
+            cta: { label: '了解培育服务', href: ROUTES.events },
             extra: {
               alt: '项目培育与资源对接轮播图',
               secondaryAction: { label: '资料中心', href: ROUTES.materials },
@@ -142,21 +132,21 @@ function buildZhBundle(locale: Locale = defaultLocale): CmsContentBundle {
             description: '面向全国职业院校在校学生团队，突出应用实践与技术技能创新。',
             iconKey: 'graduation-cap',
             sort: 1,
-            cta: { label: '查看组别规则', href: ROUTES.intro },
+            cta: { label: '查看组别规则', href: ROUTES.about },
           }),
           record(locale, 'group-university', 'university', {
             title: '高校组',
             description: '面向全国普通高等院校在校学生团队，鼓励技术创新与工程实现。',
             iconKey: 'building-2',
             sort: 2,
-            cta: { label: '查看组别规则', href: ROUTES.intro },
+            cta: { label: '查看组别规则', href: ROUTES.about },
           }),
           record(locale, 'group-youth', 'youth', {
             title: '青年创新组',
             description: '面向35周岁及以下青年团队，鼓励社会力量与青年创新创业。',
             iconKey: 'users-2',
             sort: 3,
-            cta: { label: '查看组别规则', href: ROUTES.intro },
+            cta: { label: '查看组别规则', href: ROUTES.about },
           }),
         ],
       },
@@ -260,7 +250,7 @@ function buildZhBundle(locale: Locale = defaultLocale): CmsContentBundle {
         {
           title: '合作咨询',
           description: '赛事、生态与产学研合作',
-          action: { label: '合作咨询', href: `${ROUTES.intro}#contact` },
+          action: { label: '合作咨询', href: ROUTES.contact },
         },
       ],
     },
@@ -338,41 +328,6 @@ function buildZhBundle(locale: Locale = defaultLocale): CmsContentBundle {
     }),
   ];
 
-  const intro = page(locale, 'intro', {
-    seo: siteMeta.intro,
-    hero: {
-      eyebrow: '大赛介绍',
-      title: '以真实需求牵引智能应用开发实践',
-      description: '大赛面向青年开发实践主体，围绕智能应用开发、场景化技术实践、实践能力提升和项目持续培育四个核心维度，组织项目构思、方案设计、原型开发、成果展示与应用验证。',
-      backgroundImage: introCompetitionBackground,
-      dark: true,
-    },
-    sections: [
-      {
-        id: 'intro-values',
-        sectionCode: 'valueCards',
-        sectionType: 'value-cards',
-        items: [
-          record(locale, 'value-01', 'real-problem', { title: '真实问题', description: '鼓励从具体用户、具体场景、具体痛点出发，回应教育教学、校园服务、智慧生活、产业协同、公共服务等真实需求。', sort: 1 }),
-          record(locale, 'value-02', 'real-development', { title: '真实开发', description: '关注开发过程、模块设计、工具使用、团队分工、测试记录与阶段成果，不以包装替代项目建设。', sort: 2 }),
-          record(locale, 'value-03', 'project-growth', { title: '持续成长', description: '通过分类评价、项目打磨、专家诊断和资源对接，推动项目从构想走向开发、验证和迭代。', sort: 3 }),
-        ],
-      },
-      { id: 'intro-schedule', sectionCode: 'schedule', sectionType: 'timeline', items: schedule },
-      { id: 'intro-tracks', sectionCode: 'tracks', sectionType: 'tracks', items: tracks },
-      {
-        id: 'intro-contacts',
-        sectionCode: 'contacts',
-        sectionType: 'contacts',
-        items: [
-          record(locale, 'contact-registration', 'registration', { title: '报名咨询', description: '报名系统、材料提交、缴费与票据等事项，以组委会正式通知为准。', iconKey: 'help-circle', sort: 1 }),
-          record(locale, 'contact-organization', 'organization', { title: '院校组织', description: '支持院校联系人建联、项目动员、材料规范培训与赛事说明。', iconKey: 'users-2', sort: 2 }),
-          record(locale, 'contact-media', 'media', { title: '媒体与合作', description: '围绕优秀项目展示传播、技术支持、场景对接和后续培育开展协同。', iconKey: 'mail', sort: 3 }),
-        ],
-      },
-    ],
-  });
-
   const events = page(locale, 'events', {
     seo: siteMeta.events,
     hero: {
@@ -426,61 +381,8 @@ function buildZhBundle(locale: Locale = defaultLocale): CmsContentBundle {
             subtitle: '路演活动',
             description: '入围团队进行6至8分钟路演展示和4至5分钟专家问答，集中呈现问题来源、技术方案、阶段成果和后续计划。',
             sort: 4,
-            cta: { label: '了解赛程', href: ROUTES.intro },
+            cta: { label: '了解赛程', href: ROUTES.about },
             extra: { date: '2026.12.12 - 12.13', time: '线下组织', location: '地点以后续通知为准' },
-          }),
-        ],
-      },
-    ],
-  });
-
-  const projects = page(locale, 'projects', {
-    seo: siteMeta.projects,
-    hero: {
-      eyebrow: '项目展示',
-      title: '鼓励面向真实场景的智能应用项目',
-      description: '示例项目用于展示官网信息结构，不作为赛事命题限定。参赛团队可围绕教育、校园、生活、产业、公共服务、健康服务、数字文创等方向自主选题。',
-    },
-    sections: [
-      {
-        id: 'project-filters',
-        sectionCode: 'filters',
-        sectionType: 'filters',
-        items: [
-          record(locale, 'project-filter-all', 'all', { title: '全部项目', sort: 1 }),
-          record(locale, 'project-filter-education', 'education', { title: '教育教学', sort: 2 }),
-          record(locale, 'project-filter-campus', 'campus', { title: '校园服务', sort: 3 }),
-          record(locale, 'project-filter-public', 'public-service', { title: '公共服务', sort: 4 }),
-        ],
-      },
-      {
-        id: 'project-list',
-        sectionCode: 'projects',
-        sectionType: 'projects',
-        items: [
-          record(locale, 'project-learning-agent', 'learning-agent', {
-            title: 'AI辅助学习任务规划助手',
-            subtitle: '教育教学',
-            description: '面向高校课程学习场景，帮助学生拆解学习目标、生成阶段计划、记录反馈并形成可复盘的学习证据。',
-            sort: 1,
-            cta: { label: '查看示例', href: ROUTES.projects },
-            extra: { track: '创意赛道', stage: '原型构思', date: 'Mock' },
-          }),
-          record(locale, 'project-campus-service', 'campus-service', {
-            title: '智慧校园服务问答与流程导航',
-            subtitle: '校园服务',
-            description: '围绕校园办事、场馆预约、通知查询等高频需求，构建轻量化智能问答与流程指引。',
-            sort: 2,
-            cta: { label: '查看示例', href: ROUTES.projects },
-            extra: { track: 'OPC轻创赛道', stage: '可演示版本', date: 'Mock', featured: true },
-          }),
-          record(locale, 'project-public-service', 'public-service', {
-            title: '社区公共服务智能分诊工具',
-            subtitle: '公共服务',
-            description: '帮助基层服务人员对居民诉求进行分类、记录、转办和反馈，形成可追踪的服务闭环。',
-            sort: 3,
-            cta: { label: '查看示例', href: ROUTES.projects },
-            extra: { track: '萌芽赛道', stage: '早期探索', date: 'Mock' },
           }),
         ],
       },
@@ -503,38 +405,14 @@ function buildZhBundle(locale: Locale = defaultLocale): CmsContentBundle {
         sectionType: 'downloads',
         items: [
           record(locale, 'material-notice', 'event-notice', { title: '关于举办全国大学生智能应用开发大赛的通知', description: '大赛名称、组织单位、参赛组别、赛道设置、材料提交、赛程安排、评审与报名费用等核心信息。', format: 'DOCX', audience: '参赛团队', actionLabel: '下载', fileUrl: '/downloads/aiadc-event-notice.docx', sort: 1 }) as DownloadItem,
-          record(locale, 'material-plan', 'execution-plan', { title: '全国大学生智能应用开发大赛执行方案', description: '完整说明大赛背景、定位、目标、组织机制、组别赛道、评审办法、赛程、服务培育和风险处置。', format: 'DOCX', audience: '组织单位', actionLabel: '下载', fileUrl: '/downloads/aiadc-execution-plan.docx', sort: 2 }) as DownloadItem,
-          record(locale, 'material-rules', 'review-rules', { title: '全国大学生智能应用开发大赛（2026）评审规则', description: '包含萌芽赛道、创意赛道、OPC轻创赛道评分细则，明确分组评价、分道评价、证据导向和扣分规则。', format: 'DOCX', audience: '参赛团队', actionLabel: '下载', fileUrl: '/downloads/aiadc-review-rules-2026.docx', sort: 3 }) as DownloadItem,
-          record(locale, 'material-template', 'template', { title: '报名表与项目报告书模板', description: '模板将根据赛事推进安排另行发布，团队可先按必交材料清单准备项目背景、问题界定、目标用户、解决路径和过程证明。', format: '待发布', audience: '参赛团队', actionLabel: '查看说明', fileUrl: ROUTES.materials, sort: 4 }) as DownloadItem,
         ],
       },
     ],
     ctaBanner: {
       title: '材料准备建议',
       description: '先梳理项目真实问题、目标用户、开发过程、阶段成果和团队贡献，再补充演示链接、截图、测试记录、开发日志等证明材料。',
-      link: { label: '查看赛程与赛道', href: ROUTES.intro },
+      link: { label: '查看赛程与赛道', href: ROUTES.about },
     },
-  });
-
-  const startupBase = page(locale, 'startup-base', {
-    seo: siteMeta['startup-base'],
-    hero: {
-      eyebrow: '项目培育',
-      title: '从材料规范到项目打磨，支撑团队持续成长',
-      description: '赛事期间将根据实际需要组织赛前辅导、材料规范培训、AI应用工作坊、智能应用开发指导、项目路演训练和专家诊断活动。',
-    },
-    sections: [
-      {
-        id: 'base-items',
-        sectionCode: 'baseItems',
-        sectionType: 'base-cards',
-        items: [
-          record(locale, 'base-workshop', 'workshop', { title: 'AI应用工作坊', description: '围绕智能体、自动化流程、数据分析、智能交互等方向开展实践辅导。', imageUrl: logoImage, sort: 1, extra: { location: '线上/线下结合' } }),
-          record(locale, 'base-roadshow', 'roadshow', { title: '路演训练', description: '帮助团队围绕问题来源、技术方案、阶段成果、团队贡献和后续计划形成清晰表达。', imageUrl: logoImage, sort: 2, extra: { location: '入围项目优先' } }),
-          record(locale, 'base-resource', 'resource', { title: '资源对接', description: '联动高校、企业、技术平台、孵化机构和投资机构，为优秀项目提供后续培育机会。', imageUrl: logoImage, sort: 3, extra: { location: '按项目情况安排' } }),
-        ],
-      },
-    ],
   });
 
   const about = page(locale, 'about', {
@@ -558,35 +436,6 @@ function buildZhBundle(locale: Locale = defaultLocale): CmsContentBundle {
       },
     ],
   });
-
-  const login = page(locale, 'login', {
-    seo: siteMeta.login,
-    hero: {
-      eyebrow: '报名入口',
-      title: '进入赛事报名与材料提交系统',
-      description: '请在提交前确认参赛组别、申报赛道、团队成员、报名费用和项目材料完整性。正式缴费与票据规则以组委会通知为准。',
-    },
-    sections: [],
-    primaryAction: { label: '进入报名系统', href: ROUTES.registration },
-  });
-
-  const simplePage = (pageKey: PageKey, eyebrow: string, title: string, description: string) => page(locale, pageKey, {
-    seo: siteMeta[pageKey],
-    hero: { eyebrow, title, description },
-    sections: [],
-    richTextBlocks: [
-      record(locale, `${pageKey}-block`, `${pageKey}-block`, {
-        title,
-        content: description,
-        type: 'paragraph',
-        sort: 1,
-      }),
-    ] as any,
-  });
-
-  const privacyPage = simplePage('privacy', '隐私政策', '保护参赛团队信息与项目资料安全', '平台仅在赛事报名、资格审核、材料评审、证书制作、奖项兑现和赛事服务所需范围内使用相关信息。');
-  const termsPage = simplePage('terms', '服务条款', '请如实提交报名与项目材料', '参赛团队须遵守赛事规则，如实填报身份信息、团队信息、项目材料、知识产权说明和相关证明。');
-  const cookiesPage = simplePage('cookies', 'Cookies政策', '说明赛事官网 Cookies 与本地存储使用方式', '官网可能使用必要 Cookies 与本地存储保障访问、安全、偏好记忆和基础统计，具体以本政策页面说明为准。');
 
   const newsArticles: ArticleItem[] = [
     record(locale, 'news-event-notice', 'event-notice', {
@@ -613,7 +462,7 @@ function buildZhBundle(locale: Locale = defaultLocale): CmsContentBundle {
       href: '/news/review-rules-2026',
       excerpt: '评审坚持技术路线中立原则，围绕真实问题、真实开发、真实贡献、可验证成果和持续迭代能力展开。',
       date: '2026-07-01',
-      image: { url: logoImage, alt: '全国大学生智能应用开发大赛标识' },
+      image: { url: '/assets/aiadc-logo.png', alt: '全国大学生智能应用开发大赛标识' },
       body: [
         '初赛材料评审重点审查项目材料完整性、逻辑清晰度、开发过程证据、成果基础、发展潜力及赛道适配性。',
         '决赛综合评分结合现场路演、专家问答、演示效果和复核情况形成最终分值。',
@@ -664,7 +513,7 @@ function buildZhBundle(locale: Locale = defaultLocale): CmsContentBundle {
         eventPageItems: [
           { label: '活动中心', href: ROUTES.events, description: '关键赛程和组织活动。' },
           { label: '报名入口', href: ROUTES.registration, description: '进入报名与材料提交系统。' },
-          { label: '项目培育', href: ROUTES.startupBase, description: '赛前辅导、工作坊和资源对接。' },
+          { label: '项目培育', href: ROUTES.events, description: '赛前辅导、工作坊和资源对接。' },
         ],
       },
       footer: {
@@ -673,20 +522,20 @@ function buildZhBundle(locale: Locale = defaultLocale): CmsContentBundle {
           {
             title: '为什么选择 AIADC',
             links: [
-              { label: '真实赛题', href: ROUTES.intro },
+              { label: '真实赛题', href: ROUTES.about },
               { label: '全球开发者生态', href: ROUTES.about },
-              { label: '产业资源连接', href: ROUTES.projects },
-              { label: '模型与算力支持', href: ROUTES.startupBase },
-              { label: '安全合规', href: ROUTES.policies },
-              { label: '成果孵化', href: ROUTES.startupBase },
+              { label: '产业资源连接', href: ROUTES.events },
+              { label: '模型与算力支持', href: ROUTES.events },
+              { label: '安全合规', href: ROUTES.materials },
+              { label: '成果孵化', href: ROUTES.events },
             ],
           },
           {
             title: '大模型',
             links: [
-              { label: '通用大模型', href: ROUTES.projects },
-              { label: '多模态能力', href: ROUTES.projects },
-              { label: '智能体服务', href: ROUTES.projects },
+              { label: '通用大模型', href: ROUTES.events },
+              { label: '多模态能力', href: ROUTES.events },
+              { label: '智能体服务', href: ROUTES.events },
               { label: '行业知识增强', href: ROUTES.materials },
             ],
           },
@@ -695,8 +544,8 @@ function buildZhBundle(locale: Locale = defaultLocale): CmsContentBundle {
             links: [
               { label: '全部服务', href: ROUTES.events, variant: 'primary' },
               { label: '参赛服务', href: ROUTES.registration },
-              { label: '模型广场', href: ROUTES.projects },
-              { label: '算力资源', href: ROUTES.startupBase },
+              { label: '模型广场', href: ROUTES.events },
+              { label: '算力资源', href: ROUTES.events },
               { label: '项目工作台', href: ROUTES.events },
               { label: '成本与权益', href: ROUTES.materials },
             ],
@@ -704,10 +553,10 @@ function buildZhBundle(locale: Locale = defaultLocale): CmsContentBundle {
           {
             title: '技术内容',
             links: [
-              { label: '技术解决方案', href: ROUTES.intro },
+              { label: '技术解决方案', href: ROUTES.about },
               { label: '帮助文档', href: ROUTES.materials },
-              { label: '开发者社区', href: ROUTES.startupBase },
-              { label: '训练营课程', href: ROUTES.startupBase },
+              { label: '开发者社区', href: ROUTES.events },
+              { label: '训练营课程', href: ROUTES.events },
               { label: 'API 文档', href: ROUTES.materials },
             ],
           },
@@ -715,9 +564,9 @@ function buildZhBundle(locale: Locale = defaultLocale): CmsContentBundle {
             title: '权益',
             links: [
               { label: '免费试用', href: ROUTES.registration },
-              { label: '高校计划', href: ROUTES.intro },
-              { label: '算力补贴', href: ROUTES.startupBase },
-              { label: '优秀项目孵化', href: ROUTES.startupBase },
+              { label: '高校计划', href: ROUTES.about },
+              { label: '算力补贴', href: ROUTES.events },
+              { label: '优秀项目孵化', href: ROUTES.events },
               { label: '推荐返现计划', href: ROUTES.events },
             ],
           },
@@ -728,7 +577,7 @@ function buildZhBundle(locale: Locale = defaultLocale): CmsContentBundle {
               { label: '企业命题服务', href: ROUTES.events },
               { label: '赛事公告', href: ROUTES.news },
               { label: '健康看板', href: ROUTES.about },
-              { label: '信任中心', href: ROUTES.policies },
+              { label: '信任中心', href: ROUTES.materials },
               { label: '联系我们', href: ROUTES.contact },
             ],
           },
@@ -742,11 +591,7 @@ function buildZhBundle(locale: Locale = defaultLocale): CmsContentBundle {
             { label: '微信群', href: ROUTES.contact, imageUrl: '/assets/qr/wechat-group.jpg' },
           ],
         },
-        legalLinks: [
-          { label: 'Cookies政策', href: ROUTES.cookies },
-          { label: '隐私政策', href: ROUTES.privacy },
-          { label: '用户协议', href: ROUTES.terms },
-        ],
+        legalLinks: [],
         topicLinks: [],
         filings: [
           { label: '苏ICP备2025160017号-2', href: 'https://beian.miit.gov.cn/' },
@@ -759,17 +604,9 @@ function buildZhBundle(locale: Locale = defaultLocale): CmsContentBundle {
     siteMeta,
     pages: {
       home,
-      intro,
       events,
-      projects,
-      'startup-base': startupBase,
       materials,
-      policies: simplePage('policies', '赛事规则', '以真实、规范、可信为基本准则', '赛事实施细则、报名通知、评审规则、证书样式、费用说明、申报书模板及其他配套文件，均以组委会正式发布内容为准。'),
       about,
-      cookies: getMarkdownLegalPage('cookies', locale, cookiesPage, siteMeta.cookies),
-      privacy: getMarkdownLegalPage('privacy', locale, privacyPage, siteMeta.privacy),
-      terms: getMarkdownLegalPage('terms', locale, termsPage, siteMeta.terms),
-      login,
       news: page(locale, 'news', {
         seo: siteMeta.news,
         hero: {

@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
 import Script from 'next/script';
 import { getPublicSiteUrl } from '@/lib/config/site';
-import { getContentBundle, getSiteMeta, getSiteShellContent } from '@/lib/content';
+import { getSiteMeta, getSiteShellContent } from '@/lib/content';
 import { LocaleProvider } from '@/lib/i18n/locale-provider';
 import { PageTransition } from '@/components/ui';
 import { FloatingActions, SiteFooter, SiteHeader } from '@/components/site-shell';
@@ -160,15 +160,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  const [zhContent, enContent] = await Promise.all([
-    getContentBundle('zh'),
-    getContentBundle('en'),
-  ]);
-
-  const initialContent = {
-    zh: zhContent,
-    en: enContent,
-  };
+  const siteShell = await getSiteShellContent('zh');
 
   return (
     <html lang="zh-CN" suppressHydrationWarning>
@@ -177,7 +169,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
       </head>
       <body className={`${alibabaPuHuiTi.variable} ${alibabaPuHuiTi.className} bg-background text-foreground antialiased transition-colors duration-300`}>
         <ThemeProvider>
-          <LocaleProvider initialContent={initialContent}>
+          <LocaleProvider siteShell={siteShell}>
             <div className="page-shell bg-background text-foreground transition-colors duration-300">
               <SiteHeader />
               <PageTransition>{children}</PageTransition>

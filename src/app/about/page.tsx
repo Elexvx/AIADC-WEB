@@ -186,31 +186,19 @@ const specialAwards = awardCards.slice(4);
 
 const tierAwardStyles = [
   {
-    card: {
-      background: 'linear-gradient(135deg, rgba(255,249,226,0.98), rgba(255,255,255,0.94) 52%, rgba(255,238,167,0.72))',
-      borderColor: '#f4d884',
-    },
+    card: 'tier-award-card tier-award-gold',
     icon: 'border-[#f2cf64] bg-[#fff8dc] text-[#b77900]',
   },
   {
-    card: {
-      background: 'linear-gradient(135deg, rgba(248,250,252,0.98), rgba(255,255,255,0.94) 52%, rgba(223,230,240,0.78))',
-      borderColor: '#d9e0ea',
-    },
+    card: 'tier-award-card tier-award-silver',
     icon: 'border-[#c9d3e2] bg-[#f8fafc] text-[#64748b]',
   },
   {
-    card: {
-      background: 'linear-gradient(135deg, rgba(255,246,237,0.98), rgba(255,255,255,0.94) 52%, rgba(238,190,142,0.68))',
-      borderColor: '#e9bf92',
-    },
+    card: 'tier-award-card tier-award-bronze',
     icon: 'border-[#dfaa75] bg-[#fff3e7] text-[#b75f1b]',
   },
   {
-    card: {
-      background: 'linear-gradient(135deg, rgba(239,253,248,0.98), rgba(255,255,255,0.94) 52%, rgba(186,235,220,0.72))',
-      borderColor: '#bfe3d8',
-    },
+    card: 'tier-award-card tier-award-excellence',
     icon: 'border-[#9fd4c5] bg-[#eefcf7] text-[#0f8a6a]',
   },
 ];
@@ -363,8 +351,7 @@ export default function AboutPage() {
             {tierAwards.map((item, index) => (
               <div
                 key={item.title}
-                style={tierAwardStyles[index]?.card}
-                className={`notion-card mx-auto p-5 ${
+                className={`notion-card mx-auto p-5 ${tierAwardStyles[index]?.card ?? ''} ${
                   index === 0
                     ? 'max-w-md'
                     : index === 1

@@ -9,11 +9,11 @@ export function SiteTopNoticeBar() {
       aria-label="查看最新通知：2026 年报名征集与材料提交进行中，2026年7月1日 - 2026年9月30日"
       className="site-top-notice group relative block overflow-hidden transition-colors duration-300"
     >
-      <div className="section-shell relative flex items-center justify-center gap-2 py-2 sm:py-2.5">
-        <span className="shrink-0 rounded-full bg-[#0075de] px-2.5 py-0.5 text-xs font-semibold leading-5 text-white">
+      <div className="section-shell relative flex items-center justify-center gap-3 py-2.5 sm:py-3">
+        <span className="shrink-0 rounded-full border border-[#d7ebff] bg-white px-2.5 py-0.5 text-xs font-semibold leading-5 text-[#0075de] shadow-[rgba(0,0,0,0.02)_0_0.8px_2.925px]">
           通知
         </span>
-        <p className="min-w-0 max-w-full truncate pr-8 text-center text-sm font-medium tracking-[0] transition-colors sm:pr-12 sm:text-[15px]">
+        <p className="min-w-0 max-w-full truncate pr-8 text-center text-sm font-medium tracking-[0] text-[#31302e] transition-colors sm:pr-12 sm:text-[15px]">
           2026 年报名征集与材料提交进行中 · 2026年7月1日 - 2026年9月30日
         </p>
 

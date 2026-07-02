@@ -1,9 +1,15 @@
 import { NewsArticleCard } from '@/components/news';
-import { useLocale } from '@/lib/i18n/locale-provider';
+import type { ArticleItem, NewsCategorySummary } from '@/lib/content/types';
 import { HomeSectionTitle } from './home-section-title';
 
-export function HomeNewsSection() {
-  const { news } = useLocale();
+type HomeNewsSectionProps = {
+  news: {
+    categories: NewsCategorySummary[];
+    articles: ArticleItem[];
+  };
+};
+
+export function HomeNewsSection({ news }: HomeNewsSectionProps) {
   const articles = news.articles.slice(0, 3);
 
   if (news.articles.length === 0) {
@@ -11,7 +17,7 @@ export function HomeNewsSection() {
   }
 
   return (
-    <section id="news" className="bg-white py-11 transition-colors duration-300 sm:py-14">
+    <section id="news" className="bg-white py-14 transition-colors duration-300 sm:py-18">
       <div className="section-shell">
         <HomeSectionTitle
           title="新闻动态"

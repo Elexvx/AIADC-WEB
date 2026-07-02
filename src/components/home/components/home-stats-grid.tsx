@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Card } from '@/components/ui';
 import { getSectionItems } from '@/lib/content/utils';
-import { usePageContent } from '@/lib/i18n/locale-provider';
+import type { CmsPageContent } from '@/lib/content/types';
 
 function AnimatedNumber({ value }: { value: string }) {
   const ref = useRef<HTMLDivElement | null>(null);
@@ -85,14 +85,13 @@ function AnimatedNumber({ value }: { value: string }) {
   );
 }
 
-export function HomeStatsGrid() {
-  const page = usePageContent('home');
+export function HomeStatsGrid({ page }: { page: CmsPageContent }) {
   const stats = getSectionItems(page, 'stats');
 
   return (
-    <section className="relative z-10 pt-5 pb-2 md:-mt-10 md:pt-0 lg:-mt-14">
+    <section className="relative z-10 px-0 pt-5 pb-4 md:-mt-14 md:pt-0 lg:-mt-18">
       <div className="section-shell">
-        <Card className="notion-card-elevated overflow-hidden backdrop-blur transition-colors duration-300">
+        <Card className="notion-card-elevated overflow-hidden rounded-[22px] border-white/70 bg-white/96 backdrop-blur transition-colors duration-300">
           <div className="grid grid-cols-2 gap-0 md:grid-cols-4">
             {stats.map((stat, index) => {
               const isLeftColumnOnMobile = index % 2 === 0;

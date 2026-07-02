@@ -1,95 +1,273 @@
-import { Download } from 'lucide-react';
-import { Button, InternalLink, ScrollReveal } from '@/components/ui';
+'use client';
+
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { type ReactNode, useState } from 'react';
+import { InternalLink } from '@/components/ui';
 import type { DownloadItem } from '@/lib/content/types';
 
 interface MaterialTableProps {
   items: DownloadItem[];
 }
 
+const PAGE_SIZE = 5;
+
+function formatOrder(index: number) {
+  return String(index + 1).padStart(2, '0');
+}
+
+function getFormatTone(item: DownloadItem) {
+  const isPending = item.format.includes('待') || item.actionLabel.includes('说明');
+
+  if (isPending) {
+    return 'bg-[#f6efe8] text-[#793400]';
+  }
+
+  return 'bg-[#f1efeb] text-[#615d59]';
+}
+
+function getAudienceTone(audience: string) {
+  if (audience.includes('组织')) {
+    return 'bg-[#eef7f1] text-[#4f6e5c]';
+  }
+
+  if (audience.includes('参赛')) {
+    return 'bg-[#e9f3ff] text-[#53626e]';
+  }
+
+  return 'bg-[#f1efeb] text-[#615d59]';
+}
+
+function buildVisiblePages(currentPage: number, pageCount: number) {
+  if (pageCount <= 5) {
+    return Array.from({ length: pageCount }, (_, index) => index + 1);
+  }
+
+  if (currentPage <= 3) {
+    return [1, 2, 3, 4, 5];
+  }
+
+  if (currentPage >= pageCount - 2) {
+    return [pageCount - 4, pageCount - 3, pageCount - 2, pageCount - 1, pageCount];
+  }
+
+  return [currentPage - 2, currentPage - 1, currentPage, currentPage + 1, currentPage + 2];
+}
+
 function MaterialMeta({ item }: { item: DownloadItem }) {
   return (
     <div className="flex flex-wrap gap-2">
-      <span className="rounded-full bg-[#f6f5f4] px-2.5 py-1 text-xs font-semibold leading-5 text-[#31302e]">{item.format}</span>
-      <span className="rounded-full bg-[#eef6ff] px-2.5 py-1 text-xs font-semibold leading-5 text-[#0075de]">{item.audience}</span>
+      <span
+        className={[
+          'inline-flex rounded-full px-3 py-1.5 text-[12px] font-medium leading-4 tracking-[0.04em]',
+          getFormatTone(item),
+        ]
+          .filter(Boolean)
+          .join(' ')}
+      >
+        {item.format}
+      </span>
+      <span
+        className={[
+          'inline-flex rounded-full px-3 py-1.5 text-[12px] font-medium leading-4',
+          getAudienceTone(item.audience),
+        ]
+          .filter(Boolean)
+          .join(' ')}
+      >
+        {item.audience}
+      </span>
     </div>
   );
 }
 
-function DownloadButton({ item }: { item: DownloadItem }) {
+function ActionButton({ item, block = false }: { item: DownloadItem; block?: boolean }) {
   return (
-    <Button asChild variant="outline" className="h-9 rounded-md px-3 text-sm font-semibold">
-      <InternalLink href={item.fileUrl} className="inline-flex items-center gap-2">
-        <Download className="h-4 w-4" />
-        {item.actionLabel || '下载'}
-      </InternalLink>
-    </Button>
+    <InternalLink
+      href={item.fileUrl}
+      className={[
+        'inline-flex min-h-11 items-center justify-center rounded-[8px] border border-[#e6e6e6] bg-white px-4 py-2 text-[15px] font-medium leading-5 text-[#111111] transition-colors duration-200 hover:bg-[#ffffff] hover:text-[#111111]',
+        block ? 'w-full sm:w-auto' : '',
+      ]
+        .filter(Boolean)
+        .join(' ')}
+    >
+      {item.actionLabel || '下载'}
+    </InternalLink>
+  );
+}
+
+function PagerButton({
+  label,
+  disabled = false,
+  active = false,
+  onClick,
+}: {
+  label: ReactNode;
+  disabled?: boolean;
+  active?: boolean;
+  onClick?: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      disabled={disabled}
+      onClick={onClick}
+      className={[
+        'inline-flex h-11 w-11 items-center justify-center rounded-full border text-[16px] font-medium transition-colors duration-200',
+        active
+          ? 'border-[#000000] bg-[#000000] text-white'
+          : 'border-[#e6e6e6] bg-white text-[#111111]',
+        disabled ? 'cursor-not-allowed opacity-45' : '',
+      ]
+        .filter(Boolean)
+        .join(' ')}
+      aria-current={active ? 'page' : undefined}
+    >
+      {label}
+    </button>
   );
 }
 
 export function MaterialTable({ items }: MaterialTableProps) {
+  const [page, setPage] = useState(1);
+  const pageCount = Math.max(1, Math.ceil(items.length / PAGE_SIZE));
+  const currentPage = Math.min(page, pageCount);
+  const startIndex = (currentPage - 1) * PAGE_SIZE;
+  const endIndex = Math.min(startIndex + PAGE_SIZE, items.length);
+  const visibleItems = items.slice(startIndex, endIndex);
+  const visiblePages = buildVisiblePages(currentPage, pageCount);
+
   return (
-    <div className="overflow-hidden rounded-lg border border-[#e6e6e6] bg-white shadow-[rgba(0,0,0,0.02)_0_1px_2px,rgba(0,0,0,0.04)_0_8px_24px]">
+    <div className="overflow-hidden rounded-[16px] border border-[#e6e6e6] bg-white shadow-[rgba(0,0,0,0.01)_0_0.175px_1.041px,rgba(0,0,0,0.02)_0_0.8px_2.925px,rgba(0,0,0,0.027)_0_2.025px_7.847px,rgba(0,0,0,0.04)_0_4px_18px]">
       <div className="hidden md:block">
-        <table className="w-full table-fixed border-collapse">
+        <table className="w-full border-collapse">
           <colgroup>
-            <col className="w-[5.5rem]" />
-            <col className="w-[30%]" />
-            <col className="w-[16%]" />
+            <col className="w-[7rem]" />
+            <col className="w-[31%]" />
+            <col className="w-[17%]" />
             <col />
-            <col className="w-[8.5rem]" />
+            <col className="w-[9.75rem]" />
           </colgroup>
           <thead>
-            <tr className="border-b border-[#e6e6e6] bg-[#f6f5f4] text-left text-xs font-semibold uppercase tracking-[0.06em] text-[#615d59]">
-              <th className="px-5 py-3">序号</th>
-              <th className="px-5 py-3">文件名称</th>
-              <th className="px-5 py-3">类型 / 对象</th>
-              <th className="px-5 py-3">内容说明</th>
-              <th className="px-5 py-3 text-left">操作</th>
+            <tr className="border-b border-[#e6e6e6] bg-[#f6f5f4] text-left text-[12px] font-semibold tracking-[0.125em] text-[#615d59]">
+              <th className="px-8 py-5">序号</th>
+              <th className="px-8 py-5">文件名称</th>
+              <th className="px-8 py-5">类型 / 对象</th>
+              <th className="px-8 py-5">内容说明</th>
+              <th className="px-8 py-5">操作</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-[#ececec]">
-            {items.map((item, index) => (
-              <tr key={item.id} className="transition-colors duration-200 hover:bg-[#fafafa]">
-                <td className="px-5 py-5 align-top">
-                  <span className="inline-flex h-8 w-8 items-center justify-center text-sm font-bold text-[#0075de]">
-                    {String(index + 1).padStart(2, '0')}
-                  </span>
-                </td>
-                <td className="px-5 py-5 align-top">
-                  <div className="text-base font-bold leading-7 tracking-[0] text-black">{item.title}</div>
-                </td>
-                <td className="px-5 py-5 align-top">
-                  <MaterialMeta item={item} />
-                </td>
-                <td className="px-5 py-5 align-top text-sm leading-7 text-[#615d59]">
-                  {item.description}
-                </td>
-                <td className="px-5 py-5 align-top text-left">
-                  <DownloadButton item={item} />
-                </td>
-              </tr>
-            ))}
+          <tbody>
+            {visibleItems.map((item, index) => {
+              const absoluteIndex = startIndex + index;
+
+              return (
+                <tr
+                  key={item.id}
+                  className={[
+                    'border-b border-[#e6e6e6] last:border-b-0',
+                    absoluteIndex % 2 === 0 ? 'bg-white' : 'bg-[#f6f5f4]',
+                  ]
+                    .filter(Boolean)
+                    .join(' ')}
+                >
+                  <td className="px-8 py-7 align-middle">
+                    <span className="inline-flex text-[17px] font-semibold tracking-[-0.02em] text-[#111111]">
+                      {formatOrder(absoluteIndex)}
+                    </span>
+                  </td>
+                  <td className="px-8 py-7 align-middle">
+                    <div className="max-w-[28rem] text-[16px] font-medium leading-7 tracking-[0] text-[#000000]">
+                      {item.title}
+                    </div>
+                  </td>
+                  <td className="px-8 py-7 align-middle">
+                    <MaterialMeta item={item} />
+                  </td>
+                  <td className="px-8 py-7 align-middle">
+                    <p className="max-w-[37rem] text-[15px] leading-8 text-[#615d59]">{item.description}</p>
+                  </td>
+                  <td className="px-8 py-7 align-middle">
+                    <ActionButton item={item} />
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
 
-      <ScrollReveal className="md:hidden" staggerChildren>
-        {items.map((item, index) => (
-          <article key={item.id} className={`px-5 py-5 ${index < items.length - 1 ? 'border-b border-[#e6e6e6]' : ''}`}>
-            <div className="flex items-start justify-between gap-4">
-              <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center text-sm font-bold text-[#0075de]">
-                {String(index + 1).padStart(2, '0')}
-              </span>
-              <MaterialMeta item={item} />
-            </div>
-            <h3 className="mt-4 text-lg font-bold leading-7 tracking-[0] text-black">{item.title}</h3>
-            <p className="mt-2 text-sm leading-7 text-[#615d59]">{item.description}</p>
-            <div className="mt-4">
-              <DownloadButton item={item} />
-            </div>
-          </article>
-        ))}
-      </ScrollReveal>
+      <div className="md:hidden">
+        {visibleItems.map((item, index) => {
+          const absoluteIndex = startIndex + index;
+
+          return (
+            <article
+              key={item.id}
+              className={[
+                'border-b border-[#e6e6e6] px-5 py-5 last:border-b-0',
+                absoluteIndex % 2 === 0 ? 'bg-white' : 'bg-[#f6f5f4]',
+              ]
+                .filter(Boolean)
+                .join(' ')}
+            >
+              <div className="flex items-start gap-4">
+                <span className="inline-flex min-w-[2.75rem] shrink-0 text-[16px] font-semibold tracking-[-0.02em] text-[#111111]">
+                  {formatOrder(absoluteIndex)}
+                </span>
+
+                <div className="min-w-0 flex-1">
+                  <h3 className="text-[16px] font-medium leading-7 tracking-[0] text-[#000000]">
+                    {item.title}
+                  </h3>
+
+                  <div className="mt-3">
+                    <MaterialMeta item={item} />
+                  </div>
+
+                  <div className="mt-4">
+                    <p className="text-[12px] font-semibold tracking-[0.125em] text-[#a39e98]">内容说明</p>
+                    <p className="mt-2 text-[15px] leading-7 text-[#615d59]">{item.description}</p>
+                  </div>
+
+                  <div className="mt-5">
+                    <ActionButton item={item} block />
+                  </div>
+                </div>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+
+      <div className="flex flex-col gap-4 border-t border-[#e6e6e6] bg-[#f6f5f4] px-6 py-6 sm:flex-row sm:items-center sm:justify-between">
+        <p className="text-[15px] leading-6 text-[#615d59]">
+          {items.length === 0 ? '0 / 0' : `${startIndex + 1}-${endIndex} / ${items.length}`}
+        </p>
+
+        <nav aria-label="分页" className="flex items-center gap-3 self-end sm:self-auto">
+          <PagerButton
+            label={<ChevronLeft className="h-4 w-4" />}
+            disabled={currentPage === 1}
+            onClick={() => setPage((value) => Math.max(1, value - 1))}
+          />
+
+          {visiblePages.map((pageNumber) => (
+            <PagerButton
+              key={pageNumber}
+              label={pageNumber}
+              active={pageNumber === currentPage}
+              onClick={() => setPage(pageNumber)}
+            />
+          ))}
+
+          <PagerButton
+            label={<ChevronRight className="h-4 w-4" />}
+            disabled={currentPage === pageCount}
+            onClick={() => setPage((value) => Math.min(pageCount, value + 1))}
+          />
+        </nav>
+      </div>
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import { getSectionItems } from '@/lib/content/utils';
-import { usePageContent } from '@/lib/i18n/locale-provider';
+import type { CmsPageContent } from '@/lib/content/types';
 import { HomeSectionTitle } from './home-section-title';
 
 function initials(title: string) {
@@ -28,12 +28,11 @@ const logoScaleByCode: Record<string, string> = {
   jadeisle: 'scale-[1.12]',
 };
 
-export function HomePartnersSection() {
-  const page = usePageContent('home');
+export function HomePartnersSection({ page }: { page: CmsPageContent }) {
   const partners = getSectionItems(page, 'partners');
 
   return (
-    <section id="partners" className="bg-white py-11 transition-colors duration-300 sm:py-14">
+    <section id="partners" className="bg-[#f6f5f4] py-14 transition-colors duration-300 sm:py-18">
       <div className="section-shell">
         <HomeSectionTitle title="合作支持" description="展示协同高校、产业机构与技术平台标识。" />
 
@@ -41,7 +40,7 @@ export function HomePartnersSection() {
           {partners.map((partner) => (
             <div
               key={partner.id}
-              className="grid h-24 place-items-center bg-white px-6 py-5 transition-colors duration-300 sm:h-28"
+              className="grid h-24 place-items-center rounded-xl border border-[#e6e6e6] bg-white px-6 py-5 shadow-[rgba(0,0,0,0.01)_0_0.175px_1.041px,rgba(0,0,0,0.02)_0_0.8px_2.925px,rgba(0,0,0,0.027)_0_2.025px_7.847px,rgba(0,0,0,0.04)_0_4px_18px] transition-colors duration-300 sm:h-28"
             >
               {partner.imageUrl ? (
                 <img

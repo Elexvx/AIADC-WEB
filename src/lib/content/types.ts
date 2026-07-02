@@ -2,17 +2,9 @@ import type { Locale } from '@/lib/i18n/config';
 
 export type PageKey =
   | 'home'
-  | 'intro'
   | 'events'
-  | 'projects'
-  | 'startup-base'
   | 'materials'
-  | 'policies'
   | 'about'
-  | 'cookies'
-  | 'privacy'
-  | 'terms'
-  | 'login'
   | 'news';
 
 export type ContentStatus = 'draft' | 'published';

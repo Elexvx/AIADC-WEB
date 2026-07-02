@@ -2,10 +2,16 @@
 
 import { useMemo, useState } from 'react';
 import { NewsArticleCard } from '@/components/news/components/news-article-card';
-import { useLocale } from '@/lib/i18n/locale-provider';
+import type { ArticleItem, NewsCategorySummary } from '@/lib/content/types';
 
-export function NewsTabs() {
-  const { news } = useLocale();
+type NewsTabsProps = {
+  news: {
+    categories: NewsCategorySummary[];
+    articles: ArticleItem[];
+  };
+};
+
+export function NewsTabs({ news }: NewsTabsProps) {
   const [activeCategory, setActiveCategory] = useState('all');
   const [activeTag, setActiveTag] = useState<string | null>(null);
   const categories = useMemo(() => {

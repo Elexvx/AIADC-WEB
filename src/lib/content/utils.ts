@@ -11,16 +11,9 @@ export function getSectionItems<TItem = any>(page: CmsPageContent, sectionCode: 
 export function isPageKey(value: string): value is PageKey {
   return [
     'home',
-    'intro',
     'events',
-    'projects',
-    'startup-base',
     'materials',
-    'policies',
     'about',
-    'privacy',
-    'terms',
-    'login',
     'news',
   ].includes(value);
 }

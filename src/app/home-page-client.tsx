@@ -11,38 +11,47 @@ import {
   HomeStatsGrid,
 } from '@/components/home';
 import { ScrollReveal } from '@/components/ui';
+import type { ArticleItem, CmsPageContent, NewsCategorySummary } from '@/lib/content/types';
 
-export function HomePageClient() {
+type HomePageClientProps = {
+  page: CmsPageContent;
+  news: {
+    categories: NewsCategorySummary[];
+    articles: ArticleItem[];
+  };
+};
+
+export function HomePageClient({ page, news }: HomePageClientProps) {
   const reveal = {
     distance: 16,
     threshold: 0.12,
   };
 
   return (
-    <main className="bg-white">
+    <main className="bg-[#f6f5f4]">
       <ScrollReveal as="section" distance={10} threshold={0.08}>
-        <HomeHero />
+        <HomeHero page={page} />
       </ScrollReveal>
       <ScrollReveal as="section" delay={40} {...reveal}>
-        <HomeStatsGrid />
+        <HomeStatsGrid page={page} />
       </ScrollReveal>
       <ScrollReveal as="section" delay={80} lazyRender {...reveal}>
-        <HomeGroupsSection />
+        <HomeGroupsSection page={page} />
       </ScrollReveal>
       <ScrollReveal as="section" delay={100} lazyRender {...reveal}>
-        <HomeHighlightsSection />
+        <HomeHighlightsSection page={page} />
       </ScrollReveal>
       <ScrollReveal as="section" delay={120} lazyRender {...reveal}>
-        <HomePartnersSection />
+        <HomePartnersSection page={page} />
       </ScrollReveal>
       <ScrollReveal as="section" delay={140} lazyRender {...reveal}>
-        <HomeNewsSection />
+        <HomeNewsSection news={news} />
       </ScrollReveal>
       <ScrollReveal as="section" delay={160} lazyRender {...reveal}>
-        <HomeFaqSection />
+        <HomeFaqSection page={page} />
       </ScrollReveal>
       <ScrollReveal as="section" delay={180} lazyRender {...reveal}>
-        <HomeSignupSection />
+        <HomeSignupSection page={page} />
       </ScrollReveal>
     </main>
   );

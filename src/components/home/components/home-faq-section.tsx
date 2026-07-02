@@ -1,15 +1,14 @@
 import { HelpCircle } from 'lucide-react';
 import { getSectionItems } from '@/lib/content/utils';
-import { usePageContent } from '@/lib/i18n/locale-provider';
+import type { CmsPageContent } from '@/lib/content/types';
 import { Card, CardContent } from '@/components/ui';
 import { HomeSectionTitle } from './home-section-title';
 
-export function HomeFaqSection() {
-  const page = usePageContent('home');
+export function HomeFaqSection({ page }: { page: CmsPageContent }) {
   const faqItems = getSectionItems(page, 'faq');
 
   return (
-    <section id="faq" className="bg-white py-11 transition-colors duration-300 sm:py-14">
+    <section id="faq" className="bg-[#f6f5f4] py-14 transition-colors duration-300 sm:py-18">
       <div className="section-shell">
         <HomeSectionTitle title="常见问题" description="把高频问题前置到官网，提升移动端与桌面端的信息查找效率。" centered />
         <div className="mt-9 grid gap-4 md:grid-cols-2">
