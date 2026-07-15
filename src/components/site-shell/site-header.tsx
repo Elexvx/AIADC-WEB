@@ -38,7 +38,7 @@ export function SiteHeader() {
   const { siteShell } = useLocale();
   const { brand, header } = siteShell;
 
-  const centeredNavLabels = ['活动中心', '资料中心', '通知公告', '关于大赛', '联系方式'];
+  const centeredNavLabels = ['活动中心', '资料中心', '通知公告', '关于大赛', '商务合作', '联系方式'];
   const centeredNavItems = centeredNavLabels
     .map((label) => header.mainNavItems.find((item) => item.label === label))
     .filter((item): item is NonNullable<typeof item> => Boolean(item));

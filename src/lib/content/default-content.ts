@@ -501,6 +501,7 @@ function buildZhBundle(locale: Locale = defaultLocale): CmsContentBundle {
           { label: '资料中心', href: ROUTES.materials },
           { label: '通知公告', href: ROUTES.news },
           { label: '关于大赛', href: ROUTES.about },
+          { label: '商务合作', href: ROUTES.cooperation },
           { label: '联系方式', href: ROUTES.contact },
         ],
         pageSwitchItems: [
@@ -508,6 +509,7 @@ function buildZhBundle(locale: Locale = defaultLocale): CmsContentBundle {
           { label: '材料下载', href: ROUTES.materials, description: '下载通知、方案、规则和报名材料。' },
           { label: '新闻动态', href: ROUTES.news, description: '组委会通知、评审动态与媒体信息。' },
           { label: '关于大赛', href: ROUTES.about, description: '组织机制、办赛原则和监督机制。' },
+          { label: '商务合作', href: ROUTES.cooperation, description: '赛事共建、技术支持与场景合作。' },
           { label: '联系方式', href: ROUTES.contact, description: '官网、邮箱与赛事咨询群。' },
         ],
         eventPageItems: [

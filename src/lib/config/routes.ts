@@ -5,6 +5,7 @@ export const ROUTES = {
   news: '/news',
   registration: 'https://bm.aiadc.org.cn',
   about: '/about',
+  cooperation: '/cooperation',
   contact: '/contact',
 } as const;
 

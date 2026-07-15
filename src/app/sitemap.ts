@@ -12,6 +12,7 @@ const staticRoutes = [
   { path: ROUTES.events, priority: 0.8 },
   { path: ROUTES.materials, priority: 0.8 },
   { path: ROUTES.news, priority: 0.8 },
+  { path: ROUTES.cooperation, priority: 0.7 },
   { path: ROUTES.contact, priority: 0.7 },
 ] as const;
 
