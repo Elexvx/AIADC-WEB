@@ -918,7 +918,14 @@ html.dark .polished-card {
 .article-page {
   --article-paper: #f7f5f0;
   --article-ink: #111111;
+  --article-body: #38342f;
   --article-muted: #5f5b54;
+  --article-subtle: #6c675f;
+  --article-excerpt-ink: #4e4942;
+  --article-link: #005bab;
+  --article-border: rgba(17, 17, 17, 0.25);
+  --article-tag-bg: #ffffff;
+  --article-tag-ring: #e6e6e6;
 }
 
 .article-body {
@@ -929,6 +936,64 @@ html.dark .polished-card {
 
 .article-cover {
   box-shadow: 0 18px 42px rgba(17, 17, 17, 0.08);
+}
+
+.article-back-btn,
+.article-tag,
+.article-footer-link,
+.article-related-excerpt {
+  color: var(--article-muted);
+}
+
+.article-back-btn:hover,
+.article-footer-link:hover,
+.article-related-more:hover {
+  color: var(--article-ink);
+}
+
+.group:hover .article-related-item-title {
+  color: var(--article-link);
+}
+
+.group:hover .article-related-more {
+  color: var(--article-ink);
+}
+
+.article-title,
+.article-markdown-h2,
+.article-markdown-h3,
+.article-markdown-h4,
+.article-related-title,
+.article-related-item-title {
+  color: var(--article-ink);
+}
+
+.article-meta,
+.article-paragraph,
+.article-markdown {
+  color: var(--article-body);
+}
+
+.article-date,
+.article-related-more {
+  color: var(--article-subtle);
+}
+
+.article-excerpt-text,
+.article-markdown blockquote {
+  color: var(--article-excerpt-ink);
+}
+
+.article-excerpt,
+.article-footer-divider,
+.article-related,
+.article-markdown blockquote {
+  border-color: var(--article-border);
+}
+
+.article-tag {
+  background-color: var(--article-tag-bg);
+  --tw-ring-color: var(--article-tag-ring);
 }
 
 .article-drop-cap::first-letter {
@@ -945,7 +1010,6 @@ html.dark .polished-card {
 }
 
 .article-markdown {
-  color: #38342f;
   font-size: 1rem;
   line-height: 2.05;
 }
@@ -962,7 +1026,6 @@ html.dark .polished-card {
 .article-markdown-h2,
 .article-markdown-h3,
 .article-markdown-h4 {
-  color: #111111;
   font-weight: 700;
   line-height: 1.35;
 }
@@ -1000,15 +1063,14 @@ html.dark .polished-card {
 }
 
 .article-markdown blockquote {
-  border-left: 1px solid rgba(17, 17, 17, 0.25);
+  border-left-width: 1px;
   padding-left: 1.25rem;
-  color: #4e4942;
   font-size: 1.0625rem;
   line-height: 1.9;
 }
 
 .article-markdown a {
-  color: #005bab;
+  color: var(--article-link);
   font-weight: 600;
   text-decoration: underline;
   text-underline-offset: 0.2em;
@@ -1039,7 +1101,14 @@ html.dark .polished-card {
 html.dark .article-page {
   --article-paper: hsl(var(--surface-muted));
   --article-ink: #ffffff;
-  --article-muted: hsl(var(--surface-muted-foreground));
+  --article-body: rgba(255, 255, 255, 0.88);
+  --article-muted: rgba(255, 255, 255, 0.72);
+  --article-subtle: rgba(255, 255, 255, 0.66);
+  --article-excerpt-ink: rgba(255, 255, 255, 0.8);
+  --article-link: #72c1ff;
+  --article-border: rgba(255, 255, 255, 0.2);
+  --article-tag-bg: rgba(255, 255, 255, 0.1);
+  --article-tag-ring: rgba(255, 255, 255, 0.18);
 }
 
 html.dark .article-body {

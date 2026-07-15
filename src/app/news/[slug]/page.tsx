@@ -124,7 +124,7 @@ export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
             {article.tags?.length ? (
               <div className="mt-5 flex flex-wrap justify-center gap-2">
                 {article.tags.map((tag) => (
-                  <span key={tag} className="rounded-full bg-white px-3 py-1.5 text-xs font-semibold text-[#5f5b54] ring-1 ring-[#e6e6e6]">
+                  <span key={tag} className="article-tag rounded-full bg-white px-3 py-1.5 text-xs font-semibold text-[#5f5b54] ring-1 ring-[#e6e6e6]">
                     {tag}
                   </span>
                 ))}
@@ -144,7 +144,7 @@ export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
           </figure>
 
           <aside className="article-excerpt mx-auto mt-8 max-w-[640px] border-l border-[#111111]/25 pl-5 sm:mt-10">
-            <p className="text-[1.0625rem] leading-8 text-[#4e4942]">{article.excerpt}</p>
+            <p className="article-excerpt-text text-[1.0625rem] leading-8 text-[#4e4942]">{article.excerpt}</p>
           </aside>
 
           {hasMarkdown ? (
@@ -168,7 +168,7 @@ export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
             {prevArticle ? (
               <InternalLink
                 href={`/news/${prevArticle.slug}`}
-                className="group inline-flex min-w-0 max-w-[45%] items-center gap-2 text-sm text-[#5f5b54] hover:text-[#111111]"
+                className="article-footer-link group inline-flex min-w-0 max-w-[45%] items-center gap-2 text-sm text-[#5f5b54] hover:text-[#111111]"
               >
                 <ChevronLeft className="h-4 w-4 shrink-0" />
                 <span className="truncate">上一篇：{prevArticle.title}</span>
@@ -177,7 +177,7 @@ export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
             {nextArticle ? (
               <InternalLink
                 href={`/news/${nextArticle.slug}`}
-                className="group inline-flex min-w-0 max-w-[45%] items-center justify-end gap-2 text-sm text-[#5f5b54] hover:text-[#111111]"
+                className="article-footer-link group inline-flex min-w-0 max-w-[45%] items-center justify-end gap-2 text-sm text-[#5f5b54] hover:text-[#111111]"
               >
                 <span className="truncate">下一篇：{nextArticle.title}</span>
                 <ChevronRight className="h-4 w-4 shrink-0" />
@@ -188,7 +188,7 @@ export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
 
         {relatedArticles.length > 0 ? (
           <section className="article-related mx-auto mt-14 max-w-[980px] border-t border-[#111111]/25 pt-10 sm:mt-20 sm:pt-12">
-            <h2 className="text-2xl font-bold text-[#111111]">相关内容</h2>
+            <h2 className="article-related-title text-2xl font-bold text-[#111111]">相关内容</h2>
             <div className="mt-7 grid gap-8 md:grid-cols-3">
               {relatedArticles.map((relatedArticle) => (
                 <InternalLink
@@ -196,11 +196,11 @@ export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
                   href={`/news/${relatedArticle.slug}`}
                   className="group block"
                 >
-                  <p className="text-sm font-semibold leading-6 text-[#111111] group-hover:text-[#005bab]">
+                  <p className="article-related-item-title text-sm font-semibold leading-6 text-[#111111] group-hover:text-[#005bab]">
                     {relatedArticle.title}
                   </p>
-                  <p className="mt-2 line-clamp-2 text-sm leading-6 text-[#5f5b54]">{relatedArticle.excerpt}</p>
-                  <span className="mt-3 inline-flex items-center gap-1 text-sm text-[#6c675f] group-hover:text-[#111111]">
+                  <p className="article-related-excerpt mt-2 line-clamp-2 text-sm leading-6 text-[#5f5b54]">{relatedArticle.excerpt}</p>
+                  <span className="article-related-more mt-3 inline-flex items-center gap-1 text-sm text-[#6c675f] group-hover:text-[#111111]">
                     阅读更多
                     <ArrowRight className="h-3.5 w-3.5" />
                   </span>
