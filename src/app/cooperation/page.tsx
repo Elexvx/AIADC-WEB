@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import {
-  ArrowLeftRight,
   ArrowRight,
   Building2,
   CheckCircle2,
@@ -101,11 +100,15 @@ const complianceItems = [
   },
 ] as const;
 
-function ExchangeList({ title, items, tone }: { title: string; items: readonly string[]; tone: 'partner' | 'competition' }) {
+function CooperationColumn({ title, items, tone }: { title: string; items: readonly string[]; tone: 'partner' | 'competition' | 'delivery' }) {
   return (
-    <div className="rounded-xl border border-[#e7e5e4] bg-[#fafaf9] p-5 sm:p-6">
+    <section className="p-5 sm:p-6">
       <div className="flex items-center gap-2">
-        <span className={`h-2.5 w-2.5 rounded-full ${tone === 'partner' ? 'bg-[#64748b]' : 'bg-[#0075de]'}`} aria-hidden="true" />
+        {tone === 'delivery' ? (
+          <FileCheck2 aria-hidden="true" className="h-4 w-4 text-[#0075de]" />
+        ) : (
+          <span className={`h-2.5 w-2.5 rounded-full ${tone === 'partner' ? 'bg-[#64748b]' : 'bg-[#0075de]'}`} aria-hidden="true" />
+        )}
         <h3 className="text-base font-bold text-[#18253f]">{title}</h3>
       </div>
       <ul className="mt-4 grid gap-3">
@@ -116,7 +119,7 @@ function ExchangeList({ title, items, tone }: { title: string; items: readonly s
           </li>
         ))}
       </ul>
-    </div>
+    </section>
   );
 }
 
@@ -142,27 +145,12 @@ function PartnershipExchangeCard({ item }: { item: PartnershipItem }) {
           </span>
         </div>
 
-        <div className="relative mt-7 grid gap-4 lg:grid-cols-2 lg:gap-8">
-          <ExchangeList title="合作方提供" items={item.partnerProvides} tone="partner" />
-          <div className="absolute left-1/2 top-1/2 z-10 hidden h-10 w-10 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-xl border border-[#e7e5e4] bg-white text-[#0075de] lg:grid">
-            <ArrowLeftRight aria-hidden="true" className="h-5 w-5" />
-          </div>
-          <ExchangeList title="比赛方提供" items={item.partnerReceives} tone="competition" />
-        </div>
       </div>
 
-      <div className="border-t border-[#e7e5e4] bg-[#fafaf9] px-6 py-5 sm:px-8">
-        <div className="flex items-center gap-2 text-sm font-bold text-[#18253f]">
-          <FileCheck2 aria-hidden="true" className="h-5 w-5 text-[#0075de]" />
-          双方确认交付
-        </div>
-        <ul className="mt-3 flex flex-wrap gap-2" aria-label={`${item.title}交付物`}>
-          {item.deliverables.map((deliverable) => (
-            <li key={deliverable} className="rounded-full border border-[#e7e5e4] bg-white px-3 py-1.5 text-xs font-semibold text-[#615d59]">
-              {deliverable}
-            </li>
-          ))}
-        </ul>
+      <div className="grid divide-y divide-[#e7e5e4] border-t border-[#e7e5e4] md:grid-cols-3 md:divide-x md:divide-y-0">
+        <CooperationColumn title="合作方提供" items={item.partnerProvides} tone="partner" />
+        <CooperationColumn title="比赛方提供" items={item.partnerReceives} tone="competition" />
+        <CooperationColumn title="双方确认交付" items={item.deliverables} tone="delivery" />
       </div>
     </article>
   );
