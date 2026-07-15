@@ -1,18 +1,11 @@
 import type { Metadata } from 'next';
 import {
   ArrowRight,
-  Building2,
-  CheckCircle2,
-  CloudCog,
-  FileCheck2,
-  GraduationCap,
-  Handshake,
   Mail,
   Scale,
   ShieldCheck,
   Users,
 } from 'lucide-react';
-import type { LucideIcon } from 'lucide-react';
 import { Button, InternalLink, PageHero, ScrollReveal, SectionHeading } from '@/components/ui';
 import { ROUTES } from '@/lib/config/routes';
 
@@ -34,7 +27,6 @@ type PartnershipItem = {
   partnerProvides: readonly string[];
   partnerReceives: readonly string[];
   deliverables: readonly string[];
-  icon: LucideIcon;
 };
 
 const partnershipItems = [
@@ -45,7 +37,6 @@ const partnershipItems = [
     partnerProvides: ['赛事支持或联合传播', '活动场地与基础会务', '不涉密的真实场景需求', '明确的业务对接人'],
     partnerReceives: ['支持单位公开展示', '面向当地团队的赛事宣讲', '场景命题整理与发布', '优秀项目及赛后成果对接'],
     deliverables: ['合作确认函', '场地确认单', '场景需求说明', '活动与成果简报'],
-    icon: Building2,
   },
   {
     title: '产业合作伙伴',
@@ -54,7 +45,6 @@ const partnershipItems = [
     partnerProvides: ['赛事资金、奖品或等值资源', '行业专家与技术分享', '实习、岗位或产业场景', '经确认的品牌物料'],
     partnerReceives: ['约定范围内的品牌展示', '线上分享或决赛参与机会', '优秀项目与青年人才交流', '合作执行与成果总结'],
     deliverables: ['合作协议', '权益与资源清单', '资源到位记录', '执行验收总结'],
-    icon: Handshake,
   },
   {
     title: '高校与职业院校',
@@ -63,7 +53,6 @@ const partnershipItems = [
     partnerProvides: ['校内赛事通知与组织联络', '线上或线下宣讲机会', '参赛团队推荐与日常指导', '真实的报名与组织反馈'],
     partnerReceives: ['报名指南与申报模板', '线上宣讲和集中答疑', '参赛项目汇总与进度反馈', '教师及组织荣誉申报机会'],
     deliverables: ['院校合作确认', '宣讲与通知记录', '报名项目清单', '院校参赛汇总'],
-    icon: GraduationCap,
   },
   {
     title: '技术与服务平台',
@@ -72,7 +61,6 @@ const partnershipItems = [
     partnerProvides: ['账号、接口、算力或软件授权', '明确的额度、期限与申请方式', '使用文档与技术支持联系人', '培训课程或技术答疑'],
     partnerReceives: ['技术支持伙伴公开展示', '面向参赛团队的技术说明会', '经授权的匿名使用反馈', '优秀应用案例与项目交流'],
     deliverables: ['资源说明书', '账号发放记录', '培训与答疑记录', '资源使用总结'],
-    icon: CloudCog,
   },
 ] as const satisfies readonly PartnershipItem[];
 
@@ -100,23 +88,13 @@ const complianceItems = [
   },
 ] as const;
 
-function CooperationColumn({ title, items, tone }: { title: string; items: readonly string[]; tone: 'partner' | 'competition' | 'delivery' }) {
+function CooperationColumn({ title, items }: { title: string; items: readonly string[] }) {
   return (
     <section className="p-5 sm:p-6">
-      <div className="flex items-center gap-2">
-        {tone === 'delivery' ? (
-          <FileCheck2 aria-hidden="true" className="h-4 w-4 text-[#0075de]" />
-        ) : (
-          <span className={`h-2.5 w-2.5 rounded-full ${tone === 'partner' ? 'bg-[#64748b]' : 'bg-[#0075de]'}`} aria-hidden="true" />
-        )}
-        <h3 className="text-base font-bold text-[#18253f]">{title}</h3>
-      </div>
+      <h3 className="text-base font-bold text-[#18253f]">{title}</h3>
       <ul className="mt-4 grid gap-3">
         {items.map((item) => (
-          <li key={item} className="flex items-start gap-2.5 text-sm leading-7 text-[#615d59]">
-            <CheckCircle2 aria-hidden="true" className="mt-1 h-4 w-4 shrink-0 text-[#0075de]" />
-            <span>{item}</span>
-          </li>
+          <li key={item} className="text-sm leading-7 text-[#615d59]">{item}</li>
         ))}
       </ul>
     </section>
@@ -124,33 +102,25 @@ function CooperationColumn({ title, items, tone }: { title: string; items: reado
 }
 
 function PartnershipExchangeCard({ item }: { item: PartnershipItem }) {
-  const Icon = item.icon;
-
   return (
     <article className="notion-card overflow-hidden">
       <div className="p-6 sm:p-8">
         <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-start">
-          <div className="flex items-start gap-4">
-            <div className="notion-sticker grid h-12 w-12 shrink-0 place-items-center">
-              <Icon aria-hidden="true" className="h-6 w-6" />
-            </div>
-            <div>
-              <p className="text-xs font-bold tracking-[0.16em] text-[#0075de]">{item.eyebrow}</p>
-              <h2 className="heading-3 notion-card-title mt-2">{item.title}</h2>
-              <p className="notion-card-body mt-2 text-sm leading-7">{item.description}</p>
-            </div>
+          <div>
+            <p className="text-xs font-bold tracking-[0.16em] text-[#0075de]">{item.eyebrow}</p>
+            <h2 className="heading-3 notion-card-title mt-2">{item.title}</h2>
+            <p className="notion-card-body mt-2 text-sm leading-7">{item.description}</p>
           </div>
           <span className="w-fit rounded-full border border-[#e7e5e4] bg-[#fafaf9] px-3 py-1.5 text-xs font-semibold text-[#615d59]">
             双向合作
           </span>
         </div>
-
       </div>
 
       <div className="grid divide-y divide-[#e7e5e4] border-t border-[#e7e5e4] md:grid-cols-3 md:divide-x md:divide-y-0">
-        <CooperationColumn title="合作方提供" items={item.partnerProvides} tone="partner" />
-        <CooperationColumn title="比赛方提供" items={item.partnerReceives} tone="competition" />
-        <CooperationColumn title="双方确认交付" items={item.deliverables} tone="delivery" />
+        <CooperationColumn title="合作方提供" items={item.partnerProvides} />
+        <CooperationColumn title="比赛方提供" items={item.partnerReceives} />
+        <CooperationColumn title="双方确认交付" items={item.deliverables} />
       </div>
     </article>
   );
