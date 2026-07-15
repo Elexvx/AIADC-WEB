@@ -36,8 +36,6 @@ type PartnershipItem = {
   partnerReceives: readonly string[];
   deliverables: readonly string[];
   icon: LucideIcon;
-  accentClassName: string;
-  iconClassName: string;
 };
 
 const partnershipItems = [
@@ -49,8 +47,6 @@ const partnershipItems = [
     partnerReceives: ['支持单位公开展示', '面向当地团队的赛事宣讲', '场景命题整理与发布', '优秀项目及赛后成果对接'],
     deliverables: ['合作确认函', '场地确认单', '场景需求说明', '活动与成果简报'],
     icon: Building2,
-    accentClassName: 'from-[#eaf3ff] via-white to-[#f7fbff] border-[#cfe3ff]',
-    iconClassName: 'bg-[#e7f2ff] text-[#006dcc]',
   },
   {
     title: '产业合作伙伴',
@@ -60,8 +56,6 @@ const partnershipItems = [
     partnerReceives: ['约定范围内的品牌展示', '线上分享或决赛参与机会', '优秀项目与青年人才交流', '合作执行与成果总结'],
     deliverables: ['合作协议', '权益与资源清单', '资源到位记录', '执行验收总结'],
     icon: Handshake,
-    accentClassName: 'from-[#f1edff] via-white to-[#fbf9ff] border-[#ddd4ff]',
-    iconClassName: 'bg-[#eee9ff] text-[#6550c8]',
   },
   {
     title: '高校与职业院校',
@@ -71,8 +65,6 @@ const partnershipItems = [
     partnerReceives: ['报名指南与申报模板', '线上宣讲和集中答疑', '参赛项目汇总与进度反馈', '教师及组织荣誉申报机会'],
     deliverables: ['院校合作确认', '宣讲与通知记录', '报名项目清单', '院校参赛汇总'],
     icon: GraduationCap,
-    accentClassName: 'from-[#e8faf5] via-white to-[#f7fffc] border-[#c8eadf]',
-    iconClassName: 'bg-[#e5f8f2] text-[#118067]',
   },
   {
     title: '技术与服务平台',
@@ -82,8 +74,6 @@ const partnershipItems = [
     partnerReceives: ['技术支持伙伴公开展示', '面向参赛团队的技术说明会', '经授权的匿名使用反馈', '优秀应用案例与项目交流'],
     deliverables: ['资源说明书', '账号发放记录', '培训与答疑记录', '资源使用总结'],
     icon: CloudCog,
-    accentClassName: 'from-[#fff5df] via-white to-[#fffcf5] border-[#f2dfb8]',
-    iconClassName: 'bg-[#fff2d6] text-[#a86500]',
   },
 ] as const satisfies readonly PartnershipItem[];
 
@@ -111,16 +101,16 @@ const complianceItems = [
   },
 ] as const;
 
-function ExchangeList({ title, items, tone }: { title: string; items: readonly string[]; tone: 'partner' | 'aiadc' }) {
+function ExchangeList({ title, items, tone }: { title: string; items: readonly string[]; tone: 'partner' | 'competition' }) {
   return (
-    <div className="rounded-[21px] border border-white/80 bg-white/88 p-5 shadow-[0_12px_32px_rgba(30,64,120,0.06)] backdrop-blur sm:p-6">
+    <div className="rounded-xl border border-[#e7e5e4] bg-[#fafaf9] p-5 sm:p-6">
       <div className="flex items-center gap-2">
-        <span className={`h-2.5 w-2.5 rounded-full ${tone === 'partner' ? 'bg-[#8a72e8]' : 'bg-[#0075de]'}`} aria-hidden="true" />
-        <h3 className="text-base font-bold text-slate-950">{title}</h3>
+        <span className={`h-2.5 w-2.5 rounded-full ${tone === 'partner' ? 'bg-[#64748b]' : 'bg-[#0075de]'}`} aria-hidden="true" />
+        <h3 className="text-base font-bold text-[#18253f]">{title}</h3>
       </div>
       <ul className="mt-4 grid gap-3">
         {items.map((item) => (
-          <li key={item} className="flex items-start gap-2.5 text-sm leading-7 text-slate-700">
+          <li key={item} className="flex items-start gap-2.5 text-sm leading-7 text-[#615d59]">
             <CheckCircle2 aria-hidden="true" className="mt-1 h-4 w-4 shrink-0 text-[#0075de]" />
             <span>{item}</span>
           </li>
@@ -134,41 +124,41 @@ function PartnershipExchangeCard({ item }: { item: PartnershipItem }) {
   const Icon = item.icon;
 
   return (
-    <article className={`overflow-hidden rounded-[21px] border bg-gradient-to-br ${item.accentClassName} shadow-[0_18px_46px_rgba(22,50,104,0.08)]`}>
+    <article className="notion-card overflow-hidden">
       <div className="p-6 sm:p-8">
         <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-start">
           <div className="flex items-start gap-4">
-            <div className={`grid h-12 w-12 shrink-0 place-items-center rounded-[13px] ${item.iconClassName}`}>
+            <div className="notion-sticker grid h-12 w-12 shrink-0 place-items-center">
               <Icon aria-hidden="true" className="h-6 w-6" />
             </div>
             <div>
               <p className="text-xs font-bold tracking-[0.16em] text-[#0075de]">{item.eyebrow}</p>
-              <h2 className="mt-2 text-2xl font-bold tracking-[-0.02em] text-slate-950 sm:text-3xl">{item.title}</h2>
-              <p className="mt-2 text-sm leading-7 text-slate-600">{item.description}</p>
+              <h2 className="heading-3 notion-card-title mt-2">{item.title}</h2>
+              <p className="notion-card-body mt-2 text-sm leading-7">{item.description}</p>
             </div>
           </div>
-          <span className="w-fit rounded-full border border-white/90 bg-white/75 px-3 py-1.5 text-xs font-semibold text-slate-600 shadow-sm">
+          <span className="w-fit rounded-full border border-[#e7e5e4] bg-[#fafaf9] px-3 py-1.5 text-xs font-semibold text-[#615d59]">
             双向合作
           </span>
         </div>
 
         <div className="relative mt-7 grid gap-4 lg:grid-cols-2 lg:gap-8">
           <ExchangeList title="合作方提供" items={item.partnerProvides} tone="partner" />
-          <div className="absolute left-1/2 top-1/2 z-10 hidden h-10 w-10 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-[13px] border border-white bg-white text-[#0075de] shadow-md lg:grid">
+          <div className="absolute left-1/2 top-1/2 z-10 hidden h-10 w-10 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-xl border border-[#e7e5e4] bg-white text-[#0075de] lg:grid">
             <ArrowLeftRight aria-hidden="true" className="h-5 w-5" />
           </div>
-          <ExchangeList title="AIADC 提供" items={item.partnerReceives} tone="aiadc" />
+          <ExchangeList title="比赛方提供" items={item.partnerReceives} tone="competition" />
         </div>
       </div>
 
-      <div className="border-t border-white/85 bg-white/58 px-6 py-5 sm:px-8">
-        <div className="flex items-center gap-2 text-sm font-bold text-slate-950">
+      <div className="border-t border-[#e7e5e4] bg-[#fafaf9] px-6 py-5 sm:px-8">
+        <div className="flex items-center gap-2 text-sm font-bold text-[#18253f]">
           <FileCheck2 aria-hidden="true" className="h-5 w-5 text-[#0075de]" />
           双方确认交付
         </div>
         <ul className="mt-3 flex flex-wrap gap-2" aria-label={`${item.title}交付物`}>
           {item.deliverables.map((deliverable) => (
-            <li key={deliverable} className="rounded-full border border-white bg-white/90 px-3 py-1.5 text-xs font-semibold text-slate-600 shadow-sm">
+            <li key={deliverable} className="rounded-full border border-[#e7e5e4] bg-white px-3 py-1.5 text-xs font-semibold text-[#615d59]">
               {deliverable}
             </li>
           ))}
@@ -187,7 +177,6 @@ export default function CooperationPage() {
         description="面向政府园区、产业伙伴、院校和技术平台开展规范、透明、可交付的赛事合作，共同支持真实项目成长。"
         backgroundImage="/assets/hero/aiadc-hero-incubation.png"
         dark
-        overlayClassName="bg-[linear-gradient(120deg,rgba(19,42,108,0.9),rgba(24,67,148,0.8),rgba(0,117,222,0.72))]"
         fullBleedBackground
       />
 
@@ -211,7 +200,7 @@ export default function CooperationPage() {
           <SectionHeading
             eyebrow="合作方案"
             title="每一种合作，都有清晰的双向交付"
-            description="分别说明合作方投入、AIADC 回馈和最终交付物，便于双方快速确认合作边界。"
+            description="分别说明合作方投入、比赛方支持和最终交付物，便于双方快速确认合作边界。"
             centered
             className="mx-auto max-w-4xl"
           />
@@ -234,7 +223,7 @@ export default function CooperationPage() {
 
           <ol className="grid gap-4 sm:grid-cols-3">
             {cooperationSteps.map((item) => (
-              <li key={item.step} className="rounded-[21px] border border-slate-200 bg-white p-5 shadow-sm">
+              <li key={item.step} className="notion-card p-5">
                 <span className="text-sm font-bold tracking-[0.16em] text-[#0075de]">{item.step}</span>
                 <h2 className="mt-3 text-lg font-bold text-slate-950">{item.title}</h2>
                 <p className="mt-2 text-sm leading-7 text-slate-600">{item.description}</p>
@@ -259,8 +248,8 @@ export default function CooperationPage() {
               const Icon = item.icon;
 
               return (
-                <article key={item.title} className="rounded-[21px] border border-slate-200 bg-white p-5 shadow-sm">
-                  <div className="grid h-10 w-10 place-items-center rounded-[13px] bg-[#eef6ff] text-[#0075de]">
+                <article key={item.title} className="notion-card p-5">
+                  <div className="notion-sticker grid h-10 w-10 place-items-center">
                     <Icon aria-hidden="true" className="h-5 w-5" />
                   </div>
                   <h2 className="mt-4 text-lg font-bold text-slate-950">{item.title}</h2>
@@ -274,7 +263,7 @@ export default function CooperationPage() {
 
       <ScrollReveal as="section" className="bg-[#f7f9ff] py-12 sm:py-16" delay={70}>
         <div className="section-shell">
-          <div className="overflow-hidden rounded-[21px] bg-[linear-gradient(135deg,#152d78,#0075de)] px-6 py-10 text-center text-white shadow-[0_22px_50px_rgba(0,70,160,0.2)] sm:px-10 sm:py-12">
+          <div className="overflow-hidden rounded-[24px] bg-[#213183] px-6 py-10 text-center text-white sm:px-10 sm:py-12">
             <Mail aria-hidden="true" className="mx-auto h-8 w-8" />
             <h2 className="mt-5 text-balance text-3xl font-bold tracking-[-0.03em] sm:text-4xl">期待与您共建真实、有价值的合作</h2>
             <p className="mx-auto mt-4 max-w-2xl text-sm leading-8 text-white/82 sm:text-base">
