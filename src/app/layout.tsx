@@ -1,12 +1,9 @@
 import type { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
-import Script from 'next/script';
+import { RootProvider } from 'fumadocs-ui/provider/next';
 import { getPublicSiteUrl } from '@/lib/config/site';
 import { getSiteMeta, getSiteShellContent } from '@/lib/content';
 import { LocaleProvider } from '@/lib/i18n/locale-provider';
-import { PageTransition } from '@/components/ui';
-import { FloatingActions, SiteFooter, SiteHeader } from '@/components/site-shell';
-import { ThemeProvider } from '@/components/theme/theme-provider';
 import './globals.css';
 
 const alibabaPuHuiTi = localFont({
@@ -34,26 +31,31 @@ const alibabaPuHuiTi = localFont({
 const siteUrl = getPublicSiteUrl();
 const siteLogo = '/assets/aiadc-logo.png';
 const siteOgImage = '/assets/aiadc-hero-visual.png';
-const themeBootstrapScript = `
-  (function () {
-    try {
-      var storageKey = 'aiadc-theme';
-      var storedTheme = window.localStorage.getItem(storageKey);
-      var resolvedTheme = storedTheme === 'dark' || storedTheme === 'light'
-        ? storedTheme
-        : window.matchMedia('(prefers-color-scheme: dark)').matches
-          ? 'dark'
-          : 'light';
-      var root = document.documentElement;
-      root.classList.toggle('dark', resolvedTheme === 'dark');
-      root.dataset.theme = resolvedTheme;
-    } catch (error) {
-      document.documentElement.classList.remove('dark');
-      document.documentElement.dataset.theme = 'light';
-    }
-  })();
-`;
-
+const fumadocsTranslations = {
+  'Search(search trigger)': '搜索',
+  'Search(search dialog)': '搜索赛事文档',
+  'Open Search(search trigger)(aria-label)': '打开搜索',
+  'Close Search(search dialog)(aria-label)': '关闭搜索',
+  'No results found(search dialog)': '未找到相关内容',
+  'On this page(table of contents)': '目录',
+  'No Headings(table of contents)': '暂无目录',
+  'Table of Contents(inline table of contents)': '目录',
+  'Open Sidebar(sidebar)(aria-label)': '打开文档目录',
+  'Close Sidebar(sidebar)(aria-label)': '关闭文档目录',
+  'Collapse Sidebar(sidebar)(aria-label)': '收起文档目录',
+  'Show Sidebar(sidebar)': '显示文档目录',
+  'Hide Sidebar(sidebar)': '隐藏文档目录',
+  'Next Page(pagination)': '下一页',
+  'Previous Page(pagination)': '上一页',
+  'Copy Anchor Link(heading anchor)(aria-label)': '复制章节链接',
+  'Copy Text(code block)(aria-label)': '复制代码',
+  'Copied Text(code block)(aria-label)': '已复制',
+  'Toggle Menu(mobile menu)(aria-label)': '切换菜单',
+  'Toggle Theme(theme switcher)(aria-label)': '切换日间或夜间模式',
+  'Light(theme switcher)(aria-label)': '日间模式',
+  'Dark(theme switcher)(aria-label)': '夜间模式',
+  'System(theme switcher)(aria-label)': '跟随系统',
+};
 export const viewport: Viewport = {
   colorScheme: 'light dark',
   themeColor: '#0b2a8f',
@@ -164,20 +166,21 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
 
   return (
     <html lang="zh-CN" suppressHydrationWarning>
-      <head>
-        <Script id="theme-bootstrap" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: themeBootstrapScript }} />
-      </head>
       <body className={`${alibabaPuHuiTi.variable} ${alibabaPuHuiTi.className} bg-background text-foreground antialiased transition-colors duration-300`}>
-        <ThemeProvider>
-          <LocaleProvider siteShell={siteShell}>
-            <div className="page-shell bg-background text-foreground transition-colors duration-300">
-              <SiteHeader />
-              <PageTransition>{children}</PageTransition>
-              <SiteFooter />
-            </div>
-            <FloatingActions />
-          </LocaleProvider>
-        </ThemeProvider>
+        <RootProvider
+          theme={{
+            attribute: 'class',
+            storageKey: 'aiadc-theme',
+            defaultTheme: 'system',
+            enableSystem: true,
+            themes: ['light', 'dark'],
+            disableTransitionOnChange: true,
+          }}
+          search={{ options: { api: '/api/search' } }}
+          i18n={{ locale: 'zh-CN', translations: fumadocsTranslations }}
+        >
+          <LocaleProvider siteShell={siteShell}>{children}</LocaleProvider>
+        </RootProvider>
       </body>
     </html>
   );

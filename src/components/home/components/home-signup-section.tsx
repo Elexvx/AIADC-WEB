@@ -12,7 +12,7 @@ export function HomeSignupSection({ page }: { page: CmsPageContent }) {
   }
 
   return (
-    <section id="signup" className="bg-white py-14 transition-colors duration-300 sm:py-18">
+    <section id="signup" className="bg-background py-14 transition-colors duration-300 sm:py-18">
       <div className="section-shell">
         <div className="overflow-hidden rounded-[24px] bg-[#213183] px-7 py-8 text-white transition-colors duration-300 sm:px-10 sm:py-11">
           <div className="max-w-3xl">
@@ -28,7 +28,7 @@ export function HomeSignupSection({ page }: { page: CmsPageContent }) {
             <Button
               asChild
               size="lg"
-              className="mt-9 h-12 rounded-full bg-[#0075de] px-7 text-base font-medium !text-white hover:bg-[#005bab]"
+              className="mt-9 h-12 px-7 text-base !text-white"
             >
               <InternalLink href={signup.action.href} className="inline-flex items-center gap-3 !text-white">
                 {signup.action.label}

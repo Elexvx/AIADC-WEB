@@ -28,7 +28,7 @@ export function HomePageClient({ page, news }: HomePageClientProps) {
   };
 
   return (
-    <main className="bg-[#f6f5f4]">
+    <main className="bg-background">
       <ScrollReveal as="section" distance={10} threshold={0.08}>
         <HomeHero page={page} />
       </ScrollReveal>

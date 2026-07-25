@@ -2,7 +2,7 @@
 
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { type ReactNode, useState } from 'react';
-import { InternalLink } from '@/components/ui';
+import { Button, InternalLink } from '@/components/ui';
 import type { DownloadItem } from '@/lib/content/types';
 
 interface MaterialTableProps {
@@ -82,17 +82,9 @@ function MaterialMeta({ item }: { item: DownloadItem }) {
 
 function ActionButton({ item, block = false }: { item: DownloadItem; block?: boolean }) {
   return (
-    <InternalLink
-      href={item.fileUrl}
-      className={[
-        'inline-flex min-h-11 items-center justify-center rounded-[8px] border border-[#e6e6e6] bg-white px-4 py-2 text-[15px] font-medium leading-5 text-[#111111] transition-colors duration-200 hover:bg-[#ffffff] hover:text-[#111111]',
-        block ? 'w-full sm:w-auto' : '',
-      ]
-        .filter(Boolean)
-        .join(' ')}
-    >
-      {item.actionLabel || '下载'}
-    </InternalLink>
+    <Button asChild variant="outline" className={block ? 'min-h-11 w-full sm:w-auto' : 'min-h-11'}>
+      <InternalLink href={item.fileUrl}>{item.actionLabel || '下载'}</InternalLink>
+    </Button>
   );
 }
 
@@ -108,23 +100,17 @@ function PagerButton({
   onClick?: () => void;
 }) {
   return (
-    <button
+    <Button
       type="button"
       disabled={disabled}
       onClick={onClick}
-      className={[
-        'inline-flex h-11 w-11 items-center justify-center rounded-full border text-[16px] font-medium transition-colors duration-200',
-        active
-          ? 'border-[#000000] bg-[#000000] text-white'
-          : 'border-[#e6e6e6] bg-white text-[#111111]',
-        disabled ? 'cursor-not-allowed opacity-45' : '',
-      ]
-        .filter(Boolean)
-        .join(' ')}
+      variant={active ? 'default' : 'outline'}
+      size="icon"
+      className="h-11 w-11 text-base"
       aria-current={active ? 'page' : undefined}
     >
       {label}
-    </button>
+    </Button>
   );
 }
 
@@ -138,7 +124,7 @@ export function MaterialTable({ items }: MaterialTableProps) {
   const visiblePages = buildVisiblePages(currentPage, pageCount);
 
   return (
-    <div className="overflow-hidden rounded-[16px] border border-[#e6e6e6] bg-white shadow-[rgba(0,0,0,0.01)_0_0.175px_1.041px,rgba(0,0,0,0.02)_0_0.8px_2.925px,rgba(0,0,0,0.027)_0_2.025px_7.847px,rgba(0,0,0,0.04)_0_4px_18px]">
+    <div className="overflow-hidden rounded-[16px] border border-[#e6e6e6] bg-white">
       <div className="hidden md:block">
         <table className="w-full border-collapse">
           <colgroup>

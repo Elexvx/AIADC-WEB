@@ -33,7 +33,7 @@ export function EventFilterTabs({ filters, events }: EventFilterTabsProps) {
           <label
             key={filter.id}
             htmlFor={`event-filter-${index}`}
-            className="cursor-pointer rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-[#615d59] ring-1 ring-[#e6e6e6] transition-colors duration-200 hover:bg-[#f6f5f4]"
+            className="cursor-pointer rounded-md border bg-secondary px-4 py-2.5 text-sm font-medium text-secondary-foreground transition-colors duration-100 hover:bg-accent hover:text-accent-foreground"
           >
             {filter.title}
           </label>
@@ -167,7 +167,7 @@ function buildFilterStyles(filters: CmsRecordBase[]) {
   return filters
     .map((filter, index) => {
       const checkedSelector = `#event-filter-${index}:checked ~ .event-filter-tabs label[for="event-filter-${index}"]`;
-      const activeStyle = `${checkedSelector}{background:#0075de;color:#fff;box-shadow:none}`;
+      const activeStyle = `${checkedSelector}{border-color:#0075de;background:#0075de;color:#fff}`;
 
       if (filter.code === 'all') {
         return activeStyle;

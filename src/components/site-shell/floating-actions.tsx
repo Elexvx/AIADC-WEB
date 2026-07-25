@@ -20,7 +20,7 @@ export function FloatingActions() {
         aria-label="回到顶部"
         title="回到顶部"
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        className="grid h-11 w-11 place-items-center rounded-full border border-border bg-card text-card-foreground shadow-[rgba(0,0,0,0.01)_0_0.175px_1.041px,rgba(0,0,0,0.02)_0_0.8px_2.925px,rgba(0,0,0,0.027)_0_2.025px_7.847px,rgba(0,0,0,0.04)_0_4px_18px] outline-none transition-colors hover:bg-muted focus-visible:ring-2 focus-visible:ring-[#0075de] focus-visible:ring-offset-2 sm:h-12 sm:w-12"
+        className="grid h-11 w-11 place-items-center rounded-full border border-border bg-card text-card-foreground outline-none transition-colors duration-100 hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring sm:h-12 sm:w-12"
       >
         <ArrowUp className="h-[18px] w-[18px] sm:h-5 sm:w-5" />
       </button>

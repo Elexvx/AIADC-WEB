@@ -1,0 +1,6 @@
+{
+  "title": "参赛指南",
+  "description": "报名资格、组别与赛道选择",
+  "defaultOpen": true,
+  "pages": ["index", "groups", "tracks"]
+}
