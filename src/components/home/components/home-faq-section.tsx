@@ -8,7 +8,7 @@ export function HomeFaqSection({ page }: { page: CmsPageContent }) {
   const faqItems = getSectionItems(page, 'faq');
 
   return (
-    <section id="faq" className="bg-[#f6f5f4] py-14 transition-colors duration-300 sm:py-18">
+    <section id="faq" className="bg-background py-14 transition-colors duration-300 sm:py-18">
       <div className="section-shell">
         <HomeSectionTitle title="常见问题" description="把高频问题前置到官网，提升移动端与桌面端的信息查找效率。" centered />
         <div className="mt-9 grid gap-4 md:grid-cols-2">

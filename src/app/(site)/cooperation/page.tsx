@@ -128,7 +128,7 @@ function PartnershipExchangeCard({ item }: { item: PartnershipItem }) {
 
 export default function CooperationPage() {
   return (
-    <main className="bg-white text-slate-950">
+    <main className="bg-background text-slate-950">
       <PageHero
         eyebrow="商务合作"
         title="连接技术、场景与青年创新力量"

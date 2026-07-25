@@ -148,7 +148,7 @@ export function HomeHero({ page }: { page: CmsPageContent }) {
                 <Button
                   asChild
                   size="lg"
-                  className="h-12 w-full max-w-[220px] rounded-full bg-[#0075de] px-8 text-base font-medium !text-white shadow-[rgba(0,0,0,0.14)_0_10px_24px] hover:bg-[#005bab] sm:w-auto"
+                  className="h-12 w-full max-w-[220px] px-8 text-base !text-white sm:w-auto"
                 >
                   <InternalLink href={currentHero.cta?.href ?? ROUTES.registration} className="inline-flex items-center justify-center gap-2 !text-white">
                     <UserPlus className="h-5 w-5 !text-white" />
@@ -159,7 +159,7 @@ export function HomeHero({ page }: { page: CmsPageContent }) {
                   asChild
                   size="lg"
                   variant="outline"
-                  className="hero-secondary-action h-12 w-full max-w-[220px] rounded-full px-8 text-base font-semibold shadow-[rgba(0,0,0,0.12)_0_8px_28px] sm:w-auto"
+                  className="hero-secondary-action h-12 w-full max-w-[220px] px-8 text-base sm:w-auto"
                 >
                   <InternalLink href={secondaryAction?.href ?? ROUTES.registration} className="inline-flex items-center justify-center gap-2">
                     <Network className="h-5 w-5" />

@@ -36,7 +36,7 @@ const contactCards = [
 
 export default function ContactPage() {
   return (
-    <main className="bg-white text-slate-950">
+    <main className="bg-background text-slate-950">
       <PageHero
         eyebrow="联系方式"
         title="组委会咨询与赛事服务"

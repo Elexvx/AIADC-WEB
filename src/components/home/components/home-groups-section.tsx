@@ -9,7 +9,7 @@ export function HomeGroupsSection({ page }: { page: CmsPageContent }) {
   const groups = section?.items ?? [];
 
   return (
-    <section id="groups" className="bg-[#f6f5f4] py-14 transition-colors duration-300 sm:py-18">
+    <section id="groups" className="bg-background py-14 transition-colors duration-300 sm:py-18">
       <div className="section-shell">
         <HomeSectionTitle title={section?.title ?? '参赛组别'} description={section?.description} />
 

@@ -3,6 +3,7 @@ import { ROUTES } from '@/lib/config/routes';
 import { getPublicSiteUrl } from '@/lib/config/site';
 import { getCanonicalPath } from '@/lib/metadata';
 import { getNewsArticles } from '@/lib/content';
+import { docsSource } from '@/lib/docs/source';
 
 export const dynamic = 'force-static';
 
@@ -34,5 +35,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   })) satisfies MetadataRoute.Sitemap;
 
-  return [...routes, ...articleRoutes];
+  const documentationRoutes = docsSource.getPages().map((page) => ({
+    url: new URL(getCanonicalPath(page.url), siteUrl).toString(),
+    lastModified: now,
+    changeFrequency: 'monthly' as const,
+    priority: page.url === ROUTES.docs ? 0.9 : 0.75,
+  })) satisfies MetadataRoute.Sitemap;
+
+  return [...routes, ...documentationRoutes, ...articleRoutes];
 }

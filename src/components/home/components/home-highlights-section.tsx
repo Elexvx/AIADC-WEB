@@ -9,7 +9,7 @@ export function HomeHighlightsSection({ page }: { page: CmsPageContent }) {
   const items = section?.items ?? [];
 
   return (
-    <section id="tracks" className="bg-white py-14 transition-colors duration-300 sm:py-18">
+    <section id="tracks" className="bg-background py-14 transition-colors duration-300 sm:py-18">
       <div className="section-shell">
         <HomeSectionTitle title={section?.title ?? '赛道设置'} description={section?.description} />
 

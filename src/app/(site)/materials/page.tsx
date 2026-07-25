@@ -12,7 +12,7 @@ export default async function MaterialsPage() {
   const materialItems = getSectionItems(page, 'materials');
 
   return (
-    <main className="bg-[#f6f5f4]">
+    <main className="bg-background">
 
       <PageHero
         eyebrow={page.hero?.eyebrow ?? '材料下载'}

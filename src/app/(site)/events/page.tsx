@@ -18,7 +18,7 @@ export default async function EventsPage() {
   const eventFilters = buildActivityFilters(activityItems);
 
   return (
-    <main className="bg-white">
+    <main className="bg-background">
 
       <PageHero
         eyebrow={page.hero?.eyebrow ?? '活动中心'}

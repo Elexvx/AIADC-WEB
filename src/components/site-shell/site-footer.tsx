@@ -1,6 +1,7 @@
 'use client';
 
 import { useLocale } from '@/lib/i18n/locale-provider';
+import { DOCS_NAV_ITEMS } from '@/lib/config/routes';
 import { InternalLink } from '@/components/ui';
 
 const footerHeadingClass = 'text-xl font-bold leading-7 text-slate-950';
@@ -17,12 +18,12 @@ function PlaceholderQrCode() {
 
 export function SiteFooter() {
   const { siteShell } = useLocale();
-  const { footer, header } = siteShell;
+  const { footer } = siteShell;
   const showFooterColumns = true;
   const visibleFooterColumns = [
     {
       title: '导航',
-      links: header.mainNavItems,
+      links: DOCS_NAV_ITEMS,
     },
   ];
 

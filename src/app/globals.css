@@ -1,4 +1,6 @@
 @import 'tailwindcss';
+@import 'fumadocs-ui/css/neutral.css';
+@import 'fumadocs-ui/css/preset.css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -31,20 +33,20 @@
 
 :root {
   color-scheme: light;
-  --background: 30 10% 96%;
-  --foreground: 0 0% 0%;
+  --background: 0 0% 96%;
+  --foreground: 0 0% 3.9%;
   --card: 0 0% 100%;
-  --card-foreground: 0 0% 0%;
-  --popover: 0 0% 100%;
-  --popover-foreground: 0 0% 0%;
+  --card-foreground: 0 0% 3.9%;
+  --popover: 0 0% 98%;
+  --popover-foreground: 0 0% 15.1%;
   --primary: 208 100% 44%;
   --primary-foreground: 0 0% 100%;
-  --secondary: 232 60% 32%;
-  --secondary-foreground: 0 0% 100%;
-  --muted: 30 10% 96%;
-  --muted-foreground: 30 4% 36%;
-  --accent: 204 83% 66%;
-  --accent-foreground: 0 0% 0%;
+  --secondary: 0 0% 93.1%;
+  --secondary-foreground: 0 0% 9%;
+  --muted: 0 0% 96.1%;
+  --muted-foreground: 0 0% 45.1%;
+  --accent: 0 0% 93.1%;
+  --accent-foreground: 0 0% 9%;
   --destructive: 0 84.2% 60.2%;
   --destructive-foreground: 210 40% 98%;
   --border: 0 0% 90%;
@@ -52,58 +54,56 @@
   --ring: 208 100% 44%;
   --radius: 0.75rem;
   --surface: 0 0% 100%;
-  --surface-foreground: 0 0% 0%;
-  --surface-muted: 30 10% 96%;
-  --surface-muted-foreground: 30 4% 36%;
-  --surface-border: 0 0% 90%;
-  --surface-border-alpha: 1;
+  --surface-foreground: 0 0% 3.9%;
+  --surface-muted: 0 0% 96.1%;
+  --surface-muted-foreground: 0 0% 45.1%;
+  --surface-border: 0 0% 80%;
+  --surface-border-alpha: 0.5;
   --surface-shadow: 0 0% 0%;
   --site-chrome-bg: 0 0% 100%;
-  --site-chrome-fg: 0 0% 0%;
-  --site-chrome-muted: 30 4% 36%;
-  --site-chrome-border: 0 0% 90%;
-  --site-chrome-border-alpha: 1;
-  --site-chrome-sheen: 0 117 222;
+  --site-chrome-fg: 0 0% 3.9%;
+  --site-chrome-muted: 0 0% 45.1%;
+  --site-chrome-border: 0 0% 80%;
+  --site-chrome-border-alpha: 0.5;
   --site-notice-bg: var(--background);
-  --site-notice-fg: 30 4% 19%;
+  --site-notice-fg: 0 0% 15.1%;
   --site-action-bg: 0 0% 100%;
   --site-action-fg: 0 0% 0%;
 }
 
 :root.dark {
   color-scheme: dark;
-  --background: 232 48% 13%;
-  --foreground: 0 0% 100%;
-  --card: 230 38% 18%;
-  --card-foreground: 0 0% 100%;
-  --popover: 230 38% 18%;
-  --popover-foreground: 0 0% 100%;
+  --background: 0 0% 7.04%;
+  --foreground: 0 0% 92%;
+  --card: 0 0% 9.8%;
+  --card-foreground: 0 0% 98%;
+  --popover: 0 0% 11.6%;
+  --popover-foreground: 0 0% 86.9%;
   --primary: 208 100% 44%;
   --primary-foreground: 0 0% 100%;
-  --secondary: 232 60% 32%;
-  --secondary-foreground: 0 0% 100%;
-  --muted: 230 32% 26%;
-  --muted-foreground: 0 0% 85%;
-  --accent: 204 83% 66%;
-  --accent-foreground: 0 0% 100%;
+  --secondary: 0 0% 12.9%;
+  --secondary-foreground: 0 0% 92%;
+  --muted: 0 0% 12.9%;
+  --muted-foreground: 0 0% 70%;
+  --accent: 0 0% 16.5%;
+  --accent-foreground: 0 0% 90%;
   --destructive: 0 72% 58%;
   --destructive-foreground: 210 40% 98%;
-  --border: 220 20% 22%;
-  --input: 220 20% 22%;
-  --ring: 223 100% 68%;
-  --surface: 230 38% 18%;
-  --surface-foreground: 0 0% 100%;
-  --surface-muted: 229 36% 23%;
-  --surface-muted-foreground: 0 0% 78%;
-  --surface-border: 0 0% 100%;
-  --surface-border-alpha: 0.18;
-  --surface-shadow: 221 78% 6%;
+  --border: 0 0% 18%;
+  --input: 0 0% 18%;
+  --ring: 0 0% 54.9%;
+  --surface: 0 0% 9.8%;
+  --surface-foreground: 0 0% 98%;
+  --surface-muted: 0 0% 12.9%;
+  --surface-muted-foreground: 0 0% 70%;
+  --surface-border: 0 0% 40%;
+  --surface-border-alpha: 0.2;
+  --surface-shadow: 0 0% 0%;
   --site-chrome-bg: var(--background);
   --site-chrome-fg: var(--foreground);
-  --site-chrome-muted: 0 0% 88%;
-  --site-chrome-border: 0 0% 100%;
-  --site-chrome-border-alpha: 0.18;
-  --site-chrome-sheen: 255 255 255;
+  --site-chrome-muted: 0 0% 70%;
+  --site-chrome-border: 0 0% 40%;
+  --site-chrome-border-alpha: 0.2;
   --site-notice-bg: var(--background);
   --site-notice-fg: 0 0% 100%;
   --site-action-bg: var(--surface);
@@ -127,9 +127,7 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
   overflow-y: visible;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.52), rgba(255, 255, 255, 0) 18rem),
-    hsl(var(--background));
+  background: hsl(var(--background));
   font-family: var(--font-sans);
   font-weight: 400;
   text-rendering: optimizeLegibility;
@@ -353,18 +351,10 @@ img {
   color: hsl(var(--site-notice-fg));
 }
 
-.site-top-notice::before {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  content: '';
-  background: linear-gradient(90deg, transparent, rgb(var(--site-chrome-sheen) / 0.1), transparent);
-}
-
 .site-header {
-  background: hsl(var(--site-chrome-bg) / 0.88);
+  background: hsl(var(--site-chrome-bg) / 0.96);
   color: hsl(var(--site-chrome-fg));
-  backdrop-filter: blur(18px);
+  backdrop-filter: blur(12px);
 }
 
 .site-header-main {
@@ -382,24 +372,15 @@ img {
 
 .site-theme-toggle {
   border: 1px solid hsl(var(--site-chrome-border) / var(--site-chrome-border-alpha));
-  background: hsl(var(--site-action-bg));
+  background: transparent;
   color: hsl(var(--site-action-fg));
-  box-shadow:
-    rgba(0, 0, 0, 0.01) 0 0.175px 1.041px,
-    rgba(0, 0, 0, 0.02) 0 0.8px 2.925px,
-    rgba(0, 0, 0, 0.027) 0 2.025px 7.847px,
-    rgba(0, 0, 0, 0.04) 0 4px 18px;
+  box-shadow: none;
 }
 
 .hero-secondary-action {
   border: 1px solid rgba(255, 255, 255, 0.9);
   background: rgba(255, 255, 255, 0.98);
   color: #111111;
-  box-shadow:
-    rgba(0, 0, 0, 0.01) 0 0.175px 1.041px,
-    rgba(0, 0, 0, 0.02) 0 0.8px 2.925px,
-    rgba(0, 0, 0, 0.027) 0 2.025px 7.847px,
-    rgba(0, 0, 0, 0.04) 0 4px 18px;
   backdrop-filter: blur(10px);
 }
 
@@ -916,22 +897,19 @@ html.dark .polished-card {
 
 /* Article Detail Page: Editorial Styles */
 .article-page {
-  --article-paper: #f7f5f0;
-  --article-ink: #111111;
-  --article-body: #38342f;
-  --article-muted: #5f5b54;
-  --article-subtle: #6c675f;
-  --article-excerpt-ink: #4e4942;
-  --article-link: #005bab;
-  --article-border: rgba(17, 17, 17, 0.25);
-  --article-tag-bg: #ffffff;
-  --article-tag-ring: #e6e6e6;
+  --article-ink: hsl(var(--foreground));
+  --article-body: hsl(var(--foreground) / 0.86);
+  --article-muted: hsl(var(--muted-foreground));
+  --article-subtle: hsl(var(--muted-foreground) / 0.88);
+  --article-excerpt-ink: hsl(var(--foreground) / 0.78);
+  --article-link: hsl(var(--primary));
+  --article-border: hsl(var(--border));
+  --article-tag-bg: hsl(var(--card));
+  --article-tag-ring: hsl(var(--border));
 }
 
 .article-body {
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0) 18rem),
-    var(--article-paper);
+  background: hsl(var(--background));
 }
 
 .article-cover {
@@ -1098,23 +1076,6 @@ html.dark .polished-card {
   color: inherit;
 }
 
-html.dark .article-page {
-  --article-paper: hsl(var(--surface-muted));
-  --article-ink: #ffffff;
-  --article-body: rgba(255, 255, 255, 0.88);
-  --article-muted: rgba(255, 255, 255, 0.72);
-  --article-subtle: rgba(255, 255, 255, 0.66);
-  --article-excerpt-ink: rgba(255, 255, 255, 0.8);
-  --article-link: #72c1ff;
-  --article-border: rgba(255, 255, 255, 0.2);
-  --article-tag-bg: rgba(255, 255, 255, 0.1);
-  --article-tag-ring: rgba(255, 255, 255, 0.18);
-}
-
-html.dark .article-body {
-  background: hsl(var(--surface-muted));
-}
-
 html.dark .article-cover {
   box-shadow: 0 18px 42px rgba(2, 8, 23, 0.32);
 }
@@ -1160,4 +1121,74 @@ html.dark .article-cover {
   .article-markdown p {
     text-align: left;
   }
+}
+
+/* Fumadocs: align the documentation workspace with the AIADC brand shell. */
+.docs-shell {
+  color-scheme: inherit;
+  --color-fd-background: hsl(var(--background));
+  --color-fd-foreground: hsl(var(--foreground));
+  --color-fd-muted: hsl(var(--muted));
+  --color-fd-muted-foreground: hsl(var(--muted-foreground));
+  --color-fd-popover: hsl(var(--popover));
+  --color-fd-popover-foreground: hsl(var(--popover-foreground));
+  --color-fd-card: hsl(var(--card));
+  --color-fd-card-foreground: hsl(var(--card-foreground));
+  --color-fd-border: hsl(var(--surface-border) / var(--surface-border-alpha));
+  --color-fd-primary: hsl(var(--primary));
+  --color-fd-primary-foreground: hsl(var(--primary-foreground));
+  --color-fd-secondary: hsl(var(--secondary));
+  --color-fd-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-fd-accent: hsl(var(--accent));
+  --color-fd-accent-foreground: hsl(var(--accent-foreground));
+  --color-fd-ring: hsl(var(--ring));
+  min-height: 100vh;
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: var(--font-sans);
+}
+
+.docs-shell :where(button, input, textarea, select) {
+  font-family: inherit;
+}
+
+.docs-shell #nd-docs-layout {
+  background: hsl(var(--background));
+}
+
+.docs-shell #nd-subnav {
+  border-color: hsl(var(--surface-border) / var(--surface-border-alpha));
+  background: hsl(var(--background) / 0.92);
+  backdrop-filter: blur(18px);
+}
+
+.docs-shell #nd-sidebar {
+  border-color: hsl(var(--surface-border) / var(--surface-border-alpha));
+  background: hsl(var(--card));
+}
+
+.docs-shell #nd-page {
+  text-wrap: pretty;
+}
+
+.docs-shell #nd-page h1 {
+  letter-spacing: -0.04em;
+}
+
+.docs-shell #nd-page :where(p, li) {
+  line-height: 1.85;
+}
+
+.docs-shell #nd-page table {
+  font-size: 0.94rem;
+}
+
+.docs-shell #nd-page a:not([class]) {
+  text-underline-offset: 0.2em;
+}
+
+.docs-shell .doc-action:focus-visible {
+  outline: 2px solid #0075de;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px hsl(var(--background));
 }

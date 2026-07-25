@@ -101,7 +101,7 @@ export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
   const hasMarkdown = article.contentFormat === 'markdown' && Boolean(article.bodyMarkdown?.trim());
 
   return (
-    <main className="article-page min-h-screen bg-[#f7f5f0]">
+    <main className="article-page min-h-screen bg-background">
       <article className="article-body relative px-5 pb-14 pt-12 sm:px-8 sm:pb-20 sm:pt-16 lg:px-12">
         <div className="mx-auto max-w-[760px]">
           <InternalLink

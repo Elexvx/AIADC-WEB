@@ -17,7 +17,7 @@ export function HomeNewsSection({ news }: HomeNewsSectionProps) {
   }
 
   return (
-    <section id="news" className="bg-white py-14 transition-colors duration-300 sm:py-18">
+    <section id="news" className="bg-background py-14 transition-colors duration-300 sm:py-18">
       <div className="section-shell">
         <HomeSectionTitle
           title="新闻动态"

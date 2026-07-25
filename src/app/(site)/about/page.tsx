@@ -205,7 +205,7 @@ const tierAwardStyles = [
 
 export default function AboutPage() {
   return (
-    <main className="bg-white text-slate-950">
+    <main className="bg-background text-slate-950">
       <PageHero
         eyebrow="关于大赛"
         title="全国大学生智能应用开发大赛"
