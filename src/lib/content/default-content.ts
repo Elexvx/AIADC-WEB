@@ -1,5 +1,5 @@
 import type { ArticleItem, CmsContentBundle, CmsPageContent, CmsRecordBase, DownloadItem, PageKey, StatItem, TimelineItem } from '@/lib/content/types';
-import { DOCS_NAV_ITEMS, ROUTES } from '@/lib/config/routes';
+import { ROUTES, SITE_NAV_ITEMS } from '@/lib/config/routes';
 import { defaultLocale, type Locale } from '@/lib/i18n/config';
 import { getMarkdownNewsArticles } from './markdown-articles';
 
@@ -240,7 +240,7 @@ function buildZhBundle(locale: Locale = defaultLocale): CmsContentBundle {
         {
           title: '开发者文档',
           description: '查看 SDK、API 与平台能力',
-          action: { label: '赛事文档', href: ROUTES.docs },
+          action: { label: '参赛指南', href: ROUTES.docsParticipation },
         },
         {
           title: '企业命题',
@@ -495,7 +495,7 @@ function buildZhBundle(locale: Locale = defaultLocale): CmsContentBundle {
       header: {
         languageAria: '语言切换',
         loginLabel: '报名参赛',
-        mainNavItems: [...DOCS_NAV_ITEMS],
+        mainNavItems: [...SITE_NAV_ITEMS],
         pageSwitchItems: [
           { label: '活动中心', href: ROUTES.events, description: '报名征集、评审组织、项目打磨与决赛展示。' },
           { label: '材料下载', href: ROUTES.materials, description: '下载通知、方案、规则和报名材料。' },
@@ -548,10 +548,10 @@ function buildZhBundle(locale: Locale = defaultLocale): CmsContentBundle {
             title: '技术内容',
             links: [
               { label: '技术解决方案', href: ROUTES.about },
-              { label: '帮助文档', href: ROUTES.docs },
+              { label: '帮助文档', href: ROUTES.docsParticipation },
               { label: '开发者社区', href: ROUTES.events },
               { label: '训练营课程', href: ROUTES.events },
-              { label: '参赛文档', href: ROUTES.docs },
+              { label: '参赛指南', href: ROUTES.docsParticipation },
             ],
           },
           {

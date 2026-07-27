@@ -8,6 +8,7 @@ type NewsArticleCardProps = {
   variant?: 'image' | 'compact' | 'row';
   showCategory?: boolean;
   categoryLabel?: string;
+  imageLoading?: 'eager' | 'lazy';
 };
 
 export function NewsArticleCard({
@@ -15,6 +16,7 @@ export function NewsArticleCard({
   variant = 'image',
   showCategory = true,
   categoryLabel,
+  imageLoading = 'lazy',
 }: NewsArticleCardProps) {
   const resolvedLabel = categoryLabel ?? getNewsCategoryLabel(article.category);
 
@@ -54,7 +56,7 @@ export function NewsArticleCard({
         className="notion-card-elevated grid gap-4 p-4 transition-colors duration-200 hover:border-[#d4d4d4] sm:grid-cols-[11rem_1fr]"
       >
         <div className="aspect-[4/3] overflow-hidden rounded-lg bg-[#f6f5f4] transition-colors duration-300">
-          <img src={article.image.url} alt={article.image.alt} className="h-full w-full object-cover" loading="lazy" decoding="async" />
+          <img src={article.image.url} alt={article.image.alt} className="h-full w-full object-cover" loading={imageLoading} decoding="async" />
         </div>
         <div className="min-w-0">
           <div className="flex flex-wrap items-center gap-3">
@@ -88,7 +90,7 @@ export function NewsArticleCard({
       className="notion-card-elevated group flex h-full flex-col overflow-hidden transition-colors duration-200 hover:border-[#d4d4d4]"
     >
       <div className="relative aspect-[16/10] overflow-hidden">
-        <img src={article.image.url} alt={article.image.alt} className="h-full w-full object-cover" loading="lazy" decoding="async" />
+        <img src={article.image.url} alt={article.image.alt} className="h-full w-full object-cover" loading={imageLoading} decoding="async" />
         {showCategory ? (
           <Badge className="absolute left-4 top-4">{resolvedLabel}</Badge>
         ) : null}

@@ -1,14 +1,12 @@
 {
   "title": "AIADC 赛事文档",
-  "description": "2026 赛季参赛指南、规则与材料中心",
+  "description": "2026 赛季参赛说明、材料清单与评分标准",
   "pages": [
+    "---赛事概览---",
     "index",
-    "overview",
+    "---参赛文件---",
     "participation",
-    "schedule",
     "materials",
-    "review",
-    "faq",
-    "contact"
+    "review"
   ]
 }

@@ -12,8 +12,7 @@ type DocActionProps = {
 
 const actionClassName = cn(
   buttonVariants({ variant: 'primary' }),
-  'doc-action not-prose min-h-10 gap-2 rounded-md bg-[#0075de] px-4 py-2 !text-white no-underline shadow-none',
-  'hover:bg-[#0075de]/80 focus-visible:ring-[#0075de]',
+  'doc-action not-prose min-h-10 gap-2 rounded-md px-4 py-2 no-underline shadow-none',
 );
 
 export function RegistrationAction({ children = '进入报名系统' }: Pick<DocActionProps, 'children'>) {

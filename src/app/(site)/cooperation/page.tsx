@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import {
-  ArrowRight,
   Mail,
   Scale,
   ShieldCheck,
@@ -137,21 +136,6 @@ export default function CooperationPage() {
         dark
         fullBleedBackground
       />
-
-      <ScrollReveal as="section" className="border-b border-slate-200 bg-white py-7 sm:py-8" delay={30}>
-        <div className="section-shell flex flex-col items-center justify-between gap-5 text-center sm:flex-row sm:text-left">
-          <div>
-            <p className="text-lg font-bold text-slate-950">寻找长期、可信的合作伙伴</p>
-            <p className="mt-1 text-sm leading-7 text-slate-600">合作内容以双方确认的正式文件为准。</p>
-          </div>
-          <Button asChild size="lg" className="shrink-0 lg:mr-16">
-            <a href="mailto:aiadc@aiadc.org.cn?subject=AIADC商务合作咨询">
-              联系合作团队
-              <ArrowRight aria-hidden="true" className="h-4 w-4" />
-            </a>
-          </Button>
-        </div>
-      </ScrollReveal>
 
       <ScrollReveal as="section" className="bg-white py-12 sm:py-16" delay={40}>
         <div className="section-shell">

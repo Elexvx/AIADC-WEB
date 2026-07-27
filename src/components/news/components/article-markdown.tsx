@@ -120,7 +120,7 @@ export function ArticleMarkdown({ markdown }: { markdown: string }) {
   const blocks = parseMarkdown(markdown);
 
   return (
-    <div className="article-markdown mx-auto mt-9 max-w-[640px]">
+    <div className="article-markdown mt-9 max-w-[760px]">
       {blocks.map((block, index) => {
         if (block.type === 'heading') {
           const className = block.level === 2 ? 'article-markdown-h2' : block.level === 3 ? 'article-markdown-h3' : 'article-markdown-h4';
