@@ -1217,6 +1217,7 @@ html.dark .article-cover {
 /* Fumadocs: align the documentation workspace with the AIADC brand shell. */
 .docs-shell {
   color-scheme: inherit;
+  --fd-layout-width: 97rem;
   --color-fd-primary: #cc8b00;
   --color-fd-primary-foreground: #fafafa;
   min-height: 100vh;
