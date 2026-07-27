@@ -41,10 +41,10 @@ export function HomePageClient({ page, news }: HomePageClientProps) {
       <ScrollReveal as="section" delay={100} lazyRender {...reveal}>
         <HomeHighlightsSection page={page} />
       </ScrollReveal>
-      <ScrollReveal as="section" delay={120} lazyRender {...reveal}>
+      <ScrollReveal as="section" delay={120} {...reveal}>
         <HomePartnersSection page={page} />
       </ScrollReveal>
-      <ScrollReveal as="section" delay={140} lazyRender {...reveal}>
+      <ScrollReveal as="section" delay={140} {...reveal}>
         <HomeNewsSection news={news} />
       </ScrollReveal>
       <ScrollReveal as="section" delay={160} lazyRender {...reveal}>

@@ -19,15 +19,18 @@ export const ROUTES = {
 
 export const DOCS_NAV_ITEMS = [
   { label: '文档首页', href: ROUTES.docs },
-  { label: '大赛概览', href: ROUTES.docsOverview },
-  { label: '参赛指南', href: ROUTES.docsParticipation },
-  { label: '赛程安排', href: ROUTES.docsSchedule },
+  { label: '参赛说明', href: ROUTES.docsParticipation },
   { label: '参赛材料', href: ROUTES.docsMaterials },
-  { label: '评审规则', href: ROUTES.docsReview },
-  { label: '常见问题', href: ROUTES.docsFaq },
-  { label: '联系咨询', href: ROUTES.docsContact },
+  { label: '评分标准', href: ROUTES.docsReview },
 ] as const;
 
-export const DOCS_PRIMARY_NAV_ITEMS = DOCS_NAV_ITEMS.slice(0, 6);
+export const SITE_NAV_ITEMS = [
+  { label: '活动中心', href: ROUTES.events },
+  { label: '参赛指南', href: ROUTES.docsParticipation },
+  { label: '通知公告', href: ROUTES.news },
+  { label: '关于大赛', href: ROUTES.about },
+  { label: '商务合作', href: ROUTES.cooperation },
+  { label: '联系方式', href: ROUTES.contact },
+] as const;
 
 export type RouteKey = keyof typeof ROUTES;

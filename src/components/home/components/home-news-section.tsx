@@ -26,7 +26,7 @@ export function HomeNewsSection({ news }: HomeNewsSectionProps) {
         {articles.length > 0 ? (
           <div className="mt-9 grid gap-5 md:grid-cols-3">
             {articles.map((article) => (
-              <NewsArticleCard key={article.slug} article={article} />
+              <NewsArticleCard key={article.slug} article={article} imageLoading="eager" />
             ))}
           </div>
         ) : null}

@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
+import { GeistSans } from 'geist/font/sans';
 import { RootProvider } from 'fumadocs-ui/provider/next';
 import { getPublicSiteUrl } from '@/lib/config/site';
 import { getSiteMeta, getSiteShellContent } from '@/lib/content';
@@ -50,6 +51,13 @@ const fumadocsTranslations = {
   'Copy Anchor Link(heading anchor)(aria-label)': '复制章节链接',
   'Copy Text(code block)(aria-label)': '复制代码',
   'Copied Text(code block)(aria-label)': '已复制',
+  'Copy Markdown(page actions)': '复制 Markdown',
+  'Open(page actions)': '打开',
+  'View as Markdown(page actions)': '查看 Markdown',
+  'Open in Scira AI(page actions)': '在 Scira AI 中打开',
+  'Open in ChatGPT(page actions)': '在 ChatGPT 中打开',
+  'Open in Claude(page actions)': '在 Claude 中打开',
+  'Open in Cursor(page actions)': '在 Cursor 中打开',
   'Toggle Menu(mobile menu)(aria-label)': '切换菜单',
   'Toggle Theme(theme switcher)(aria-label)': '切换日间或夜间模式',
   'Light(theme switcher)(aria-label)': '日间模式',
@@ -166,7 +174,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
 
   return (
     <html lang="zh-CN" suppressHydrationWarning>
-      <body className={`${alibabaPuHuiTi.variable} ${alibabaPuHuiTi.className} bg-background text-foreground antialiased transition-colors duration-300`}>
+      <body className={`${GeistSans.variable} ${alibabaPuHuiTi.variable} ${alibabaPuHuiTi.className} bg-background text-foreground antialiased transition-colors duration-300`}>
         <RootProvider
           theme={{
             attribute: 'class',

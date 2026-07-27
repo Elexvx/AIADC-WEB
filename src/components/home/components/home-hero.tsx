@@ -128,7 +128,7 @@ export function HomeHero({ page }: { page: CmsPageContent }) {
         ) : null}
 
         {!isImageOnlySlide ? (
-          <div className="section-shell relative z-10 flex h-full items-center justify-center px-6 py-14 text-center">
+          <div className="section-shell relative z-10 flex h-full items-center justify-center py-14 text-center">
             <div className="mx-auto max-w-[820px]">
               <h1 className="text-[2.75rem] font-bold leading-none tracking-[-0.05em] text-white transition-colors duration-300 sm:text-[4rem] lg:text-[4.75rem]">
                 {titleLines.length > 0

@@ -1,7 +1,7 @@
 'use client';
 
 import { useLocale } from '@/lib/i18n/locale-provider';
-import { DOCS_NAV_ITEMS } from '@/lib/config/routes';
+import { SITE_NAV_ITEMS } from '@/lib/config/routes';
 import { InternalLink } from '@/components/ui';
 
 const footerHeadingClass = 'text-xl font-bold leading-7 text-slate-950';
@@ -23,7 +23,7 @@ export function SiteFooter() {
   const visibleFooterColumns = [
     {
       title: '导航',
-      links: DOCS_NAV_ITEMS,
+      links: SITE_NAV_ITEMS,
     },
   ];
 
@@ -45,7 +45,7 @@ export function SiteFooter() {
                         <img
                           src={qrCode.imageUrl}
                           alt={qrCode.label}
-                          loading="lazy"
+                          loading="eager"
                           decoding="async"
                           className="h-24 w-24 rounded-md border border-slate-200 bg-white object-cover p-1 shadow-sm"
                         />
