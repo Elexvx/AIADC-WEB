@@ -1,4 +1,4 @@
-import { ArrowRight, CalendarDays } from 'lucide-react';
+import { CalendarDays } from 'lucide-react';
 import { getNewsCategoryLabel } from '@/components/news/lib/news';
 import { type ArticleItem } from '@/lib/content/types';
 import { Badge, InternalLink } from '@/components/ui';
@@ -108,10 +108,6 @@ export function NewsArticleCard({
             ))}
           </div>
         ) : null}
-        <span className="mt-auto inline-flex items-center gap-2 pt-5 text-sm font-semibold text-[#0075de] transition-colors duration-300">
-          查看全文
-          <ArrowRight className="h-4 w-4" />
-        </span>
       </div>
     </InternalLink>
   );
