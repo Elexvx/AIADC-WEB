@@ -41,7 +41,7 @@ export default function ContactPage() {
         eyebrow="联系方式"
         title="组委会咨询与赛事服务"
         description="通过地址、邮箱与官方通知群获取赛事服务信息。"
-        backgroundImage="/assets/hero/aiadc-hero-registration.png"
+        backgroundImage="/assets/hero/aiadc-hero-registration.webp"
         dark
         fullBleedBackground
       />

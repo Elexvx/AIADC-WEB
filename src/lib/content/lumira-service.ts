@@ -213,7 +213,7 @@ function normalizeRemoteArticle(item: unknown, index: number): ArticleItem | nul
     excerpt: asString(item.excerpt, body[0] ?? ''),
     date: asString(item.date, new Date().toISOString().slice(0, 10)),
     image: {
-      url: asString(image.url, asString(item.imageUrl, '/assets/official-notice-cover.png')),
+      url: asString(image.url, asString(item.imageUrl, '/assets/official-notice-cover.webp')),
       alt: asString(image.alt, title),
     },
     body,

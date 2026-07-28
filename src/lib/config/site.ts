@@ -1,4 +1,4 @@
-const defaultSiteUrl = 'https://www.aiadc.org.cn';
+const defaultSiteUrl = 'https://aiadc.org.cn';
 
 export function getPublicSiteUrl() {
   const configuredUrl = process.env.NEXT_PUBLIC_SITE_URL ?? process.env.VITE_PUBLIC_SITE_URL ?? defaultSiteUrl;

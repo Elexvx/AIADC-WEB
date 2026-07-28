@@ -3,13 +3,13 @@ import { ROUTES, SITE_NAV_ITEMS } from '@/lib/config/routes';
 import { defaultLocale, type Locale } from '@/lib/i18n/config';
 import { getMarkdownNewsArticles } from './markdown-articles';
 
-const noticeCover = '/assets/official-notice-cover.png';
-const heroVisual = '/assets/aiadc-hero-visual.png';
-const heroOfficialPoster = '/assets/hero/aiadc-hero-official-poster.png';
-const heroCompetition = '/assets/hero/aiadc-hero-competition.png';
-const heroRegistration = '/assets/hero/aiadc-hero-registration.png';
-const heroIncubation = '/assets/hero/aiadc-hero-incubation.png';
-const introCompetitionBackground = '/assets/hero/aiadc-intro-competition-bg.png';
+const noticeCover = '/assets/official-notice-cover.webp';
+const heroVisual = '/assets/aiadc-hero-visual.webp';
+const heroOfficialPoster = '/assets/hero/aiadc-hero-official-poster.webp';
+const heroCompetition = '/assets/hero/aiadc-hero-competition.webp';
+const heroRegistration = '/assets/hero/aiadc-hero-registration.webp';
+const heroIncubation = '/assets/hero/aiadc-hero-incubation.webp';
+const introCompetitionBackground = '/assets/hero/aiadc-intro-competition-bg.webp';
 
 function record<T extends Partial<CmsRecordBase>>(locale: Locale, id: string, code: string, data: T): CmsRecordBase & T {
   return {
@@ -462,7 +462,7 @@ function buildZhBundle(locale: Locale = defaultLocale): CmsContentBundle {
       href: '/news/review-rules-2026',
       excerpt: '评审坚持技术路线中立原则，围绕真实问题、真实开发、真实贡献、可验证成果和持续迭代能力展开。',
       date: '2026-07-01',
-      image: { url: '/assets/aiadc-logo.png', alt: '全国大学生智能应用开发大赛标识' },
+      image: { url: '/assets/aiadc-logo-medium.webp', alt: '全国大学生智能应用开发大赛标识' },
       body: [
         '初赛材料评审重点审查项目材料完整性、逻辑清晰度、开发过程证据、成果基础、发展潜力及赛道适配性。',
         '决赛综合评分结合现场路演、专家问答、演示效果和复核情况形成最终分值。',

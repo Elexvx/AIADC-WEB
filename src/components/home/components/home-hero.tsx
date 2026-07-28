@@ -8,7 +8,7 @@ import type { CmsPageContent } from '@/lib/content/types';
 import { Button, InternalLink } from '@/components/ui';
 
 const carouselIntervalMs = 8000;
-const carouselWarmupDelayMs = 1200;
+const carouselWarmupDelayMs = 5000;
 
 type HeroSlideExtra = {
   alt?: string;
@@ -105,7 +105,7 @@ export function HomeHero({ page }: { page: CmsPageContent }) {
           return (
             <img
               key={slide.id}
-              src={slide.imageUrl ?? '/assets/aiadc-hero-visual.png'}
+              src={slide.imageUrl ?? '/assets/aiadc-hero-visual.webp'}
               alt={String(slideExtra.alt ?? 'AIADC carousel image')}
               aria-hidden={!isActiveSlide}
               decoding="async"

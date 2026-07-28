@@ -6,7 +6,7 @@ category: notice
 tags: [赛事通知, 报名参赛, 2026]
 excerpt: 为深入贯彻落实教育强国、科技强国、人才强国建设战略部署，全国大学生智能应用开发大赛组织委员会决定举办全国大学生智能应用开发大赛，现将有关事项通知如下。
 date: 2026-07-01
-image: /assets/official-notice-cover.png
+image: /assets/official-notice-cover.webp
 imageAlt: 关于举办全国大学生智能应用开发大赛的通知
 sort: 1
 status: published

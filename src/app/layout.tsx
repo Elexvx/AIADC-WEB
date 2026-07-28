@@ -1,33 +1,15 @@
 import type { Metadata, Viewport } from 'next';
-import localFont from 'next/font/local';
 import { GeistSans } from 'geist/font/sans';
+import type { CSSProperties } from 'react';
 import { RootProvider } from 'fumadocs-ui/provider/next';
 import { getPublicSiteUrl } from '@/lib/config/site';
 import { getSiteMeta, getSiteShellContent } from '@/lib/content';
 import { LocaleProvider } from '@/lib/i18n/locale-provider';
 import './globals.css';
 
-const alibabaPuHuiTi = localFont({
-  src: [
-    {
-      path: '../../public/fonts/alibaba-puhuiti/AlibabaPuHuiTi-Regular.woff2',
-      weight: '400',
-      style: 'normal',
-    },
-    {
-      path: '../../public/fonts/alibaba-puhuiti/AlibabaPuHuiTi-Medium.woff2',
-      weight: '500',
-      style: 'normal',
-    },
-    {
-      path: '../../public/fonts/alibaba-puhuiti/AlibabaPuHuiTi-Bold.woff2',
-      weight: '700',
-      style: 'normal',
-    },
-  ],
-  display: 'swap',
-  variable: '--font-alibaba-puhuiti',
-});
+const systemChineseFontStyle = {
+  '--font-alibaba-puhuiti': "'PingFang SC', 'Microsoft YaHei', 'Noto Sans CJK SC', ui-sans-serif, system-ui, sans-serif",
+} as CSSProperties;
 
 const siteUrl = getPublicSiteUrl();
 const siteLogo = '/assets/aiadc-logo.png';
@@ -173,8 +155,8 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   const siteShell = await getSiteShellContent('zh');
 
   return (
-    <html lang="zh-CN" suppressHydrationWarning>
-      <body className={`${GeistSans.variable} ${alibabaPuHuiTi.variable} ${alibabaPuHuiTi.className} bg-background text-foreground antialiased transition-colors duration-300`}>
+    <html lang="zh-CN" suppressHydrationWarning style={systemChineseFontStyle}>
+      <body className={`${GeistSans.variable} bg-background text-foreground antialiased transition-colors duration-300`}>
         <RootProvider
           theme={{
             attribute: 'class',

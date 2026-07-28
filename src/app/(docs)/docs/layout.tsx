@@ -22,7 +22,7 @@ export default function DocumentationLayout({ children }: Readonly<{ children: R
           title: (
             <span className="flex min-w-0 items-center gap-2">
               <Image
-                src="/assets/aiadc-logo.png"
+                src="/assets/aiadc-logo-small.webp"
                 alt="AIADC 赛事文档"
                 width={20}
                 height={20}

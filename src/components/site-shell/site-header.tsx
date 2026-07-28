@@ -31,12 +31,20 @@ const MOBILE_NAV_ITEMS = [
   { ...SITE_NAV_ITEMS[5], icon: Mail },
   { label: '报名参赛', href: ROUTES.registration, icon: SquareArrowOutUpRight },
 ] as const;
+function GithubMark({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className={className} fill="currentColor">
+      <path d="M12 .7a11.5 11.5 0 0 0-3.64 22.41c.58.11.79-.25.79-.56v-2.23c-3.22.7-3.9-1.37-3.9-1.37-.52-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.77 2.72 1.26 3.38.96.1-.75.41-1.26.74-1.55-2.57-.29-5.27-1.29-5.27-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.16 1.18a10.9 10.9 0 0 1 5.75 0c2.2-1.49 3.16-1.18 3.16-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.4-2.71 5.38-5.29 5.67.42.36.79 1.06.79 2.14v3.17c0 .31.21.68.8.56A11.5 11.5 0 0 0 12 .7Z" />
+    </svg>
+  );
+}
+
 
 function BrandMark({ primary, secondary }: { primary: string; secondary: string }) {
   return (
     <span className="flex min-w-0 items-center gap-3">
       <span className="grid h-11 w-11 shrink-0 place-items-center overflow-hidden rounded-2xl border border-[#ece7e1] bg-white shadow-[rgba(0,0,0,0.02)_0_0.8px_2.925px,rgba(0,0,0,0.04)_0_4px_18px]">
-        <img src="/assets/aiadc-logo.png" alt="" width={40} height={40} className="h-9 w-9 object-contain" />
+        <img src="/assets/aiadc-logo-small.webp" alt="" width={40} height={40} className="h-9 w-9 object-contain" />
       </span>
       <span className="min-w-0 leading-none">
         <strong className="site-header-brand block max-w-[min(68vw,26rem)] truncate text-[1.125rem] font-semibold tracking-[-0.02em] transition-colors duration-300 sm:max-w-none sm:text-[1.25rem]">
@@ -52,7 +60,7 @@ function MobileBrandMark({ primary, secondary }: { primary: string; secondary: s
   return (
     <span className="flex min-w-0 items-center gap-2.5">
       <img
-        src="/assets/aiadc-logo.png"
+        src="/assets/aiadc-logo-small.webp"
         alt=""
         width={28}
         height={28}
@@ -211,13 +219,7 @@ export function SiteHeader() {
                   aria-label="在 GitHub 查看 AIADC-WEB"
                   className="site-mobile-navigation-github inline-flex h-10 w-10 items-center justify-center rounded-md transition-colors"
                 >
-                  <img
-                    src="https://github.githubassets.com/favicons/favicon.svg"
-                    alt=""
-                    width={22}
-                    height={22}
-                    className="h-[22px] w-[22px] dark:invert"
-                  />
+                  <GithubMark className="h-[22px] w-[22px]" />
                 </a>
                 <span className="flex-1" aria-hidden="true" />
                 <ThemeSwitch mode="light-dark" className="site-mobile-theme-switch" />

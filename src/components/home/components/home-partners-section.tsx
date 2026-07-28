@@ -47,7 +47,7 @@ export function HomePartnersSection({ page }: { page: CmsPageContent }) {
                   src={partner.imageUrl}
                   alt={`${partner.title} logo`}
                   className={`h-12 w-[172px] object-contain sm:h-14 sm:w-[190px] ${logoScaleByCode[partner.code] ?? ''}`}
-                  loading="eager"
+                  loading="lazy"
                   decoding="async"
                 />
               ) : (

@@ -132,7 +132,7 @@ export default function CooperationPage() {
         eyebrow="商务合作"
         title="连接技术、场景与青年创新力量"
         description="面向政府园区、产业伙伴、院校和技术平台开展规范、透明、可交付的赛事合作，共同支持真实项目成长。"
-        backgroundImage="/assets/hero/aiadc-hero-incubation.png"
+        backgroundImage="/assets/hero/aiadc-hero-incubation.webp"
         dark
         fullBleedBackground
       />

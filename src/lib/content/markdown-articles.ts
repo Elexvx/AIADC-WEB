@@ -107,7 +107,7 @@ function normalizeArticle(filePath: string, fileName: string, frontMatter: Front
   const slug = toStringValue(frontMatter.slug, path.basename(fileName, path.extname(fileName)));
   const title = toStringValue(frontMatter.title, slug);
   const category = toStringValue(frontMatter.category, 'news');
-  const imageUrl = toStringValue(frontMatter.image, toStringValue(frontMatter.imageUrl, '/assets/official-notice-cover.png'));
+  const imageUrl = toStringValue(frontMatter.image, toStringValue(frontMatter.imageUrl, '/assets/official-notice-cover.webp'));
   const imageAlt = toStringValue(frontMatter.imageAlt, title);
   const body = markdownToPlainParagraphs(markdown);
 
