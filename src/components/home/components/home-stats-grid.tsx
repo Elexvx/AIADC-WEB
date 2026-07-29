@@ -92,18 +92,21 @@ export function HomeStatsGrid({ page }: { page: CmsPageContent }) {
     <section className="relative z-10 px-0 pt-5 pb-4 md:-mt-14 md:pt-0 lg:-mt-18">
       <div className="section-shell">
         <Card className="notion-card-elevated overflow-hidden rounded-[22px] border-white/70 bg-white/96 backdrop-blur transition-colors duration-300">
-          <div className="grid grid-cols-2 gap-0 md:grid-cols-4">
+          <div className="grid grid-cols-2 gap-0 md:grid-cols-3">
             {stats.map((stat, index) => {
               const isLeftColumnOnMobile = index % 2 === 0;
-              const isTopRowOnMobile = index < 2;
+              const hasItemsBelowOnMobile = index < stats.length - (stats.length % 2 || 2);
               const isLastDesktopColumn = index === stats.length - 1;
+              const spansLastMobileRow = stats.length > 1 && stats.length % 2 === 1 && isLastDesktopColumn;
 
               return (
                 <div
                   key={stat.label}
                   className={`flex min-h-[118px] min-w-0 flex-col items-center justify-center gap-3 border-[#e6e6e6] px-3 py-5 text-center md:min-h-[124px] md:px-4 ${
-                    isTopRowOnMobile ? 'border-b' : ''
-                  } ${isLeftColumnOnMobile ? 'border-r' : ''} ${
+                    hasItemsBelowOnMobile ? 'border-b' : ''
+                  } ${spansLastMobileRow ? 'col-span-2 md:col-span-1' : ''} ${
+                    isLeftColumnOnMobile && !spansLastMobileRow ? 'border-r' : ''
+                  } ${
                     isLastDesktopColumn ? 'md:border-r-0' : 'md:border-r'
                   } md:border-b-0`}
                 >
