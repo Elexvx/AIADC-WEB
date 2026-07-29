@@ -9,7 +9,9 @@ export default function DocumentationLayout({ children }: Readonly<{ children: R
     <div className="docs-shell">
       <DocsLayout
         tree={docsSource.pageTree}
-        githubUrl="https://github.com/Elexvx/AIADC-WEB"
+        themeSwitch={{
+          mode: 'light-dark',
+        }}
         tabs={[
           {
             title: '2026 赛季',
