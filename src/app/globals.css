@@ -1268,6 +1268,191 @@ html.dark .article-cover {
   box-shadow: 0 0 0 4px var(--color-fd-background);
 }
 
+/* Participation guide: polished with the same primitives and rhythm as Fumadocs. */
+.aiadc-doc-page {
+  --aiadc-doc-border: color-mix(in srgb, var(--color-fd-border) 82%, transparent);
+  --aiadc-doc-muted: color-mix(in srgb, var(--color-fd-muted) 88%, transparent);
+}
+
+.aiadc-doc-title {
+  position: relative;
+  margin-top: 0.5rem;
+  padding-top: 1rem;
+  font-size: clamp(2rem, 4vw, 2.65rem);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+}
+
+.aiadc-doc-title::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2.75rem;
+  height: 0.25rem;
+  border-radius: 999px;
+  background: var(--color-fd-primary);
+  content: '';
+}
+
+.aiadc-doc-description {
+  max-width: 46rem;
+  color: var(--color-fd-muted-foreground);
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+.aiadc-doc-actions {
+  width: fit-content;
+  margin-top: 1.25rem;
+  padding: 0.5rem;
+  border: 1px solid var(--aiadc-doc-border);
+  border-radius: 0.75rem;
+  background: var(--aiadc-doc-muted);
+}
+
+.aiadc-doc-body {
+  font-size: 1rem;
+  line-height: 1.85;
+}
+
+.aiadc-doc-body > h2 {
+  margin-top: 3.25rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--aiadc-doc-border);
+  font-size: clamp(1.4rem, 2.5vw, 1.7rem);
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.025em;
+}
+
+.aiadc-doc-body > h2:first-child {
+  margin-top: 2.25rem;
+}
+
+.aiadc-doc-body > h3 {
+  margin-top: 1rem;
+  margin-bottom: 0;
+  padding: 1rem 1.1rem 0.4rem;
+  border: 1px solid var(--aiadc-doc-border);
+  border-bottom: 0;
+  border-radius: 0.8rem 0.8rem 0 0;
+  background: var(--color-fd-card);
+  color: var(--color-fd-card-foreground);
+  font-size: 1.075rem;
+  font-weight: 650;
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+}
+
+.aiadc-doc-body > h3 + p {
+  margin-top: 0;
+  padding: 0.35rem 1.1rem 1.1rem;
+  border: 1px solid var(--aiadc-doc-border);
+  border-top: 0;
+  border-radius: 0 0 0.8rem 0.8rem;
+  background: var(--color-fd-card);
+  color: var(--color-fd-muted-foreground);
+  line-height: 1.85;
+}
+
+.aiadc-doc-body > div:has(> table) {
+  overflow-x: auto;
+  overflow-y: hidden;
+  border: 1px solid var(--aiadc-doc-border);
+  border-radius: 0.9rem;
+  background: var(--color-fd-card);
+}
+
+.aiadc-doc-body > div:has(> table) table {
+  margin: 0;
+}
+
+.aiadc-doc-body > div:has(> table) thead {
+  background: var(--aiadc-doc-muted);
+}
+
+.aiadc-doc-body > div:has(> table) th {
+  color: var(--color-fd-foreground);
+  font-size: 0.82rem;
+  font-weight: 650;
+  letter-spacing: 0.015em;
+}
+
+.aiadc-doc-body > div:has(> table) td {
+  color: var(--color-fd-muted-foreground);
+  font-size: 0.925rem;
+  line-height: 1.7;
+}
+
+.aiadc-doc-body > div:has(> table) tbody tr {
+  transition: background-color 160ms ease;
+}
+
+.aiadc-doc-body > div:has(> table) tbody tr:hover {
+  background: var(--aiadc-doc-muted);
+}
+
+.aiadc-doc-body > .aiadc-doc-callout {
+  margin-block: 1.25rem;
+  border-radius: 0.85rem;
+}
+
+.aiadc-doc-body > ul {
+  padding: 1rem 1.15rem 1rem 2.5rem;
+  border: 1px solid var(--aiadc-doc-border);
+  border-radius: 0.85rem;
+  background: var(--color-fd-card);
+}
+
+.aiadc-doc-body > ul > li {
+  padding-left: 0.2rem;
+}
+
+.aiadc-doc-body > ul > li::marker {
+  color: var(--color-fd-primary);
+}
+
+@media (max-width: 640px) {
+  .aiadc-doc-title {
+    margin-top: 0.25rem;
+    padding-top: 0.85rem;
+    font-size: 2rem;
+  }
+
+  .aiadc-doc-description {
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  .aiadc-doc-actions {
+    width: 100%;
+  }
+
+  .aiadc-doc-body {
+    line-height: 1.8;
+  }
+
+  .aiadc-doc-body > h2 {
+    margin-top: 2.75rem;
+    padding-top: 1.25rem;
+    font-size: 1.45rem;
+  }
+
+  .aiadc-doc-body > h3 {
+    padding: 0.9rem 1rem 0.35rem;
+  }
+
+  .aiadc-doc-body > h3 + p {
+    padding: 0.35rem 1rem 1rem;
+  }
+
+  .aiadc-doc-body > div:has(> table) {
+    margin-inline: 0;
+    border-radius: 0.75rem;
+  }
+}
+
 html:has(.docs-shell) {
   scrollbar-color: #a3a3a3 var(--color-fd-background);
 }

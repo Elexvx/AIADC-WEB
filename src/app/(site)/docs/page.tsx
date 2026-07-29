@@ -1,11 +1,11 @@
 import type { Metadata } from 'next';
-import { ArrowRight, BookOpenText, ClipboardList, Files, ListChecks } from 'lucide-react';
+import { ArrowRight, BookOpenText, ClipboardList, ListChecks } from 'lucide-react';
 import { Button, InternalLink, PageHero, ScrollReveal } from '@/components/ui';
 import { ROUTES } from '@/lib/config/routes';
 
 export const metadata: Metadata = {
   title: 'AIADC 赛事文档中心',
-  description: '集中查阅全国大学生智能应用开发大赛参赛说明、材料提交清单与评分标准。',
+  description: '集中查阅全国大学生智能应用开发大赛参赛说明与评分标准。',
   alternates: {
     canonical: ROUTES.docs,
   },
@@ -15,21 +15,13 @@ const documents = [
   {
     order: '01',
     title: '参赛说明',
-    description: '查看参赛组别、三类赛道、报名与组队要求、2026 赛程、报名费用和奖项安排。',
+    description: '查看参赛组别、三类赛道、报名与组队要求、项目方向、2026 赛程和评审方式。',
     scope: '参赛资格与赛程',
     href: ROUTES.docsParticipation,
     icon: ClipboardList,
   },
   {
     order: '02',
-    title: '参赛材料',
-    description: '按正式清单准备报名表、项目报告书、路演文稿、承诺书、过程证明及条件性材料。',
-    scope: '材料准备与提交',
-    href: ROUTES.docsMaterials,
-    icon: Files,
-  },
-  {
-    order: '03',
     title: '评分标准',
     description: '查阅萌芽、创意、OPC 轻创三赛道的完整百分制评分指标、评审口径和扣分规则。',
     scope: '评审规则与分值',
@@ -44,7 +36,7 @@ export default function DocumentationCenterPage() {
       <PageHero
         eyebrow="参赛指南"
         title="AIADC 赛事文档中心"
-        description="三份核心参赛文件集中展示。先了解参赛要求，再准备材料，最后核对评分标准。"
+        description="两份核心参赛文件集中展示。先了解参赛要求，再核对评分标准。"
       />
 
       <ScrollReveal as="section" className="bg-white pt-8 pb-14 dark:bg-background sm:pt-10 sm:pb-18" delay={40}>
@@ -61,7 +53,7 @@ export default function DocumentationCenterPage() {
             </div>
             <div className="inline-flex items-center gap-2 text-sm text-[#615d59] dark:text-white/65">
               <BookOpenText className="size-4" aria-hidden="true" />
-              共 3 份核心文件
+              共 2 份核心文件
             </div>
           </div>
 

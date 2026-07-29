@@ -117,7 +117,6 @@ function buildZhBundle(locale: Locale = defaultLocale): CmsContentBundle {
           record(locale, 'stat-schools', 'schools', { value: '1200+', label: '参赛高校', title: '参赛高校', iconKey: 'users-2', sort: 1 }) as StatItem,
           record(locale, 'stat-teams', 'teams', { value: '8500+', label: '参赛团队', title: '参赛团队', iconKey: 'users', sort: 2 }) as StatItem,
           record(locale, 'stat-works', 'works', { value: '12000+', label: '参赛作品', title: '参赛作品', iconKey: 'file-text', sort: 3 }) as StatItem,
-          record(locale, 'stat-awards', 'awards', { value: '1500+', label: '历届获奖项目', title: '历届获奖项目', iconKey: 'trophy', sort: 4 }) as StatItem,
         ],
       },
       {
@@ -292,7 +291,7 @@ function buildZhBundle(locale: Locale = defaultLocale): CmsContentBundle {
     record(locale, 'schedule-final', 'final', {
       title: '线下决赛与成果展示',
       date: '2026.12.12 - 2026.12.13',
-      detail: '组织线下路演答辩、项目展示、奖项评定、颁奖仪式和资源对接活动。',
+      detail: '组织线下路演答辩、项目展示、结果确认和资源对接活动。',
       featured: true,
       sort: 6,
     }) as TimelineItem,
@@ -404,7 +403,7 @@ function buildZhBundle(locale: Locale = defaultLocale): CmsContentBundle {
         sectionCode: 'materials',
         sectionType: 'downloads',
         items: [
-          record(locale, 'material-notice', 'event-notice', { title: '关于举办全国大学生智能应用开发大赛的通知', description: '大赛名称、组织单位、参赛组别、赛道设置、材料提交、赛程安排、评审与报名费用等核心信息。', format: 'DOCX', audience: '参赛团队', actionLabel: '下载', fileUrl: '/downloads/aiadc-event-notice.docx', sort: 1 }) as DownloadItem,
+          record(locale, 'material-notice', 'event-notice', { title: '关于举办全国大学生智能应用开发大赛的通知', description: '大赛名称、组织单位、参赛组别、赛道设置、材料提交、赛程安排与评审方式等核心信息。', format: 'DOCX', audience: '参赛团队', actionLabel: '下载', fileUrl: '/downloads/aiadc-event-notice.docx', sort: 1 }) as DownloadItem,
         ],
       },
     ],
@@ -541,7 +540,6 @@ function buildZhBundle(locale: Locale = defaultLocale): CmsContentBundle {
               { label: '模型广场', href: ROUTES.events },
               { label: '算力资源', href: ROUTES.events },
               { label: '项目工作台', href: ROUTES.events },
-              { label: '成本与权益', href: ROUTES.materials },
             ],
           },
           {
@@ -552,16 +550,6 @@ function buildZhBundle(locale: Locale = defaultLocale): CmsContentBundle {
               { label: '开发者社区', href: ROUTES.events },
               { label: '训练营课程', href: ROUTES.events },
               { label: '参赛指南', href: ROUTES.docsParticipation },
-            ],
-          },
-          {
-            title: '权益',
-            links: [
-              { label: '免费试用', href: ROUTES.registration },
-              { label: '高校计划', href: ROUTES.about },
-              { label: '算力补贴', href: ROUTES.events },
-              { label: '优秀项目孵化', href: ROUTES.events },
-              { label: '推荐返现计划', href: ROUTES.events },
             ],
           },
           {
@@ -616,7 +604,7 @@ function buildZhBundle(locale: Locale = defaultLocale): CmsContentBundle {
     news: {
       categories: [
         { label: '新闻动态', value: 'news', description: '赛事进展与重要发布。', sort: 1, status: 'published' },
-        { label: '通知公告', value: 'notice', description: '规则、材料、奖项与报名提醒。', sort: 2, status: 'published' },
+        { label: '通知公告', value: 'notice', description: '规则、材料与报名提醒。', sort: 2, status: 'published' },
         { label: '媒体报道', value: 'media', description: '媒体关注与项目展示。', sort: 3, status: 'published' },
         ...extraNewsCategories,
       ],

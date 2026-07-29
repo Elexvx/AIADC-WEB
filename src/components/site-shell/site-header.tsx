@@ -72,9 +72,6 @@ export function SiteHeader() {
   useEffect(() => {
     if (!isMobileMenuOpen) return;
 
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-
     function closeOnEscape(event: KeyboardEvent) {
       if (event.key === 'Escape') {
         setIsMobileMenuOpen(false);
@@ -83,7 +80,6 @@ export function SiteHeader() {
 
     window.addEventListener('keydown', closeOnEscape);
     return () => {
-      document.body.style.overflow = previousOverflow;
       window.removeEventListener('keydown', closeOnEscape);
     };
   }, [isMobileMenuOpen]);

@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import type { CSSProperties } from 'react';
 import {
-  Banknote,
   Boxes,
   CalendarDays,
   CheckCircle2,
@@ -11,11 +10,9 @@ import {
   GraduationCap,
   Lightbulb,
   Network,
-  Medal,
   Rocket,
   ShieldCheck,
   Sparkles,
-  Trophy,
   Users,
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
@@ -23,7 +20,7 @@ import { PageHero, ScrollReveal, SectionHeading } from '@/components/ui';
 
 export const metadata: Metadata = {
   title: '关于大赛',
-  description: '了解全国大学生智能应用开发大赛的背景、组织单位、参赛组别、赛道设置、项目要求、赛程安排、评审奖项与报名费用。',
+  description: '了解全国大学生智能应用开发大赛的背景、组织单位、参赛组别、赛道设置、项目要求、赛程安排与评审方式。',
   alternates: {
     canonical: '/about/',
     languages: {
@@ -159,47 +156,12 @@ const scheduleItems = [
   {
     date: '2026.10.30 - 2026.10.31',
     title: '线下决赛与成果展示',
-    description: '组织线下路演答辩、项目展示、奖项评定、颁奖仪式和资源对接活动。',
+    description: '组织线下路演答辩、项目展示、结果确认和资源对接活动。',
   },
   {
     date: '2026.11.01 - 2026.12.31',
     title: '成果展示与后续服务',
-    description: '开展成果展示、证书制作、资源对接及后续服务工作。',
-  },
-];
-
-const awardCards = [
-  { title: '金奖', standard: '综合表现突出，问题真实、技术路线清晰、成果完成度高，具备较强示范价值。' },
-  { title: '银奖', standard: '项目逻辑完整，开发过程证据充分，已有较好验证基础和持续迭代能力。' },
-  { title: '铜奖', standard: '项目方向明确，材料完整，能够说明关键实现过程和阶段性成果。' },
-  { title: '优秀奖', standard: '符合赛事要求，具有一定创新潜力、实践价值或成长空间。' },
-  { title: '技术创新奖', standard: '在算法、系统架构、智能交互、工程实现或技术组合方面具有明显亮点。' },
-  { title: '场景突破奖', standard: '面向真实场景提出有效解决方案，用户需求、应用流程和落地路径清晰。' },
-  { title: '产品匠心奖', standard: '产品体验、功能完整度、演示效果、视觉表达或细节打磨表现突出。' },
-  { title: '优秀指导教师奖', standard: '在项目指导、组织培育、过程管理和学生成长支持方面贡献突出。' },
-  { title: '卓越组织奖', standard: '院校或机构组织动员有力，赛事服务规范，参赛成果质量和参与度突出。' },
-  { title: '协同育人奖', standard: '在产教融合、资源支持、场景开放和人才培养协同方面形成有效实践。' },
-];
-
-const tierAwards = awardCards.slice(0, 4);
-const specialAwards = awardCards.slice(4);
-
-const tierAwardStyles = [
-  {
-    card: 'tier-award-card tier-award-gold',
-    icon: 'border-[#f2cf64] bg-[#fff8dc] text-[#b77900]',
-  },
-  {
-    card: 'tier-award-card tier-award-silver',
-    icon: 'border-[#c9d3e2] bg-[#f8fafc] text-[#64748b]',
-  },
-  {
-    card: 'tier-award-card tier-award-bronze',
-    icon: 'border-[#dfaa75] bg-[#fff3e7] text-[#b75f1b]',
-  },
-  {
-    card: 'tier-award-card tier-award-excellence',
-    icon: 'border-[#9fd4c5] bg-[#eefcf7] text-[#0f8a6a]',
+    description: '开展成果展示、资源对接及后续服务工作。',
   },
 ];
 
@@ -323,11 +285,11 @@ export default function AboutPage() {
         </div>
       </ScrollReveal>
 
-      <ScrollReveal as="section" lazyRender className="bg-white py-12 sm:py-16" delay={140}>
+      <ScrollReveal as="section" lazyRender className="bg-white py-12 pb-16 sm:py-16 sm:pb-20" delay={140}>
         <div className="section-shell">
           <SectionHeading
-            eyebrow="评审与奖项"
-            title="评审与奖项"
+            eyebrow="评审方式"
+            title="评审方式"
             description="初赛阶段主要采取材料评审方式，决赛阶段采取路演展示与专家答辩相结合的方式，综合考察真实性、完成度、演示效果和后续迭代能力。"
             centered
             className="mx-auto max-w-5xl"
@@ -343,75 +305,6 @@ export default function AboutPage() {
               description="重点考察项目展示效果、现场表达能力、专家问答质量、成果真实性、开发完成度、演示完成度和后续迭代能力。"
               icon={ClipboardCheck}
             />
-          </div>
-          <div className="mt-8 space-y-3">
-            {tierAwards.map((item, index) => (
-              <div
-                key={item.title}
-                className={`notion-card mx-auto p-5 ${tierAwardStyles[index]?.card ?? ''} ${
-                  index === 0
-                    ? 'max-w-md'
-                    : index === 1
-                      ? 'max-w-xl'
-                      : index === 2
-                        ? 'max-w-3xl'
-                        : 'max-w-5xl'
-                }`}
-              >
-                <div className="flex items-center gap-3">
-                  <div className={`grid h-10 w-10 place-items-center rounded-lg border ${tierAwardStyles[index]?.icon ?? 'border-[#dfe7fb] bg-white text-[#0075de]'}`}>
-                    <Medal className="h-5 w-5" />
-                  </div>
-                  <h3 className="text-base font-bold text-[#18253f]">{item.title}</h3>
-                </div>
-                <p className="mt-4 text-sm leading-7 text-[#615d59]">{item.standard}</p>
-              </div>
-            ))}
-          </div>
-          <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {specialAwards.map((item) => (
-              <div key={item.title} className="notion-card p-5">
-                <div className="flex items-center gap-3">
-                  <div className="grid h-10 w-10 place-items-center rounded-lg border border-[#dfe7fb] bg-white text-[#0075de]">
-                    <Trophy className="h-5 w-5" />
-                  </div>
-                  <h3 className="text-base font-bold text-[#18253f]">{item.title}</h3>
-                </div>
-                <p className="mt-4 text-sm leading-7 text-[#615d59]">{item.standard}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </ScrollReveal>
-
-      <ScrollReveal as="section" lazyRender className="bg-white py-12 pb-16 sm:py-16 sm:pb-20" delay={160}>
-        <div className="section-shell">
-          <SectionHeading
-            eyebrow="报名费用"
-            title="报名费用"
-            description="本次大赛各参赛组别、各赛道报名费统一标准为每人50元。"
-            centered
-            className="mx-auto max-w-4xl"
-          />
-          <div className="mx-auto mt-8 max-w-5xl">
-            <div className="grid gap-5 md:grid-cols-[260px_1fr] md:items-stretch">
-              <div className="notion-card grid place-items-center p-8 text-center">
-                <div>
-                  <div className="mx-auto grid h-12 w-12 place-items-center rounded-lg border border-[#dfe7fb] bg-white text-[#0075de]">
-                    <Banknote className="h-6 w-6" />
-                  </div>
-                  <div className="mt-5 text-sm font-bold text-[#0075de]">统一标准</div>
-                  <div className="mt-2 text-5xl font-bold text-[#18253f]">50元</div>
-                  <div className="mt-1 text-sm text-[#615d59]">每人</div>
-                </div>
-              </div>
-              <div className="notion-card p-7 sm:p-8">
-                <h2 className="heading-3 notion-card-title">报名费用说明</h2>
-                <p className="mt-4 text-sm leading-8 text-[#31302e] sm:text-base">
-                  参赛团队须按实际报名人数缴纳相应费用，即每队报名费用为：50元/人 × 实际报名人数。
-                </p>
-              </div>
-            </div>
           </div>
         </div>
       </ScrollReveal>

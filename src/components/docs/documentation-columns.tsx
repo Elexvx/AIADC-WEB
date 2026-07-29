@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ChartNoAxesColumnIncreasing, ClipboardList, Files } from 'lucide-react';
+import { ChartNoAxesColumnIncreasing, ClipboardList } from 'lucide-react';
 import type { ComponentType, SVGProps } from 'react';
 
 type DocumentationLink = {
@@ -14,19 +14,12 @@ const documents: DocumentationLink[] = [
   {
     eyebrow: '文件一',
     title: '参赛说明',
-    description: '查看参赛组别、三类赛道、报名与组队要求、2026 赛程、费用和奖项。',
+    description: '查看参赛组别、三类赛道、报名与组队要求、项目方向、2026 赛程和评审方式。',
     href: '/docs/participation',
     icon: ClipboardList,
   },
   {
     eyebrow: '文件二',
-    title: '参赛材料',
-    description: '按正式清单准备报名表、报告书、路演文稿、承诺书和过程证明。',
-    href: '/docs/materials',
-    icon: Files,
-  },
-  {
-    eyebrow: '文件三',
     title: '评分标准',
     description: '查阅萌芽、创意、OPC 轻创三赛道的完整百分制评分指标和扣分规则。',
     href: '/docs/review',
@@ -62,14 +55,14 @@ export function DocumentationColumns() {
     <section className="not-prose my-8" aria-labelledby="core-documentation-title" data-documentation-columns>
       <div className="mb-4">
         <h2 id="core-documentation-title" className="text-xl font-semibold tracking-tight text-fd-foreground">
-          三份核心参赛文件
+          两份核心参赛文件
         </h2>
         <p className="mt-1 text-sm leading-6 text-fd-muted-foreground">
-          从参赛资格到材料准备，再到评分规则，按顺序查阅。
+          先了解参赛资格与赛程，再核对评分规则。
         </p>
       </div>
 
-      <div className="grid gap-3 lg:grid-cols-3">
+      <div className="grid gap-3 lg:grid-cols-2">
         {documents.map((item) => (
           <DocumentationCard key={item.href} item={item} />
         ))}

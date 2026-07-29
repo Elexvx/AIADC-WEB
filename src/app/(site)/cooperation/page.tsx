@@ -43,7 +43,7 @@ const partnershipItems = [
     description: '以赛事资源、专业能力和产业场景支持项目成长。',
     partnerProvides: ['赛事资金、奖品或等值资源', '行业专家与技术分享', '实习、岗位或产业场景', '经确认的品牌物料'],
     partnerReceives: ['约定范围内的品牌展示', '线上分享或决赛参与机会', '优秀项目与青年人才交流', '合作执行与成果总结'],
-    deliverables: ['合作协议', '权益与资源清单', '资源到位记录', '执行验收总结'],
+    deliverables: ['合作协议', '合作资源清单', '资源到位记录', '执行验收总结'],
   },
   {
     title: '高校与职业院校',
@@ -72,7 +72,7 @@ const cooperationSteps = [
 const complianceItems = [
   {
     title: '评审独立',
-    description: '合作伙伴不干预参赛资格、评审标准、专家评分与奖项结果。',
+    description: '合作伙伴不干预参赛资格、评审标准、专家评分与评审结果。',
     icon: Scale,
   },
   {

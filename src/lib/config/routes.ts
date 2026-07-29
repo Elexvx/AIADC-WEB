@@ -6,7 +6,6 @@ export const ROUTES = {
   docsOverview: '/docs/overview',
   docsParticipation: '/docs/participation',
   docsSchedule: '/docs/schedule',
-  docsMaterials: '/docs/materials',
   docsReview: '/docs/review',
   docsFaq: '/docs/faq',
   docsContact: '/docs/contact',
@@ -20,7 +19,6 @@ export const ROUTES = {
 export const DOCS_NAV_ITEMS = [
   { label: '文档首页', href: ROUTES.docs },
   { label: '参赛说明', href: ROUTES.docsParticipation },
-  { label: '参赛材料', href: ROUTES.docsMaterials },
   { label: '评分标准', href: ROUTES.docsReview },
 ] as const;
 
