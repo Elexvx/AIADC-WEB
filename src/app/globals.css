@@ -350,9 +350,7 @@ img {
 
 .site-top-notice {
   position: relative;
-  border-bottom: 1px solid hsl(var(--site-chrome-border) / var(--site-chrome-border-alpha));
-  background: hsl(var(--site-notice-bg));
-  color: hsl(var(--site-notice-fg));
+  color: var(--color-fd-foreground);
 }
 
 .site-header {
@@ -372,6 +370,24 @@ img {
 
 .site-header-nav-muted {
   color: hsl(var(--site-chrome-muted) / 0.86);
+}
+
+.site-header-search {
+  width: clamp(10rem, 16vw, 18.75rem);
+  min-width: 10rem;
+  border-color: hsl(var(--site-chrome-border) / var(--site-chrome-border-alpha));
+  background: hsl(var(--site-action-bg) / 0.78);
+  color: hsl(var(--site-chrome-muted));
+}
+
+.site-header-search:hover {
+  background: hsl(var(--accent) / 0.9);
+  color: hsl(var(--accent-foreground));
+}
+
+.site-header-theme-switch {
+  border-color: hsl(var(--site-chrome-border) / var(--site-chrome-border-alpha));
+  background: hsl(var(--site-action-bg) / 0.78);
 }
 
 .site-theme-toggle {
@@ -426,11 +442,6 @@ img {
   font-weight: 500;
 }
 
-.site-mobile-navigation-github {
-  color: hsl(var(--site-chrome-fg));
-}
-
-.site-mobile-navigation-github:hover,
 .site-mobile-search-trigger:hover {
   background: hsl(var(--accent));
   color: hsl(var(--accent-foreground));
@@ -1075,6 +1086,7 @@ html.dark .polished-card {
 .article-paragraph {
   position: relative;
   text-align: justify;
+  text-indent: 2em;
   text-justify: inter-ideograph;
 }
 
@@ -1089,6 +1101,7 @@ html.dark .polished-card {
 
 .article-markdown p {
   text-align: justify;
+  text-indent: 2em;
   text-justify: inter-ideograph;
 }
 
@@ -1218,8 +1231,9 @@ html.dark .article-cover {
 .docs-shell {
   color-scheme: inherit;
   --fd-layout-width: 97rem;
-  --color-fd-primary: #cc8b00;
-  --color-fd-primary-foreground: #fafafa;
+  --color-fd-primary: #0075de;
+  --color-fd-primary-foreground: #ffffff;
+  --color-fd-ring: #0075de;
   min-height: 100vh;
   background: var(--color-fd-background);
   color: var(--color-fd-foreground);

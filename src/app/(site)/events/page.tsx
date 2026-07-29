@@ -25,8 +25,6 @@ export default async function EventsPage() {
         title={page.hero?.title ?? ''}
         description={page.hero?.description ?? ''}
         backgroundImage={page.hero?.backgroundImage}
-        dark={page.hero?.dark}
-        fullBleedBackground
       />
 
       <ScrollReveal as="section" className="bg-white pt-8 pb-3 sm:pt-10" delay={40}>

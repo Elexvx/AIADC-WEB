@@ -102,7 +102,7 @@ OPC轻创赛道中的“轻创”定位为轻量化创作、轻量化创新实�
 ## 十三、联系方式
 
 - （一）大赛官网：[aiadc.org.cn](https://www.aiadc.org.cn/)。
-- （二）报名入口：[https://www.saikr.com/vse/aiadc](https://www.saikr.com/vse/aiadc)。
+- （二）报名入口：[https://bm.aiadc.org.cn](https://bm.aiadc.org.cn)。
 - （三）赛事咨询QQ群：871465293（1群）。
 - （四）微信公众号：智能应用开发大赛。
 - （五）材料补正与资格咨询：由赛事执行秘书处通过大赛官网、报名系统或赛事咨询QQ群统一受理；补正内容和期限以组委会通知为准。

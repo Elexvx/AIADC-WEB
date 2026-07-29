@@ -45,7 +45,6 @@ export default function DocumentationCenterPage() {
         eyebrow="参赛指南"
         title="AIADC 赛事文档中心"
         description="三份核心参赛文件集中展示。先了解参赛要求，再准备材料，最后核对评分标准。"
-        fullBleedBackground
       />
 
       <ScrollReveal as="section" className="bg-white pt-8 pb-14 dark:bg-background sm:pt-10 sm:pb-18" delay={40}>

@@ -4,12 +4,11 @@ type PageHeroProps = {
   description: string;
   className?: string;
   backgroundImage?: string;
-  dark?: boolean;
-  overlayClassName?: string;
-  fullBleedBackground?: boolean;
   backgroundLoading?: 'eager' | 'lazy';
   titleAs?: 'h1' | 'h2';
 };
+
+const DEFAULT_PAGE_HERO_BACKGROUND = '/assets/hero/aiadc-intro-competition-bg.webp';
 
 export function PageHero({
   eyebrow,
@@ -17,71 +16,34 @@ export function PageHero({
   description,
   className = '',
   backgroundImage,
-  dark = false,
-  overlayClassName,
-  fullBleedBackground = false,
   titleAs = 'h1',
   backgroundLoading = titleAs === 'h1' ? 'eager' : 'lazy',
 }: PageHeroProps) {
   const TitleTag = titleAs;
-  const backgroundImageElement = backgroundImage ? (
-    <img
-      src={backgroundImage}
-      alt=""
-      aria-hidden="true"
-      loading={backgroundLoading}
-      decoding={backgroundLoading === 'eager' ? 'sync' : 'async'}
-      fetchPriority={backgroundLoading === 'eager' ? 'high' : 'auto'}
-      className="absolute inset-0 h-full w-full object-cover object-center"
-    />
-  ) : null;
-
-  if (fullBleedBackground && backgroundImage) {
-    return (
-      <section className={`relative overflow-hidden py-16 sm:py-20 lg:py-24 ${className}`.trim()}>
-        {backgroundImageElement}
-        <div
-          className={`absolute inset-0 ${
-            overlayClassName ??
-            (dark
-              ? 'bg-[linear-gradient(120deg,rgba(33,49,131,0.92),rgba(33,49,131,0.82),rgba(33,49,131,0.86))]'
-              : 'bg-[linear-gradient(135deg,rgba(246,245,244,0.9),rgba(255,255,255,0.9),rgba(246,245,244,0.78))] dark:bg-[linear-gradient(120deg,rgba(33,49,131,0.92),rgba(33,49,131,0.82),rgba(33,49,131,0.86))]')
-          }`}
-          aria-hidden="true"
-        />
-
-        <div className="section-shell relative">
-          <div className="mx-auto max-w-5xl text-center">
-            <div className={`section-kicker mx-auto ${dark ? 'text-white' : 'text-[#0075de] dark:text-white'}`}>{eyebrow}</div>
-            <TitleTag className={`mt-4 text-balance heading-2 ${dark ? 'text-white' : 'text-black dark:text-white'}`}>{title}</TitleTag>
-            <p className={`mx-auto mt-5 max-w-4xl body-lg ${dark ? 'text-white/82' : 'text-[#31302e] dark:text-white/82'}`}>{description}</p>
-          </div>
-        </div>
-      </section>
-    );
-  }
+  const resolvedBackgroundImage = backgroundImage ?? DEFAULT_PAGE_HERO_BACKGROUND;
 
   return (
-    <section className={`relative overflow-hidden bg-muted py-16 transition-colors duration-300 dark:bg-background sm:py-20 lg:py-24 ${className}`.trim()}>
-      {backgroundImage ? (
-        <>
-          {backgroundImageElement}
-          <div
-            className={`absolute inset-0 ${
-              overlayClassName ??
-              (dark
-                ? 'bg-[linear-gradient(120deg,rgba(33,49,131,0.88),rgba(33,49,131,0.74),rgba(33,49,131,0.8))]'
-                : 'bg-[linear-gradient(135deg,rgba(246,245,244,0.84),rgba(255,255,255,0.9),rgba(246,245,244,0.8))] dark:bg-[linear-gradient(120deg,rgba(33,49,131,0.9),rgba(33,49,131,0.76),rgba(33,49,131,0.82))]')
-            }`}
-            aria-hidden="true"
-          />
-        </>
-      ) : null}
+    <section
+      className={`relative flex min-h-72 items-center overflow-hidden py-12 sm:min-h-76 sm:py-14 lg:h-76 lg:min-h-76 lg:py-0 ${className}`.trim()}
+    >
+      <img
+        src={resolvedBackgroundImage}
+        alt=""
+        aria-hidden="true"
+        loading={backgroundLoading}
+        decoding={backgroundLoading === 'eager' ? 'sync' : 'async'}
+        fetchPriority={backgroundLoading === 'eager' ? 'high' : 'auto'}
+        className="absolute inset-0 h-full w-full object-cover object-center"
+      />
+      <div
+        className="absolute inset-0 bg-[linear-gradient(120deg,rgba(33,49,131,0.88),rgba(33,49,131,0.74),rgba(33,49,131,0.82))]"
+        aria-hidden="true"
+      />
 
       <div className="section-shell relative text-center">
-        <div className={`section-kicker mx-auto ${dark ? 'text-white' : 'text-[#0075de] dark:text-white'}`}>{eyebrow}</div>
-        <TitleTag className={`mx-auto mt-4 max-w-5xl text-balance heading-2 ${dark ? 'text-white' : 'text-black dark:text-white'}`}>{title}</TitleTag>
-        <p className={`mx-auto mt-6 max-w-4xl text-sm leading-8 ${dark ? 'text-white/82' : 'text-[#31302e] dark:text-white/82'} sm:text-[17px] sm:leading-8 lg:text-[19px] lg:leading-9`}>{description}</p>
+        <div className="section-kicker mx-auto text-white">{eyebrow}</div>
+        <TitleTag className="heading-2 mx-auto mt-4 max-w-5xl text-balance text-white">{title}</TitleTag>
+        <p className="body-lg mx-auto mt-5 max-w-4xl text-white/82">{description}</p>
       </div>
     </section>
   );

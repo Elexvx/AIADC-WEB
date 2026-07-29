@@ -210,10 +210,7 @@ export default function AboutPage() {
         eyebrow="关于大赛"
         title="全国大学生智能应用开发大赛"
         description="面向青年学生与青年创新主体，围绕真实需求、智能应用开发、产品设计、场景验证与项目实践，搭建规范、公正、可验证的赛事与成果展示平台。"
-        backgroundImage="/assets/hero/aiadc-intro-competition-bg.png"
-        dark
-        overlayClassName="bg-[linear-gradient(120deg,rgba(33,49,131,0.78),rgba(33,49,131,0.64),rgba(33,49,131,0.72))]"
-        fullBleedBackground
+        backgroundImage="/assets/hero/aiadc-intro-competition-bg.webp"
       />
 
       <ScrollReveal as="section" className="bg-white py-12 sm:py-16" delay={40}>
@@ -530,7 +527,7 @@ function ProjectDirectionWall() {
   ];
 
   return (
-    <div className="mx-auto mt-8 max-w-6xl py-2">
+    <div className="mt-8 py-2">
       <div className="space-y-3">
         {rows.map((row, rowIndex) => {
           const Icon = row.icon;
@@ -538,10 +535,10 @@ function ProjectDirectionWall() {
 
           return (
             <div key={`${row.label}-${rowIndex}`} className="relative overflow-hidden py-1">
-              <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-gradient-to-r from-white to-transparent" />
-              <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-gradient-to-l from-white to-transparent" />
+              <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-gradient-to-r from-[hsl(var(--surface))] to-transparent" />
+              <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-gradient-to-l from-[hsl(var(--surface))] to-transparent" />
               <div
-                className={`flex w-max transform-gpu gap-3 px-10 will-change-transform ${
+                className={`flex w-max transform-gpu gap-3 will-change-transform ${
                   row.reverse ? 'animate-[tag-scroll-quarter-reverse_var(--tag-duration)_linear_infinite]' : 'animate-[tag-scroll-quarter_var(--tag-duration)_linear_infinite]'
                 }`}
                 style={{ '--tag-duration': `${row.duration}s` } as CSSProperties}

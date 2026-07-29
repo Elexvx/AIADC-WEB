@@ -19,9 +19,6 @@ export default async function MaterialsPage() {
         title={page.hero?.title ?? ''}
         description={page.hero?.description ?? ''}
         backgroundImage={page.hero?.backgroundImage}
-        backgroundLoading="lazy"
-        dark={page.hero?.dark}
-        fullBleedBackground
       />
 
       <ScrollReveal as="section" className="relative z-10 bg-[#f6f5f4] pt-8 pb-14 sm:pt-10 sm:pb-18" delay={40}>
