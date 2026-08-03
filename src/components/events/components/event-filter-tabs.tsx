@@ -4,12 +4,19 @@ import { Badge, Button } from '@/components/ui';
 import type { CmsRecordBase } from '@/lib/content/types';
 
 export interface EventFilterTabsProps {
-  filters: CmsRecordBase[];
   events: CmsRecordBase[];
 }
 
-export function EventFilterTabs({ filters, events }: EventFilterTabsProps) {
-  const runtimeFilters = buildActivityFilters(events, filters);
+export function EventFilterTabs({ events }: EventFilterTabsProps) {
+  if (events.length === 0) {
+    return (
+      <div className="rounded-lg border border-dashed border-slate-200 bg-slate-50 p-8 text-center text-sm text-slate-500 transition-colors duration-300 dark:border-white/12 dark:bg-slate-950/42 dark:text-slate-300">
+        没有数据
+      </div>
+    );
+  }
+
+  const runtimeFilters = buildActivityFilters(events);
   const featuredEvent = events.find((item) => Boolean(item.extra?.featured)) ?? events[0];
   const regularEvents = events.filter((item) => item.id !== featuredEvent?.id);
 
@@ -105,12 +112,6 @@ export function EventFilterTabs({ filters, events }: EventFilterTabsProps) {
             </article>
           ))}
         </div>
-
-        {events.length === 0 && (
-          <div className="rounded-lg border border-dashed border-slate-200 bg-slate-50 p-8 text-center text-sm text-slate-500 transition-colors duration-300 dark:border-white/12 dark:bg-slate-950/42 dark:text-slate-300">
-            暂无活动。
-          </div>
-        )}
       </div>
     </div>
   );
@@ -141,14 +142,10 @@ function EventMeta({ event, compact = false }: { event: CmsRecordBase; compact?:
   );
 }
 
-function buildActivityFilters(events: CmsRecordBase[], fallbackFilters: CmsRecordBase[]): CmsRecordBase[] {
+function buildActivityFilters(events: CmsRecordBase[]): CmsRecordBase[] {
   const categories = Array.from(
     new Set(events.map((event) => event.subtitle).filter((subtitle): subtitle is string => Boolean(subtitle))),
   );
-
-  if (!categories.length) {
-    return fallbackFilters.length ? fallbackFilters : [allFilter()];
-  }
 
   return [
     allFilter(),

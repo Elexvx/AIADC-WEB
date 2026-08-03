@@ -334,58 +334,7 @@ function buildZhBundle(locale: Locale = defaultLocale): CmsContentBundle {
       title: '围绕报名、评审与项目打磨有序推进',
       description: '从暑期预报名到线下决赛，官网集中呈现关键节点、活动安排和参赛团队需要关注的事项。',
     },
-    sections: [
-      {
-        id: 'event-filters',
-        sectionCode: 'filters',
-        sectionType: 'filters',
-        items: [
-          record(locale, 'filter-all', 'all', { title: '全部', sort: 1 }),
-          record(locale, 'filter-roadshow', 'roadshow', { title: '路演活动', sort: 2 }),
-          record(locale, 'filter-salon', 'salon', { title: '创业沙龙', sort: 3 }),
-          record(locale, 'filter-policy', 'policy', { title: '政策宣讲', sort: 4 }),
-        ],
-      },
-      {
-        id: 'event-list',
-        sectionCode: 'events',
-        sectionType: 'events',
-        items: [
-          record(locale, 'event-submit', 'submit-materials', {
-            title: '报名征集与材料提交',
-            subtitle: '政策宣讲',
-            description: '参赛团队在报名周期内完成组别、赛道、成员信息、项目报告书、路演PPT和过程证明材料提交。',
-            sort: 1,
-            cta: { label: '进入报名', href: ROUTES.registration },
-            extra: { featured: true, date: '2026.07.01 - 09.30', time: '线上持续开放', location: '赛事报名系统' },
-          }),
-          record(locale, 'event-workshop', 'ai-workshop', {
-            title: 'AI应用开发与材料规范辅导',
-            subtitle: '创业沙龙',
-            description: '围绕项目报告书、演示视频、开发过程证明和AI工具使用说明，帮助团队提升材料可信度。',
-            sort: 2,
-            cta: { label: '查看材料', href: ROUTES.materials },
-            extra: { date: '2026.08 - 10', time: '按通知安排', location: '线上工作坊' },
-          }),
-          record(locale, 'event-preliminary', 'preliminary-review', {
-            title: '线上初赛材料评审',
-            subtitle: '政策宣讲',
-            description: '专家依据对应赛道100分评分表，审查材料完整性、逻辑清晰度、开发过程证据和赛道适配性。',
-            sort: 3,
-            cta: { label: '查看评审规则', href: ROUTES.materials },
-            extra: { date: '2026.11.08 - 11.15', time: '线上评审', location: '专家评审系统' },
-          }),
-          record(locale, 'event-final', 'final-roadshow', {
-            title: '线下决赛路演与成果展示',
-            subtitle: '路演活动',
-            description: '入围团队进行6至8分钟路演展示和4至5分钟专家问答，集中呈现问题来源、技术方案、阶段成果和后续计划。',
-            sort: 4,
-            cta: { label: '了解赛程', href: ROUTES.about },
-            extra: { date: '2026.12.12 - 12.13', time: '线下组织', location: '地点以后续通知为准' },
-          }),
-        ],
-      },
-    ],
+    sections: [],
   });
 
   const materials = page(locale, 'materials', {
