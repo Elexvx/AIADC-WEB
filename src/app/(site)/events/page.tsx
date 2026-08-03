@@ -3,6 +3,9 @@ import { getPageMetadata } from '@/lib/metadata';
 import { PageHero, ScrollReveal } from '@/components/ui';
 import { EventFilterTabs } from '@/components/events/components/event-filter-tabs';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export async function generateMetadata() {
   return getPageMetadata('events', '/events');
 }

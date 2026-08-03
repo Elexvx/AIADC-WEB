@@ -370,7 +370,7 @@ async function fetchLumiraActivities(locale?: string): Promise<CmsRecordBase[] |
 
   try {
     const response = await fetch(url, {
-      next: { revalidate: CONTENT_REVALIDATE_SECONDS },
+      cache: 'no-store',
       signal: AbortSignal.timeout(lumiraServiceConfig.requestTimeoutMs),
     });
     if (!response.ok) {
@@ -396,17 +396,6 @@ const getCachedContentBundle = unstable_cache(
   {
     revalidate: CONTENT_REVALIDATE_SECONDS,
     tags: ['lumira-content-bundle'],
-  },
-);
-
-const getCachedActivities = unstable_cache(
-  async (locale: Locale): Promise<CmsRecordBase[]> => {
-    return (await fetchLumiraActivities(locale)) || [];
-  },
-  ['lumira-activities'],
-  {
-    revalidate: CONTENT_REVALIDATE_SECONDS,
-    tags: ['lumira-activities'],
   },
 );
 
@@ -462,5 +451,5 @@ export async function getResolvedNewsArticleBySlug(slug: string, locale?: string
 }
 
 export async function getResolvedActivities(locale?: string): Promise<CmsRecordBase[]> {
-  return getCachedActivities(resolveLocale(locale));
+  return (await fetchLumiraActivities(resolveLocale(locale))) || [];
 }
