@@ -7,6 +7,11 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: '/docs',
+        destination: '/docs/participation/',
+        permanent: true,
+      },
+      {
         source: '/docs/overview',
         destination: '/docs/participation/#一参赛组别',
         permanent: true,

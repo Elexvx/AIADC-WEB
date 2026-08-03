@@ -39,7 +39,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     url: new URL(getCanonicalPath(page.url), siteUrl).toString(),
     lastModified: now,
     changeFrequency: 'monthly' as const,
-    priority: page.url === ROUTES.docs ? 0.9 : 0.75,
+    priority: page.url === ROUTES.docsParticipation ? 0.9 : 0.75,
   })) satisfies MetadataRoute.Sitemap;
 
   return [...routes, ...documentationRoutes, ...articleRoutes];

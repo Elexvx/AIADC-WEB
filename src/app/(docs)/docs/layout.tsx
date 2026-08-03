@@ -16,7 +16,7 @@ export default function DocumentationLayout({ children }: Readonly<{ children: R
           {
             title: '2026 赛季',
             description: 'AIADC 赛事文档',
-            url: '/docs',
+            url: ROUTES.docsParticipation,
             icon: <CalendarDays aria-hidden="true" />,
           },
         ]}

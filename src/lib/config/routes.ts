@@ -17,7 +17,6 @@ export const ROUTES = {
 } as const;
 
 export const DOCS_NAV_ITEMS = [
-  { label: '文档首页', href: ROUTES.docs },
   { label: '参赛说明', href: ROUTES.docsParticipation },
   { label: '评分标准', href: ROUTES.docsReview },
 ] as const;
