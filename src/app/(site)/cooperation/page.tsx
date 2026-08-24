@@ -1,10 +1,5 @@
 import type { Metadata } from 'next';
-import {
-  Mail,
-  Scale,
-  ShieldCheck,
-  Users,
-} from 'lucide-react';
+import { Scale, ShieldCheck, Users } from 'lucide-react';
 import { Button, InternalLink, PageHero, ScrollReveal, SectionHeading } from '@/components/ui';
 import { ROUTES } from '@/lib/config/routes';
 
@@ -201,21 +196,34 @@ export default function CooperationPage() {
         </div>
       </ScrollReveal>
 
-      <ScrollReveal as="section" className="bg-[#f7f9ff] py-12 sm:py-16" delay={70}>
+      <ScrollReveal
+        id="cooperation-contact"
+        as="section"
+        className="bg-background py-14 transition-colors duration-300 sm:py-18"
+        delay={70}
+      >
         <div className="section-shell">
-          <div className="overflow-hidden rounded-[24px] bg-[#213183] px-6 py-10 text-center text-white sm:px-10 sm:py-12">
-            <Mail aria-hidden="true" className="mx-auto h-8 w-8" />
-            <h2 className="mt-5 text-balance text-3xl font-bold tracking-[-0.03em] sm:text-4xl">期待与您共建真实、有价值的合作</h2>
-            <p className="mx-auto mt-4 max-w-2xl text-sm leading-8 text-white/82 sm:text-base">
-              请简要说明机构名称、合作方向与可提供资源，组委会将通过官方邮箱与您联系。
-            </p>
-            <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <Button asChild size="lg" className="bg-white !text-[#0b3b8f] hover:bg-white/90">
-                <a href="mailto:aiadc@aiadc.org.cn?subject=AIADC商务合作咨询">aiadc@aiadc.org.cn</a>
-              </Button>
-              <Button asChild size="lg" variant="outline" className="border-white/35 bg-white/10 !text-white hover:bg-white/18">
-                <InternalLink href={ROUTES.contact}>查看联系方式</InternalLink>
-              </Button>
+          <div className="overflow-hidden rounded-[24px] bg-[#213183] px-7 py-8 text-white transition-colors duration-300 sm:px-10 sm:py-11">
+            <div className="max-w-3xl">
+              <h2 className="notion-cta-title max-w-[16ch] text-white transition-colors duration-300 sm:max-w-none">
+                期待与您共建真实、有价值的合作
+              </h2>
+              <p className="notion-cta-body mt-5 max-w-2xl text-white/88 transition-colors duration-300">
+                请简要说明机构名称、合作方向与可提供资源，组委会将通过官方邮箱与您联系。
+              </p>
+              <div className="mt-9 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
+                <Button asChild size="lg" className="h-12 px-7 text-base !text-white">
+                  <a href="mailto:aiadc@aiadc.org.cn?subject=AIADC商务合作咨询">aiadc@aiadc.org.cn</a>
+                </Button>
+                <Button
+                  asChild
+                  size="lg"
+                  variant="outline"
+                  className="h-12 border-white/35 bg-white/10 px-7 text-base !text-white hover:bg-white/18"
+                >
+                  <InternalLink href={ROUTES.contact}>查看联系方式</InternalLink>
+                </Button>
+              </div>
             </div>
           </div>
         </div>
