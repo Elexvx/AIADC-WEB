@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next';
+import { AntdRegistry } from '@ant-design/nextjs-registry';
 import { GeistSans } from 'geist/font/sans';
 import type { CSSProperties } from 'react';
 import { RootProvider } from 'fumadocs-ui/provider/next';
@@ -157,20 +158,22 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   return (
     <html lang="zh-CN" suppressHydrationWarning style={systemChineseFontStyle}>
       <body className={`${GeistSans.variable} bg-background text-foreground antialiased transition-colors duration-300`}>
-        <RootProvider
-          theme={{
-            attribute: 'class',
-            storageKey: 'aiadc-theme',
-            defaultTheme: 'system',
-            enableSystem: true,
-            themes: ['light', 'dark'],
-            disableTransitionOnChange: true,
-          }}
-          search={{ options: { api: '/api/search' } }}
-          i18n={{ locale: 'zh-CN', translations: fumadocsTranslations }}
-        >
-          <LocaleProvider siteShell={siteShell}>{children}</LocaleProvider>
-        </RootProvider>
+        <AntdRegistry>
+          <RootProvider
+            theme={{
+              attribute: 'class',
+              storageKey: 'aiadc-theme',
+              defaultTheme: 'system',
+              enableSystem: true,
+              themes: ['light', 'dark'],
+              disableTransitionOnChange: true,
+            }}
+            search={{ options: { api: '/api/search' } }}
+            i18n={{ locale: 'zh-CN', translations: fumadocsTranslations }}
+          >
+            <LocaleProvider siteShell={siteShell}>{children}</LocaleProvider>
+          </RootProvider>
+        </AntdRegistry>
       </body>
     </html>
   );

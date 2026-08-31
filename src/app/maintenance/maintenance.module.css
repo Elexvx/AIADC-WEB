@@ -1,0 +1,341 @@
+.page {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  overflow: hidden;
+  padding: 40px clamp(20px, 4vw, 48px);
+  color-scheme: light;
+  background: linear-gradient(135deg, #f8fbff 0%, #f1f5fd 48%, #eef3fb 100%);
+}
+
+.dotGrid {
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+  opacity: 0.45;
+  background-image: radial-gradient(circle at center, rgb(37 99 235 / 15%) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.glowTop,
+.glowBottom {
+  position: absolute;
+  z-index: -2;
+  border-radius: 999px;
+  filter: blur(64px);
+  pointer-events: none;
+}
+
+.glowTop {
+  top: -112px;
+  left: -112px;
+  width: 384px;
+  height: 384px;
+  background: rgb(147 197 253 / 28%);
+}
+
+.glowBottom {
+  right: -96px;
+  bottom: -144px;
+  width: 480px;
+  height: 480px;
+  background: rgb(165 180 252 / 22%);
+}
+
+.card {
+  width: min(100%, 1180px);
+  margin: 0 auto;
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 92%);
+  background: rgb(255 255 255 / 82%);
+  box-shadow: 0 32px 90px rgb(30 64 175 / 14%);
+  backdrop-filter: blur(20px);
+}
+
+.card :global(.ant-card-body) {
+  padding: 0 !important;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1.08fr 0.92fr;
+}
+
+.brandPanel {
+  position: relative;
+  min-height: 646px;
+  overflow: hidden;
+  padding: 60px 64px;
+  color: #ffffff;
+  background: linear-gradient(145deg, #0d2f83 0%, #164db9 50%, #2766da 100%);
+}
+
+.ringLarge,
+.ringSmall {
+  position: absolute;
+  border: 1px solid rgb(255 255 255 / 16%);
+  border-radius: 999px;
+}
+
+.ringLarge {
+  top: -96px;
+  right: -96px;
+  width: 288px;
+  height: 288px;
+}
+
+.ringSmall {
+  top: -48px;
+  right: -48px;
+  width: 192px;
+  height: 192px;
+}
+
+.brandContent {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+}
+
+.logoWrap {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  overflow: hidden;
+  place-items: center;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgb(15 23 42 / 12%);
+  outline: 4px solid rgb(255 255 255 / 14%);
+}
+
+.brandName:global(.ant-typography),
+.brandSubtitle:global(.ant-typography),
+.brandMeta :global(.ant-typography) {
+  display: block;
+  color: #ffffff;
+}
+
+.brandName:global(.ant-typography) {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.brandSubtitle:global(.ant-typography) {
+  margin-top: 2px;
+  color: #dbeafe;
+  font-size: 12px;
+}
+
+.brandMessage {
+  margin: auto 0;
+  padding: 52px 0;
+}
+
+.statusTag:global(.ant-tag) {
+  margin: 0;
+  padding: 7px 13px;
+  border-color: rgb(255 255 255 / 20%);
+  border-radius: 999px;
+  color: #eff6ff;
+  background: rgb(255 255 255 / 10%);
+  backdrop-filter: blur(8px);
+}
+
+.heroTitle:global(.ant-typography) {
+  margin: 24px 0 0;
+  color: #ffffff;
+  font-size: clamp(40px, 4vw, 52px);
+  line-height: 1.22;
+  letter-spacing: -0.03em;
+}
+
+.heroDescription:global(.ant-typography) {
+  max-width: 520px;
+  margin: 24px 0 0;
+  color: #dbeafe;
+  font-size: 17px;
+  line-height: 1.9;
+}
+
+.brandMeta :global(.ant-typography) {
+  color: #dbeafe;
+  font-size: 14px;
+}
+
+.brandMeta :global(.anticon) {
+  margin-right: 6px;
+}
+
+.accessPanel {
+  display: flex;
+  align-items: center;
+  padding: 52px 60px;
+  background: rgb(255 255 255 / 94%);
+}
+
+.accessContent {
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.securityIcon {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  border: 1px solid #dbeafe;
+  border-radius: 16px;
+  color: #1756d1;
+  background: #eff6ff;
+  font-size: 23px;
+}
+
+.eyebrow {
+  margin-top: 28px;
+  color: #1756d1;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+}
+
+.accessTitle:global(.ant-typography) {
+  margin: 10px 0 0;
+  color: #0f172a;
+  font-size: 30px;
+  letter-spacing: -0.02em;
+}
+
+.accessDescription:global(.ant-typography) {
+  margin: 10px 0 0;
+  color: #64748b;
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+.form {
+  margin-top: 28px;
+}
+
+.form :global(.ant-form-item-label > label) {
+  color: #334155;
+  font-weight: 500;
+}
+
+.form :global(.ant-input-affix-wrapper) {
+  padding-inline: 15px;
+}
+
+.form :global(.ant-input-prefix) {
+  margin-inline-end: 10px;
+  color: #94a3b8;
+}
+
+.alert {
+  margin-top: -8px;
+  margin-bottom: 20px;
+}
+
+.submitItem {
+  margin-top: 26px;
+  margin-bottom: 0;
+}
+
+.submitItem :global(.ant-btn) {
+  height: 52px;
+}
+
+.helpText {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid #e2e8f0;
+  line-height: 1.7;
+}
+
+@media (max-width: 920px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .brandPanel {
+    min-height: 420px;
+    padding: 40px 48px;
+  }
+
+  .brandMessage {
+    padding: 48px 0;
+  }
+
+  .accessPanel {
+    padding: 48px;
+  }
+}
+
+@media (max-width: 560px) {
+  .page {
+    align-items: flex-start;
+    padding: 20px 12px;
+    overflow: visible;
+  }
+
+  .card {
+    border-radius: 20px;
+  }
+
+  .brandPanel {
+    min-height: 0;
+    padding: 28px 24px 26px;
+  }
+
+  .brandMessage {
+    padding: 42px 0 34px;
+  }
+
+  .heroTitle:global(.ant-typography) {
+    font-size: 32px;
+  }
+
+  .heroDescription:global(.ant-typography) {
+    margin-top: 16px;
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  .brandMeta {
+    gap: 10px 18px !important;
+  }
+
+  .brandMeta :global(.ant-typography) {
+    font-size: 12px;
+  }
+
+  .accessPanel {
+    padding: 34px 24px 30px;
+  }
+
+  .eyebrow {
+    margin-top: 22px;
+  }
+
+  .accessTitle:global(.ant-typography) {
+    font-size: 26px;
+  }
+
+  .accessDescription:global(.ant-typography) {
+    font-size: 14px;
+  }
+
+  .form {
+    margin-top: 24px;
+  }
+
+  .helpText {
+    margin-top: 26px;
+    padding-top: 20px;
+    font-size: 13px;
+  }
+}
