@@ -3,15 +3,28 @@ export function getSafeReturnPath(value: string | null | undefined) {
     return '/';
   }
 
+  const siteOrigin = 'https://maintenance.invalid';
+  let returnUrl: URL;
+
+  try {
+    returnUrl = new URL(value, siteOrigin);
+  } catch {
+    return '/';
+  }
+
+  // URL parsers treat backslashes as slashes for special schemes. Verify the
+  // parsed origin so inputs such as "/\\attacker.example" stay on this site.
+  if (returnUrl.origin !== siteOrigin) {
+    return '/';
+  }
+
   if (
-    value === '/maintenance' ||
-    value === '/maintenance/' ||
-    value.startsWith('/maintenance?') ||
-    value.startsWith('/maintenance/?') ||
-    value.startsWith('/api/maintenance/')
+    returnUrl.pathname === '/maintenance' ||
+    returnUrl.pathname === '/maintenance/' ||
+    returnUrl.pathname.startsWith('/api/maintenance/')
   ) {
     return '/';
   }
 
-  return value;
+  return `${returnUrl.pathname}${returnUrl.search}${returnUrl.hash}`;
 }
